@@ -5,12 +5,9 @@
 [![License](https://img.shields.io/badge/License-MIT%2BCC--BY-blue)](LICENSE.md)
 [![DOI](https://jose.theoj.org/papers/10.21105/jose.00144/status.svg)](https://doi.org/10.21105/jose.00144)
 
-This is the custom curriculum developed by the University of Michigan Software
-Carpentry instance.
-It is in the `beta` stage of development; we are continuing to host workshops to
-gather feedback and polish the curriculum.
+This is a version of the University of Michigan Carpentries curriculum adapted for Cornell Microbiology data science workshops.
 
-The rendered website can be found [here](https://umcarpentries.github.io/intro-curriculum-r).
+The rendered website can be found [here](https://gus-pendleton.github.io/intro-curriculum-r/).
 
 ## Repo Layout
 
@@ -94,7 +91,7 @@ For a typical 2-day workshop. Can be modified for different workshop formats.
 
 ## Citation
 
-If you would like to cite our work, please use:
+To cite the original U-M developed curriculum, please use:
 
 ```
 Lapp et al., (2022). Developing and deploying an integrated workshop 
