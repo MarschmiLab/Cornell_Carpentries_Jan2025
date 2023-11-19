@@ -76,26 +76,16 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.3.1 ──
-~~~
-{: .output}
-
-
-
-~~~
-✔ ggplot2 3.3.5     ✔ purrr   0.3.4
-✔ tibble  3.1.6     ✔ dplyr   1.0.7
-✔ tidyr   1.1.4     ✔ stringr 1.4.0
-✔ readr   2.1.1     ✔ forcats 0.5.1
-~~~
-{: .output}
-
-
-
-~~~
-── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ~~~
 {: .output}
 
@@ -115,22 +105,10 @@ gapminder_data <- read_csv("data/gapminder_data.csv")
 
 ~~~
 Rows: 1704 Columns: 6
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -477,7 +455,7 @@ gapminder_data %>%
  8 Afghanistan  1987 13867957 Asia         40.8      852. 11820990309.
  9 Afghanistan  1992 16317921 Asia         41.7      649. 10595901589.
 10 Afghanistan  1997 22227415 Asia         41.8      635. 14121995875.
-# … with 1,694 more rows
+# ℹ 1,694 more rows
 ~~~
 {: .output}
 
@@ -510,7 +488,7 @@ This will add a new column called "gdp" to our data. We use the column names as 
 > >  8 Afghanistan  1987 13867957 Asia         40.8      852.  1.18e10         13.9 
 > >  9 Afghanistan  1992 16317921 Asia         41.7      649.  1.06e10         16.3 
 > > 10 Afghanistan  1997 22227415 Asia         41.8      635.  1.41e10         22.2 
-> > # … with 1,694 more rows
+> > # ℹ 1,694 more rows
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -546,7 +524,7 @@ gapminder_data %>%
  8 13867957  1987
  9 16317921  1992
 10 22227415  1997
-# … with 1,694 more rows
+# ℹ 1,694 more rows
 ~~~
 {: .output}
 
@@ -575,7 +553,7 @@ gapminder_data %>%
  8 Afghanistan  1987 13867957    40.8      852.
  9 Afghanistan  1992 16317921    41.7      649.
 10 Afghanistan  1997 22227415    41.8      635.
-# … with 1,694 more rows
+# ℹ 1,694 more rows
 ~~~
 {: .output}
 
@@ -608,7 +586,7 @@ gapminder_data %>%
 > >  8 Afghanistan Asia       1987    40.8
 > >  9 Afghanistan Asia       1992    41.7
 > > 10 Afghanistan Asia       1997    41.8
-> > # … with 1,694 more rows
+> > # ℹ 1,694 more rows
 > > ~~~
 > > {: .output}
 > > 
@@ -634,7 +612,7 @@ gapminder_data %>%
 > >  8 Afghanistan  1987 Asia         40.8
 > >  9 Afghanistan  1992 Asia         41.7
 > > 10 Afghanistan  1997 Asia         41.8
-> > # … with 1,694 more rows
+> > # ℹ 1,694 more rows
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -668,7 +646,7 @@ gapminder_data %>%
 >  8  1987 Afghanistan Asia     
 >  9  1992 Afghanistan Asia     
 > 10  1997 Afghanistan Asia     
-> # … with 1,694 more rows
+> # ℹ 1,694 more rows
 > ~~~
 > {: .output}
 > This returns just the three columns we are interested in. 
@@ -704,7 +682,7 @@ gapminder_data %>%
 > > >  8 13867957    40.8      852.
 > > >  9 16317921    41.7      649.
 > > > 10 22227415    41.8      635.
-> > > # … with 1,694 more rows
+> > > # ℹ 1,694 more rows
 > > > ~~~
 > > > {: .output}
 > > {: .solution}
@@ -745,8 +723,8 @@ gapminder_data %>%
  8 Bahrain     Asia        50.9   53.8   56.9   59.9   63.3   65.6   69.1   70.8
  9 Bangladesh  Asia        37.5   39.3   41.2   43.5   45.3   46.9   50.0   52.8
 10 Belgium     Europe      68     69.2   70.2   70.9   71.4   72.8   73.9   75.4
-# … with 132 more rows, and 4 more variables: 1992 <dbl>, 1997 <dbl>,
-#   2002 <dbl>, 2007 <dbl>
+# ℹ 132 more rows
+# ℹ 4 more variables: `1992` <dbl>, `1997` <dbl>, `2002` <dbl>, `2007` <dbl>
 ~~~
 {: .output}
 
@@ -770,22 +748,10 @@ Before we move on to more data cleaning, let's create the final gapminder datafr
 > > 
 > > ~~~
 > > Rows: 1704 Columns: 6
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > ── Column specification ─────────────────────────────────────────────────────────────────────────────────
+> > ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > > Delimiter: ","
 > > chr (2): country, continent
 > > dbl (4): year, pop, lifeExp, gdpPercap
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
 > > 
 > > ℹ Use `spec()` to retrieve the full column specification for this data.
 > > ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -854,36 +820,17 @@ read_csv("data/co2-un-data.csv")
 
 ~~~
 New names:
-* `` -> ...3
-* `` -> ...4
-* `` -> ...5
-* `` -> ...6
-* `` -> ...7
-~~~
-{: .output}
-
-
-
-~~~
 Rows: 2133 Columns: 7
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
-Delimiter: ","
-chr (7): T24, CO2 emission estimates, ...3, ...4, ...5, ...6, ...7
-~~~
-{: .output}
-
-
-
-~~~
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+── Column specification
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+(7): T24, CO2 emission estimates, ...3, ...4, ...5, ...6, ...7
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this
+message.
+• `` -> `...3`
+• `` -> `...4`
+• `` -> `...5`
+• `` -> `...6`
+• `` -> `...7`
 ~~~
 {: .output}
 
@@ -891,19 +838,19 @@ chr (7): T24, CO2 emission estimates, ...3, ...4, ...5, ...6, ...7
 
 ~~~
 # A tibble: 2,133 × 7
-   T24                 `CO2 emission estimates` ...3  ...4    ...5  ...6  ...7  
-   <chr>               <chr>                    <chr> <chr>   <chr> <chr> <chr> 
- 1 Region/Country/Area <NA>                     Year  Series  Value Foot… Source
- 2 8                   Albania                  1975  Emissi… 4338… <NA>  Inter…
- 3 8                   Albania                  1985  Emissi… 6929… <NA>  Inter…
- 4 8                   Albania                  1995  Emissi… 1848… <NA>  Inter…
- 5 8                   Albania                  2005  Emissi… 3825… <NA>  Inter…
- 6 8                   Albania                  2010  Emissi… 3930… <NA>  Inter…
- 7 8                   Albania                  2015  Emissi… 3824… <NA>  Inter…
- 8 8                   Albania                  2016  Emissi… 3674… <NA>  Inter…
- 9 8                   Albania                  2017  Emissi… 4342… <NA>  Inter…
-10 8                   Albania                  1975  Emissi… 1.80… <NA>  Inter…
-# … with 2,123 more rows
+   T24                 `CO2 emission estimates` ...3  ...4     ...5  ...6  ...7 
+   <chr>               <chr>                    <chr> <chr>    <chr> <chr> <chr>
+ 1 Region/Country/Area <NA>                     Year  Series   Value Foot… Sour…
+ 2 8                   Albania                  1975  Emissio… 4338… <NA>  Inte…
+ 3 8                   Albania                  1985  Emissio… 6929… <NA>  Inte…
+ 4 8                   Albania                  1995  Emissio… 1848… <NA>  Inte…
+ 5 8                   Albania                  2005  Emissio… 3825… <NA>  Inte…
+ 6 8                   Albania                  2010  Emissio… 3930… <NA>  Inte…
+ 7 8                   Albania                  2015  Emissio… 3824… <NA>  Inte…
+ 8 8                   Albania                  2016  Emissio… 3674… <NA>  Inte…
+ 9 8                   Albania                  2017  Emissio… 4342… <NA>  Inte…
+10 8                   Albania                  1975  Emissio… 1.80… <NA>  Inte…
+# ℹ 2,123 more rows
 ~~~
 {: .output}
 
@@ -919,33 +866,13 @@ read_csv("data/co2-un-data.csv", skip=1)
 
 ~~~
 New names:
-* `` -> ...2
-~~~
-{: .output}
-
-
-
-~~~
 Rows: 2132 Columns: 7
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): ...2, Series, Footnotes, Source
-dbl (3): Region/Country/Area, Year, Value
-~~~
-{: .output}
-
-
-
-~~~
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+── Column specification
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+(4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this
+message.
+• `` -> `...2`
 ~~~
 {: .output}
 
@@ -953,19 +880,19 @@ dbl (3): Region/Country/Area, Year, Value
 
 ~~~
 # A tibble: 2,132 × 7
-   `Region/Country/Area` ...2     Year Series       Value Footnotes Source      
-                   <dbl> <chr>   <dbl> <chr>        <dbl> <chr>     <chr>       
- 1                     8 Albania  1975 Emissions … 4.34e3 <NA>      Internation…
- 2                     8 Albania  1985 Emissions … 6.93e3 <NA>      Internation…
- 3                     8 Albania  1995 Emissions … 1.85e3 <NA>      Internation…
- 4                     8 Albania  2005 Emissions … 3.83e3 <NA>      Internation…
- 5                     8 Albania  2010 Emissions … 3.93e3 <NA>      Internation…
- 6                     8 Albania  2015 Emissions … 3.82e3 <NA>      Internation…
- 7                     8 Albania  2016 Emissions … 3.67e3 <NA>      Internation…
- 8                     8 Albania  2017 Emissions … 4.34e3 <NA>      Internation…
- 9                     8 Albania  1975 Emissions … 1.80e0 <NA>      Internation…
-10                     8 Albania  1985 Emissions … 2.34e0 <NA>      Internation…
-# … with 2,122 more rows
+   `Region/Country/Area` ...2     Year Series             Value Footnotes Source
+                   <dbl> <chr>   <dbl> <chr>              <dbl> <chr>     <chr> 
+ 1                     8 Albania  1975 Emissions (thous… 4.34e3 <NA>      Inter…
+ 2                     8 Albania  1985 Emissions (thous… 6.93e3 <NA>      Inter…
+ 3                     8 Albania  1995 Emissions (thous… 1.85e3 <NA>      Inter…
+ 4                     8 Albania  2005 Emissions (thous… 3.83e3 <NA>      Inter…
+ 5                     8 Albania  2010 Emissions (thous… 3.93e3 <NA>      Inter…
+ 6                     8 Albania  2015 Emissions (thous… 3.82e3 <NA>      Inter…
+ 7                     8 Albania  2016 Emissions (thous… 3.67e3 <NA>      Inter…
+ 8                     8 Albania  2017 Emissions (thous… 4.34e3 <NA>      Inter…
+ 9                     8 Albania  1975 Emissions per ca… 1.80e0 <NA>      Inter…
+10                     8 Albania  1985 Emissions per ca… 2.34e0 <NA>      Inter…
+# ℹ 2,122 more rows
 ~~~
 {: .output}
 
@@ -988,22 +915,10 @@ co2_emissions_dirty <- read_csv("data/co2-un-data.csv", skip=2,
 
 ~~~
 Rows: 2132 Columns: 7
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (4): country, series, footnotes, source
 dbl (3): region, year, value
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -1021,19 +936,19 @@ co2_emissions_dirty
 
 ~~~
 # A tibble: 2,132 × 7
-   region country  year series             value footnotes source               
-    <dbl> <chr>   <dbl> <chr>              <dbl> <chr>     <chr>                
- 1      8 Albania  1975 Emissions (thous… 4.34e3 <NA>      International Energy…
- 2      8 Albania  1985 Emissions (thous… 6.93e3 <NA>      International Energy…
- 3      8 Albania  1995 Emissions (thous… 1.85e3 <NA>      International Energy…
- 4      8 Albania  2005 Emissions (thous… 3.83e3 <NA>      International Energy…
- 5      8 Albania  2010 Emissions (thous… 3.93e3 <NA>      International Energy…
- 6      8 Albania  2015 Emissions (thous… 3.82e3 <NA>      International Energy…
- 7      8 Albania  2016 Emissions (thous… 3.67e3 <NA>      International Energy…
- 8      8 Albania  2017 Emissions (thous… 4.34e3 <NA>      International Energy…
- 9      8 Albania  1975 Emissions per ca… 1.80e0 <NA>      International Energy…
-10      8 Albania  1985 Emissions per ca… 2.34e0 <NA>      International Energy…
-# … with 2,122 more rows
+   region country  year series                            value footnotes source
+    <dbl> <chr>   <dbl> <chr>                             <dbl> <chr>     <chr> 
+ 1      8 Albania  1975 Emissions (thousand metric tons… 4.34e3 <NA>      Inter…
+ 2      8 Albania  1985 Emissions (thousand metric tons… 6.93e3 <NA>      Inter…
+ 3      8 Albania  1995 Emissions (thousand metric tons… 1.85e3 <NA>      Inter…
+ 4      8 Albania  2005 Emissions (thousand metric tons… 3.83e3 <NA>      Inter…
+ 5      8 Albania  2010 Emissions (thousand metric tons… 3.93e3 <NA>      Inter…
+ 6      8 Albania  2015 Emissions (thousand metric tons… 3.82e3 <NA>      Inter…
+ 7      8 Albania  2016 Emissions (thousand metric tons… 3.67e3 <NA>      Inter…
+ 8      8 Albania  2017 Emissions (thousand metric tons… 4.34e3 <NA>      Inter…
+ 9      8 Albania  1975 Emissions per capita (metric to… 1.80e0 <NA>      Inter…
+10      8 Albania  1985 Emissions per capita (metric to… 2.34e0 <NA>      Inter…
+# ℹ 2,122 more rows
 ~~~
 {: .output}
 
@@ -1052,40 +967,21 @@ co2_emissions_dirty
 > 
 > ~~~
 > New names:
-> * `` -> ...2
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
 > Rows: 2132 Columns: 7
+> ── Column specification
+> ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this
+> message.
+> • `` -> `...2`
 > ~~~
 > {: .output}
 > 
 > 
 > 
 > ~~~
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────
-> Delimiter: ","
-> chr (4): ...2, Series, Footnotes, Source
-> dbl (3): Region/Country/Area, Year, Value
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> 
-> ℹ Use `spec()` to retrieve the full column specification for this data.
-> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> Error: Can't rename columns that don't exist.
+> Error in `rename()`:
+> ! Can't rename columns that don't exist.
 > ✖ Column `X2` doesn't exist.
 > ~~~
 > {: .error}
@@ -1103,33 +999,13 @@ co2_emissions_dirty
 > 
 > ~~~
 > New names:
-> * `` -> ...2
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
 > Rows: 2132 Columns: 7
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────
-> Delimiter: ","
-> chr (4): ...2, Series, Footnotes, Source
-> dbl (3): Region/Country/Area, Year, Value
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> 
-> ℹ Use `spec()` to retrieve the full column specification for this data.
-> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> ── Column specification
+> ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this
+> message.
+> • `` -> `...2`
 > ~~~
 > {: .output}
 > 
@@ -1137,19 +1013,19 @@ co2_emissions_dirty
 > 
 > ~~~
 > # A tibble: 2,132 × 7
->    `region/country/area` ...2     year series       value footnotes source      
->                    <dbl> <chr>   <dbl> <chr>        <dbl> <chr>     <chr>       
->  1                     8 Albania  1975 Emissions … 4.34e3 <NA>      Internation…
->  2                     8 Albania  1985 Emissions … 6.93e3 <NA>      Internation…
->  3                     8 Albania  1995 Emissions … 1.85e3 <NA>      Internation…
->  4                     8 Albania  2005 Emissions … 3.83e3 <NA>      Internation…
->  5                     8 Albania  2010 Emissions … 3.93e3 <NA>      Internation…
->  6                     8 Albania  2015 Emissions … 3.82e3 <NA>      Internation…
->  7                     8 Albania  2016 Emissions … 3.67e3 <NA>      Internation…
->  8                     8 Albania  2017 Emissions … 4.34e3 <NA>      Internation…
->  9                     8 Albania  1975 Emissions … 1.80e0 <NA>      Internation…
-> 10                     8 Albania  1985 Emissions … 2.34e0 <NA>      Internation…
-> # … with 2,122 more rows
+>    `region/country/area` ...2     year series             value footnotes source
+>                    <dbl> <chr>   <dbl> <chr>              <dbl> <chr>     <chr> 
+>  1                     8 Albania  1975 Emissions (thous… 4.34e3 <NA>      Inter…
+>  2                     8 Albania  1985 Emissions (thous… 6.93e3 <NA>      Inter…
+>  3                     8 Albania  1995 Emissions (thous… 1.85e3 <NA>      Inter…
+>  4                     8 Albania  2005 Emissions (thous… 3.83e3 <NA>      Inter…
+>  5                     8 Albania  2010 Emissions (thous… 3.93e3 <NA>      Inter…
+>  6                     8 Albania  2015 Emissions (thous… 3.82e3 <NA>      Inter…
+>  7                     8 Albania  2016 Emissions (thous… 3.67e3 <NA>      Inter…
+>  8                     8 Albania  2017 Emissions (thous… 4.34e3 <NA>      Inter…
+>  9                     8 Albania  1975 Emissions per ca… 1.80e0 <NA>      Inter…
+> 10                     8 Albania  1985 Emissions per ca… 2.34e0 <NA>      Inter…
+> # ℹ 2,122 more rows
 > ~~~
 > {: .output}
 {: .solution}
@@ -1183,7 +1059,7 @@ We previously saw how we can subset columns from a data frame using the select f
 > >  8 Albania  2017 Emissions (thousand metric tons of carbon dioxide)   4342.  
 > >  9 Albania  1975 Emissions per capita (metric tons of carbon dioxide)    1.80
 > > 10 Albania  1985 Emissions per capita (metric tons of carbon dioxide)    2.34
-> > # … with 2,122 more rows
+> > # ℹ 2,122 more rows
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -1216,7 +1092,7 @@ co2_emissions_dirty %>%
  8 Albania  2017 total_emissions      4342.  
  9 Albania  1975 per_capita_emissions    1.80
 10 Albania  1985 per_capita_emissions    2.34
-# … with 2,122 more rows
+# ℹ 2,122 more rows
 ~~~
 {: .output}
 
@@ -1248,7 +1124,7 @@ co2_emissions_dirty %>%
  8 Albania  2017          4342.               1.51 
  9 Algeria  1975         13553.               0.811
 10 Algeria  1985         42073.               1.86 
-# … with 1,056 more rows
+# ℹ 1,056 more rows
 ~~~
 {: .output}
 
@@ -1322,7 +1198,7 @@ Excellent! The last step before we can join this data frame is to get the most d
 > >  8 Azerbaijan  29018.      3.46 
 > >  9 Bahrain     20565.     23.1  
 > > 10 Bangladesh  31960.      0.223
-> > # … with 130 more rows
+> > # ℹ 130 more rows
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -1365,22 +1241,10 @@ gapminder_data_2007 <- read_csv("data/gapminder_data.csv") %>%
 
 ~~~
 Rows: 1704 Columns: 6
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -1414,7 +1278,7 @@ inner_join(gapminder_data, co2_emissions)
 
 
 ~~~
-Joining, by = "country"
+Joining with `by = join_by(country)`
 ~~~
 {: .output}
 
@@ -1434,7 +1298,8 @@ Joining, by = "country"
  8 Albania  1987 3075321 Europe       72       3739.          3825.
  9 Albania  1992 3326498 Europe       71.6     2497.          3825.
 10 Albania  1997 3428038 Europe       73.0     3193.          3825.
-# … with 1,178 more rows, and 1 more variable: per_capita_emission <dbl>
+# ℹ 1,178 more rows
+# ℹ 1 more variable: per_capita_emission <dbl>
 ~~~
 {: .output}
 
@@ -1462,7 +1327,8 @@ inner_join(gapminder_data, co2_emissions, by="country")
  8 Albania  1987 3075321 Europe       72       3739.          3825.
  9 Albania  1992 3326498 Europe       71.6     2497.          3825.
 10 Albania  1997 3428038 Europe       73.0     3193.          3825.
-# … with 1,178 more rows, and 1 more variable: per_capita_emission <dbl>
+# ℹ 1,178 more rows
+# ℹ 1 more variable: per_capita_emission <dbl>
 ~~~
 {: .output}
 
@@ -1492,7 +1358,7 @@ anti_join(gapminder_data, co2_emissions, by="country")
  8 Afghanistan  1987 13867957 Asia         40.8      852.
  9 Afghanistan  1992 16317921 Asia         41.7      649.
 10 Afghanistan  1997 22227415 Asia         41.8      635.
-# … with 506 more rows
+# ℹ 506 more rows
 ~~~
 {: .output}
 We can see that the co2_emissions data were missing for Bolivia, Puerto Rico, United States, and Venezuela. 
@@ -1522,22 +1388,10 @@ co2_emissions <- read_csv("data/co2-un-data.csv", skip=2,
 
 ~~~
 Rows: 2132 Columns: 7
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (4): country, series, footnotes, source
 dbl (3): region, year, value
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -1567,7 +1421,7 @@ anti_join(gapminder_data, co2_emissions, by="country")
  8 Afghanistan  1987 13867957 Asia         40.8      852.
  9 Afghanistan  1992 16317921 Asia         41.7      649.
 10 Afghanistan  1997 22227415 Asia         41.8      635.
-# … with 470 more rows
+# ℹ 470 more rows
 ~~~
 {: .output}
 
@@ -1588,22 +1442,10 @@ mutate(country = recode(country, "Puerto Rico" = "United States"))
 
 ~~~
 Rows: 1704 Columns: 6
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -1630,22 +1472,10 @@ gapminder_data <- read_csv("data/gapminder_data.csv") %>%
 
 ~~~
 Rows: 1704 Columns: 6
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -1663,7 +1493,7 @@ anti_join(gapminder_data, co2_emissions, by="country")
 
 ~~~
 # A tibble: 0 × 4
-# … with 4 variables: country <chr>, lifeExp <dbl>, gdpPercap <dbl>, pop <dbl>
+# ℹ 4 variables: country <chr>, lifeExp <dbl>, gdpPercap <dbl>, pop <dbl>
 ~~~
 {: .output}
 Now our `anti_join()` returns an empty data frame, which tells us that we have reconciled all of the keys from the gapminder data with the data in the co2_emissions data frame.
@@ -1703,7 +1533,7 @@ mutate(region = if_else(country == "Canada" | country == "United States" | count
  8 Cuba                  78.3     8948.  11416987  25051.      2.22  south 
  9 Dominican Republic    72.2     6025.   9319622  17522.      1.90  south 
 10 Ecuador               75.0     6873.  13755680  23927.      1.74  south 
-# … with 14 more rows
+# ℹ 14 more rows
 ~~~
 {: .output}
 Let's look at the output - see how the Canada, US, and Mexico rows are all labeled as "north" and everything else is labeled as "south"  
@@ -1737,7 +1567,10 @@ ggplot(gapminder_co2, aes(x=gdpPercap, y=per_capita)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-PlotPercapCO2vsGDP-1.png" title="plot of chunk PlotPercapCO2vsGDP" alt="plot of chunk PlotPercapCO2vsGDP" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-04-PlotPercapCO2vsGDP-1.png" alt="plot of chunk PlotPercapCO2vsGDP" width="612" />
+<p class="caption">plot of chunk PlotPercapCO2vsGDP</p>
+</div>
 
 *Tip:* Notice we used the `\n` in our title to get a new line to prevent it from getting cut off.
 
@@ -1758,11 +1591,14 @@ ggplot(gapminder_co2, aes(x=gdpPercap, y=per_capita)) +
 
 
 ~~~
-`geom_smooth()` using method = 'loess' and formula 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ~~~
 {: .output}
 
-<img src="../fig/rmd-04-PlotPercapCO2vsGDPSmooth-1.png" title="plot of chunk PlotPercapCO2vsGDPSmooth" alt="plot of chunk PlotPercapCO2vsGDPSmooth" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-04-PlotPercapCO2vsGDPSmooth-1.png" alt="plot of chunk PlotPercapCO2vsGDPSmooth" width="612" />
+<p class="caption">plot of chunk PlotPercapCO2vsGDPSmooth</p>
+</div>
 
 We can force the line to be straight using `method="lm"` as an argument to `geom_smooth`
 
@@ -1781,11 +1617,14 @@ ggplot(gapminder_co2, aes(x=gdpPercap, y=per_capita)) +
 
 
 ~~~
-`geom_smooth()` using formula 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'
 ~~~
 {: .output}
 
-<img src="../fig/rmd-04-PlotPercapCO2vsGDP1SmoothLm-1.png" title="plot of chunk PlotPercapCO2vsGDP1SmoothLm" alt="plot of chunk PlotPercapCO2vsGDP1SmoothLm" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-04-PlotPercapCO2vsGDP1SmoothLm-1.png" alt="plot of chunk PlotPercapCO2vsGDP1SmoothLm" width="612" />
+<p class="caption">plot of chunk PlotPercapCO2vsGDP1SmoothLm</p>
+</div>
 
 To answer our first question, as the title of our plot indicates there is indeed a strong association between a nation's GDP and the amount of CO2 it produces.
 
@@ -1816,7 +1655,7 @@ gapminder_co2 %>%
  8 Cuba                  78.3     8948.  11416987  25051.      2.22  south 
  9 Dominican Republic    72.2     6025.   9319622  17522.      1.90  south 
 10 Ecuador               75.0     6873.  13755680  23927.      1.74  south 
-# … with 14 more rows
+# ℹ 14 more rows
 ~~~
 {: .output}
 
@@ -1909,9 +1748,10 @@ gapminder_data %>%
 
 
 ~~~
-Error: Problem with `filter()` input `..1`.
-ℹ Input `..1` is `year == 2007`.
-✖ object 'year' not found
+Error in `filter()`:
+ℹ In argument: `year == 2007`.
+Caused by error in `year == 2007`:
+! comparison (1) is possible only for atomic and list types
 ~~~
 {: .error}
 
@@ -1941,19 +1781,20 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > ~~~
 > > # A tibble: 24 × 9
-> >    country       lifeExp gdpPercap     pop  total per_capita region totalPercent
-> >    <chr>           <dbl>     <dbl>   <dbl>  <dbl>      <dbl> <chr>         <dbl>
-> >  1 Argentina        75.3    12779.  4.03e7 1.49e5      3.82  south        1.98  
-> >  2 Bolivia          65.6     3822.  9.12e6 8.98e3      0.984 south        0.119 
-> >  3 Brazil           72.4     9066.  1.90e8 3.12e5      1.67  south        4.13  
-> >  4 Canada           80.7    36319.  3.34e7 5.40e5     16.8   north        7.16  
-> >  5 Chile            78.6    13172.  1.63e7 5.44e4      3.34  south        0.721 
-> >  6 Colombia         72.9     7007.  4.42e7 5.36e4      1.24  south        0.710 
-> >  7 Costa Rica       78.8     9645.  4.13e6 5.46e3      1.29  south        0.0724
-> >  8 Cuba             78.3     8948.  1.14e7 2.51e4      2.22  south        0.332 
-> >  9 Dominican Re…    72.2     6025.  9.32e6 1.75e4      1.90  south        0.232 
-> > 10 Ecuador          75.0     6873.  1.38e7 2.39e4      1.74  south        0.317 
-> > # … with 14 more rows, and 1 more variable: popPercent <dbl>
+> >    country        lifeExp gdpPercap    pop  total per_capita region totalPercent
+> >    <chr>            <dbl>     <dbl>  <dbl>  <dbl>      <dbl> <chr>         <dbl>
+> >  1 Argentina         75.3    12779. 4.03e7 1.49e5      3.82  south        1.98  
+> >  2 Bolivia           65.6     3822. 9.12e6 8.98e3      0.984 south        0.119 
+> >  3 Brazil            72.4     9066. 1.90e8 3.12e5      1.67  south        4.13  
+> >  4 Canada            80.7    36319. 3.34e7 5.40e5     16.8   north        7.16  
+> >  5 Chile             78.6    13172. 1.63e7 5.44e4      3.34  south        0.721 
+> >  6 Colombia          72.9     7007. 4.42e7 5.36e4      1.24  south        0.710 
+> >  7 Costa Rica        78.8     9645. 4.13e6 5.46e3      1.29  south        0.0724
+> >  8 Cuba              78.3     8948. 1.14e7 2.51e4      2.22  south        0.332 
+> >  9 Dominican Rep…    72.2     6025. 9.32e6 1.75e4      1.90  south        0.232 
+> > 10 Ecuador           75.0     6873. 1.38e7 2.39e4      1.74  south        0.317 
+> > # ℹ 14 more rows
+> > # ℹ 1 more variable: popPercent <dbl>
 > > ~~~
 > > {: .output}
 > >
@@ -2000,11 +1841,13 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error in FUN(X[[i]], ...): object 'total_emissionsPercent' not found
+> > Error in `geom_col()`:
+> > ! Problem while computing aesthetics.
+> > ℹ Error occurred in the 1st layer.
+> > Caused by error in `FUN()`:
+> > ! object 'total_emissionsPercent' not found
 > > ~~~
 > > {: .error}
-> > 
-> > <img src="../fig/rmd-04-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 > 
 > Now rotate the x-labels by 90 degrees (if you don't remember how, google it again or look at our code from the ggplot lesson)  
@@ -2021,11 +1864,13 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error in FUN(X[[i]], ...): object 'total_emissionsPercent' not found
+> > Error in `geom_col()`:
+> > ! Problem while computing aesthetics.
+> > ℹ Error occurred in the 1st layer.
+> > Caused by error in `FUN()`:
+> > ! object 'total_emissionsPercent' not found
 > > ~~~
 > > {: .error}
-> > 
-> > <img src="../fig/rmd-04-unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 > 
 > Reorder the bars in descending order. **Hint:** try Googling how to use the `reorder()` function with ggplot.
@@ -2041,11 +1886,13 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error in tapply(X = X, INDEX = x, FUN = FUN, ...): object 'total_emissionsPercent' not found
+> > Error in `geom_col()`:
+> > ! Problem while computing aesthetics.
+> > ℹ Error occurred in the 1st layer.
+> > Caused by error in `tapply()`:
+> > ! object 'total_emissionsPercent' not found
 > > ~~~
 > > {: .error}
-> > 
-> > <img src="../fig/rmd-04-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 > 
 > Practice making it look pretty! 
@@ -2065,10 +1912,10 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error: arrange() failed at implicit mutate() step. 
-> > * Problem with `mutate()` column `..1`.
-> > ℹ `..1 = per_capita_emissions`.
-> > ✖ object 'per_capita_emissions' not found
+> > Error in `arrange()`:
+> > ℹ In argument: `..1 = per_capita_emissions`.
+> > Caused by error:
+> > ! object 'per_capita_emissions' not found
 > > ~~~
 > > {: .error}
 > {: .solution}
@@ -2086,11 +1933,13 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error in FUN(X[[i]], ...): object 'per_capita_emissions' not found
+> > Error in `geom_col()`:
+> > ! Problem while computing aesthetics.
+> > ℹ Error occurred in the 1st layer.
+> > Caused by error in `FUN()`:
+> > ! object 'per_capita_emissions' not found
 > > ~~~
 > > {: .error}
-> > 
-> > <img src="../fig/rmd-04-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 > 
 > Reorder them in descending order. **Hint:** use the `reorder()` function. 
@@ -2106,10 +1955,12 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error in tapply(X = X, INDEX = x, FUN = FUN, ...): object 'per_capita_emissions' not found
+> > Error in `geom_col()`:
+> > ! Problem while computing aesthetics.
+> > ℹ Error occurred in the 1st layer.
+> > Caused by error in `tapply()`:
+> > ! object 'per_capita_emissions' not found
 > > ~~~
 > > {: .error}
-> > 
-> > <img src="../fig/rmd-04-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}

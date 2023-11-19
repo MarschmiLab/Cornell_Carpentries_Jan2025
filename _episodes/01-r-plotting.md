@@ -174,26 +174,16 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.3.1 ──
-~~~
-{: .output}
-
-
-
-~~~
-✔ ggplot2 3.3.5     ✔ purrr   0.3.4
-✔ tibble  3.1.6     ✔ dplyr   1.0.7
-✔ tidyr   1.1.4     ✔ stringr 1.4.0
-✔ readr   2.1.1     ✔ forcats 0.5.1
-~~~
-{: .output}
-
-
-
-~~~
-── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ~~~
 {: .output}
 
@@ -282,22 +272,10 @@ gapminder_1997 <- read_csv("gapminder_1997.csv")
 
 ~~~
 Rows: 142 Columns: 5
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -425,7 +403,7 @@ Do all functions need arguments? Let's test some other functions:
 
 
 ~~~
-[1] "2021-12-16"
+[1] "2023-11-19"
 ~~~
 {: .output}
 
@@ -439,7 +417,7 @@ Do all functions need arguments? Let's test some other functions:
 
 
 ~~~
-[1] "/Users/kelly/projects/carpentries/mrflick-curriculum/_episodes_rmd"
+[1] "/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/intro-curriculum-r/_episodes_rmd"
 ~~~
 {: .output}
 
@@ -489,22 +467,10 @@ read_csv(file = 'gapminder_1997.csv')
 
 ~~~
 Rows: 142 Columns: 5
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -527,7 +493,7 @@ dbl (3): pop, lifeExp, gdpPercap
  8 Bahrain        598561 Asia         73.9    20292.
  9 Bangladesh  123315288 Asia         59.4      973.
 10 Belgium      10199787 Europe       77.5    27561.
-# … with 132 more rows
+# ℹ 132 more rows
 ~~~
 {: .output}
 
@@ -576,7 +542,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > 
 > ~~~
-> [1] "2021-12-16"
+> [1] "2023-11-19"
 > ~~~
 > {: .output}
 > 
@@ -590,7 +556,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > 
 > ~~~
-> [1] "/Users/kelly/projects/carpentries/mrflick-curriculum/_episodes_rmd"
+> [1] "/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/intro-curriculum-r/_episodes_rmd"
 > ~~~
 > {: .output}
 > 
@@ -618,7 +584,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > 
 > ~~~
-> Error: 'gapminder_1997.csv' does not exist in current working directory ('/Users/kelly/projects/carpentries/mrflick-curriculum/_episodes_rmd').
+> Error: 'gapminder_1997.csv' does not exist in current working directory ('/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/intro-curriculum-r/_episodes_rmd').
 > ~~~
 > {: .error}
 {: .callout}
@@ -639,7 +605,10 @@ ggplot(data=gapminder_1997)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-ggplotDataOnly-1.png" title="plot of chunk ggplotDataOnly" alt="plot of chunk ggplotDataOnly" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-ggplotDataOnly-1.png" alt="plot of chunk ggplotDataOnly" width="612" />
+<p class="caption">plot of chunk ggplotDataOnly</p>
+</div>
 
 To run code that you've typed in the editor, you have a few options. Remember
 that the quickest way to run the code is by pressing
@@ -681,7 +650,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-ggplotX-1.png" title="plot of chunk ggplotX" alt="plot of chunk ggplotX" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-ggplotX-1.png" alt="plot of chunk ggplotX" width="612" />
+<p class="caption">plot of chunk ggplotX</p>
+</div>
 
 Note that we've added this new function call to a second line just to make it
 easier to read. To do this we make sure that the `+` is at the end of the first
@@ -702,7 +674,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotAddXLabel-1.png" title="plot of chunk FirstPlotAddXLabel" alt="plot of chunk FirstPlotAddXLabel" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotAddXLabel-1.png" alt="plot of chunk FirstPlotAddXLabel" width="612" />
+<p class="caption">plot of chunk FirstPlotAddXLabel</p>
+</div>
 
 OK. That looks better. 
 
@@ -734,7 +709,10 @@ OK. That looks better.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-FirstPlotAddY-1.png" title="plot of chunk FirstPlotAddY" alt="plot of chunk FirstPlotAddY" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-FirstPlotAddY-1.png" alt="plot of chunk FirstPlotAddY" width="612" />
+> > <p class="caption">plot of chunk FirstPlotAddY</p>
+> > </div>
 > > {: .source}
 > {: .solution}
 {: .challenge}
@@ -759,7 +737,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotAddPoints-1.png" title="plot of chunk FirstPlotAddPoints" alt="plot of chunk FirstPlotAddPoints" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotAddPoints-1.png" alt="plot of chunk FirstPlotAddPoints" width="612" />
+<p class="caption">plot of chunk FirstPlotAddPoints</p>
+</div>
 
 Now we're really getting somewhere. It finally looks like a proper plot!  We can
 now see a trend in the data. It looks like countries with a larger GDP tend to
@@ -779,7 +760,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotAddTitle-1.png" title="plot of chunk FirstPlotAddTitle" alt="plot of chunk FirstPlotAddTitle" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotAddTitle-1.png" alt="plot of chunk FirstPlotAddTitle" width="612" />
+<p class="caption">plot of chunk FirstPlotAddTitle</p>
+</div>
 
 No one can deny we've made a very handsome plot! But now looking at the data, we
 might be curious about learning more about the points that are the extremes of
@@ -802,7 +786,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotAddColor-1.png" title="plot of chunk FirstPlotAddColor" alt="plot of chunk FirstPlotAddColor" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotAddColor-1.png" alt="plot of chunk FirstPlotAddColor" width="612" />
+<p class="caption">plot of chunk FirstPlotAddColor</p>
+</div>
 
 Here we can see that in 1997 the African countries had much lower life
 expectancy than many other continents. Notice that when we add a mapping for
@@ -828,7 +815,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotAddColorScale-1.png" title="plot of chunk FirstPlotAddColorScale" alt="plot of chunk FirstPlotAddColorScale" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotAddColorScale-1.png" alt="plot of chunk FirstPlotAddColorScale" width="612" />
+<p class="caption">plot of chunk FirstPlotAddColorScale</p>
+</div>
 
 The `scale_color_brewer()` function is just one of many you can use to change
 colors. There are bunch of "palettes" that are build in. You can view them all
@@ -856,19 +846,6 @@ There are also lots of other fun options:
 > > ~~~
 > > #install.packages("wesanderson") # install package from GitHub
 > > library(wesanderson)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in library(wesanderson): there is no package called 'wesanderson'
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > ggplot(data = gapminder_1997) +
 > > aes(x = gdpPercap) +
 > > labs(x = "GDP Per Capita") +
@@ -881,12 +858,10 @@ There are also lots of other fun options:
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in wes_palette("Cavalcanti1"): could not find function "wes_palette"
-> > ~~~
-> > {: .error}
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-Color-1.png" alt="plot of chunk Color" width="612" />
+> > <p class="caption">plot of chunk Color</p>
+> > </div>
 > > {: .source}
 > {: .solution}
 {: .challenge}
@@ -911,7 +886,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotAddSize-1.png" title="plot of chunk FirstPlotAddSize" alt="plot of chunk FirstPlotAddSize" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotAddSize-1.png" alt="plot of chunk FirstPlotAddSize" width="612" />
+<p class="caption">plot of chunk FirstPlotAddSize</p>
+</div>
 
 There doesn't seem to be a very strong association with population size. We can
 see two very large countries with relatively low GDP per capita (but since the
@@ -937,7 +915,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotAddPop-1.png" title="plot of chunk FirstPlotAddPop" alt="plot of chunk FirstPlotAddPop" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotAddPop-1.png" alt="plot of chunk FirstPlotAddPop" width="612" />
+<p class="caption">plot of chunk FirstPlotAddPop</p>
+</div>
 
 This works because you can treat the columns in the aesthetic mappings just like
 any other variables and can use functions to transform or change them at plot
@@ -971,7 +952,10 @@ the plot in its own window.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-Shape-1.png" title="plot of chunk Shape" alt="plot of chunk Shape" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-Shape-1.png" alt="plot of chunk Shape" width="612" />
+> > <p class="caption">plot of chunk Shape</p>
+> > </div>
 > > {: .source}
 > {: .solution}
 {: .challenge}
@@ -993,7 +977,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-FirstPlotCondensed-1.png" title="plot of chunk FirstPlotCondensed" alt="plot of chunk FirstPlotCondensed" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-FirstPlotCondensed-1.png" alt="plot of chunk FirstPlotCondensed" width="612" />
+<p class="caption">plot of chunk FirstPlotCondensed</p>
+</div>
 
 # Plotting for data exploration
 _[Back to top](#contents)_
@@ -1015,22 +1002,10 @@ To start, we will read in the data without using the interactive RStudio file na
 
 ~~~
 Rows: 1704 Columns: 6
-~~~
-{: .output}
-
-
-
-~~~
-── Column specification ─────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
-~~~
-{: .output}
-
-
-
-~~~
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -1080,7 +1055,10 @@ Notice that this dataset has an additional column `year` compared to the smaller
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-01-PlotFullGapminder-1.png" title="plot of chunk PlotFullGapminder" alt="plot of chunk PlotFullGapminder" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-01-PlotFullGapminder-1.png" alt="plot of chunk PlotFullGapminder" width="612" />
+> <p class="caption">plot of chunk PlotFullGapminder</p>
+> </div>
 >
 {: .challenge}
 
@@ -1115,7 +1093,10 @@ Our plot has a lot of points in columns which makes it hard to see trends over t
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapMinderLinePlotBad-1.png" title="plot of chunk GapMinderLinePlotBad" alt="plot of chunk GapMinderLinePlotBad" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapMinderLinePlotBad-1.png" alt="plot of chunk GapMinderLinePlotBad" width="612" />
+<p class="caption">plot of chunk GapMinderLinePlotBad</p>
+</div>
 
 Hmm. This doesn't look right. By setting the color value, we got a line for each continent, but we really wanted a line for each country. We need to tell ggplot that we want to connect the values for each `country` value instead. To do this, we need to use the `group=` aesthetic.
 
@@ -1127,7 +1108,10 @@ Hmm. This doesn't look right. By setting the color value, we got a line for each
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapMinderLinePlot-1.png" title="plot of chunk GapMinderLinePlot" alt="plot of chunk GapMinderLinePlot" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapMinderLinePlot-1.png" alt="plot of chunk GapMinderLinePlot" width="612" />
+<p class="caption">plot of chunk GapMinderLinePlot</p>
+</div>
 
 Sometimes plots like this are called "spaghetti plots" because all the lines look like a bunch of wet noodles.
 
@@ -1143,7 +1127,10 @@ Sometimes plots like this are called "spaghetti plots" because all the lines loo
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-gapminderMoreLines-1.png" title="plot of chunk gapminderMoreLines" alt="plot of chunk gapminderMoreLines" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-gapminderMoreLines-1.png" alt="plot of chunk gapminderMoreLines" width="612" />
+> > <p class="caption">plot of chunk gapminderMoreLines</p>
+> > </div>
 > > (China and India are the two Asian countries that have experienced massive population growth from 1952-2007.)
 > {: .solution}
 {: .challenge}
@@ -1167,7 +1154,10 @@ We've previously used the discrete values of the `continent` column to color in 
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-GapBox-1.png" title="plot of chunk GapBox" alt="plot of chunk GapBox" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-GapBox-1.png" alt="plot of chunk GapBox" width="612" />
+> > <p class="caption">plot of chunk GapBox</p>
+> > </div>
 > {: .solution}
 {: .challenge}
 
@@ -1185,7 +1175,10 @@ This type of visualization makes it easy to compare the range and spread of valu
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-GapViol-1.png" title="plot of chunk GapViol" alt="plot of chunk GapViol" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-GapViol-1.png" alt="plot of chunk GapViol" width="612" />
+> > <p class="caption">plot of chunk GapViol</p>
+> > </div>
 > {: .solution}
 {: .challenge}
 
@@ -1202,7 +1195,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolin-1.png" title="plot of chunk GapViolin" alt="plot of chunk GapViolin" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolin-1.png" alt="plot of chunk GapViolin" width="612" />
+<p class="caption">plot of chunk GapViolin</p>
+</div>
 
 Violin plots are similar to box plots, but they show the range and spread of values with curves rather than boxes (wider curves = more observations) and they do not include outliers. Also note you need a minimum number of points so they can be drawn - because Oceania only has two values, it doesn't get a curve. We can include the Oceania data by adding a layer of points on top that will show us the "raw" data:
 
@@ -1215,7 +1211,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinPoints-1.png" title="plot of chunk GapViolinPoints" alt="plot of chunk GapViolinPoints" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinPoints-1.png" alt="plot of chunk GapViolinPoints" width="612" />
+<p class="caption">plot of chunk GapViolinPoints</p>
+</div>
 
 OK, we've drawn the points but most of them stack up on top of each other. One way to make it easier to see all the data is to "jitter" the points, or move them around randomly so they don't stack up on top of each other. To do this, we use `geom_jitter` rather than `geom_point`
 
@@ -1228,7 +1227,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinJitter-1.png" title="plot of chunk GapViolinJitter" alt="plot of chunk GapViolinJitter" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinJitter-1.png" alt="plot of chunk GapViolinJitter" width="612" />
+<p class="caption">plot of chunk GapViolinJitter</p>
+</div>
 
 Be aware that these movements are random so your plot will look a bit different each time you run it!
 
@@ -1243,7 +1245,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinJitterLayers-1.png" title="plot of chunk GapViolinJitterLayers" alt="plot of chunk GapViolinJitterLayers" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinJitterLayers-1.png" alt="plot of chunk GapViolinJitterLayers" width="612" />
+<p class="caption">plot of chunk GapViolinJitterLayers</p>
+</div>
 
 Since we plot the `geom_jitter` layer first, the violin plot layer is placed on top of the `geom_jitter` layer, so we cannot see most of the points.
 
@@ -1257,7 +1262,10 @@ ggplot(data = gapminder_1997, mapping = aes(x = continent, y = lifeExp)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinJitter2-1.png" title="plot of chunk GapViolinJitter2" alt="plot of chunk GapViolinJitter2" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinJitter2-1.png" alt="plot of chunk GapViolinJitter2" width="612" />
+<p class="caption">plot of chunk GapViolinJitter2</p>
+</div>
 
 However, we can also use aesthetic values for only one layer of our plot. To do that, you an place an additional `aes()` inside of that layer. For example, what if we want to change the size for the points so they are scaled by population, but we don't want to change the violin plot? We can do:
 
@@ -1270,7 +1278,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinJitterAes-1.png" title="plot of chunk GapViolinJitterAes" alt="plot of chunk GapViolinJitterAes" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinJitterAes-1.png" alt="plot of chunk GapViolinJitterAes" width="612" />
+<p class="caption">plot of chunk GapViolinJitterAes</p>
+</div>
 
 Both `geom_violin` and `geom_jitter` will inherit the default values of `aes(continent, lifeExp)` but only `geom_jitter` will also use `aes(size = pop)`.
 
@@ -1315,7 +1326,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinColor-1.png" title="plot of chunk GapViolinColor" alt="plot of chunk GapViolinColor" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinColor-1.png" alt="plot of chunk GapViolinColor" width="612" />
+<p class="caption">plot of chunk GapViolinColor</p>
+</div>
 Well, that didn't get all that colorful. That's because objects like these violins have two different parts that have a color: the shape outline, and the inner part of the shape. For geoms that have an inner part, you change the fill color with `fill=` rather than `color=`, so let's try that instead
 
 
@@ -1326,7 +1340,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinFill-1.png" title="plot of chunk GapViolinFill" alt="plot of chunk GapViolinFill" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinFill-1.png" alt="plot of chunk GapViolinFill" width="612" />
+<p class="caption">plot of chunk GapViolinFill</p>
+</div>
 
 That's some plot now isn't it! Compare this to what you see when you map the fill property to your data rather than setting a specific value.
 
@@ -1338,7 +1355,10 @@ ggplot(data = gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapViolinFillMap-1.png" title="plot of chunk GapViolinFillMap" alt="plot of chunk GapViolinFillMap" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapViolinFillMap-1.png" alt="plot of chunk GapViolinFillMap" width="612" />
+<p class="caption">plot of chunk GapViolinFillMap</p>
+</div>
 
 So "darkolivegreen" maybe wasn't the prettiest color. R knows lots of color names. You can see the full list if you run `colors()` in the console. Since there are so many, you can randomly choose 10 if you run `sample(colors(), size = 10)`.
 
@@ -1359,7 +1379,10 @@ So "darkolivegreen" maybe wasn't the prettiest color. R knows lots of color name
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-GapViolinFillSoln-1.png" title="plot of chunk GapViolinFillSoln" alt="plot of chunk GapViolinFillSoln" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-GapViolinFillSoln-1.png" alt="plot of chunk GapViolinFillSoln" width="612" />
+> > <p class="caption">plot of chunk GapViolinFillSoln</p>
+> > </div>
 > {: .solution}
 {: .challenge}
 
@@ -1373,7 +1396,10 @@ So "darkolivegreen" maybe wasn't the prettiest color. R knows lots of color name
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-01-GapViolinAesFillMap-1.png" title="plot of chunk GapViolinAesFillMap" alt="plot of chunk GapViolinAesFillMap" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-01-GapViolinAesFillMap-1.png" alt="plot of chunk GapViolinAesFillMap" width="612" />
+> <p class="caption">plot of chunk GapViolinAesFillMap</p>
+> </div>
 > Why doesn't this work? How can you fix it? Where does that color come from?
 >
 > > ## Solution
@@ -1401,7 +1427,10 @@ ggplot(gapminder_1997) +
 ~~~
 {: .output}
 
-<img src="../fig/rmd-01-GapLifeHist-1.png" title="plot of chunk GapLifeHist" alt="plot of chunk GapLifeHist" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapLifeHist-1.png" alt="plot of chunk GapLifeHist" width="612" />
+<p class="caption">plot of chunk GapLifeHist</p>
+</div>
 
 You should not only see the plot in the plot window, but also a message telling you to choose a better bin value. Histograms can look very different depending on the number of bars you decide to draw. The default is 30. Let's try setting a different value by explicitly passing a `bin=` argument to the `geom_histogram` later.
 
@@ -1413,7 +1442,10 @@ ggplot(gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapLifeHistBins-1.png" title="plot of chunk GapLifeHistBins" alt="plot of chunk GapLifeHistBins" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapLifeHistBins-1.png" alt="plot of chunk GapLifeHistBins" width="612" />
+<p class="caption">plot of chunk GapLifeHistBins</p>
+</div>
 
 Try different values like 5 or 50 to see how the plot changes.
 
@@ -1429,7 +1461,10 @@ Try different values like 5 or 50 to see how the plot changes.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-GapLifeDens1-1.png" title="plot of chunk GapLifeDens1" alt="plot of chunk GapLifeDens1" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-GapLifeDens1-1.png" alt="plot of chunk GapLifeDens1" width="612" />
+> > <p class="caption">plot of chunk GapLifeDens1</p>
+> > </div>
 > {: .solution}
 {: .challenge}
 
@@ -1448,7 +1483,10 @@ ggplot(gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapLifeHistBinsClassicTheme-1.png" title="plot of chunk GapLifeHistBinsClassicTheme" alt="plot of chunk GapLifeHistBinsClassicTheme" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapLifeHistBinsClassicTheme-1.png" alt="plot of chunk GapLifeHistBinsClassicTheme" width="612" />
+<p class="caption">plot of chunk GapLifeHistBinsClassicTheme</p>
+</div>
 
 Try out a few other themes, to see which you like: `theme_bw()`, `theme_linedraw()`, `theme_minimal()`.
 
@@ -1465,7 +1503,10 @@ Try out a few other themes, to see which you like: `theme_bw()`, `theme_linedraw
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-GapLifeDens2-1.png" title="plot of chunk GapLifeDens2" alt="plot of chunk GapLifeDens2" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-GapLifeDens2-1.png" alt="plot of chunk GapLifeDens2" width="612" />
+> > <p class="caption">plot of chunk GapLifeDens2</p>
+> > </div>
 > {: .solution}
 {: .challenge}
 
@@ -1482,7 +1523,10 @@ ggplot(gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapNoFacet-1.png" title="plot of chunk GapNoFacet" alt="plot of chunk GapNoFacet" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapNoFacet-1.png" alt="plot of chunk GapNoFacet" width="612" />
+<p class="caption">plot of chunk GapNoFacet</p>
+</div>
 
 The first time we made this plot, we colored the points differently for each of the continents. This time let's actually draw a separate box for each continent. We can do this with `facet_wrap()`
 
@@ -1495,7 +1539,10 @@ ggplot(gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapFacetWrap-1.png" title="plot of chunk GapFacetWrap" alt="plot of chunk GapFacetWrap" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapFacetWrap-1.png" alt="plot of chunk GapFacetWrap" width="612" />
+<p class="caption">plot of chunk GapFacetWrap</p>
+</div>
 Note that `facet_wrap` requires this extra helper function called `vars()` in order to pass in the column names. It's a lot like the `aes()` function, but it doesn't require an aesthetic name. We can see in this output that we get a separate box with a label for each continent so that only the points for that continent are in that box.
 
 The other faceting function ggplot provides is `facet_grid()`. The main difference is that `facet_grid()` will make sure all of your smaller boxes share a common axis. In this example, we will stack all the boxes on top of each other into rows so that their x axes all line up.
@@ -1508,7 +1555,10 @@ ggplot(gapminder_1997) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-GapFacetGrid-1.png" title="plot of chunk GapFacetGrid" alt="plot of chunk GapFacetGrid" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-GapFacetGrid-1.png" alt="plot of chunk GapFacetGrid" width="612" />
+<p class="caption">plot of chunk GapFacetGrid</p>
+</div>
 
 Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom.
 
@@ -1541,7 +1591,10 @@ ggsave("awesome_plot.jpg", width=6, height=4)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-savingPlotExercise-1.png" title="plot of chunk savingPlotExercise" alt="plot of chunk savingPlotExercise" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-savingPlotExercise-1.png" alt="plot of chunk savingPlotExercise" width="612" />
+> > <p class="caption">plot of chunk savingPlotExercise</p>
+> > </div>
 > > 
 > > ~~~
 > > ggsave("awesome_histogram.jpg", width=6, height=4)
@@ -1570,7 +1623,10 @@ violin_plot
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-outputViolinPlot-1.png" title="plot of chunk outputViolinPlot" alt="plot of chunk outputViolinPlot" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-outputViolinPlot-1.png" alt="plot of chunk outputViolinPlot" width="612" />
+<p class="caption">plot of chunk outputViolinPlot</p>
+</div>
 
 We can also add changes to the plot. Let's say we want our violin plot to have the black-and-white theme:
 
@@ -1580,7 +1636,10 @@ violin_plot + theme_bw()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-violinPlotBWTheme-1.png" title="plot of chunk violinPlotBWTheme" alt="plot of chunk violinPlotBWTheme" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-violinPlotBWTheme-1.png" alt="plot of chunk violinPlotBWTheme" width="612" />
+<p class="caption">plot of chunk violinPlotBWTheme</p>
+</div>
 
 Watch out! Adding the theme does not change the `violin_plot` object! If we want to change the object, we need to store our changes:
 
@@ -1659,7 +1718,10 @@ library(gifski)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-hansGraphStaticSolution-1.png" title="plot of chunk hansGraphStaticSolution" alt="plot of chunk hansGraphStaticSolution" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-hansGraphStaticSolution-1.png" alt="plot of chunk hansGraphStaticSolution" width="612" />
+> > <p class="caption">plot of chunk hansGraphStaticSolution</p>
+> > </div>
 >{: .solution}
 
 > **Part 2:**
@@ -1679,7 +1741,10 @@ library(gifski)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-01-hansGraphStaticPrettySolution-1.png" title="plot of chunk hansGraphStaticPrettySolution" alt="plot of chunk hansGraphStaticPrettySolution" width="612" style="display: block; margin: auto;" />
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-01-hansGraphStaticPrettySolution-1.png" alt="plot of chunk hansGraphStaticPrettySolution" width="612" />
+> > <p class="caption">plot of chunk hansGraphStaticPrettySolution</p>
+> > </div>
 > {: .solution}
 {: .challenge}
 
@@ -1696,7 +1761,10 @@ library(gifski)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-hansGraphStatic-1.png" title="plot of chunk hansGraphStatic" alt="plot of chunk hansGraphStatic" width="612" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-01-hansGraphStatic-1.png" alt="plot of chunk hansGraphStatic" width="612" />
+<p class="caption">plot of chunk hansGraphStatic</p>
+</div>
 
 Ok, now we're getting somewhere! But right now we're plotting all of the years
 of our dataset on one plot - now we want to animate the plot so each year shows
@@ -1717,91 +1785,137 @@ animatedHansPlot
 
 
 ~~~
-Rendering [--------------------------------------------] at 1.2 fps ~ eta: 1m
-Rendering [>-------------------------------------------] at 1.1 fps ~ eta: 1m
-Rendering [=>------------------------------------------] at 1.1 fps ~ eta: 1m
-Rendering [==>-----------------------------------------] at 1.1 fps ~ eta: 1m
-Rendering [===>----------------------------------------] at 1.1 fps ~ eta: 1m
-Rendering [====>-----------------------------------------] at 1 fps ~ eta: 1m
-Rendering [====>--------------------------------------] at 0.98 fps ~ eta: 2m
-Rendering [====>--------------------------------------] at 0.98 fps ~ eta: 1m
-Rendering [=====>-------------------------------------] at 0.97 fps ~ eta: 2m
-Rendering [=====>-------------------------------------] at 0.93 fps ~ eta: 2m
-Rendering [=====>-------------------------------------] at 0.94 fps ~ eta: 2m
-Rendering [======>------------------------------------] at 0.89 fps ~ eta: 2m
-Rendering [======>------------------------------------] at 0.85 fps ~ eta: 2m
-Rendering [=======>-----------------------------------] at 0.82 fps ~ eta: 2m
-Rendering [========>----------------------------------] at 0.82 fps ~ eta: 2m
-Rendering [=========>---------------------------------] at 0.82 fps ~ eta: 2m
-Rendering [=========>---------------------------------] at 0.83 fps ~ eta: 2m
-Rendering [==========>--------------------------------] at 0.83 fps ~ eta: 2m
-Rendering [==========>--------------------------------] at 0.84 fps ~ eta: 1m
-Rendering [===========>-------------------------------] at 0.84 fps ~ eta: 1m
-Rendering [===========>-------------------------------] at 0.85 fps ~ eta: 1m
-Rendering [============>------------------------------] at 0.86 fps ~ eta: 1m
-Rendering [=============>-----------------------------] at 0.86 fps ~ eta: 1m
-Rendering [==============>----------------------------] at 0.87 fps ~ eta: 1m
-Rendering [==============>----------------------------] at 0.86 fps ~ eta: 1m
-Rendering [===============>---------------------------] at 0.85 fps ~ eta: 1m
-Rendering [================>--------------------------] at 0.86 fps ~ eta: 1m
-Rendering [=================>-------------------------] at 0.86 fps ~ eta: 1m
-Rendering [==================>------------------------] at 0.84 fps ~ eta: 1m
-Rendering [==================>------------------------] at 0.85 fps ~ eta: 1m
-Rendering [===================>-----------------------] at 0.85 fps ~ eta: 1m
-Rendering [====================>----------------------] at 0.85 fps ~ eta: 1m
-Rendering [=====================>---------------------] at 0.85 fps ~ eta: 1m
-Rendering [=====================>---------------------] at 0.86 fps ~ eta: 1m
-Rendering [======================>--------------------] at 0.85 fps ~ eta: 1m
-Rendering [======================>--------------------] at 0.84 fps ~ eta: 1m
-Rendering [=======================>-------------------] at 0.84 fps ~ eta: 1m
-Rendering [========================>------------------] at 0.83 fps ~ eta: 1m
-Rendering [========================>------------------] at 0.82 fps ~ eta: 1m
-Rendering [========================>------------------] at 0.82 fps ~ eta: 50s
-Rendering [=========================>-----------------] at 0.82 fps ~ eta: 49s
-Rendering [=========================>-----------------] at 0.82 fps ~ eta: 47s
-Rendering [==========================>----------------] at 0.82 fps ~ eta: 46s
-Rendering [==========================>----------------] at 0.82 fps ~ eta: 45s
-Rendering [===========================>---------------] at 0.82 fps ~ eta: 44s
-Rendering [===========================>---------------] at 0.82 fps ~ eta: 43s
-Rendering [===========================>---------------] at 0.82 fps ~ eta: 42s
-Rendering [============================>--------------] at 0.82 fps ~ eta: 40s
-Rendering [============================>--------------] at 0.82 fps ~ eta: 39s
-Rendering [=============================>-------------] at 0.83 fps ~ eta: 38s
-Rendering [=============================>-------------] at 0.82 fps ~ eta: 37s
-Rendering [==============================>------------] at 0.82 fps ~ eta: 35s
-Rendering [==============================>------------] at 0.82 fps ~ eta: 34s
-Rendering [==============================>------------] at 0.82 fps ~ eta: 33s
-Rendering [===============================>-----------] at 0.82 fps ~ eta: 32s
-Rendering [===============================>-----------] at 0.82 fps ~ eta: 30s
-Rendering [================================>----------] at 0.82 fps ~ eta: 29s
-Rendering [================================>----------] at 0.82 fps ~ eta: 28s
-Rendering [=================================>---------] at 0.81 fps ~ eta: 27s
-Rendering [=================================>---------] at 0.81 fps ~ eta: 26s
-Rendering [==================================>---------] at 0.8 fps ~ eta: 25s
-Rendering [===================================>--------] at 0.8 fps ~ eta: 24s
-Rendering [==================================>--------] at 0.81 fps ~ eta: 22s
-Rendering [====================================>-------] at 0.8 fps ~ eta: 21s
-Rendering [===================================>-------] at 0.81 fps ~ eta: 20s
-Rendering [====================================>------] at 0.81 fps ~ eta: 19s
-Rendering [====================================>------] at 0.81 fps ~ eta: 17s
-Rendering [====================================>------] at 0.81 fps ~ eta: 16s
-Rendering [=====================================>-----] at 0.81 fps ~ eta: 15s
-Rendering [=====================================>-----] at 0.81 fps ~ eta: 14s
-Rendering [======================================>----] at 0.81 fps ~ eta: 12s
-Rendering [======================================>----] at 0.81 fps ~ eta: 11s
-Rendering [=======================================>---] at 0.82 fps ~ eta: 10s
-Rendering [=======================================>---] at 0.82 fps ~ eta: 9s
-Rendering [=======================================>---] at 0.81 fps ~ eta: 7s
-Rendering [=========================================>--] at 0.8 fps ~ eta: 6s
-Rendering [=========================================>--] at 0.8 fps ~ eta: 5s
-Rendering [==========================================>-] at 0.8 fps ~ eta: 4s
-Rendering [==========================================>-] at 0.8 fps ~ eta: 2s
-Rendering [===========================================>] at 0.8 fps ~ eta: 1s
-Rendering [============================================] at 0.8 fps ~ eta: 0s
+
+Rendering [----------------------------------------------] at 4 fps ~ eta:
+25s
+Rendering [>-------------------------------------------] at 3.8 fps ~ eta:
+26s
+Rendering [>-------------------------------------------] at 3.7 fps ~ eta:
+26s
+Rendering [=>------------------------------------------] at 3.7 fps ~ eta:
+26s
+Rendering [=>------------------------------------------] at 3.7 fps ~ eta:
+25s
+Rendering [==>-----------------------------------------] at 3.7 fps ~ eta:
+25s
+Rendering [===>----------------------------------------] at 3.7 fps ~ eta:
+25s
+Rendering [===>----------------------------------------] at 3.7 fps ~ eta:
+24s
+Rendering [====>---------------------------------------] at 3.7 fps ~ eta:
+24s
+Rendering [=====>--------------------------------------] at 3.7 fps ~ eta:
+24s
+Rendering [=====>--------------------------------------] at 3.7 fps ~ eta:
+23s
+Rendering [======>-------------------------------------] at 3.7 fps ~ eta:
+23s
+Rendering [=======>------------------------------------] at 3.7 fps ~ eta:
+22s
+Rendering [========>-----------------------------------] at 3.7 fps ~ eta:
+22s
+Rendering [=========>----------------------------------] at 3.6 fps ~ eta:
+22s
+Rendering [=========>----------------------------------] at 3.6 fps ~ eta:
+21s
+Rendering [==========>---------------------------------] at 3.6 fps ~ eta:
+21s
+Rendering [==========>---------------------------------] at 3.7 fps ~ eta:
+20s
+Rendering [===========>--------------------------------] at 3.7 fps ~ eta:
+20s
+Rendering [============>-------------------------------] at 3.7 fps ~ eta:
+19s
+Rendering [=============>------------------------------] at 3.7 fps ~ eta:
+19s
+Rendering [=============>------------------------------] at 3.7 fps ~ eta:
+18s
+Rendering [==============>-----------------------------] at 3.7 fps ~ eta:
+18s
+Rendering [===============>----------------------------] at 3.7 fps ~ eta:
+17s
+Rendering [================>---------------------------] at 3.7 fps ~ eta:
+17s
+Rendering [================>---------------------------] at 3.7 fps ~ eta:
+16s
+Rendering [=================>--------------------------] at 3.7 fps ~ eta:
+16s
+Rendering [==================>-------------------------] at 3.7 fps ~ eta:
+15s
+Rendering [===================>------------------------] at 3.7 fps ~ eta:
+15s
+Rendering [====================>-----------------------] at 3.7 fps ~ eta:
+14s
+Rendering [=====================>----------------------] at 3.7 fps ~ eta:
+14s
+Rendering [=====================>----------------------] at 3.7 fps ~ eta:
+13s
+Rendering [======================>---------------------] at 3.7 fps ~ eta:
+13s
+Rendering [=======================>--------------------] at 3.7 fps ~ eta:
+12s
+Rendering [========================>-------------------] at 3.7 fps ~ eta:
+12s
+Rendering [=========================>------------------] at 3.7 fps ~ eta:
+11s
+Rendering [==========================>-----------------] at 3.7 fps ~ eta:
+11s
+Rendering [==========================>-----------------] at 3.7 fps ~ eta:
+10s
+Rendering [===========================>----------------] at 3.7 fps ~ eta:
+10s
+Rendering [============================>---------------] at 3.7 fps ~ eta:
+10s
+Rendering [============================>---------------] at 3.7 fps ~ eta:
+9s
+Rendering [=============================>--------------] at 3.7 fps ~ eta:
+9s
+Rendering [=============================>--------------] at 3.6 fps ~ eta:
+9s
+Rendering [==============================>-------------] at 3.6 fps ~ eta:
+8s
+Rendering [===============================>------------] at 3.7 fps ~ eta:
+8s
+Rendering [===============================>------------] at 3.7 fps ~ eta:
+7s
+Rendering [================================>-----------] at 3.7 fps ~ eta:
+7s
+Rendering [=================================>----------] at 3.7 fps ~ eta:
+6s
+Rendering [==================================>---------] at 3.7 fps ~ eta:
+6s
+Rendering [==================================>---------] at 3.7 fps ~ eta:
+5s
+Rendering [===================================>--------] at 3.7 fps ~ eta:
+5s
+Rendering [====================================>-------] at 3.7 fps ~ eta:
+5s
+Rendering [====================================>-------] at 3.7 fps ~ eta:
+4s
+Rendering [=====================================>------] at 3.7 fps ~ eta:
+4s
+Rendering [======================================>-----] at 3.7 fps ~ eta:
+3s
+Rendering [=======================================>----] at 3.7 fps ~ eta:
+3s
+Rendering [=======================================>----] at 3.7 fps ~ eta:
+2s
+Rendering [========================================>---] at 3.7 fps ~ eta:
+2s
+Rendering [=========================================>--] at 3.7 fps ~ eta:
+1s
+Rendering [==========================================>-] at 3.7 fps ~ eta:
+1s
+Rendering [===========================================>] at 3.7 fps ~ eta:
+0s
+Rendering [============================================] at 3.7 fps ~ eta: 0s
 ~~~
 {: .output}
 
-<img src="fig/rmd-01-hansGraphAnimated-1.gif" title="plot of chunk hansGraphAnimated" alt="plot of chunk hansGraphAnimated" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="fig/rmd-01-hansGraphAnimated-1.gif" alt="plot of chunk hansGraphAnimated"  />
+<p class="caption">plot of chunk hansGraphAnimated</p>
+</div>
 
 Awesome! This is looking sweet! Let's make sure we understand the code above:
 
@@ -1857,7 +1971,13 @@ gapminder_1997 %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-01-mapPlots-1.png" title="plot of chunk mapPlots" alt="plot of chunk mapPlots" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in `mproject()`:
+! The package "mapproj" is required for `coord_map()`
+~~~
+{: .error}
 
 Notice that this map helps to show that we actually have some gaps in the data.
 We are missing observations for counties like Russia and many countries in

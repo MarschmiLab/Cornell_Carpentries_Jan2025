@@ -366,6 +366,8 @@ gapminder_1997 %>%
 |Australia   | 18565243|Oceania   |   78.83|  26997.94|
 |New Zealand |  3676187|Oceania   |   77.55|  21050.41|
 
+
+
 Now that we have a report we are happy with, let's push the changes to GitHub.
 
 ## Formatting
@@ -452,22 +454,10 @@ First we're going to start out with a few questions about the gapminder dataset.
 > 
 > ~~~
 > Rows: 1704 Columns: 6
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (2): country, continent
 > dbl (4): year, pop, lifeExp, gdpPercap
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
 > 
 > ℹ Use `spec()` to retrieve the full column specification for this data.
 > ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -489,7 +479,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-13</p>
+> </div>
 {: .solution}
 
 [3] It seems like there are 2 outliers - which countries are those?
@@ -524,7 +517,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-15</p>
+> </div>
 {: .solution}
 
 
@@ -543,7 +539,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-16</p>
+> </div>
 {: .solution}
 
 [6] It's hard to see which country is which here. Can you change the scatter plot to a line plot so we can get a better sense of trends over time? **Hint:**  This website has more information: https://www.r-graph-gallery.com/line-chart-several-groups-ggplot2.html
@@ -558,7 +557,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-17" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-17</p>
+> </div>
 {: .solution}
 
 #### Looking into life expectancy a bit more.
@@ -612,7 +614,10 @@ _[Back to top](#contents)_
 [9] Make a boxplot for the life expectancies of the countries in Asia for each year (year is the x axis, life expectancy is the y axis). Also fix the x and y axis labels.
 
 > ## Solution
-> <img src="../fig/rmd-05-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-20</p>
+> </div>
 {: .solution}
 
 ##### Bonus questions: come back to these if you have time at the end
@@ -653,7 +658,10 @@ _[Back to top](#contents)_
 [11] Make a boxplot for the life expectancies of the countries over time for each continent. Try to fix the x and y axis labels and text, too. Feel free to change the theme if you'd like.
 
 > ## Solution
-> <img src="../fig/rmd-05-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-22-1.png" alt="plot of chunk unnamed-chunk-22" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-22</p>
+> </div>
 {: .solution}
 
 [12] Which country has had the greatest increase in life expectancy from 1952 to 2007? **Hint:** You might want to use the `pivot_wider()` function to get your data in a format with columns for: country, 1952 life expectancy, 2007 life expectancy, and the difference between 2007 and 1992 life expectancy.
@@ -738,33 +746,13 @@ _[Back to top](#contents)_
 > 
 > ~~~
 > New names:
-> * `` -> ...2
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
 > Rows: 2420 Columns: 7
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────
-> Delimiter: ","
-> chr (4): ...2, Series, Footnotes, Source
-> dbl (3): Region/Country/Area, Year, Value
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> 
-> ℹ Use `spec()` to retrieve the full column specification for this data.
-> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> ── Column specification
+> ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this
+> message.
+> • `` -> `...2`
 > ~~~
 > {: .output}
 {: .solution}
@@ -813,7 +801,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-28-1.png" alt="plot of chunk unnamed-chunk-28" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-28</p>
+> </div>
 {: .solution}
 
 [5] Plot the expenditure by year (discrete x vs continuous y) using a scatter plot. Feel free to try to make the plot more legible if you want.
@@ -827,7 +818,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-29-1.png" alt="plot of chunk unnamed-chunk-29" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-29</p>
+> </div>
 {: .solution}
 
 [6] Plot the expenditure by year (discrete x vs continuous y) using a violin plot or a boxplot.
@@ -841,7 +835,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-30-1.png" alt="plot of chunk unnamed-chunk-30" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-30</p>
+> </div>
 {: .solution}
 
 ### Combining the CO2 and R&D datasets
@@ -870,22 +867,10 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > ~~~
 > Rows: 2132 Columns: 7
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (4): country, series, footnotes, source
 > dbl (3): region, year, value
-> ~~~
-> {: .output}
-> 
-> 
-> 
-> ~~~
 > 
 > ℹ Use `spec()` to retrieve the full column specification for this data.
 > ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -905,7 +890,7 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > 
 > ~~~
-> Joining, by = c("country", "year")
+> Joining with `by = join_by(country, year)`
 > ~~~
 > {: .output}
 {: .solution}
@@ -923,17 +908,13 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > ~~~
 > Warning: `funs()` was deprecated in dplyr 0.8.0.
-> Please use a list of either functions or lambdas: 
+> ℹ Please use a list of either functions or lambdas:
 > 
->   # Simple named list: 
->   list(mean = mean, median = median)
+> # Simple named list: list(mean = mean, median = median)
 > 
->   # Auto named with `tibble::lst()`: 
->   tibble::lst(mean, median)
+> # Auto named with `tibble::lst()`: tibble::lst(mean, median)
 > 
->   # Using lambdas
->   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-> This warning is displayed once every 8 hours.
+> # Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
 > Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 > ~~~
 > {: .warning}
@@ -998,7 +979,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-36-1.png" alt="plot of chunk unnamed-chunk-36" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-36</p>
+> </div>
 {: .solution}
 
 
@@ -1015,7 +999,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-37-1.png" alt="plot of chunk unnamed-chunk-37" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-37</p>
+> </div>
 {: .solution}
 
 [14] Identify the countries that have five time points for both C02 emissions and R&D.
@@ -1054,7 +1041,10 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-05-unnamed-chunk-39-1.png" title="plot of chunk unnamed-chunk-39" alt="plot of chunk unnamed-chunk-39" width="612" style="display: block; margin: auto;" />
+> <div class="figure" style="text-align: center">
+> <img src="../fig/rmd-05-unnamed-chunk-39-1.png" alt="plot of chunk unnamed-chunk-39" width="612" />
+> <p class="caption">plot of chunk unnamed-chunk-39</p>
+> </div>
 {: .solution}
 
 
