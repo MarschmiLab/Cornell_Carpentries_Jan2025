@@ -1,31 +1,28 @@
 ---
 source: Rmd
-title: "R for Plotting"
-teaching: 120
-exercises: 30
+title: "Introduction to R"
+teaching: 90
+exercises: 10
 questions:
 - "What are R and R Studio?"
-- "How do I read data into R?"
-- "What are geometries and aesthetics?"
-- "How can I use R to create and save professional data visualizations?"
+- "How do I write code in R?"
+- "How do I work with different types of data in R?"
 objectives:
 - "To become oriented with R and R Studio."
-- "To be able to read in data from csv files."
-- "To create plots with both discrete and continuous variables."
-- "To understand mapping and layering using `ggplot2`."
-- "To be able to modify a plot's color, theme, and axis labels."
-- "To be able to save plots to a local directory."
+- "To understand an R object and its class"
+- "To write logical comparisons between objects"
+- "To differentiate vectors, lists, and data frames"
+- "To subset R objects"
 keypoints:
 - "R is a free programming language used by many for reproducible data analysis."
-- "Use `read_csv` to read tabular data in R."
-- "Geometries are the visual elements drawn on data visualizations (lines, points, etc.), and aesthetics are the visual properties of those geometries (color, position, etc.)."
-- "Use `ggplot()` and geoms to create data visualizations, and save them using `ggsave()`."
+- "The class of an object describes what type of data is holds"
+- "We can use numbers, names, or logical values to subset data"
 
 ---
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
-knitr_fig_path("01-")
+knitr_fig_path("02-")
 ```
 
 ```{r echo=FALSE}
@@ -92,7 +89,7 @@ To make your life in R easier, there is a great (and free!) program called RStud
 {: .challenge}
 
 > ## The tidyverse vs Base R
-> If you've used R before, you may have learned commands that are different than the ones we will be using during this workshop. We will be focusing on functions from the [tidyverse](https://www.tidyverse.org/). The "tidyverse" is a collection of R packages that have been designed to work well together and offer many convenient features that do not come with a fresh install of R (aka "base R"). These packages are very popular and have a lot of developer support including many staff members from RStudio. These functions generally help you to write code that is easier to read and maintain. We believe learning these tools will help you become more productive more quickly.
+> In this workshop, we'll spend some time using functions that are automatically loaded in R ("base" R) before switching to the tidyverse. The "tidyverse" is a collection of R packages that have been designed to work well together and offer many convenient features that do not come with a fresh install of R. These packages are very popular and have a lot of developer support including many staff members from RStudio. These functions generally help you to write code that is easier to read and maintain. We believe learning these tools will help you become more productive more quickly.
 {: .callout}
 
 
@@ -164,6 +161,185 @@ On line 1 of `gdp_population.R`, type `2+2`.
 With your cursor on the line with the `2+2`, click the button that says <kbd>Run</kbd>. You should be able to see that `2+2` was run in the Console.
 
 As you write more code, you can highlight multiple lines and then click <kbd>Run</kbd> to run all of the lines you have selected.
+
+# R Syntax: Object Assignment, Functions, and Data Types
+
+When we're coding in R, we often want to assign a value, or a collection of values, to the **object**, which means we gave those values a name. To create an object in R, we'll use the `<-` symbol, which is the **assignment operator**. It assigns values generated or typed on the right to objects on the left. 
+
+```{r assignment}
+number_1 <- 2
+
+number_2 <- 3
+
+my_field <- "Microbiology"
+```
+
+Now we can see our obejcts in the Environment pane. An alternative symbol that you might see used as an **assignment operator** is the `=` but it is clearer to only use `<-` for assignment. We use this symbol so often that RStudio has a keyboard short cut for it: <kbd>Alt</kbd>+<kbd>-</kbd> on Windows, and <kbd>Option</kbd>+<kbd>-</kbd> on Mac. You can retrieve the values you stored by typing the name of the object. 
+
+```{r using an object)}
+number_1
+
+number_1 + number_2
+
+my_field
+```
+
+> ## Assigning values to objects
+> Try to assign values to some objects and observe each object after you have assigned a new value. What do you notice?
+>
+> ```{r Objects, eval = FALSE}
+> name <- "Ben"
+> name
+> age <- 26
+> age
+> name <- "Harry Potter"
+> name
+> ```
+> {: .source}
+>
+> > ## Solution
+> > When we assign a value to an object, the object stores that value so we can access it later. However, if we store a new value in an object we have already created (like when we stored "Harry Potter" in the `name` object), it replaces the old value. The `age` object does not change, because we never assign it a new value.
+> {: .solution}
+{: .challenge}
+
+
+> ## Guidelines on naming objects
+> - You want your object names to be explicit and not too long.
+> - They cannot start with a number (2x is not valid, but x2 is).
+> - R is case sensitive, so for example, weight_kg is different from Weight_kg.
+> - You cannot use spaces in the name.
+> - There are some names that cannot be used because they are the names of fundamental functions in R (e.g., if, else, for; see [here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html) for a complete list). If in doubt, check the help to see if the name is already in use (`?function_name`).
+> - It's best to avoid dots (.) within names. Many function names in R itself have them and dots also have a special meaning (methods) in R and other programming languages.
+> - It is recommended to use nouns for object names and verbs for function names.
+> - Be consistent in the styling of your code, such as where you put spaces, how you name objects, etc. Using a consistent coding style makes your code clearer to read for your future self and your collaborators. One popular style guide can be found through the [tidyverse](https://style.tidyverse.org/).
+{: .checklist}
+
+> ## Bonus Exercise: Bad names for objects
+> Try to assign values to some new objects. What do you notice? After running all four lines of code bellow, what value do you think the object `Flower` holds?
+>
+> ```{r BadObjects, eval = FALSE}
+> 1number <- 3
+> Flower <- "marigold"
+> flower <- "rose"
+> favorite number <- 12
+> ```
+> {: .source}
+>
+> > ## Solution
+> > Notice that we get an error when we try to assign values to `1number` and `favorite number`. This is because we cannot start an object name with a numeral and we cannot have spaces in object names. The object `Flower` still holds "marigold." This is because R is case-sensitive, so running `flower <- "rose"` does NOT change the `Flower` object. This can get confusing, and is why we generally avoid having objects with the same name and different capitalization.
+> {: .solution}
+{: .challenge}
+
+If we want to store a collection of values, we'll need to use a **function** in R, which combines values into something we call a **vector**. Let's make a vector of numbers, and a vector of words (we call them "strings" in R)
+
+```{r making a vector}
+my_num_vec <- c(1, 2, 3)
+
+my_num_vec
+
+my_name_vec <- c("Dog", "Cat", "Bird")
+
+my_name_vec
+
+```
+
+In R, functions will have a name (in this case, `c`), and then parentheses. Inside the parentheses are our **arguments**.
+
+We can also add vectors together.
+
+```{r adding vectors}
+my_num_vec2 <- c(2,4,6)
+
+my_num_vec + my_num_vec2
+
+my_num_vec + my_name_vec
+```
+Oh no! We got an error from that last line of code. To understand what went wrong, we need to discuss different data types in R. We can ask what the datatype of an obejct is using another function, `typeof()`.
+
+```{r data types}
+typeof(my_num_vec)
+
+typeof(my_name_vec)
+```
+Our vector of numbers is the type `double`, which you'll also see written as `numeric`. The data type of our name vector is `character`. There are five main data types in R: `double`, `integer`, `complex`, `logical`, and `character`. Today, we're only going to worry about double (numeric), character, and logical types. Logical types represent `TRUE` and `FALSE`.
+
+```{r logical type}
+my_logic_vec <- c(TRUE, FALSE, TRUE)
+
+typeof(my_logic_vec)
+```
+> ## Pro-tip
+> 
+> We don't need to write out the full word `TRUE` or `FALSE`; we can also use `T` 
+> or `F`. R will not accept `true` or `t`. I like writing out the full word to 
+> make my code as clear as possible.
+>
+{: .callout}
+
+The data type of a vector determines what sort of functions we can use it in. For example, we can add two numerical vectors together, but we cannot add a character vector to a numeric vector. R is strict about these rules, and will give us errors if we try. Let's see our last error again:
+
+```{r non-numeric error}
+my_num_vec + my_name_vec
+```
+R is telling us it cannot add these vectors together, because we gave it a non-numeric (character) argument.
+
+# Data Structures
+
+The way we organize pieces of data in R is called a **data structure**. Luckily, we've already learned about one data structure - the vector! A vector is an organized list of values *which have the same data type*. What happens if we try to make a vector with a combination of data types?
+
+```{r multi-type vector}
+mixed_vector <- c(2, TRUE, "Word")
+
+mixed_vector
+
+typeof(mixed_vector)
+```
+All of the values in our `mixed_vector` have become characters. This is called **coercion** in R, which is converting values to a specific data type. `Character` is the most general data type, because while any number or logical value can be represented as a word, most words cannot be represented as numbers. We can coerce objects to different types, using functions that start with `as.` However, if R cannot figure out how to convert a value, it will return `NA` instead.
+
+```{r using as.}
+as.character(my_num_vec)
+
+as.numeric(my_logic_vec)
+
+as.numeric(my_name_vec)
+
+```
+
+What if we want an object in R that can hold multiple different types of data? For this, we have a specialized data structure in R, called a `list`. While we make vectors using the `c()` function, we make lists using the `list()` function. 
+
+```{r lists}
+my_list <- list(2, TRUE, "Word")
+
+my_list
+```
+
+If we click on `my_list` in the environment pane, we can see what values it stores. Notice that none of the values underwent coercion, unlike in our vector. Lists can hold anything, including vectors and even other lists. 
+
+While vectors and lists are important data structures, as microbiologists, most of the time we work with **tabular data**. In R, tabular data is represented by a structure called a `data.frame`. Like lists, `data.frames` can hold multiple data types. We can make a `data.frame` from scratch using the `data.frame()` function.
+
+```{r dataframe}
+micro_df <- data.frame(species = c("Ecoli", "Bsubtilis", "Saureus"),
+                       gram_pos = c(FALSE, TRUE, TRUE),
+                       genome_mbp = c(5, 4.2, 2.8))
+
+micro_df
+```
+
+`Data.frames` are organized by columns (`variables`) and rows (`observations`). To view `data.frames`, we can print them in the console by typing their name, or clicking on them in the `Environment` pane. `Data.frames` come with some rules:
+
+ 1. Every column needs to have the same number of rows; if you have data missing, you need to fill those spots with `NA`s
+ 2. Each column is a single data type. If you try to combine data types in a column, R with **coerce** them to be the same
+ 3. Column names should be valid object names in R, so avoid spaces, special characters, and starting with numbers (there are workarounds but we should avoid them). 
+
+
+
+
+
+
+
+
+
+
 
 Let's delete the line with 2+2 and replace it with `library(tidyverse)`.
 
@@ -275,54 +451,7 @@ We should see a data table outputted, similar to what we saw in the Viewer tab.
 
 In R terms, `gapminder_1997` is a named **object** that references or stores something. In this case, `gapminder_1997` stores a specific table of data.
 
-Looking back at the command in our code file, the second thing we see is a `<-` symbol, which is the **assignment operator**. It assigns values generated or typed on the right to objects on the left. An alternative symbol that you might see used as an **assignment operator** is the `=` but it is clearer to only use `<-` for assignment. We use this symbol so often that RStudio has a keyboard short cut for it: <kbd>Alt</kbd>+<kbd>-</kbd> on Windows, and <kbd>Option</kbd>+<kbd>-</kbd> on Mac.
 
-
-> ## Assigning values to objects
-> Try to assign values to some objects and observe each object after you have assigned a new value. What do you notice?
->
-> ```{r Objects, eval = FALSE}
-> name <- "Ben"
-> name
-> age <- 26
-> age
-> name <- "Harry Potter"
-> name
-> ```
-> {: .source}
->
-> > ## Solution
-> > When we assign a value to an object, the object stores that value so we can access it later. However, if we store a new value in an object we have already created (like when we stored "Harry Potter" in the `name` object), it replaces the old value. The `age` object does not change, because we never assign it a new value.
-> {: .solution}
-{: .challenge}
-
-
-> ## Guidelines on naming objects
-> - You want your object names to be explicit and not too long.
-> - They cannot start with a number (2x is not valid, but x2 is).
-> - R is case sensitive, so for example, weight_kg is different from Weight_kg.
-> - You cannot use spaces in the name.
-> - There are some names that cannot be used because they are the names of fundamental functions in R (e.g., if, else, for; see [here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html) for a complete list). If in doubt, check the help to see if the name is already in use (`?function_name`).
-> - It's best to avoid dots (.) within names. Many function names in R itself have them and dots also have a special meaning (methods) in R and other programming languages.
-> - It is recommended to use nouns for object names and verbs for function names.
-> - Be consistent in the styling of your code, such as where you put spaces, how you name objects, etc. Using a consistent coding style makes your code clearer to read for your future self and your collaborators. One popular style guide can be found through the [tidyverse](https://style.tidyverse.org/).
-{: .checklist}
-
-> ## Bonus Exercise: Bad names for objects
-> Try to assign values to some new objects. What do you notice? After running all four lines of code bellow, what value do you think the object `Flower` holds?
->
-> ```{r BadObjects, eval = FALSE}
-> 1number <- 3
-> Flower <- "marigold"
-> flower <- "rose"
-> favorite number <- 12
-> ```
-> {: .source}
->
-> > ## Solution
-> > Notice that we get an error when we try to assign values to `1number` and `favorite number`. This is because we cannot start an object name with a numeral and we cannot have spaces in object names. The object `Flower` still holds "marigold." This is because R is case-sensitive, so running `flower <- "rose"` does NOT change the `Flower` object. This can get confusing, and is why we generally avoid having objects with the same name and different capitalization.
-> {: .solution}
-{: .challenge}
 
 The next part of the command is `read_csv("gapminder_1997.csv")`. This has a few different key parts. The first part is the `read_csv` function. You call a function in R by typing it's name followed by opening then closing parenthesis. Each function has a purpose, which is often hinted at by the name of the function. Let's try to run the function without anything inside the parenthesis.
 

@@ -3,23 +3,18 @@
 # Instead, please edit 03-r-plotting.md in _episodes_rmd/
 source: Rmd
 title: "R for Plotting"
-teaching: 120
-exercises: 30
+teaching: 90
+exercises: 20
 questions:
-- "What are R and R Studio?"
-- "How do I read data into R?"
+- "What is the tidyverse?"
 - "What are geometries and aesthetics?"
 - "How can I use R to create and save professional data visualizations?"
 objectives:
-- "To become oriented with R and R Studio."
-- "To be able to read in data from csv files."
 - "To create plots with both discrete and continuous variables."
 - "To understand mapping and layering using `ggplot2`."
 - "To be able to modify a plot's color, theme, and axis labels."
 - "To be able to save plots to a local directory."
 keypoints:
-- "R is a free programming language used by many for reproducible data analysis."
-- "Use `read_csv` to read tabular data in R."
 - "Geometries are the visual elements drawn on data visualizations (lines, points, etc.), and aesthetics are the visual properties of those geometries (color, position, etc.)."
 - "Use `ggplot()` and geoms to create data visualizations, and save them using `ggsave()`."
 
@@ -606,7 +601,7 @@ ggplot(data=gapminder_1997)
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-ggplotDataOnly-1.png" alt="plot of chunk ggplotDataOnly" width="612" />
+<img src="../fig/rmd-03-ggplotDataOnly-1.png" alt="plot of chunk ggplotDataOnly" width="612" />
 <p class="caption">plot of chunk ggplotDataOnly</p>
 </div>
 
@@ -651,7 +646,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-ggplotX-1.png" alt="plot of chunk ggplotX" width="612" />
+<img src="../fig/rmd-03-ggplotX-1.png" alt="plot of chunk ggplotX" width="612" />
 <p class="caption">plot of chunk ggplotX</p>
 </div>
 
@@ -675,7 +670,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddXLabel-1.png" alt="plot of chunk FirstPlotAddXLabel" width="612" />
+<img src="../fig/rmd-03-FirstPlotAddXLabel-1.png" alt="plot of chunk FirstPlotAddXLabel" width="612" />
 <p class="caption">plot of chunk FirstPlotAddXLabel</p>
 </div>
 
@@ -710,7 +705,7 @@ OK. That looks better.
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-FirstPlotAddY-1.png" alt="plot of chunk FirstPlotAddY" width="612" />
+> > <img src="../fig/rmd-03-FirstPlotAddY-1.png" alt="plot of chunk FirstPlotAddY" width="612" />
 > > <p class="caption">plot of chunk FirstPlotAddY</p>
 > > </div>
 > > {: .source}
@@ -738,7 +733,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddPoints-1.png" alt="plot of chunk FirstPlotAddPoints" width="612" />
+<img src="../fig/rmd-03-FirstPlotAddPoints-1.png" alt="plot of chunk FirstPlotAddPoints" width="612" />
 <p class="caption">plot of chunk FirstPlotAddPoints</p>
 </div>
 
@@ -761,7 +756,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddTitle-1.png" alt="plot of chunk FirstPlotAddTitle" width="612" />
+<img src="../fig/rmd-03-FirstPlotAddTitle-1.png" alt="plot of chunk FirstPlotAddTitle" width="612" />
 <p class="caption">plot of chunk FirstPlotAddTitle</p>
 </div>
 
@@ -787,7 +782,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddColor-1.png" alt="plot of chunk FirstPlotAddColor" width="612" />
+<img src="../fig/rmd-03-FirstPlotAddColor-1.png" alt="plot of chunk FirstPlotAddColor" width="612" />
 <p class="caption">plot of chunk FirstPlotAddColor</p>
 </div>
 
@@ -816,7 +811,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddColorScale-1.png" alt="plot of chunk FirstPlotAddColorScale" width="612" />
+<img src="../fig/rmd-03-FirstPlotAddColorScale-1.png" alt="plot of chunk FirstPlotAddColorScale" width="612" />
 <p class="caption">plot of chunk FirstPlotAddColorScale</p>
 </div>
 
@@ -902,7 +897,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddSize-1.png" alt="plot of chunk FirstPlotAddSize" width="612" />
+<img src="../fig/rmd-03-FirstPlotAddSize-1.png" alt="plot of chunk FirstPlotAddSize" width="612" />
 <p class="caption">plot of chunk FirstPlotAddSize</p>
 </div>
 
@@ -931,7 +926,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddPop-1.png" alt="plot of chunk FirstPlotAddPop" width="612" />
+<img src="../fig/rmd-03-FirstPlotAddPop-1.png" alt="plot of chunk FirstPlotAddPop" width="612" />
 <p class="caption">plot of chunk FirstPlotAddPop</p>
 </div>
 
@@ -968,7 +963,7 @@ the plot in its own window.
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-Shape-1.png" alt="plot of chunk Shape" width="612" />
+> > <img src="../fig/rmd-03-Shape-1.png" alt="plot of chunk Shape" width="612" />
 > > <p class="caption">plot of chunk Shape</p>
 > > </div>
 > > {: .source}
@@ -993,7 +988,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotCondensed-1.png" alt="plot of chunk FirstPlotCondensed" width="612" />
+<img src="../fig/rmd-03-FirstPlotCondensed-1.png" alt="plot of chunk FirstPlotCondensed" width="612" />
 <p class="caption">plot of chunk FirstPlotCondensed</p>
 </div>
 
@@ -1071,7 +1066,7 @@ Notice that this dataset has an additional column `year` compared to the smaller
 > {: .language-r}
 > 
 > <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-01-PlotFullGapminder-1.png" alt="plot of chunk PlotFullGapminder" width="612" />
+> <img src="../fig/rmd-03-PlotFullGapminder-1.png" alt="plot of chunk PlotFullGapminder" width="612" />
 > <p class="caption">plot of chunk PlotFullGapminder</p>
 > </div>
 >
@@ -1109,7 +1104,7 @@ Our plot has a lot of points in columns which makes it hard to see trends over t
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapMinderLinePlotBad-1.png" alt="plot of chunk GapMinderLinePlotBad" width="612" />
+<img src="../fig/rmd-03-GapMinderLinePlotBad-1.png" alt="plot of chunk GapMinderLinePlotBad" width="612" />
 <p class="caption">plot of chunk GapMinderLinePlotBad</p>
 </div>
 
@@ -1124,7 +1119,7 @@ Hmm. This doesn't look right. By setting the color value, we got a line for each
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapMinderLinePlot-1.png" alt="plot of chunk GapMinderLinePlot" width="612" />
+<img src="../fig/rmd-03-GapMinderLinePlot-1.png" alt="plot of chunk GapMinderLinePlot" width="612" />
 <p class="caption">plot of chunk GapMinderLinePlot</p>
 </div>
 
@@ -1143,7 +1138,7 @@ Sometimes plots like this are called "spaghetti plots" because all the lines loo
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-gapminderMoreLines-1.png" alt="plot of chunk gapminderMoreLines" width="612" />
+> > <img src="../fig/rmd-03-gapminderMoreLines-1.png" alt="plot of chunk gapminderMoreLines" width="612" />
 > > <p class="caption">plot of chunk gapminderMoreLines</p>
 > > </div>
 > > (China and India are the two Asian countries that have experienced massive population growth from 1952-2007.)
@@ -1170,7 +1165,7 @@ We've previously used the discrete values of the `continent` column to color in 
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapBox-1.png" alt="plot of chunk GapBox" width="612" />
+> > <img src="../fig/rmd-03-GapBox-1.png" alt="plot of chunk GapBox" width="612" />
 > > <p class="caption">plot of chunk GapBox</p>
 > > </div>
 > {: .solution}
@@ -1191,7 +1186,7 @@ This type of visualization makes it easy to compare the range and spread of valu
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapViol-1.png" alt="plot of chunk GapViol" width="612" />
+> > <img src="../fig/rmd-03-GapViol-1.png" alt="plot of chunk GapViol" width="612" />
 > > <p class="caption">plot of chunk GapViol</p>
 > > </div>
 > {: .solution}
@@ -1211,7 +1206,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolin-1.png" alt="plot of chunk GapViolin" width="612" />
+<img src="../fig/rmd-03-GapViolin-1.png" alt="plot of chunk GapViolin" width="612" />
 <p class="caption">plot of chunk GapViolin</p>
 </div>
 
@@ -1227,7 +1222,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinPoints-1.png" alt="plot of chunk GapViolinPoints" width="612" />
+<img src="../fig/rmd-03-GapViolinPoints-1.png" alt="plot of chunk GapViolinPoints" width="612" />
 <p class="caption">plot of chunk GapViolinPoints</p>
 </div>
 
@@ -1243,7 +1238,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitter-1.png" alt="plot of chunk GapViolinJitter" width="612" />
+<img src="../fig/rmd-03-GapViolinJitter-1.png" alt="plot of chunk GapViolinJitter" width="612" />
 <p class="caption">plot of chunk GapViolinJitter</p>
 </div>
 
@@ -1261,7 +1256,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitterLayers-1.png" alt="plot of chunk GapViolinJitterLayers" width="612" />
+<img src="../fig/rmd-03-GapViolinJitterLayers-1.png" alt="plot of chunk GapViolinJitterLayers" width="612" />
 <p class="caption">plot of chunk GapViolinJitterLayers</p>
 </div>
 
@@ -1278,7 +1273,7 @@ ggplot(data = gapminder_1997, mapping = aes(x = continent, y = lifeExp)) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitter2-1.png" alt="plot of chunk GapViolinJitter2" width="612" />
+<img src="../fig/rmd-03-GapViolinJitter2-1.png" alt="plot of chunk GapViolinJitter2" width="612" />
 <p class="caption">plot of chunk GapViolinJitter2</p>
 </div>
 
@@ -1294,7 +1289,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitterAes-1.png" alt="plot of chunk GapViolinJitterAes" width="612" />
+<img src="../fig/rmd-03-GapViolinJitterAes-1.png" alt="plot of chunk GapViolinJitterAes" width="612" />
 <p class="caption">plot of chunk GapViolinJitterAes</p>
 </div>
 
@@ -1342,7 +1337,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinColor-1.png" alt="plot of chunk GapViolinColor" width="612" />
+<img src="../fig/rmd-03-GapViolinColor-1.png" alt="plot of chunk GapViolinColor" width="612" />
 <p class="caption">plot of chunk GapViolinColor</p>
 </div>
 Well, that didn't get all that colorful. That's because objects like these violins have two different parts that have a color: the shape outline, and the inner part of the shape. For geoms that have an inner part, you change the fill color with `fill=` rather than `color=`, so let's try that instead
@@ -1356,7 +1351,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinFill-1.png" alt="plot of chunk GapViolinFill" width="612" />
+<img src="../fig/rmd-03-GapViolinFill-1.png" alt="plot of chunk GapViolinFill" width="612" />
 <p class="caption">plot of chunk GapViolinFill</p>
 </div>
 
@@ -1371,7 +1366,7 @@ ggplot(data = gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinFillMap-1.png" alt="plot of chunk GapViolinFillMap" width="612" />
+<img src="../fig/rmd-03-GapViolinFillMap-1.png" alt="plot of chunk GapViolinFillMap" width="612" />
 <p class="caption">plot of chunk GapViolinFillMap</p>
 </div>
 
@@ -1395,7 +1390,7 @@ So "darkolivegreen" maybe wasn't the prettiest color. R knows lots of color name
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapViolinFillSoln-1.png" alt="plot of chunk GapViolinFillSoln" width="612" />
+> > <img src="../fig/rmd-03-GapViolinFillSoln-1.png" alt="plot of chunk GapViolinFillSoln" width="612" />
 > > <p class="caption">plot of chunk GapViolinFillSoln</p>
 > > </div>
 > {: .solution}
@@ -1412,7 +1407,7 @@ So "darkolivegreen" maybe wasn't the prettiest color. R knows lots of color name
 > {: .language-r}
 > 
 > <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-01-GapViolinAesFillMap-1.png" alt="plot of chunk GapViolinAesFillMap" width="612" />
+> <img src="../fig/rmd-03-GapViolinAesFillMap-1.png" alt="plot of chunk GapViolinAesFillMap" width="612" />
 > <p class="caption">plot of chunk GapViolinAesFillMap</p>
 > </div>
 > Why doesn't this work? How can you fix it? Where does that color come from?
@@ -1443,7 +1438,7 @@ ggplot(gapminder_1997) +
 {: .output}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapLifeHist-1.png" alt="plot of chunk GapLifeHist" width="612" />
+<img src="../fig/rmd-03-GapLifeHist-1.png" alt="plot of chunk GapLifeHist" width="612" />
 <p class="caption">plot of chunk GapLifeHist</p>
 </div>
 
@@ -1458,7 +1453,7 @@ ggplot(gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapLifeHistBins-1.png" alt="plot of chunk GapLifeHistBins" width="612" />
+<img src="../fig/rmd-03-GapLifeHistBins-1.png" alt="plot of chunk GapLifeHistBins" width="612" />
 <p class="caption">plot of chunk GapLifeHistBins</p>
 </div>
 
@@ -1477,7 +1472,7 @@ Try different values like 5 or 50 to see how the plot changes.
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens1-1.png" alt="plot of chunk GapLifeDens1" width="612" />
+> > <img src="../fig/rmd-03-GapLifeDens1-1.png" alt="plot of chunk GapLifeDens1" width="612" />
 > > <p class="caption">plot of chunk GapLifeDens1</p>
 > > </div>
 > {: .solution}
@@ -1499,7 +1494,7 @@ ggplot(gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapLifeHistBinsClassicTheme-1.png" alt="plot of chunk GapLifeHistBinsClassicTheme" width="612" />
+<img src="../fig/rmd-03-GapLifeHistBinsClassicTheme-1.png" alt="plot of chunk GapLifeHistBinsClassicTheme" width="612" />
 <p class="caption">plot of chunk GapLifeHistBinsClassicTheme</p>
 </div>
 
@@ -1519,7 +1514,7 @@ Try out a few other themes, to see which you like: `theme_bw()`, `theme_linedraw
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens2-1.png" alt="plot of chunk GapLifeDens2" width="612" />
+> > <img src="../fig/rmd-03-GapLifeDens2-1.png" alt="plot of chunk GapLifeDens2" width="612" />
 > > <p class="caption">plot of chunk GapLifeDens2</p>
 > > </div>
 > {: .solution}
@@ -1539,7 +1534,7 @@ ggplot(gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapNoFacet-1.png" alt="plot of chunk GapNoFacet" width="612" />
+<img src="../fig/rmd-03-GapNoFacet-1.png" alt="plot of chunk GapNoFacet" width="612" />
 <p class="caption">plot of chunk GapNoFacet</p>
 </div>
 
@@ -1555,7 +1550,7 @@ ggplot(gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapFacetWrap-1.png" alt="plot of chunk GapFacetWrap" width="612" />
+<img src="../fig/rmd-03-GapFacetWrap-1.png" alt="plot of chunk GapFacetWrap" width="612" />
 <p class="caption">plot of chunk GapFacetWrap</p>
 </div>
 Note that `facet_wrap` requires this extra helper function called `vars()` in order to pass in the column names. It's a lot like the `aes()` function, but it doesn't require an aesthetic name. We can see in this output that we get a separate box with a label for each continent so that only the points for that continent are in that box.
@@ -1571,7 +1566,7 @@ ggplot(gapminder_1997) +
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapFacetGrid-1.png" alt="plot of chunk GapFacetGrid" width="612" />
+<img src="../fig/rmd-03-GapFacetGrid-1.png" alt="plot of chunk GapFacetGrid" width="612" />
 <p class="caption">plot of chunk GapFacetGrid</p>
 </div>
 
@@ -1607,7 +1602,7 @@ ggsave("awesome_plot.jpg", width=6, height=4)
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-savingPlotExercise-1.png" alt="plot of chunk savingPlotExercise" width="612" />
+> > <img src="../fig/rmd-03-savingPlotExercise-1.png" alt="plot of chunk savingPlotExercise" width="612" />
 > > <p class="caption">plot of chunk savingPlotExercise</p>
 > > </div>
 > > 
@@ -1639,7 +1634,7 @@ violin_plot
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-outputViolinPlot-1.png" alt="plot of chunk outputViolinPlot" width="612" />
+<img src="../fig/rmd-03-outputViolinPlot-1.png" alt="plot of chunk outputViolinPlot" width="612" />
 <p class="caption">plot of chunk outputViolinPlot</p>
 </div>
 
@@ -1652,7 +1647,7 @@ violin_plot + theme_bw()
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-violinPlotBWTheme-1.png" alt="plot of chunk violinPlotBWTheme" width="612" />
+<img src="../fig/rmd-03-violinPlotBWTheme-1.png" alt="plot of chunk violinPlotBWTheme" width="612" />
 <p class="caption">plot of chunk violinPlotBWTheme</p>
 </div>
 
@@ -1734,7 +1729,7 @@ library(gifski)
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-hansGraphStaticSolution-1.png" alt="plot of chunk hansGraphStaticSolution" width="612" />
+> > <img src="../fig/rmd-03-hansGraphStaticSolution-1.png" alt="plot of chunk hansGraphStaticSolution" width="612" />
 > > <p class="caption">plot of chunk hansGraphStaticSolution</p>
 > > </div>
 >{: .solution}
@@ -1757,7 +1752,7 @@ library(gifski)
 > > {: .language-r}
 > > 
 > > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-hansGraphStaticPrettySolution-1.png" alt="plot of chunk hansGraphStaticPrettySolution" width="612" />
+> > <img src="../fig/rmd-03-hansGraphStaticPrettySolution-1.png" alt="plot of chunk hansGraphStaticPrettySolution" width="612" />
 > > <p class="caption">plot of chunk hansGraphStaticPrettySolution</p>
 > > </div>
 > {: .solution}
@@ -1777,7 +1772,7 @@ library(gifski)
 {: .language-r}
 
 <div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-hansGraphStatic-1.png" alt="plot of chunk hansGraphStatic" width="612" />
+<img src="../fig/rmd-03-hansGraphStatic-1.png" alt="plot of chunk hansGraphStatic" width="612" />
 <p class="caption">plot of chunk hansGraphStatic</p>
 </div>
 
@@ -1801,134 +1796,128 @@ animatedHansPlot
 
 ~~~
 
-Rendering [>-------------------------------------------] at 9.3 fps ~ eta:
-11s
+Rendering [>-------------------------------------------] at 9.4 fps ~ eta:
+10s
 Rendering [>-------------------------------------------] at 9.1 fps ~ eta:
 11s
 Rendering [=>--------------------------------------------] at 9 fps ~ eta:
 11s
 Rendering [=>------------------------------------------] at 8.9 fps ~ eta:
 11s
-Rendering [==>-----------------------------------------] at 8.6 fps ~ eta:
+Rendering [==>-----------------------------------------] at 8.7 fps ~ eta:
 11s
-Rendering [===>----------------------------------------] at 8.6 fps ~ eta:
+Rendering [===>----------------------------------------] at 8.7 fps ~ eta:
 11s
-Rendering [===>----------------------------------------] at 8.6 fps ~ eta:
+Rendering [===>----------------------------------------] at 8.7 fps ~ eta:
 10s
-Rendering [====>---------------------------------------] at 8.6 fps ~ eta:
+Rendering [====>---------------------------------------] at 8.7 fps ~ eta:
 10s
-Rendering [=====>--------------------------------------] at 8.6 fps ~ eta:
+Rendering [=====>--------------------------------------] at 8.7 fps ~ eta:
 10s
-Rendering [======>-------------------------------------] at 8.5 fps ~ eta:
+Rendering [======>-------------------------------------] at 8.6 fps ~ eta:
 10s
-Rendering [=======>------------------------------------] at 8.4 fps ~ eta:
+Rendering [=======>------------------------------------] at 8.6 fps ~ eta:
 10s
-Rendering [========>-----------------------------------] at 8.4 fps ~ eta:
-10s
-Rendering [========>-----------------------------------] at 8.4 fps ~ eta:
+Rendering [=======>------------------------------------] at 8.5 fps ~ eta:
 9s
-Rendering [=========>----------------------------------] at 8.4 fps ~ eta:
+Rendering [========>-----------------------------------] at 8.5 fps ~ eta:
 9s
-Rendering [=========>----------------------------------] at 8.3 fps ~ eta:
+Rendering [=========>----------------------------------] at 8.5 fps ~ eta:
 9s
-Rendering [==========>---------------------------------] at 8.3 fps ~ eta:
+Rendering [==========>---------------------------------] at 8.4 fps ~ eta:
 9s
-Rendering [===========>--------------------------------] at 8.3 fps ~ eta:
+Rendering [===========>--------------------------------] at 8.4 fps ~ eta:
 9s
-Rendering [===========>--------------------------------] at 8.2 fps ~ eta:
-9s
-Rendering [============>-------------------------------] at 8.2 fps ~ eta:
-9s
-Rendering [=============>--------------------------------] at 8 fps ~ eta:
-9s
-Rendering [=============>------------------------------] at 8.1 fps ~ eta:
-9s
-Rendering [=============>------------------------------] at 8.1 fps ~ eta:
+Rendering [============>-------------------------------] at 8.4 fps ~ eta:
 8s
-Rendering [==============>-----------------------------] at 8.2 fps ~ eta:
+Rendering [============>-------------------------------] at 8.3 fps ~ eta:
 8s
-Rendering [===============>----------------------------] at 8.2 fps ~ eta:
+Rendering [=============>------------------------------] at 8.2 fps ~ eta:
+8s
+Rendering [==============>-----------------------------] at 8.3 fps ~ eta:
 8s
 Rendering [===============>----------------------------] at 8.3 fps ~ eta:
 8s
-Rendering [================>---------------------------] at 8.3 fps ~ eta:
-7s
-Rendering [=================>--------------------------] at 8.3 fps ~ eta:
+Rendering [===============>----------------------------] at 8.4 fps ~ eta:
+8s
+Rendering [================>---------------------------] at 8.4 fps ~ eta:
 7s
 Rendering [=================>--------------------------] at 8.4 fps ~ eta:
 7s
-Rendering [==================>-------------------------] at 8.4 fps ~ eta:
+Rendering [=================>--------------------------] at 8.5 fps ~ eta:
 7s
-Rendering [===================>------------------------] at 8.4 fps ~ eta:
+Rendering [==================>-------------------------] at 8.5 fps ~ eta:
 7s
-Rendering [===================>------------------------] at 8.4 fps ~ eta:
+Rendering [===================>------------------------] at 8.5 fps ~ eta:
 6s
-Rendering [====================>-----------------------] at 8.4 fps ~ eta:
+Rendering [====================>-----------------------] at 8.5 fps ~ eta:
 6s
-Rendering [=====================>----------------------] at 8.4 fps ~ eta:
+Rendering [=====================>----------------------] at 8.5 fps ~ eta:
 6s
-Rendering [======================>---------------------] at 8.4 fps ~ eta:
+Rendering [======================>---------------------] at 8.6 fps ~ eta:
 6s
-Rendering [=======================>--------------------] at 8.4 fps ~ eta:
+Rendering [======================>---------------------] at 8.6 fps ~ eta:
 5s
-Rendering [========================>-------------------] at 8.4 fps ~ eta:
+Rendering [=======================>--------------------] at 8.5 fps ~ eta:
 5s
-Rendering [=========================>------------------] at 8.4 fps ~ eta:
+Rendering [=======================>--------------------] at 8.6 fps ~ eta:
 5s
-Rendering [==========================>-----------------] at 8.4 fps ~ eta:
+Rendering [========================>-------------------] at 8.6 fps ~ eta:
 5s
-Rendering [===========================>----------------] at 8.4 fps ~ eta:
+Rendering [=========================>------------------] at 8.6 fps ~ eta:
+5s
+Rendering [==========================>-----------------] at 8.5 fps ~ eta:
+5s
+Rendering [==========================>-----------------] at 8.5 fps ~ eta:
 4s
-Rendering [============================>---------------] at 8.4 fps ~ eta:
+Rendering [===========================>----------------] at 8.5 fps ~ eta:
 4s
-Rendering [=============================>--------------] at 8.4 fps ~ eta:
+Rendering [============================>---------------] at 8.5 fps ~ eta:
 4s
-Rendering [==============================>-------------] at 8.4 fps ~ eta:
+Rendering [=============================>--------------] at 8.5 fps ~ eta:
 4s
-Rendering [==============================>-------------] at 8.4 fps ~ eta:
+Rendering [==============================>-------------] at 8.5 fps ~ eta:
+4s
+Rendering [==============================>-------------] at 8.5 fps ~ eta:
 3s
-Rendering [===============================>------------] at 8.4 fps ~ eta:
+Rendering [===============================>------------] at 8.5 fps ~ eta:
+3s
+Rendering [================================>-----------] at 8.5 fps ~ eta:
 3s
 Rendering [================================>-----------] at 8.4 fps ~ eta:
 3s
-Rendering [================================>-----------] at 8.3 fps ~ eta:
+Rendering [=================================>----------] at 8.4 fps ~ eta:
 3s
-Rendering [=================================>----------] at 8.3 fps ~ eta:
-3s
-Rendering [==================================>---------] at 8.3 fps ~ eta:
-3s
-Rendering [==================================>---------] at 8.3 fps ~ eta:
+Rendering [==================================>---------] at 8.4 fps ~ eta:
+2s
+Rendering [===================================>--------] at 8.4 fps ~ eta:
 2s
 Rendering [===================================>--------] at 8.3 fps ~ eta:
 2s
-Rendering [===================================>--------] at 8.2 fps ~ eta:
+Rendering [====================================>-------] at 8.4 fps ~ eta:
 2s
-Rendering [====================================>-------] at 8.3 fps ~ eta:
+Rendering [=====================================>------] at 8.4 fps ~ eta:
 2s
-Rendering [=====================================>------] at 8.3 fps ~ eta:
-2s
-Rendering [======================================>-----] at 8.3 fps ~ eta:
-1s
-Rendering [=======================================>----] at 8.3 fps ~ eta:
+Rendering [======================================>-----] at 8.4 fps ~ eta:
 1s
 Rendering [=======================================>----] at 8.4 fps ~ eta:
 1s
 Rendering [========================================>---] at 8.4 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.4 fps ~ eta:
+Rendering [=========================================>--] at 8.5 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.4 fps ~ eta:
+Rendering [=========================================>--] at 8.5 fps ~ eta:
 0s
-Rendering [==========================================>-] at 8.4 fps ~ eta:
+Rendering [==========================================>-] at 8.5 fps ~ eta:
 0s
-Rendering [===========================================>] at 8.4 fps ~ eta:
+Rendering [===========================================>] at 8.5 fps ~ eta:
 0s
-Rendering [============================================] at 8.4 fps ~ eta: 0s
+Rendering [============================================] at 8.5 fps ~ eta: 0s
 ~~~
 {: .output}
 
 <div class="figure" style="text-align: center">
-<img src="fig/rmd-01-hansGraphAnimated-1.gif" alt="plot of chunk hansGraphAnimated"  />
+<img src="fig/rmd-03-hansGraphAnimated-1.gif" alt="plot of chunk hansGraphAnimated"  />
 <p class="caption">plot of chunk hansGraphAnimated</p>
 </div>
 

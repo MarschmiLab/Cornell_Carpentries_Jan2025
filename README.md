@@ -1,4 +1,4 @@
-# U-M Carpentries R Curriculum
+# Cornell Carpentries Curriculum (adapted from University of Michigan)
 
 [![website](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/website.yml/badge.svg)](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/website.yml)
 [![check-links](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/check-links.yml/badge.svg)](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/check-links.yml)
