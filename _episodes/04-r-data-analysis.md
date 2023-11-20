@@ -76,13 +76,13 @@ library(tidyverse)
 
 
 ~~~
-── Attaching core tidyverse packages ────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ✔ purrr     1.0.2     
-── Conflicts ──────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -105,7 +105,7 @@ gapminder_data <- read_csv("data/gapminder_data.csv")
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -748,7 +748,7 @@ Before we move on to more data cleaning, let's create the final gapminder datafr
 > > 
 > > ~~~
 > > Rows: 1704 Columns: 6
-> > ── Column specification ──────────────────────────────────────────────────────────────────────────────────
+> > ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > > Delimiter: ","
 > > chr (2): country, continent
 > > dbl (4): year, pop, lifeExp, gdpPercap
@@ -822,10 +822,9 @@ read_csv("data/co2-un-data.csv")
 New names:
 Rows: 2133 Columns: 7
 ── Column specification
-────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 (7): T24, CO2 emission estimates, ...3, ...4, ...5, ...6, ...7
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set
-`show_col_types = FALSE` to quiet this message.
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -> `...3`
 • `` -> `...4`
 • `` -> `...5`
@@ -868,10 +867,9 @@ read_csv("data/co2-un-data.csv", skip=1)
 New names:
 Rows: 2132 Columns: 7
 ── Column specification
-────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set
-`show_col_types = FALSE` to quiet this message.
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -> `...2`
 ~~~
 {: .output}
@@ -915,7 +913,7 @@ co2_emissions_dirty <- read_csv("data/co2-un-data.csv", skip=2,
 
 ~~~
 Rows: 2132 Columns: 7
-── Column specification ──────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (4): country, series, footnotes, source
 dbl (3): region, year, value
@@ -969,10 +967,9 @@ co2_emissions_dirty
 > New names:
 > Rows: 2132 Columns: 7
 > ── Column specification
-> ────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 > (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set
-> `show_col_types = FALSE` to quiet this message.
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 > • `` -> `...2`
 > ~~~
 > {: .output}
@@ -1001,10 +998,9 @@ co2_emissions_dirty
 > New names:
 > Rows: 2132 Columns: 7
 > ── Column specification
-> ────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 > (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set
-> `show_col_types = FALSE` to quiet this message.
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 > • `` -> `...2`
 > ~~~
 > {: .output}
@@ -1241,7 +1237,7 @@ gapminder_data_2007 <- read_csv("data/gapminder_data.csv") %>%
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1388,7 +1384,7 @@ co2_emissions <- read_csv("data/co2-un-data.csv", skip=2,
 
 ~~~
 Rows: 2132 Columns: 7
-── Column specification ──────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (4): country, series, footnotes, source
 dbl (3): region, year, value
@@ -1442,7 +1438,7 @@ mutate(country = recode(country, "Puerto Rico" = "United States"))
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1472,7 +1468,7 @@ gapminder_data <- read_csv("data/gapminder_data.csv") %>%
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1751,7 +1747,7 @@ gapminder_data %>%
 Error in `filter()`:
 ℹ In argument: `year == 2007`.
 Caused by error in `year == 2007`:
-! comparison (1) is possible only for atomic and list types
+! comparison (==) is possible only for atomic and list types
 ~~~
 {: .error}
 
@@ -1844,7 +1840,7 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > Error in `geom_col()`:
 > > ! Problem while computing aesthetics.
 > > ℹ Error occurred in the 1st layer.
-> > Caused by error in `FUN()`:
+> > Caused by error:
 > > ! object 'total_emissionsPercent' not found
 > > ~~~
 > > {: .error}
@@ -1867,7 +1863,7 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > Error in `geom_col()`:
 > > ! Problem while computing aesthetics.
 > > ℹ Error occurred in the 1st layer.
-> > Caused by error in `FUN()`:
+> > Caused by error:
 > > ! object 'total_emissionsPercent' not found
 > > ~~~
 > > {: .error}
@@ -1889,7 +1885,7 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > Error in `geom_col()`:
 > > ! Problem while computing aesthetics.
 > > ℹ Error occurred in the 1st layer.
-> > Caused by error in `tapply()`:
+> > Caused by error:
 > > ! object 'total_emissionsPercent' not found
 > > ~~~
 > > {: .error}
@@ -1936,7 +1932,7 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > Error in `geom_col()`:
 > > ! Problem while computing aesthetics.
 > > ℹ Error occurred in the 1st layer.
-> > Caused by error in `FUN()`:
+> > Caused by error:
 > > ! object 'per_capita_emissions' not found
 > > ~~~
 > > {: .error}
@@ -1958,7 +1954,7 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > Error in `geom_col()`:
 > > ! Problem while computing aesthetics.
 > > ℹ Error occurred in the 1st layer.
-> > Caused by error in `tapply()`:
+> > Caused by error:
 > > ! object 'per_capita_emissions' not found
 > > ~~~
 > > {: .error}

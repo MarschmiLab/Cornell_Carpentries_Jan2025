@@ -454,7 +454,7 @@ First we're going to start out with a few questions about the gapminder dataset.
 > 
 > ~~~
 > Rows: 1704 Columns: 6
-> ── Column specification ──────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (2): country, continent
 > dbl (4): year, pop, lifeExp, gdpPercap
@@ -748,10 +748,9 @@ _[Back to top](#contents)_
 > New names:
 > Rows: 2420 Columns: 7
 > ── Column specification
-> ────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 > (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set
-> `show_col_types = FALSE` to quiet this message.
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 > • `` -> `...2`
 > ~~~
 > {: .output}
@@ -867,7 +866,7 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > ~~~
 > Rows: 2132 Columns: 7
-> ── Column specification ──────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (4): country, series, footnotes, source
 > dbl (3): region, year, value
