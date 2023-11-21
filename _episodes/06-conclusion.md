@@ -5,14 +5,14 @@ questions:
 - "What do I do after the workshop to apply what I learned and keep learning more?"
 - "Where can I learn more coding skills?"
 - "How do I deal with coding errors (i.e. debug)?"
-- "What resources are there at the University of Michigan?"
+- "What other coding resources do we have at Cornell?"
 - "What other coding concepts should I learn?"
 objectives:
-- "Learn how to get help with code via the Internet and at the University of Michigan."
+- "Learn how to get help with code via the Internet and at Cornell"
 - "Learn about other coding concepts that would be good to learn in the future."
 keypoints:
   - "When it comes to trying to figure out how to code something, and debugging, Internet searching is your best friend."
-  - "There are several resources at the University of Michigan that you can take advantage of if you need help with your code."
+  - "There are several resources at Cornell that you can take advantage of if you need help with your code."
   - "We didn't have time to cover all important coding concepts in this workshop, so definitely continue trying to learn more once you get comfortable with the material we covered."
   - "There are often packages and tools that you can leverage to perform domain-specific analyses, so search for them!"
 ---
@@ -32,18 +32,15 @@ As you continue on your coding journey, two things will happen:
 
 As we complete the course, we want to  share with you some tips and tricks that have helped us on our own programming journeys.
 
-## Writing code at the University of Michigan
+## Writing code at Cornell
 
 There are many local opportunities at the University of Michigan or around the Ann Arbor campus to find coding support, learn new programming skills, and connect with other users.
 
 ### Get help and connect
 
-* [Software Carpentry Workshops](https://UMCarpentries.org/workshops/)
-    - We're always looking for more helpers & instructors!
-* [CoderSpaces](https://datascience.isr.umich.edu/events/coderspaces/)
-* [Data Analysis Networking Group (_DANG!_)](https://um-dang.github.io/)
-* [CSCAR consulting](https://cscar.research.umich.edu/) and [workshops](https://cscar.research.umich.edu/events/category/workshops/)
-* [Local meetup groups](https://www.meetup.com/topics/computer-programming/us/mi/ann_arbor/)
+* Attend Micro Hacky Hours :)
+* [Cornell Center for Advanced Computing Worshops](https://its.weill.cornell.edu/scientific-computing-training-series)
+* [Cornell BioHPC Office Hours](https://biohpc.cornell.edu/lab/office1.aspx)
 
 ## Dealing with coding errors
 
@@ -69,7 +66,7 @@ If searching for your particular code problem hasn't turned up a solution, you m
 
 ## Asking strangers for help
 
-If you are unable to determine what's wrong with your own code, the internet offers several possible ways to get help: asking questions on programming websites, interacting with developers on GitHub, chatting with other programmers on Slack, or reaching out on Twitter. If you're intimidated by asking people on the internet, you can also reach out to [people at the University of Michigan](#get-help-and-connect). You don't have to do this all on your own. However, there are some important things to keep in mind when asking questions - whether it be to people on the internet, or to people at the university. You may want to consider these tips to help you increase your chances of getting the support you need:
+If you are unable to determine what's wrong with your own code, the internet offers several possible ways to get help: asking questions on programming websites, interacting with developers on GitHub, chatting with other programmers on Slack, or reaching out on Twitter. If you're intimidated by asking people on the internet, you can also reach out to folks in the department, or attend Hacky Hour. You don't have to do this all on your own. However, there are some important things to keep in mind when asking questions - whether it be to people on the internet, or to people at the university. You may want to consider these tips to help you increase your chances of getting the support you need:
 * First, provide a brief summary of what you are trying to accomplish. You may have been working on the problem for a long time but the person you are asking will have no idea of your work until now. Keep it short and focus on your ultimate goal rather than just talking about your code. Sometimes there may better ways to solve the problem than the solution you've attempted this far.
 * Then, briefly mention what you've tried so far. Maybe mention the search terms you used online or the specific documentation you've looked at. It should be clear that you've at least tried to solve the problem yourself first (after all, that's the way you're most likely to learn the most).
 * Now, describe the problem you are having. Don't just say "the code doesn't work." Are you getting an error? If so, what is the exact message? Are you getting unexpected results? If so, then what exactly were you expecting to happen?
@@ -105,10 +102,6 @@ In the following, we list some strategies and resources we find useful. As you m
 * [R Markdown Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/rmarkdown-2.0.pdf)
 * [R Markdown Reference Guide](http://www.utstat.toronto.edu/reid/sta2201s/rmarkdown-reference.pdf)
 
-### Free learning platforms available at U-M
-
-* [Michigan Online](https://online.umich.edu/)
-* [LinkedIn Learning](https://hr.umich.edu/working-u-m/organizational-learning-resources-faculty-staff/professional-development-courses-resources/linkedin-learning)
 
 ## Some important advanced coding concepts that you will want to learn if you continue coding a lot
 
@@ -133,10 +126,6 @@ We encourage you to investigate domain-specific packages and software that will 
 
 ### High-performance computing clusters
 
-If you're performing computationally-intensive analyses, you'll likely want to use a high-performance computing cluster. At the University of Michigan, many of us work on [Great Lakes](https://arc-ts.umich.edu/greatlakes/user-guide/) for much of our research. It can be a bit overwhelming at first, so try to find someone to help you learn the ropes. Sometimes there are also [workshops](https://arc-ts.umich.edu/events/) where you can learn more.
-
-### Git/GitHub
-
-If you start using Git/GitHub more frequently, it's useful to learn how to [create branches](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging) to work on new parts of your analysis. When you're confident that it works, you can then merge the contents of the branch back into your "master" branch.
+If you're performing computationally-intensive analyses, you'll likely want to use a high-performance computing cluster. Cornell has the [BioHPC](https://biohpc.cornell.edu/Default.aspx) where you can run bioinformatic analyses. 
 
 {% include links.md %}

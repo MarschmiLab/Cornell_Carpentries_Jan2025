@@ -932,9 +932,9 @@ The first time we made this plot, we colored the points differently for each of 
 ggplot(gapminder_1997) +
   aes(x = gdpPercap, y = lifeExp) +
   geom_point() +
-  facet_wrap(vars(continent))
+  facet_wrap(~continent)
 ```
-Note that `facet_wrap` requires this extra helper function called `vars()` in order to pass in the column names. It's a lot like the `aes()` function, but it doesn't require an aesthetic name. We can see in this output that we get a separate box with a label for each continent so that only the points for that continent are in that box.
+Note that `facet_wrap` requires this `~` in order to pass in the column names. You can it the `~` as "facet **by** this. We can see in this output that we get a separate box with a label for each continent so that only the points for that continent are in that box.
 
 The other faceting function ggplot provides is `facet_grid()`. The main difference is that `facet_grid()` will make sure all of your smaller boxes share a common axis. In this example, we will stack all the boxes on top of each other into rows so that their x axes all line up.
 ```{r GapFacetGrid}
@@ -944,7 +944,7 @@ ggplot(gapminder_1997) +
   facet_grid(rows = vars(continent))
 ```
 
-Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom.
+Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom. We also used the function `vars()` to make it clear we're referencing the column `continent`.
 
 ## Saving plots
 _[Back to top](#contents)_
