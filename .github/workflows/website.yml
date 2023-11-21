@@ -2,7 +2,7 @@ name: Website
 on:
   push:
     branches:
-      - cornell_fall2023
+      - gh-pages
       - main
   pull_request: []
 jobs:
