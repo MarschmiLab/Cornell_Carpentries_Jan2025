@@ -76,13 +76,13 @@ library(tidyverse)
 
 
 ~~~
-── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ✔ purrr     1.0.2     
-── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -105,7 +105,7 @@ gapminder_data <- read_csv("data/gapminder_data.csv")
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -748,7 +748,7 @@ Before we move on to more data cleaning, let's create the final gapminder datafr
 > > 
 > > ~~~
 > > Rows: 1704 Columns: 6
-> > ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> > ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > > Delimiter: ","
 > > chr (2): country, continent
 > > dbl (4): year, pop, lifeExp, gdpPercap
@@ -761,46 +761,6 @@ Before we move on to more data cleaning, let's create the final gapminder datafr
 {: .challenge}
 
 Awesome! This is the dataframe we will be using later on in this lesson. 
-
-
-## Reviewing Git and GitHub
-Now that we have our gapminder data prepared, let's use what we learned about git and GitHub in the previous lesson to add, commit, and push our changes.  
-
-Open Terminal/Git Bash, if you do not have it open already. First we'll need to navigate to our un-report directory.
-
-Let's start by print our current working directory and listing the items in the directory, to see where we are. 
-``` 
-pwd
-ls
-```
-
-Now, we'll navigate to the un-report directory. 
-```
-cd ~/Desktop/un-report  
-ls
-```
-
-To start, let's pull to make sure our local repository is up to date. 
-```
-git status
-git pull
-```
-
-Not let's add and commit our changes. 
-```
-git status
-git add
-git status "un_data_analysis.R"  
-git commit -m "Create data analysis file"  
-```
-
-Finally, let's check our commits and then push the commits to GitHub. 
-```
-git status
-git log --online  
-git push 
-git status
-``` 
 
 # Cleaning up data
 
@@ -822,10 +782,9 @@ read_csv("data/co2-un-data.csv")
 New names:
 Rows: 2133 Columns: 7
 ── Column specification
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 (7): T24, CO2 emission estimates, ...3, ...4, ...5, ...6, ...7
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to
-quiet this message.
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -> `...3`
 • `` -> `...4`
 • `` -> `...5`
@@ -854,7 +813,7 @@ quiet this message.
 ~~~
 {: .output}
 
-The output gives us a warning about missing column names being filled in with things like 'X3', 'X4', etc. Looking at the table that is outputted by `read_csv()` we can see that there appear to be two rows at the top of the file that contain information about the data in the table. The first is a header that tells us the table number and its name. Ideally, we'd skip that. We can do this using the `skip=` argument in read_csv by giving it a number of lines to skip.
+The output gives us a warning about missing column names being filled in with things like '...3', '...4', etc. Looking at the table that is outputted by `read_csv()` we can see that there appear to be two rows at the top of the file that contain information about the data in the table. The first is a header that tells us the table number and its name. Ideally, we'd skip that. We can do this using the `skip=` argument in read_csv by giving it a number of lines to skip.
 
 
 ~~~
@@ -868,10 +827,9 @@ read_csv("data/co2-un-data.csv", skip=1)
 New names:
 Rows: 2132 Columns: 7
 ── Column specification
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to
-quiet this message.
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -> `...2`
 ~~~
 {: .output}
@@ -915,7 +873,7 @@ co2_emissions_dirty <- read_csv("data/co2-un-data.csv", skip=2,
 
 ~~~
 Rows: 2132 Columns: 7
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (4): country, series, footnotes, source
 dbl (3): region, year, value
@@ -959,7 +917,7 @@ co2_emissions_dirty
 > 
 > ~~~
 > read_csv("data/co2-un-data.csv", skip=1) %>%
->   rename(country=X2)
+>   rename(country=...2)
 > ~~~
 > {: .language-r}
 > 
@@ -969,10 +927,9 @@ co2_emissions_dirty
 > New names:
 > Rows: 2132 Columns: 7
 > ── Column specification
-> ────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 > (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to
-> quiet this message.
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 > • `` -> `...2`
 > ~~~
 > {: .output}
@@ -980,11 +937,22 @@ co2_emissions_dirty
 > 
 > 
 > ~~~
-> Error in `rename()`:
-> ! Can't rename columns that don't exist.
-> ✖ Column `X2` doesn't exist.
+> # A tibble: 2,132 × 7
+>    `Region/Country/Area` country  Year Series             Value Footnotes Source
+>                    <dbl> <chr>   <dbl> <chr>              <dbl> <chr>     <chr> 
+>  1                     8 Albania  1975 Emissions (thous… 4.34e3 <NA>      Inter…
+>  2                     8 Albania  1985 Emissions (thous… 6.93e3 <NA>      Inter…
+>  3                     8 Albania  1995 Emissions (thous… 1.85e3 <NA>      Inter…
+>  4                     8 Albania  2005 Emissions (thous… 3.83e3 <NA>      Inter…
+>  5                     8 Albania  2010 Emissions (thous… 3.93e3 <NA>      Inter…
+>  6                     8 Albania  2015 Emissions (thous… 3.82e3 <NA>      Inter…
+>  7                     8 Albania  2016 Emissions (thous… 3.67e3 <NA>      Inter…
+>  8                     8 Albania  2017 Emissions (thous… 4.34e3 <NA>      Inter…
+>  9                     8 Albania  1975 Emissions per ca… 1.80e0 <NA>      Inter…
+> 10                     8 Albania  1985 Emissions per ca… 2.34e0 <NA>      Inter…
+> # ℹ 2,122 more rows
 > ~~~
-> {: .error}
+> {: .output}
 >
 > Many data analysts prefer to have their column headings and variable names be in all lower case. We can use a variation of `rename()`, which is `rename_all()` that allows us to set all of the column headings to lower case by giving it the name of the tolower function, which makes everything lowercase.
 > 
@@ -1001,10 +969,9 @@ co2_emissions_dirty
 > New names:
 > Rows: 2132 Columns: 7
 > ── Column specification
-> ────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 > (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to
-> quiet this message.
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 > • `` -> `...2`
 > ~~~
 > {: .output}
@@ -1241,7 +1208,7 @@ gapminder_data_2007 <- read_csv("data/gapminder_data.csv") %>%
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1388,7 +1355,7 @@ co2_emissions <- read_csv("data/co2-un-data.csv", skip=2,
 
 ~~~
 Rows: 2132 Columns: 7
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (4): country, series, footnotes, source
 dbl (3): region, year, value
@@ -1442,7 +1409,7 @@ mutate(country = recode(country, "Puerto Rico" = "United States"))
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1472,7 +1439,7 @@ gapminder_data <- read_csv("data/gapminder_data.csv") %>%
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1687,43 +1654,6 @@ gapminder_co2 %>%
 The `if_else()` statement reads like, "if country equals "Canada" OR `|` "United states" OR "Mexico", the new variable region should be "north", else "south"". It's worth exploring logical operators for "or" `|`, "and" `&&`, and "not" `!`, which opens up a great deal of possibilities for writing code to do what you want.
 
 We see that although Canada, the United States, and Mexico account for close to half the population of the Americas, they account for 88% of the CO2 emitted. We just did this math quickly by plugging the numbers from our table into the console to get the percentages. Can we make that a little more reproducible by calculating percentages for population (pop) and total emissions (total) into our data before summarizing?
-
-
-## Finishing with Git and GitHub
-
-Awesome work! Let's make sure it doesn't go to waste. Time to add, commit, and push our changes to GitHub again - do you remember how?
-
-> ## changing directories
-> Print your current working directory and list the items in the directory to check where you are. If you are not in the un-report directory, navigate there. 
-> > ## Solution: 
-> > ```
-> > pwd  
-> > ls 
-> > cd ~/Desktop/un-report  
-> > ls
-> > ```
-> {: .solution}
-{: .challenge}
-
-> ## reviewing git and GitHub
-> 
-> Pull to make sure our local repository is up to date. Then add, commit, and push your commits to GitHub. Don't forget to check your git status periodically to make sure everything is going as expected! 
-> 
-> > ## Solution: 
-> > ```
-> > git status 
-> > git pull
-> > git status 
-> > git add "data-analysis.R"  
-> > git status 
-> > git commit -m "Create data analysis file"  
-> > git status 
-> > git log --online  
-> > git push
-> > git status 
-> > ```
-> {: .solution}
-{: .challenge}
 
 
 # Bonus 

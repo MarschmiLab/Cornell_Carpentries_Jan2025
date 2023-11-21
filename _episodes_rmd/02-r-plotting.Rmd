@@ -64,7 +64,7 @@ Let's make a new R script to store the code we'll write while analyzing the gapm
 
 Back in the "File" menu, you'll see the first option is "New File". Selecting "New File" opens another menu to the right and the first option is "R Script". Select "R Script".
 
-Now we have a fourth panel in the upper left corner of RStudio that includes an **Editor** tab with an untitled R Script. Let's save this file as `gdp_population.R` in our project directory.
+Let's save this file as `gdp_population.R` in our project directory.
 
 Let's start by loading a package called `tidyverse`
 
@@ -633,6 +633,13 @@ Let's review the columns and the types of data stored in our dataset to decide h
 ```{r DataExploration, eval=FALSE}
 str(gapminder_data)
 ```
+
+> ## Pro-tip
+>
+> The tidyverse also comes with a function for quickly seeing the structure of your `data.frame` called `glimpse()`. Try it and compare to the output from `str()`!
+>
+{: .testimonial}
+
 (You can also review the structure of your data in the **Environment** tab by clicking on the blue circle with the arrow in it next to your data object name.)
 
 So, what do we see? The column names are listed after a `$` symbol, and then we have a `:` followed by a text label. These labels correspond to the type of data stored in each column.

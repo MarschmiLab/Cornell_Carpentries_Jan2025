@@ -150,7 +150,7 @@ As you write more code, you can highlight multiple lines and then click <kbd>Run
 # Objects and Assignment
 _[Back to top](#contents)_
 
-When we're coding in R, we often want to assign a value, or a collection of values, to the **object**, which means we gave those values a name. To create an object in R, we'll use the `<-` symbol, which is the **assignment operator**. It assigns values generated or typed on the right to objects on the left. 
+When we're coding in R, we often want to assign a value, or a collection of values, to an **object**, which means we gave those values a name. To create an object in R, we'll use the `<-` symbol, which is the **assignment operator**. It assigns values generated or typed on the right to objects on the left. 
 
 
 ~~~
@@ -1067,7 +1067,7 @@ _[Back to top](#contents)_
 
 Now we'll introduce some new subsetting operators. There are three functions used to subset lists. We've already seen one of these when learning about atomic vectors (`[`), and we'll learn two more, (`[[`), and (`$`).
 
-Using `[` will always return a list. If you want to *subset* a list, but not *extract* an element, then you will likely use `[`.
+Using `[` will always return a list. We can check the data *structure* of an object using the `class()` function. If you want to *subset* a list, but not *extract* an element, then you will likely use `[`.
 
 
 ~~~
@@ -1092,6 +1092,20 @@ my_list
 
 
 ~~~
+class(my_list)
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "list"
+~~~
+{: .output}
+
+
+
+~~~
 my_list[1]
 ~~~
 {: .language-r}
@@ -1101,6 +1115,20 @@ my_list[1]
 ~~~
 [[1]]
 [1] 2
+~~~
+{: .output}
+
+
+
+~~~
+class(my_list[1])
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "list"
 ~~~
 {: .output}
 
@@ -1118,6 +1146,20 @@ my_list[[2]]
 
 ~~~
 [1]  TRUE FALSE
+~~~
+{: .output}
+
+
+
+~~~
+class(my_list[[2]])
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "logical"
 ~~~
 {: .output}
 
@@ -1209,14 +1251,14 @@ The `$` function is a shorthand way for extracting elements by name:
 
 
 ~~~
-my_list$B
+my_list$b
 ~~~
 {: .language-r}
 
 
 
 ~~~
-NULL
+[1]  TRUE FALSE
 ~~~
 {: .output}
 

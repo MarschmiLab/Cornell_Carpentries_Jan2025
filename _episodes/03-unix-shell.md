@@ -279,9 +279,12 @@ ls
 ```
 awesome_plot.jpg
 awesome_violin_plot.jpg
+base_R.R
+co2-un-data.csv
 gapminder_1997.csv
 gapminder_data.csv
 gdp_population.R
+rnd-un-data.csv
 ```
 {: .output}
 
@@ -323,9 +326,12 @@ ls un-report
 ```
 awesome_plot.jpg
 awesome_violin_plot.jpg
+base_R.R
+co2-un-data.csv
 gapminder_1997.csv
 gapminder_data.csv
 gdp_population.R
+rnd-un-data.csv
 ```
 {: .output}
 
@@ -447,9 +453,12 @@ ls
 ```
 awesome_plot.jpg
 awesome_violin_plot.jpg
+base_R.R
+co2-un-data.csv
 gapminder_1997.csv
 gapminder_data.csv
 gdp_population.R
+rnd-un-data.csv
 ```
 {: .output}
 
@@ -464,10 +473,13 @@ One way is the following:
 ```
 .
 ├── code
-│   └── gdp_population.R
+│   ├── base_R.R
+    └── gdp_population.R
 ├── data
-│   ├── gapminder_1997.csv
+│   ├── co2-un-data.csv
+    └── gapminder_1997.csv
     └── gapminder_data.csv
+    └── rnd-un-data.csv
 └── figures
     ├── awesome_plot.jpg
     └── awesome_violin_plot.jpg
@@ -503,10 +515,13 @@ ls
 ```
 awesome_plot.jpg
 awesome_violin_plot.jpg
+base_R.R
 code
+co2-un-data.csv
 gapminder_1997.csv
 gapminder_data.csv
 gdp_population.R
+rnd-un-data.csv
 ```
 {: .output}
 
@@ -540,9 +555,12 @@ ls
 ```
 awesome_plot.jpg
 awesome_violin_plot.jpg
+base_R.R
 code
+co2-un-data.csv
 gapminder_1997.csv
 gapminder_data.csv
+rnd-un-data.csv
 ```
 {: .output}
 
@@ -557,17 +575,24 @@ gdp_population.R
 ```
 {: .output}
 
-There it is!
+There it is! Let's also move our `base_R.R` file.
+
+```
+mv base_R.R code
+```
+{: .language-bash}
 
 > ## Creating directories and moving files
 >
-> Create a `data` directory and move `gapminder_data.csv` and `gapminder_1997.csv` into the newly created `data` directory.
+> Create a `data` directory and move all your csv files into the newly created `data` directory.
 > > ## Solution
 > > From the `un-report` directory:
 > >  ```
 > > mkdir data
+> > mv co2-un-data.csv data
 > > mv gapminder_data.csv data
 > > mv gapminder_1997.csv data
+> > mv rnd-un-data.csv data
 > > ```
 > {: .solution}
 {: .challenge}
@@ -612,10 +637,10 @@ ls *
 {: .language-bash}
 ```
 code:
-gdp_population.R
+base_R.R gdp_population.R
 
 data:
-gapminder_1997.csv  gapminder_data.csv
+co2-un-data.csv gapminder_1997.csv  gapminder_data.csv rnd-un-data.csv
 
 figures:
 awesome_plot.jpg    awesome_violin_plot.jpg
