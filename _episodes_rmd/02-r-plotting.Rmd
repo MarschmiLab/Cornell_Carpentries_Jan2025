@@ -21,7 +21,7 @@ keypoints:
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
-knitr_fig_path("03-")
+knitr_fig_path("02-")
 ```
 
 ```{r echo=FALSE}
@@ -32,6 +32,7 @@ set.seed(20210109)
 
 ### Contents
 
+1. [Introduction to the tidyverse](#introduction-to-the-tidyverse)
 1. [Loading and reviewing data](#loading-and-reviewing-data)
 1. [Understanding commands](#understanding-commands)
 1. [Creating our first plot](#creating-our-first-plot)
@@ -50,14 +51,7 @@ set.seed(20210109)
       + [Map plots](#map-plots)
 1. [Glossary of terms](#glossary-of-terms)
 
-> ## Bonus: why learn to program?
-> Share why you're interested in learning how to code.
-> > ## Solution:
-> > There are lots of different reasons, including to perform data analysis and generate figures. I'm sure you have morespecific reasons for why you'd like to learn!
-> {: .solution}
-{: .challenge}
-
-# Introduction to R and RStudio
+# Introduction to the Tidyverse
 _[Back to top](#contents)_
 
 In this session we will learn how to read data into R and plot it, allowing us to test the hypothesis that a country's life expectancy is related to the total value of its finished goods and services, also known as the Gross Domestic Product (GDP). Compared to our previous lesson, we'll use functions from the `tidyverse` to make working with our data easier. 
@@ -147,6 +141,7 @@ Now look in the **Environment** tab in the upper right corner of RStudio. Here y
 {: .callout}
 
 # Understanding commands
+_[Back to top](#contents)_
 
 Let's take a closer look at the `read_csv` command we typed.
 

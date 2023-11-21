@@ -60,13 +60,13 @@ For a typical 2-day workshop. Can be modified for different workshop formats.
 |---|-------|-------------|
 | **Day 1** |   |
 | 09:00 | Welcome to the workshop | `_episodes/00-intro.md` |
-| 09:15 | **R for Plotting** | `_episodes_rmd/01-r-plotting.Rmd` |
+| 09:15 | **Introduction ot R** | `_episodes_rmd/01-r-base.Rmd` |
 | 10:30 | Break |  |
-| 10:45 | **R for Plotting (Continued)** | continuation of `01-r-plotting` |
+| 10:45 | **R for Plotting** | continuation of `01-r-plotting` |
 | 12:00 | Lunch Break |  |
-| 13:00 | **The Unix Shell** | `_episodes/02-unix-shell.md` |
+| 13:00 | **R for Plotting (Continued)** | `_episodes_rmd/02-r-plotting.Rmd` |
 | 14:15 | Break |  |
-| 14:30 | **Intro to git & GitHub** | `_episodes_rmd/03-intro-git-github.md` |
+| 14:30 | **The Unix Shell** | `_episodes_/03-unix-shell.md` |
 | 16:30 | Wrap-up Day 1 |  |
 | **Day 2** |   |
 | 09:00 | **R for Data Analysis** | `_episodes_rmd/04-r-data-analysis.Rmd` |
@@ -91,7 +91,7 @@ For a typical 2-day workshop. Can be modified for different workshop formats.
 
 ## Citation
 
-To cite the original U-M developed curriculum, please use:
+This lesson is mostly built on the [U-M Carpentries curriculum](https://umcarpentries.org/intro-curriculum-r/), with exercises taken from ["R for Reproducible Scientific Analysis" Carpentries curriculum](https://swcarpentry.github.io/r-novice-gapminder/). To cite the original U-M developed curriculum, please use:
 
 ```
 Lapp et al., (2022). Developing and deploying an integrated workshop 
