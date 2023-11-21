@@ -1,9 +1,8 @@
 # Cornell Carpentries Curriculum (adapted from University of Michigan)
 
-[![website](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/website.yml/badge.svg)](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/website.yml)
-[![check-links](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/check-links.yml/badge.svg)](https://github.com/UMCarpentries/intro-curriculum-r/actions/workflows/check-links.yml)
+[![website](https://github.com/gus-pendleton/intro-curriculum-r/actions/workflows/website.yml/badge.svg)](https://github.com/gus-pendleton/intro-curriculum-r/actions/workflows/website.yml)
+[![check-links](https://github.com/gus-pendleton/intro-curriculum-r/actions/workflows/check-links.yml/badge.svg)](https://github.com/gus-pendleton/intro-curriculum-r/actions/workflows/check-links.yml)
 [![License](https://img.shields.io/badge/License-MIT%2BCC--BY-blue)](LICENSE.md)
-[![DOI](https://jose.theoj.org/papers/10.21105/jose.00144/status.svg)](https://doi.org/10.21105/jose.00144)
 
 This is a version of the University of Michigan Carpentries curriculum adapted for Cornell Microbiology data science workshops.
 
