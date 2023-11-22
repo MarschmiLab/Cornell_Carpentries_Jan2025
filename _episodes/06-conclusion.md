@@ -34,7 +34,7 @@ As we complete the course, we want to  share with you some tips and tricks that 
 
 ## Writing code at Cornell
 
-There are many local opportunities at the University of Michigan or around the Ann Arbor campus to find coding support, learn new programming skills, and connect with other users.
+There are many local opportunities at Cornell to find coding support, learn new programming skills, and connect with other users.
 
 ### Get help and connect
 
