@@ -776,7 +776,7 @@ x
 > [1] 6.2 7.1 4.8
 > ~~~
 > {: .output}
-> 
+> {: .source}
 > > ## Solution
 > > 
 > > ~~~
@@ -1041,6 +1041,8 @@ x[names(x) == "a"]
 > 
 > Write a subsetting command to return the values in x that are greater than 4 and less than 7.
 > 
+> {: .source}
+> 
 > > ## Solution to challenge 2
 > > 
 > > 
@@ -1058,7 +1060,7 @@ x[names(x) == "a"]
 > > ~~~
 > > {: .output}
 > >
-> > {: .solution}
+> {: .solution}
 >
 {: .challenge}
 
@@ -1382,3 +1384,409 @@ micro_df[1,2]
 If we subset a single row, the result will be a data frame (because the elements are mixed types). 
 
 But for a single column the result will be a vector.
+
+Finally, we often want to select rows of a data frame that match a certain condition. To do this, we'll combine skills we learned in subsetting and logical comparisons.
+
+First, let's select a specific column:
+
+
+~~~
+micro_df$genome_mbp
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 5.0 4.2 2.8
+~~~
+{: .output}
+Then, let's use it in a logical comparison:
+
+
+~~~
+micro_df$genome_mbp > 4
+~~~
+{: .language-r}
+
+
+
+~~~
+[1]  TRUE  TRUE FALSE
+~~~
+{: .output}
+
+Finally, let's use that logical vector to select rows from our data frame with the `[` operator:
+
+
+~~~
+micro_df[micro_df$genome_mbp > 4]
+~~~
+{: .language-r}
+
+
+
+~~~
+    species gram_pos
+1     Ecoli    FALSE
+2 Bsubtilis     TRUE
+3   Saureus     TRUE
+~~~
+{: .output}
+
+Hmm. Did that do what we wanted? Our logical vector was `TRUE TRUE FALSE`. It looks like we selected the first two *columns* of the data frame, not the first two *rows*. Remember that the `[` assume you're selecting columns by default. If we want them to select rows, we need to add a ,
+
+
+~~~
+micro_df[micro_df$genome_mbp > 4,]
+~~~
+{: .language-r}
+
+
+
+~~~
+    species gram_pos genome_mbp
+1     Ecoli    FALSE        5.0
+2 Bsubtilis     TRUE        4.2
+~~~
+{: .output}
+
+Perfect!
+
+
+
+> ## Challenge 7
+> 
+> Fix each of the following common data frame subsetting errors:
+> 
+> 1. Extract observations collected for E. coli
+>   
+>   
+>   ~~~
+>   micro_df[micro_df$species = "Ecoli",]
+>   ~~~
+>   {: .language-r}
+> 
+> 2. Drop columns 2 and 3
+>   
+>   
+>   ~~~
+>   micro_df[,-2:3]
+>   ~~~
+>   {: .language-r}
+> 
+> 3. Extract the rows where the genome size is larger than 4.5 Mbp
+>   
+>   
+>   ~~~
+>   micro_df[micro_df$genome_mbp > 4.5]
+>   ~~~
+>   {: .language-r}
+> 
+> 4. Extract the first row, and the 2nd and 3rd columns
+>   
+>   
+>   ~~~
+>   micro_df[1, 2, 3]
+>   ~~~
+>   {: .language-r}
+> 
+> 5. Advanced: extract rows that contain information for B. subtilis or S. aureus
+>   
+>   
+>   ~~~
+>   micro_df[micro_df$species == "Bsubtilis" | "Saureus",]
+>   ~~~
+>   {: .language-r}
+> 
+> {: .source}
+> 
+> > ## Solution to challenge 7
+> > 
+> > Fix each of the following common data frame subsetting errors:
+> > 1. Extract observations collected for E. coli
+> >   
+> >   
+> >   ~~~
+> >   # micro_df[micro_df$species = "Ecoli",]
+> >   micro_df[micro_df$species == "Ecoli",]
+> >   ~~~
+> >   {: .language-r}
+> > 2. Drop columns 2 and 3
+> >   
+> >   
+> >   ~~~
+> >   # micro_df[,-2:3]
+> >   micro_df[-c(2:3)]
+> >   ~~~
+> >   {: .language-r}
+> > 3. Extract the rows where the genome size is larger than 4.5 Mbp
+> >   
+> >   
+> >   ~~~
+> >   # micro_df[micro_df$genome_mbp > 4.5]
+> >   micro_df[micro_df$genome_mbp > 4.5,]
+> >   ~~~
+> >   {: .language-r}
+> > 4. Extract the first row, and the 2nd and 3rd columns
+> >   
+> >   
+> >   ~~~
+> >   # micro_df[1, 2, 3]
+> >   micro_df[1, c(2, 3)]
+> >   ~~~
+> >   {: .language-r}
+> > 5. Advanced: extract rows that contain information for B. subtilis or S. aureus
+> >   
+> >   
+> >   ~~~
+> >   # micro_df[micro_df$species == "Bsubtilis" | "Saureus",]
+> >   micro_df[micro_df$species == "Bsubtilis" | micro_df$species == "Saureus",]
+> >   
+> >   # Or if you're lazy...
+> >   micro_df[micro_df$gram_pos,]
+> >   ~~~
+> >   {: .language-r}
+> > 
+> {: .solution}
+>
+{: .challenge}
+
+# Bonus: If else statements
+
+Often when we're coding we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.
+
+There are several ways you can control flow in R.
+For conditional statements, the most commonly used approaches are the constructs:
+
+
+~~~
+# if
+if (condition is true) {
+  perform action
+}
+
+# if ... else
+if (condition is true) {
+  perform action
+} else {  # that is, if the condition is false,
+  perform alternative action
+}
+~~~
+{: .language-r}
+
+Say, for example, that we want R to print a message if a variable `x` has a particular value:
+
+
+~~~
+x <- 8
+
+if (x >= 10) {
+  print("x is greater than or equal to 10")
+}
+
+x
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 8
+~~~
+{: .output}
+
+The print statement does not appear in the console because x is not greater than 10. To print a different message for numbers less than 10, we can add an `else` statement.
+
+
+~~~
+x <- 8
+
+if (x >= 10) {
+  print("x is greater than or equal to 10")
+} else {
+  print("x is less than 10")
+}
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "x is less than 10"
+~~~
+{: .output}
+
+You can also test multiple conditions by using `else if`.
+
+
+~~~
+x <- 8
+
+if (x >= 10) {
+  print("x is greater than or equal to 10")
+} else if (x > 5) {
+  print("x is greater than 5, but less than 10")
+} else {
+  print("x is less than 5")
+}
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "x is greater than 5, but less than 10"
+~~~
+{: .output}
+
+**Important:** when R evaluates the condition inside `if()` statements, it is looking for a logical element, i.e., `TRUE` or `FALSE`. This can cause some headaches for beginners. For example:
+
+
+~~~
+x  <-  4 == 3
+if (x) {
+  "4 equals 3"
+} else {
+  "4 does not equal 3"
+}
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "4 does not equal 3"
+~~~
+{: .output}
+
+As we can see, the not equal message was printed because the vector x is `FALSE`
+
+
+~~~
+x <- 4 == 3
+x
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] FALSE
+~~~
+{: .output}
+
+
+> ## Challenge
+> 
+> Use an `if()` statement to print a suitable message reporting whether there are any records from *B. subtilis* in our `micro_df`. Some functions that we have learned but could be helpful > include `any()`, or `nrow`. Preview their help pages for hints using the `?` function.
+> 
+> {: .source}
+> 
+> > ## Solution to Challenge 1
+> > 
+> > We will first see a solution which uses the `nrow` function.
+> > We first obtain a logical vector describing which element of `micro_df$species` is equal to `Bsubtilis`:
+> > 
+> > 
+> > ~~~
+> > micro_df[(micro_df$species == "Bsubtilis"),]
+> > ~~~
+> > {: .language-r}
+> > 
+> > Then, we count the number of rows of the data.frame `micro_df` that correspond to the "Bsubtilis":
+> > 
+> > 
+> > ~~~
+> > bac_row_number <- nrow(micro_df[(micro_df$species == "Bsubtilis"),])
+> > ~~~
+> > {: .language-r}
+> > 
+> > The presence of any record for the year "Bsubtilis" is equivalent to the request that `rows"Bsubtilis"_number` is one or more:
+> > 
+> > 
+> > ~~~
+> > bac_row_number >= 1
+> > ~~~
+> > {: .language-r}
+> > 
+> > Putting all together, we obtain:
+> > 
+> > 
+> > ~~~
+> > if(nrow(micro_df[(micro_df$species == "Bsubtilis"),]) >= 1){
+> >    print("Record(s) for Bsubtilis found.")
+> > }
+> > ~~~
+> > {: .language-r}
+> > 
+> > All this can be done more quickly with `any()`. The logical condition can be expressed as:
+> > 
+> > 
+> > ~~~
+> > if(any(micro_df$species == "Bsubtilis")){
+> >    print("Record(s) for Bsubtilis found.")
+> > }
+> > ~~~
+> > {: .language-r}
+> {: .solution}
+>
+{: .challenge}
+
+
+Did anyone get a warning message like this?
+
+
+~~~
+Error in if (micro_df$species == "Bsubtilis") {: the condition has length > 1
+~~~
+{: .error}
+
+The `if()` function only accepts singular (of length 1) inputs, and therefore returns an error when you use it with a vector. The `if()` function will still run, but will only evaluate the condition in the first element of the vector. Therefore, to use the `if()` function, you need to make sure your input is singular (of length 1).
+
+
+> ## Tip: Built in `ifelse()` function
+> 
+> `R` accepts both `if()` and `else if()` statements structured as outlined above,
+> but also statements using `R`'s built-in `ifelse()` function. This
+> function accepts both singular and vector inputs and is structured as
+> follows:
+> 
+> 
+> ~~~
+> # ifelse function
+> ifelse(condition is true, perform action, perform alternative action)
+> ~~~
+> {: .language-r}
+> 
+> where the first argument is the condition or a set of conditions to be met, the
+> second argument is the statement that is evaluated when the condition is `TRUE`,
+> and the third statement  is the statement that is evaluated when the condition
+> is `FALSE`.
+> 
+> 
+> ~~~
+> y <- -3
+> ifelse(y < 0, "y is a negative number", "y is either positive or zero")
+> ~~~
+> {: .language-r}
+> 
+> 
+> 
+> ~~~
+> [1] "y is a negative number"
+> ~~~
+> {: .output}
+> 
+{: .callout}
+
+> ## Tip: `any()` and `all()`
+> 
+> The `any()` function will return `TRUE` if at least one
+> `TRUE` value is found within a vector, otherwise it will return `FALSE`.
+> This can be used in a similar way to the `%in%` operator.
+> The function `all()`, as the name suggests, will only return `TRUE` if all values in
+> the vector are `TRUE`.
+{: .callout}
+
+

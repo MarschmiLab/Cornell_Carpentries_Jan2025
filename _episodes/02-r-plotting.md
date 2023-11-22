@@ -73,13 +73,13 @@ library(tidyverse)
 
 
 ~~~
-── Attaching core tidyverse packages ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ──────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -139,7 +139,7 @@ gapminder_1997 <- read_csv("gapminder_1997.csv")
 
 ~~~
 Rows: 142 Columns: 5
-── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
@@ -226,7 +226,7 @@ Do all functions need arguments? Let's test some other functions:
 
 
 ~~~
-[1] "2023-11-21"
+[1] "2023-11-22"
 ~~~
 {: .output}
 
@@ -290,7 +290,7 @@ read_csv(file = 'gapminder_1997.csv')
 
 ~~~
 Rows: 142 Columns: 5
-── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
@@ -365,7 +365,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > 
 > ~~~
-> [1] "2023-11-21"
+> [1] "2023-11-22"
 > ~~~
 > {: .output}
 > 
@@ -840,7 +840,7 @@ To start, we will read in the data without using the interactive RStudio file na
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1380,7 +1380,7 @@ The first time we made this plot, we colored the points differently for each of 
 ggplot(gapminder_1997) +
   aes(x = gdpPercap, y = lifeExp) +
   geom_point() +
-  facet_wrap(vars(continent))
+  facet_wrap(~continent)
 ~~~
 {: .language-r}
 
@@ -1388,7 +1388,7 @@ ggplot(gapminder_1997) +
 <img src="../fig/rmd-02-GapFacetWrap-1.png" alt="plot of chunk GapFacetWrap" width="612" />
 <p class="caption">plot of chunk GapFacetWrap</p>
 </div>
-Note that `facet_wrap` requires this extra helper function called `vars()` in order to pass in the column names. It's a lot like the `aes()` function, but it doesn't require an aesthetic name. We can see in this output that we get a separate box with a label for each continent so that only the points for that continent are in that box.
+Note that `facet_wrap` requires this `~` in order to pass in the column names. You can it the `~` as "facet **by** this. We can see in this output that we get a separate box with a label for each continent so that only the points for that continent are in that box.
 
 The other faceting function ggplot provides is `facet_grid()`. The main difference is that `facet_grid()` will make sure all of your smaller boxes share a common axis. In this example, we will stack all the boxes on top of each other into rows so that their x axes all line up.
 
@@ -1405,7 +1405,7 @@ ggplot(gapminder_1997) +
 <p class="caption">plot of chunk GapFacetGrid</p>
 </div>
 
-Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom.
+Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom. We also used the function `vars()` to make it clear we're referencing the column `continent`.
 
 ## Saving plots
 _[Back to top](#contents)_
@@ -1631,7 +1631,9 @@ animatedHansPlot
 
 ~~~
 
-Rendering [>-------------------------------------------] at 9.8 fps ~ eta:
+Rendering [>-------------------------------------------] at 9.9 fps ~ eta:
+10s
+Rendering [>-------------------------------------------] at 9.7 fps ~ eta:
 10s
 Rendering [=>------------------------------------------] at 9.6 fps ~ eta:
 10s
@@ -1641,107 +1643,117 @@ Rendering [==>-----------------------------------------] at 8.7 fps ~ eta:
 11s
 Rendering [==>-----------------------------------------] at 8.8 fps ~ eta:
 11s
-Rendering [===>----------------------------------------] at 8.8 fps ~ eta:
-10s
 Rendering [===>----------------------------------------] at 8.9 fps ~ eta:
 10s
-Rendering [===>----------------------------------------] at 8.8 fps ~ eta:
+Rendering [====>-----------------------------------------] at 9 fps ~ eta:
 10s
-Rendering [====>---------------------------------------] at 8.7 fps ~ eta:
+Rendering [=====>----------------------------------------] at 9 fps ~ eta:
 10s
-Rendering [=====>--------------------------------------] at 8.7 fps ~ eta:
+Rendering [=====>--------------------------------------] at 9.1 fps ~ eta:
 10s
-Rendering [======>-------------------------------------] at 8.7 fps ~ eta:
+Rendering [=====>----------------------------------------] at 9 fps ~ eta:
 10s
-Rendering [=======>------------------------------------] at 8.7 fps ~ eta:
+Rendering [======>---------------------------------------] at 9 fps ~ eta:
 9s
-Rendering [========>-----------------------------------] at 8.7 fps ~ eta:
+Rendering [=======>--------------------------------------] at 9 fps ~ eta:
 9s
-Rendering [=========>----------------------------------] at 8.7 fps ~ eta:
+Rendering [========>-------------------------------------] at 9 fps ~ eta:
 9s
-Rendering [==========>---------------------------------] at 8.7 fps ~ eta:
+Rendering [========>-----------------------------------] at 8.9 fps ~ eta:
 9s
-Rendering [==========>---------------------------------] at 8.6 fps ~ eta:
+Rendering [=========>----------------------------------] at 8.9 fps ~ eta:
 9s
-Rendering [===========>--------------------------------] at 8.6 fps ~ eta:
+Rendering [==========>---------------------------------] at 8.9 fps ~ eta:
+9s
+Rendering [==========>---------------------------------] at 8.8 fps ~ eta:
 8s
-Rendering [============>-------------------------------] at 8.6 fps ~ eta:
+Rendering [===========>--------------------------------] at 8.8 fps ~ eta:
 8s
-Rendering [============>-------------------------------] at 8.5 fps ~ eta:
+Rendering [============>-------------------------------] at 8.8 fps ~ eta:
 8s
-Rendering [=============>------------------------------] at 8.5 fps ~ eta:
+Rendering [============>-------------------------------] at 8.7 fps ~ eta:
 8s
-Rendering [==============>-----------------------------] at 8.5 fps ~ eta:
+Rendering [=============>------------------------------] at 8.7 fps ~ eta:
 8s
-Rendering [===============>----------------------------] at 8.4 fps ~ eta:
+Rendering [==============>-----------------------------] at 8.7 fps ~ eta:
 8s
-Rendering [================>---------------------------] at 8.4 fps ~ eta:
+Rendering [==============>-----------------------------] at 8.6 fps ~ eta:
+8s
+Rendering [===============>----------------------------] at 8.5 fps ~ eta:
+8s
+Rendering [===============>----------------------------] at 8.6 fps ~ eta:
 7s
-Rendering [=================>--------------------------] at 8.4 fps ~ eta:
+Rendering [================>---------------------------] at 8.6 fps ~ eta:
 7s
-Rendering [==================>-------------------------] at 8.5 fps ~ eta:
+Rendering [=================>--------------------------] at 8.6 fps ~ eta:
 7s
-Rendering [===================>------------------------] at 8.5 fps ~ eta:
+Rendering [==================>-------------------------] at 8.6 fps ~ eta:
+7s
+Rendering [==================>-------------------------] at 8.7 fps ~ eta:
 6s
-Rendering [====================>-----------------------] at 8.5 fps ~ eta:
+Rendering [===================>------------------------] at 8.7 fps ~ eta:
 6s
-Rendering [=====================>----------------------] at 8.5 fps ~ eta:
+Rendering [===================>------------------------] at 8.6 fps ~ eta:
 6s
-Rendering [======================>---------------------] at 8.5 fps ~ eta:
+Rendering [====================>-----------------------] at 8.7 fps ~ eta:
 6s
-Rendering [=======================>--------------------] at 8.5 fps ~ eta:
+Rendering [=====================>----------------------] at 8.7 fps ~ eta:
+6s
+Rendering [======================>---------------------] at 8.7 fps ~ eta:
+6s
+Rendering [======================>---------------------] at 8.6 fps ~ eta:
 5s
-Rendering [========================>-------------------] at 8.5 fps ~ eta:
+Rendering [=======================>--------------------] at 8.6 fps ~ eta:
 5s
-Rendering [=========================>------------------] at 8.4 fps ~ eta:
+Rendering [========================>-------------------] at 8.6 fps ~ eta:
 5s
-Rendering [==========================>-----------------] at 8.3 fps ~ eta:
+Rendering [=========================>------------------] at 8.6 fps ~ eta:
 5s
-Rendering [==========================>-----------------] at 8.4 fps ~ eta:
+Rendering [=========================>------------------] at 8.5 fps ~ eta:
 5s
-Rendering [===========================>----------------] at 8.4 fps ~ eta:
+Rendering [==========================>-----------------] at 8.5 fps ~ eta:
+5s
+Rendering [==========================>-----------------] at 8.6 fps ~ eta:
 4s
-Rendering [============================>---------------] at 8.4 fps ~ eta:
+Rendering [===========================>----------------] at 8.6 fps ~ eta:
 4s
-Rendering [=============================>--------------] at 8.4 fps ~ eta:
+Rendering [============================>---------------] at 8.6 fps ~ eta:
 4s
-Rendering [==============================>-------------] at 8.4 fps ~ eta:
+Rendering [=============================>--------------] at 8.6 fps ~ eta:
 4s
-Rendering [==============================>-------------] at 8.4 fps ~ eta:
+Rendering [==============================>-------------] at 8.6 fps ~ eta:
 3s
-Rendering [===============================>------------] at 8.4 fps ~ eta:
+Rendering [===============================>------------] at 8.6 fps ~ eta:
 3s
-Rendering [================================>-----------] at 8.4 fps ~ eta:
+Rendering [================================>-----------] at 8.6 fps ~ eta:
 3s
-Rendering [================================>-----------] at 8.5 fps ~ eta:
+Rendering [=================================>----------] at 8.6 fps ~ eta:
 3s
-Rendering [=================================>----------] at 8.5 fps ~ eta:
-3s
-Rendering [=================================>----------] at 8.4 fps ~ eta:
-3s
-Rendering [==================================>---------] at 8.4 fps ~ eta:
+Rendering [==================================>---------] at 8.6 fps ~ eta:
 2s
-Rendering [===================================>--------] at 8.4 fps ~ eta:
+Rendering [===================================>--------] at 8.6 fps ~ eta:
 2s
-Rendering [====================================>-------] at 8.4 fps ~ eta:
+Rendering [===================================>--------] at 8.5 fps ~ eta:
 2s
-Rendering [=====================================>------] at 8.4 fps ~ eta:
+Rendering [====================================>-------] at 8.5 fps ~ eta:
 2s
-Rendering [======================================>-----] at 8.4 fps ~ eta:
+Rendering [=====================================>------] at 8.6 fps ~ eta:
+2s
+Rendering [======================================>-----] at 8.6 fps ~ eta:
 1s
-Rendering [=======================================>----] at 8.4 fps ~ eta:
+Rendering [=======================================>----] at 8.6 fps ~ eta:
 1s
-Rendering [========================================>---] at 8.4 fps ~ eta:
+Rendering [========================================>---] at 8.6 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.4 fps ~ eta:
+Rendering [=========================================>--] at 8.6 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.4 fps ~ eta:
+Rendering [=========================================>--] at 8.6 fps ~ eta:
 0s
-Rendering [==========================================>-] at 8.4 fps ~ eta:
+Rendering [==========================================>-] at 8.6 fps ~ eta:
 0s
-Rendering [===========================================>] at 8.4 fps ~ eta:
+Rendering [===========================================>] at 8.6 fps ~ eta:
 0s
-Rendering [============================================] at 8.4 fps ~ eta: 0s
+Rendering [============================================] at 8.6 fps ~ eta: 0s
 ~~~
 {: .output}
 
