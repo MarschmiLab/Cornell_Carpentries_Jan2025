@@ -5,9 +5,12 @@ title: Setup
 ## Pre-workshop setup steps
 
 1. Install the following software (<a href="#install">all instructions are below</a>).
-    - A Unix shell (e.g. bash, zsh, Git Bash for windows Users)
     - [R](https://www.r-project.org/)
     - [RStudio](https://rstudio.com/), an integrated development environment for R
+    - For Windows users: Git for Windows. This will install a Bash "emulator" we'll use for the Unix lesson.
+
+Instructions to install each of these tools are available on the [course website.](https://marschmilab.github.io/2023-12-12-Cornell-Micro/)
+
 1. After you have installed everything above, download [un-report.zip](https://github.com/UMSWC/curriculum/raw/gh-pages/files/un-report.zip). You'll need the files included during the workshop.
     1. Move `un-report.zip` to your Desktop and unzip it (usually double-clicking it will work).
     1. Start up **RStudio**. In the upper left menu, select `File` > `Open`. In the window that opens, go to the `un-report/` folder on your Desktop and select the file `check_setup.R` to open it in RStudio.
