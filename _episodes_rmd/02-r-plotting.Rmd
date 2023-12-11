@@ -422,10 +422,7 @@ expectancy than many other continents. Notice that when we add a mapping for
 color, ggplot automatically provided a legend for us. It took care of assigning
 different colors to each of our unique values of the `continent` variable. (Note
 that when we mapped the x and y values, those drew the actual axis labels, so in
-a way the axes are like the legends for the x and y values). The colors that
-ggplot uses are determined by the color "scale". Each aesthetic value we can
-supply (x, y, color, etc) has a corresponding scale. Let's change the colors to
-make them a bit prettier.
+a way the axes are like the legends for the x and y values). 
 
 ```{r FirstPlotAddColorScale}
 ggplot(data = gapminder_1997) +
@@ -436,47 +433,8 @@ ggplot(data = gapminder_1997) +
   geom_point() +
   labs(title = "Do people in wealthy countries live longer?") +
   aes(color = continent) +
-  scale_color_brewer(palette = "Set1")
 ```
 
-The `scale_color_brewer()` function is just one of many you can use to change
-colors. There are bunch of "palettes" that are build in. You can view them all
-by running `RColorBrewer::display.brewer.all()` or check out the [Color Brewer
-website](https://colorbrewer2.org/) for more info about choosing plot colors.
-
-There are also lots of other fun options:
-
-- [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
-- [National parks](https://github.com/katiejolly/nationalparkcolors)
-- [LaCroix](https://github.com/johannesbjork/LaCroixColoR)
-- [Wes Anderson](https://github.com/karthik/wesanderson)
-
-> ## Bonus Exercise: Changing colors
-> Play around with different color palettes. Feel free to install another
-> package and choose one of those if you want. Pick your favorite!
-> {: .source}
->
-> > ## Solution
-> > You can use RColorBrewer::display.brewer.all() to pick a color palette. 
-> > As a bonus, you can also use one of the packages listed above. 
-> > Here's an example:
-> > 
-> > ```{r Color}
-> > #install.packages("wesanderson") # install package from GitHub
-> > library(wesanderson)
-> > ggplot(data = gapminder_1997) +
-> > aes(x = gdpPercap) +
-> > labs(x = "GDP Per Capita") +
-> > aes(y = lifeExp) +
-> > labs(y = "Life Expectancy") +
-> > geom_point() +
-> > labs(title = "Do people in wealthy countries live longer?") +
-> > aes(color = continent) +
-> > scale_color_manual(values = wes_palette('Cavalcanti1'))
-> > ```
-> > {: .source}
-> {: .solution}
-{: .challenge}
 
 Since we have the data for the population of each country, we might be curious
 what effect population might have on life expectancy and GDP per capita. Do you
@@ -492,7 +450,6 @@ ggplot(data = gapminder_1997) +
   geom_point() +
   labs(title = "Do people in wealthy countries live longer?") +
   aes(color = continent) +
-  scale_color_brewer(palette = "Set1") +
   aes(size = pop)
 ```
 
@@ -513,7 +470,6 @@ ggplot(data = gapminder_1997) +
   geom_point() +
   labs(title = "Do people in wealthy countries live longer?") +
   aes(color = continent) +
-  scale_color_brewer(palette = "Set1") +
   aes(size = pop/1000000) +
   labs(size = "Population (in millions)")
 ```
@@ -542,7 +498,6 @@ the plot in its own window.
 > >   geom_point() +
 > >   labs(title = "Do people in wealthy countries live longer?") +
 > >   aes(color = continent) +
-> >   scale_color_brewer(palette = "Set1") +
 > >   aes(size = pop/1000000) +
 > >   labs(size = "Population (in millions)") +
 > >   aes(shape = continent)
@@ -561,7 +516,6 @@ together. A more condensed version of the exact same plot would look like this:
 ggplot(data = gapminder_1997) +
   aes(x = gdpPercap, y = lifeExp, color = continent, size = pop/1000000) +
   geom_point() +
-  scale_color_brewer(palette = "Set1") +
   labs(x = "GDP Per Capita", y = "Life Expectancy",
     title = "Do people in wealthy countries live longer?", size = "Population (in millions)")
 ```
@@ -798,7 +752,7 @@ Both `geom_violin` and `geom_jitter` will inherit the default values of `aes(con
 ## Color vs. Fill 
 _[Back to top](#contents)_
 
-Let's say we want to spice up our plot a bit by adding some color. Maybe we want our violin color to a fancy color like "darkolivegreen." We can do this by explicitly setting the color aesthetic inside the `geom_violin` function. Note that because we are assigning a color directly and not using any values from our data to do so, we do not need to use the `aes()` mapping function. Let's try it out:
+Let's say we want to spice up our plot a bit by adding some color. Maybe we want our violin color to a fancy color like "pink." We can do this by explicitly setting the color aesthetic inside the `geom_violin` function. Note that because we are assigning a color directly and not using any values from our data to do so, we do not need to use the `aes()` mapping function. Let's try it out:
 
 ```{r GapViolinColor}
 ggplot(data = gapminder_1997) +
@@ -813,7 +767,14 @@ ggplot(data = gapminder_1997) +
   geom_violin(fill="pink")
 ```
 
-That's some plot now isn't it! Compare this to what you see when you map the fill property to your data rather than setting a specific value.
+That's some plot now isn't it! So "pink" maybe wasn't the prettiest color. R knows lots of color names. You can see the full list if you run `colors()` in the console. Since there are so many, you can randomly choose 10 if you run `sample(colors(), size = 10)`.
+
+> ## choosing a color
+>  Use `sample(colors(), size = 10)` a few times until you get an interesting sounding color name and swap that out for "pink" in the violin plot example.
+>
+{: .challenge}
+
+We could also use a variable to determine the fill. Compare this to what you see when you map the fill property to your data rather than setting a specific value.
 
 ```{r GapViolinFillMap}
 ggplot(data = gapminder_1997) +
@@ -821,13 +782,66 @@ ggplot(data = gapminder_1997) +
   geom_violin(aes(fill=continent))
 ```
 
-So "darkolivegreen" maybe wasn't the prettiest color. R knows lots of color names. You can see the full list if you run `colors()` in the console. Since there are so many, you can randomly choose 10 if you run `sample(colors(), size = 10)`.
+But what if we want to specify specific colors for our plots. The colors that
+ggplot uses are determined by the color "scale". Each aesthetic value we can
+supply (x, y, color, etc) has a corresponding scale. Let's change the colors to
+make them a bit prettier. We can do that by using the function `scale_fill_manual`
 
-> ## choosing a color
->  Use `sample(colors(), size = 10)` a few times until you get an interesting sounding color name and swap that out for "darkolivegreen" in the violin plot example.
+```{r GapViolinFillMan}
+ggplot(data = gapminder_1997) +
+  aes(x = continent, y = lifeExp) +
+  geom_violin(aes(fill=continent)) +
+  scale_fill_manual(values = c("pink", "thistle","turquoise","tomato","orange1"))
+```
+
+
+Sometimes manually choosing colors is frustrating. There are many packages which produce pre-made palettes which you can supply to your data. A common one is `RColorBrewer`. We can use the palettes from RColorBrewer using the `scale_color_brewer` function. 
+
+```{r GapViolinFillBrew}
+ggplot(data = gapminder_1997) +
+  aes(x = continent, y = lifeExp) +
+  geom_violin(aes(fill=continent)) +
+  scale_fill_brewer(palette = "Set1")
+```
+
+The `scale_color_brewer()` function is just one of many you can use to change
+colors. There are bunch of "palettes" that are build in. You can view them all
+by running `RColorBrewer::display.brewer.all()` or check out the [Color Brewer
+website](https://colorbrewer2.org/) for more info about choosing plot colors.
+
+There are also lots of other fun options:
+
+- [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+- [National parks](https://github.com/katiejolly/nationalparkcolors)
+- [LaCroix](https://github.com/johannesbjork/LaCroixColoR)
+- [Wes Anderson](https://github.com/karthik/wesanderson)
+
+> ## Bonus Exercise: Lots of different palettes!
+> Play around with different color palettes. Feel free to install another
+> package and choose one of those if you want. Pick your favorite!
+> {: .source}
 >
+> > ## Solution
+> > You can use RColorBrewer::display.brewer.all() to pick a color palette. 
+> > As a bonus, you can also use one of the packages listed above. 
+> > Here's an example:
+> > 
+> > ```{r Color}
+> > #install.packages("wesanderson") # install package from GitHub
+> > library(wesanderson)
+> > ggplot(data = gapminder_1997) +
+> > aes(x = gdpPercap) +
+> > labs(x = "GDP Per Capita") +
+> > aes(y = lifeExp) +
+> > labs(y = "Life Expectancy") +
+> > geom_point() +
+> > labs(title = "Do people in wealthy countries live longer?") +
+> > aes(color = continent) +
+> > scale_color_manual(values = wes_palette('Cavalcanti1'))
+> > ```
+> > {: .source}
+> {: .solution}
 {: .challenge}
-
 
 > ## Bonus Exercise: Transparency
 > Another aesthetic that can be changed is how transparent our colors/fills are. The `alpha` parameter decides how transparent to make the colors. By default, `alpha = 1`, and our colors are completely opaque. Decreasing `alpha` increases the transparency of our colors/fills. Try changing the transparency of our violin plot. (**Hint:** Should alpha be inside or outside `aes()`?)
