@@ -163,30 +163,15 @@ Often we'll want to learn more about how to use a certain command such as `ls`. 
 learn more about a specific command. 
 
 Some commands have additional information that can be found by using the `-h` or `--help`
-flags. This will print brief documentation for the command:
+flags. Others require a special command called `man` to print the help manual for that command. Let's run an experiment - try finding help with the `ls` command using either flags (`ls --help`) or the `man` command (`man ls`). What worked for you?
 
 ![]({{ page.root }}/fig/unix-shell/man_ls.png)
 
-```
-man -h
-man --help
-```
-{: .language-bash}
-
-![]({{ page.root }}/fig/unix-shell/man_help.png)
-
-Other commands, such as `ls`, don't have help flags, but have manual pages with more information. We can navigate 
-the manual page using the `man` command to view the description of a command and its options. For example, 
-if you want to know more about the navigation options of `ls` you can type `man ls` on the command line:
-
-```
-man ls
-```
-{: .language-bash}
+For Macs and Linux operating systems, we need the `man` command, while the bash emulator on windows uses the help flags.
 
 On the manual page for `ls`, we see a section titled **options**. These options, also called **flags**, are similar to arguments in R functions, and allow us to customize how `ls` runs.
 
-To get out of the man page, click `q`.
+To get out of the man page on a Mac, click `q`.
 
 Sometimes, commands will have multiple flags that we want to use at the same time. For example, 
 `ls` has a flag `-F` that displays a slash after all directories, as well as a flag `-a` that
@@ -261,6 +246,19 @@ Untitled.png
 Your Desktop will likely look different, but the important thing is that you see the folder we worked in for the R plotting lesson.
 Is the `un-report` directory listed on your Desktop?
 
+> ## Finding Your Desktop on OneDrive
+>
+> Many windows use OneDrive to backup their files to cloud storage (this is a great idea!). However, it can make navigating file paths a little more complicated. When you type `ls` in your home directory, do you see something like `OneDrive - Cornell University` ?
+>
+> If so, we may need to explicitly navigate to the Desktop directory that lives in our Cornell OneDrive. We can do so with the following command:
+> 
+> `cd 'OneDrive - Cornell University/Desktop'`
+> 
+> The apostrophes are necessary, because our file path has spaces in it, which Unix will otherwise interpret as separate arguments.
+
+> If you run `ls`, do you see the un-report folder now? 
+{: .challenge}
+
 How can we get into the `un-report` directory?
 
 ```
@@ -313,6 +311,8 @@ pwd
 
 ```
 /home/USERNAME/Desktop
+/c/Users/USERNAME/Desktop
+/c/Users/USERNAME/OneDrive - Cornell University/Desktop
 ```
 {: .output}
 
@@ -359,15 +359,17 @@ pwd
 
 ```
 /home/USERNAME
+/c/home/USERNAME
 ```
 {: .output}
 
 It takes you back to your home directory!
 
-To get back to your projects directory you can use the following command:
+To get back to your projects directory you can use the following commands, depending on your operating system:
 
 ```
 cd Desktop/un-report
+cd "OneDrive - Cornell University/Desktop/un-report"
 ```
 {: .language-bash}
 
@@ -390,6 +392,7 @@ pwd
 
 ```
 /home/USERNAME
+/c/Users/USERNAME
 ```
 {: .output}
 
@@ -438,7 +441,9 @@ pwd
 {: .language-bash}
 
 ```
-/home/USERNAME/Desktop/un-reports
+/home/USERNAME/Desktop/un-report
+/c/Users/USERNAME/Desktop/un-report
+/c/Users/USERNAME/OneDrive - Cornell University/Desktop/un-report
 ```
 {: .output}
 

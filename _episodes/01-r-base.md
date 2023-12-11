@@ -1455,7 +1455,7 @@ Perfect!
 
 
 
-> ## Challenge 7
+> ## Challenge
 > 
 > Fix each of the following common data frame subsetting errors:
 > 
@@ -1501,7 +1501,7 @@ Perfect!
 > 
 > {: .source}
 > 
-> > ## Solution to challenge 7
+> > ## Solution
 > > 
 > > Fix each of the following common data frame subsetting errors:
 > > 1. Extract observations collected for E. coli
@@ -1683,7 +1683,7 @@ x
 > 
 > {: .source}
 > 
-> > ## Solution to Challenge 1
+> > ## Solution
 > > 
 > > We will first see a solution which uses the `nrow` function.
 > > We first obtain a logical vector describing which element of `micro_df$species` is equal to `Bsubtilis`:
