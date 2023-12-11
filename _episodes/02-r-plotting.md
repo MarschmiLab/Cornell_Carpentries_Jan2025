@@ -73,13 +73,13 @@ library(tidyverse)
 
 
 ~~~
-── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ✔ purrr     1.0.2     
-── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -139,7 +139,7 @@ gapminder_1997 <- read_csv("gapminder_1997.csv")
 
 ~~~
 Rows: 142 Columns: 5
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
@@ -290,7 +290,7 @@ read_csv(file = 'gapminder_1997.csv')
 
 ~~~
 Rows: 142 Columns: 5
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
@@ -619,10 +619,7 @@ expectancy than many other continents. Notice that when we add a mapping for
 color, ggplot automatically provided a legend for us. It took care of assigning
 different colors to each of our unique values of the `continent` variable. (Note
 that when we mapped the x and y values, those drew the actual axis labels, so in
-a way the axes are like the legends for the x and y values). The colors that
-ggplot uses are determined by the color "scale". Each aesthetic value we can
-supply (x, y, color, etc) has a corresponding scale. Let's change the colors to
-make them a bit prettier.
+a way the axes are like the legends for the x and y values). 
 
 
 ~~~
@@ -634,75 +631,19 @@ ggplot(data = gapminder_1997) +
   geom_point() +
   labs(title = "Do people in wealthy countries live longer?") +
   aes(color = continent) +
-  scale_color_brewer(palette = "Set1")
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-02-FirstPlotAddColorScale-1.png" alt="plot of chunk FirstPlotAddColorScale" width="612" />
-<p class="caption">plot of chunk FirstPlotAddColorScale</p>
-</div>
 
-The `scale_color_brewer()` function is just one of many you can use to change
-colors. There are bunch of "palettes" that are build in. You can view them all
-by running `RColorBrewer::display.brewer.all()` or check out the [Color Brewer
-website](https://colorbrewer2.org/) for more info about choosing plot colors.
 
-There are also lots of other fun options:
+~~~
+Error: <text>:9:0: unexpected end of input
+7:   labs(title = "Do people in wealthy countries live longer?") +
+8:   aes(color = continent) +
+  ^
+~~~
+{: .error}
 
-- [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
-- [National parks](https://github.com/katiejolly/nationalparkcolors)
-- [LaCroix](https://github.com/johannesbjork/LaCroixColoR)
-- [Wes Anderson](https://github.com/karthik/wesanderson)
-
-> ## Bonus Exercise: Changing colors
-> Play around with different color palettes. Feel free to install another
-> package and choose one of those if you want. Pick your favorite!
-> {: .source}
->
-> > ## Solution
-> > You can use RColorBrewer::display.brewer.all() to pick a color palette. 
-> > As a bonus, you can also use one of the packages listed above. 
-> > Here's an example:
-> > 
-> > 
-> > ~~~
-> > #install.packages("wesanderson") # install package from GitHub
-> > library(wesanderson)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in library(wesanderson): there is no package called 'wesanderson'
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
-> > ggplot(data = gapminder_1997) +
-> > aes(x = gdpPercap) +
-> > labs(x = "GDP Per Capita") +
-> > aes(y = lifeExp) +
-> > labs(y = "Life Expectancy") +
-> > geom_point() +
-> > labs(title = "Do people in wealthy countries live longer?") +
-> > aes(color = continent) +
-> > scale_color_manual(values = wes_palette('Cavalcanti1'))
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in wes_palette("Cavalcanti1"): could not find function "wes_palette"
-> > ~~~
-> > {: .error}
-> > {: .source}
-> {: .solution}
-{: .challenge}
 
 Since we have the data for the population of each country, we might be curious
 what effect population might have on life expectancy and GDP per capita. Do you
@@ -719,7 +660,6 @@ ggplot(data = gapminder_1997) +
   geom_point() +
   labs(title = "Do people in wealthy countries live longer?") +
   aes(color = continent) +
-  scale_color_brewer(palette = "Set1") +
   aes(size = pop)
 ~~~
 {: .language-r}
@@ -747,7 +687,6 @@ ggplot(data = gapminder_1997) +
   geom_point() +
   labs(title = "Do people in wealthy countries live longer?") +
   aes(color = continent) +
-  scale_color_brewer(palette = "Set1") +
   aes(size = pop/1000000) +
   labs(size = "Population (in millions)")
 ~~~
@@ -783,7 +722,6 @@ the plot in its own window.
 > >   geom_point() +
 > >   labs(title = "Do people in wealthy countries live longer?") +
 > >   aes(color = continent) +
-> >   scale_color_brewer(palette = "Set1") +
 > >   aes(size = pop/1000000) +
 > >   labs(size = "Population (in millions)") +
 > >   aes(shape = continent)
@@ -809,7 +747,6 @@ together. A more condensed version of the exact same plot would look like this:
 ggplot(data = gapminder_1997) +
   aes(x = gdpPercap, y = lifeExp, color = continent, size = pop/1000000) +
   geom_point() +
-  scale_color_brewer(palette = "Set1") +
   labs(x = "GDP Per Capita", y = "Life Expectancy",
     title = "Do people in wealthy countries live longer?", size = "Population (in millions)")
 ~~~
@@ -840,7 +777,7 @@ To start, we will read in the data without using the interactive RStudio file na
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1161,7 +1098,7 @@ Both `geom_violin` and `geom_jitter` will inherit the default values of `aes(con
 ## Color vs. Fill 
 _[Back to top](#contents)_
 
-Let's say we want to spice up our plot a bit by adding some color. Maybe we want our violin color to a fancy color like "darkolivegreen." We can do this by explicitly setting the color aesthetic inside the `geom_violin` function. Note that because we are assigning a color directly and not using any values from our data to do so, we do not need to use the `aes()` mapping function. Let's try it out:
+Let's say we want to spice up our plot a bit by adding some color. Maybe we want our violin color to a fancy color like "pink." We can do this by explicitly setting the color aesthetic inside the `geom_violin` function. Note that because we are assigning a color directly and not using any values from our data to do so, we do not need to use the `aes()` mapping function. Let's try it out:
 
 
 ~~~
@@ -1190,7 +1127,14 @@ ggplot(data = gapminder_1997) +
 <p class="caption">plot of chunk GapViolinFill</p>
 </div>
 
-That's some plot now isn't it! Compare this to what you see when you map the fill property to your data rather than setting a specific value.
+That's some plot now isn't it! So "pink" maybe wasn't the prettiest color. R knows lots of color names. You can see the full list if you run `colors()` in the console. Since there are so many, you can randomly choose 10 if you run `sample(colors(), size = 10)`.
+
+> ## choosing a color
+>  Use `sample(colors(), size = 10)` a few times until you get an interesting sounding color name and swap that out for "pink" in the violin plot example.
+>
+{: .challenge}
+
+We could also use a variable to determine the fill. Compare this to what you see when you map the fill property to your data rather than setting a specific value.
 
 
 ~~~
@@ -1205,13 +1149,102 @@ ggplot(data = gapminder_1997) +
 <p class="caption">plot of chunk GapViolinFillMap</p>
 </div>
 
-So "darkolivegreen" maybe wasn't the prettiest color. R knows lots of color names. You can see the full list if you run `colors()` in the console. Since there are so many, you can randomly choose 10 if you run `sample(colors(), size = 10)`.
+But what if we want to specify specific colors for our plots. The colors that
+ggplot uses are determined by the color "scale". Each aesthetic value we can
+supply (x, y, color, etc) has a corresponding scale. Let's change the colors to
+make them a bit prettier. We can do that by using the function `scale_fill_manual`
 
-> ## choosing a color
->  Use `sample(colors(), size = 10)` a few times until you get an interesting sounding color name and swap that out for "darkolivegreen" in the violin plot example.
+
+~~~
+ggplot(data = gapminder_1997) +
+  aes(x = continent, y = lifeExp) +
+  geom_violin(aes(fill=continent)) +
+  scale_fill_manual(values = c("pink", "thistle","turquoise","tomato","orange1"))
+~~~
+{: .language-r}
+
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-02-GapViolinFillMan-1.png" alt="plot of chunk GapViolinFillMan" width="612" />
+<p class="caption">plot of chunk GapViolinFillMan</p>
+</div>
+
+
+Sometimes manually choosing colors is frustrating. There are many packages which produce pre-made palettes which you can supply to your data. A common one is `RColorBrewer`. We can use the palettes from RColorBrewer using the `scale_color_brewer` function. 
+
+
+~~~
+ggplot(data = gapminder_1997) +
+  aes(x = continent, y = lifeExp) +
+  geom_violin(aes(fill=continent)) +
+  scale_fill_brewer(palette = "Set1")
+~~~
+{: .language-r}
+
+<div class="figure" style="text-align: center">
+<img src="../fig/rmd-02-GapViolinFillBrew-1.png" alt="plot of chunk GapViolinFillBrew" width="612" />
+<p class="caption">plot of chunk GapViolinFillBrew</p>
+</div>
+
+The `scale_color_brewer()` function is just one of many you can use to change
+colors. There are bunch of "palettes" that are build in. You can view them all
+by running `RColorBrewer::display.brewer.all()` or check out the [Color Brewer
+website](https://colorbrewer2.org/) for more info about choosing plot colors.
+
+There are also lots of other fun options:
+
+- [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+- [National parks](https://github.com/katiejolly/nationalparkcolors)
+- [LaCroix](https://github.com/johannesbjork/LaCroixColoR)
+- [Wes Anderson](https://github.com/karthik/wesanderson)
+
+> ## Bonus Exercise: Lots of different palettes!
+> Play around with different color palettes. Feel free to install another
+> package and choose one of those if you want. Pick your favorite!
+> {: .source}
 >
+> > ## Solution
+> > You can use RColorBrewer::display.brewer.all() to pick a color palette. 
+> > As a bonus, you can also use one of the packages listed above. 
+> > Here's an example:
+> > 
+> > 
+> > ~~~
+> > #install.packages("wesanderson") # install package from GitHub
+> > library(wesanderson)
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Error in library(wesanderson): there is no package called 'wesanderson'
+> > ~~~
+> > {: .error}
+> > 
+> > 
+> > 
+> > ~~~
+> > ggplot(data = gapminder_1997) +
+> > aes(x = gdpPercap) +
+> > labs(x = "GDP Per Capita") +
+> > aes(y = lifeExp) +
+> > labs(y = "Life Expectancy") +
+> > geom_point() +
+> > labs(title = "Do people in wealthy countries live longer?") +
+> > aes(color = continent) +
+> > scale_color_manual(values = wes_palette('Cavalcanti1'))
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Error in wes_palette("Cavalcanti1"): could not find function "wes_palette"
+> > ~~~
+> > {: .error}
+> > {: .source}
+> {: .solution}
 {: .challenge}
-
 
 > ## Bonus Exercise: Transparency
 > Another aesthetic that can be changed is how transparent our colors/fills are. The `alpha` parameter decides how transparent to make the colors. By default, `alpha = 1`, and our colors are completely opaque. Decreasing `alpha` increases the transparency of our colors/fills. Try changing the transparency of our violin plot. (**Hint:** Should alpha be inside or outside `aes()`?)
@@ -1631,127 +1664,125 @@ animatedHansPlot
 
 ~~~
 
-Rendering [>-------------------------------------------] at 9.8 fps ~ eta:
+Rendering [>-------------------------------------------] at 9.6 fps ~ eta:
 10s
-Rendering [=>------------------------------------------] at 9.6 fps ~ eta:
+Rendering [>-------------------------------------------] at 9.4 fps ~ eta:
 10s
-Rendering [=>------------------------------------------] at 9.5 fps ~ eta:
-10s
-Rendering [==>-----------------------------------------] at 8.7 fps ~ eta:
+Rendering [=>------------------------------------------] at 9.1 fps ~ eta:
 11s
+Rendering [=>------------------------------------------] at 9.1 fps ~ eta:
+10s
 Rendering [==>-----------------------------------------] at 8.8 fps ~ eta:
 11s
-Rendering [===>----------------------------------------] at 8.9 fps ~ eta:
+Rendering [===>----------------------------------------] at 8.8 fps ~ eta:
 10s
-Rendering [====>-----------------------------------------] at 9 fps ~ eta:
+Rendering [====>---------------------------------------] at 8.8 fps ~ eta:
 10s
-Rendering [=====>----------------------------------------] at 9 fps ~ eta:
+Rendering [====>---------------------------------------] at 8.7 fps ~ eta:
 10s
-Rendering [=====>--------------------------------------] at 8.9 fps ~ eta:
+Rendering [=====>--------------------------------------] at 8.7 fps ~ eta:
 10s
-Rendering [======>-------------------------------------] at 8.9 fps ~ eta:
+Rendering [======>-------------------------------------] at 8.7 fps ~ eta:
+10s
+Rendering [======>-------------------------------------] at 8.6 fps ~ eta:
+10s
+Rendering [=======>------------------------------------] at 8.6 fps ~ eta:
+10s
+Rendering [=======>------------------------------------] at 8.6 fps ~ eta:
 9s
-Rendering [======>---------------------------------------] at 9 fps ~ eta:
+Rendering [========>-----------------------------------] at 8.6 fps ~ eta:
 9s
-Rendering [=======>--------------------------------------] at 9 fps ~ eta:
+Rendering [=========>----------------------------------] at 8.6 fps ~ eta:
 9s
-Rendering [=======>------------------------------------] at 8.9 fps ~ eta:
+Rendering [=========>----------------------------------] at 8.5 fps ~ eta:
 9s
-Rendering [========>-----------------------------------] at 8.9 fps ~ eta:
+Rendering [==========>---------------------------------] at 8.5 fps ~ eta:
 9s
-Rendering [=========>----------------------------------] at 8.9 fps ~ eta:
+Rendering [==========>---------------------------------] at 8.4 fps ~ eta:
 9s
-Rendering [==========>---------------------------------] at 8.8 fps ~ eta:
+Rendering [===========>--------------------------------] at 8.4 fps ~ eta:
 9s
-Rendering [==========>---------------------------------] at 8.8 fps ~ eta:
+Rendering [============>-------------------------------] at 8.4 fps ~ eta:
 8s
-Rendering [===========>--------------------------------] at 8.8 fps ~ eta:
+Rendering [=============>------------------------------] at 8.3 fps ~ eta:
 8s
-Rendering [===========>--------------------------------] at 8.7 fps ~ eta:
+Rendering [==============>-----------------------------] at 8.3 fps ~ eta:
 8s
-Rendering [============>-------------------------------] at 8.7 fps ~ eta:
+Rendering [==============>-----------------------------] at 8.1 fps ~ eta:
 8s
-Rendering [=============>------------------------------] at 8.7 fps ~ eta:
+Rendering [===============>----------------------------] at 8.2 fps ~ eta:
 8s
-Rendering [==============>-----------------------------] at 8.6 fps ~ eta:
+Rendering [================>---------------------------] at 8.2 fps ~ eta:
 8s
-Rendering [==============>-----------------------------] at 8.5 fps ~ eta:
-8s
-Rendering [==============>-----------------------------] at 8.6 fps ~ eta:
-8s
-Rendering [===============>----------------------------] at 8.6 fps ~ eta:
+Rendering [================>---------------------------] at 8.2 fps ~ eta:
 7s
-Rendering [================>---------------------------] at 8.6 fps ~ eta:
+Rendering [=================>--------------------------] at 8.3 fps ~ eta:
 7s
-Rendering [=================>--------------------------] at 8.6 fps ~ eta:
+Rendering [==================>-------------------------] at 8.3 fps ~ eta:
 7s
-Rendering [=================>--------------------------] at 8.7 fps ~ eta:
+Rendering [==================>-------------------------] at 8.4 fps ~ eta:
 7s
-Rendering [==================>-------------------------] at 8.7 fps ~ eta:
+Rendering [===================>------------------------] at 8.4 fps ~ eta:
 7s
-Rendering [==================>-------------------------] at 8.7 fps ~ eta:
+Rendering [===================>------------------------] at 8.4 fps ~ eta:
 6s
-Rendering [===================>------------------------] at 8.7 fps ~ eta:
+Rendering [====================>-----------------------] at 8.4 fps ~ eta:
 6s
-Rendering [====================>-----------------------] at 8.7 fps ~ eta:
+Rendering [=====================>----------------------] at 8.4 fps ~ eta:
 6s
-Rendering [=====================>----------------------] at 8.7 fps ~ eta:
+Rendering [======================>---------------------] at 8.4 fps ~ eta:
 6s
-Rendering [======================>---------------------] at 8.7 fps ~ eta:
-6s
-Rendering [======================>---------------------] at 8.6 fps ~ eta:
+Rendering [=======================>--------------------] at 8.4 fps ~ eta:
 5s
-Rendering [=======================>--------------------] at 8.6 fps ~ eta:
-5s
-Rendering [========================>-------------------] at 8.6 fps ~ eta:
+Rendering [========================>-------------------] at 8.4 fps ~ eta:
 5s
 Rendering [=========================>------------------] at 8.5 fps ~ eta:
 5s
-Rendering [=========================>------------------] at 8.6 fps ~ eta:
+Rendering [==========================>-----------------] at 8.5 fps ~ eta:
 5s
-Rendering [==========================>-----------------] at 8.6 fps ~ eta:
-5s
-Rendering [==========================>-----------------] at 8.6 fps ~ eta:
+Rendering [==========================>-----------------] at 8.5 fps ~ eta:
 4s
-Rendering [===========================>----------------] at 8.6 fps ~ eta:
+Rendering [===========================>----------------] at 8.5 fps ~ eta:
 4s
-Rendering [============================>---------------] at 8.6 fps ~ eta:
+Rendering [============================>---------------] at 8.4 fps ~ eta:
 4s
-Rendering [=============================>--------------] at 8.6 fps ~ eta:
+Rendering [=============================>--------------] at 8.4 fps ~ eta:
 4s
-Rendering [==============================>-------------] at 8.6 fps ~ eta:
+Rendering [==============================>-------------] at 8.4 fps ~ eta:
+4s
+Rendering [==============================>-------------] at 8.4 fps ~ eta:
 3s
-Rendering [===============================>------------] at 8.6 fps ~ eta:
+Rendering [===============================>------------] at 8.4 fps ~ eta:
 3s
-Rendering [================================>-----------] at 8.6 fps ~ eta:
+Rendering [================================>-----------] at 8.4 fps ~ eta:
 3s
-Rendering [=================================>----------] at 8.6 fps ~ eta:
+Rendering [=================================>----------] at 8.4 fps ~ eta:
 3s
-Rendering [==================================>---------] at 8.6 fps ~ eta:
+Rendering [==================================>---------] at 8.4 fps ~ eta:
+3s
+Rendering [==================================>---------] at 8.4 fps ~ eta:
 2s
-Rendering [===================================>--------] at 8.5 fps ~ eta:
+Rendering [===================================>--------] at 8.4 fps ~ eta:
 2s
-Rendering [====================================>-------] at 8.5 fps ~ eta:
+Rendering [====================================>-------] at 8.3 fps ~ eta:
 2s
-Rendering [====================================>-------] at 8.6 fps ~ eta:
+Rendering [=====================================>------] at 8.3 fps ~ eta:
 2s
-Rendering [=====================================>------] at 8.6 fps ~ eta:
-2s
-Rendering [======================================>-----] at 8.6 fps ~ eta:
+Rendering [======================================>-----] at 8.3 fps ~ eta:
 1s
-Rendering [=======================================>----] at 8.6 fps ~ eta:
+Rendering [=======================================>----] at 8.4 fps ~ eta:
 1s
-Rendering [========================================>---] at 8.6 fps ~ eta:
+Rendering [========================================>---] at 8.4 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.6 fps ~ eta:
+Rendering [=========================================>--] at 8.4 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.6 fps ~ eta:
+Rendering [=========================================>--] at 8.4 fps ~ eta:
 0s
-Rendering [==========================================>-] at 8.6 fps ~ eta:
+Rendering [==========================================>-] at 8.4 fps ~ eta:
 0s
-Rendering [===========================================>] at 8.6 fps ~ eta:
+Rendering [===========================================>] at 8.4 fps ~ eta:
 0s
-Rendering [============================================] at 8.6 fps ~ eta: 0s
+Rendering [============================================] at 8.4 fps ~ eta: 0s
 ~~~
 {: .output}
 
