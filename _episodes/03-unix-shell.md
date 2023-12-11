@@ -215,6 +215,12 @@ cd Desktop
 ```
 {: .language-bash}
 
+> ## Copy and Paste in Windows Bash Emulator
+>
+> One of my biggest frustrations when I began using a bash emulator on windows is that my normal commands for paste (Ctrl + v) didn't work! 
+> In Git Bash (our bash emulator), we can instead use Ctrl + Shift + Insert.
+{: .callout}
+
 Let's see if we're in the right place:
 
 ```
@@ -256,7 +262,7 @@ Is the `un-report` directory listed on your Desktop?
 > 
 > The apostrophes are necessary, because our file path has spaces in it, which Unix will otherwise interpret as separate arguments.
 > If you run `ls`, do you see the un-report folder now? 
-{: .challenge}
+{: .callout}
 
 How can we get into the `un-report` directory?
 
