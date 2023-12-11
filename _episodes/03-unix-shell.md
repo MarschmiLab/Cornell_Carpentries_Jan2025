@@ -255,7 +255,6 @@ Is the `un-report` directory listed on your Desktop?
 > `cd 'OneDrive - Cornell University/Desktop'`
 > 
 > The apostrophes are necessary, because our file path has spaces in it, which Unix will otherwise interpret as separate arguments.
-
 > If you run `ls`, do you see the un-report folder now? 
 {: .challenge}
 
