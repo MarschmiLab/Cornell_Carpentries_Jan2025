@@ -38,7 +38,7 @@ There are many local opportunities at Cornell to find coding support, learn new 
 
 ### Get help and connect
 
-* Attend Micro Hacky Hours :)
+* [Attend Micro Hacky Hours :)](https://github.com/gus-pendleton/Hacky_Hour_Tutorials)
 * [Cornell Center for Advanced Computing Worshops](https://its.weill.cornell.edu/scientific-computing-training-series)
 * [Cornell BioHPC Office Hours](https://biohpc.cornell.edu/lab/office1.aspx)
 
@@ -54,7 +54,6 @@ Even well seasoned coders run into bugs all the time. Here are some strategies o
 * If you have been able to find parts of your code that cause the error, take some time to review the documentation for the functions or commands you are using. Even for functions or commands you've used before, there may still be parts of the documentation that you just haven't needed to use before. See if there are examples in the documentation that you can compare your own code to. Most programs make finding the documentation pretty easy.
   * __R__: Typing a question mark immediately followed by a function name, i.e., `?<command>` (e.g. ?print), pulls up the R documentation for that function. This provides  a function description, as well as in-depth information about each function argument including its purpose, default and other available options.
   * __Shell__: Using `man <command>` or `<command> --help` pulls up the manual page with more information. To quit, click `q`.
-  * __Git__: `git help` displays help information about git. Read more [here](https://git-scm.com/docs/git-help).
 * Search online for the error message along with the function that is not working. Most likely, someone encountered this error before you and the examples online will help you figure out your own issue.
 * Perform a general online search for what you are trying to do, e.g., "how to import a comma separated spreadsheet into R", "how to delete a directory from the command line", "how to merge conflicts in git". Typically, you will find step-by-step online documentation that you can adapt for your own purposes.
 
@@ -96,11 +95,21 @@ In the following, we list some strategies and resources we find useful. As you m
 * [RStudio Cheat Sheets](https://rstudio.com/resources/cheatsheets/). A good collection of cheat sheets to print out and hang at your desk. For example: [base R](https://github.com/rstudio/cheatsheets/blob/main/base-r.pdf), [tidyverse](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Tidyverse+Cheat+Sheet.pdf), and [ggplot](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
 * If there is a specific R package that you want to use (e.g. [mikropml](http://www.schlosslab.org/mikropml/) for machine learning analysis), you can use the vignettes to help you learn the basics of the package. You can search for the vignette online, or use the `vignette()` function in R to open them.
 
+### Plotting Resources
+
+* [ggplot cheatsheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+* [The R Graph Gallery](https://r-graph-gallery.com/)
+* [Friends Don't Let Friends Make Bad Graphs](https://github.com/cxli233/FriendsDontLetFriends)
+
 ### R Markdown
 
 * [Getting started with R Markdown Online Tutorial](https://rmarkdown.rstudio.com/lesson-1.html)
 * [R Markdown Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/rmarkdown-2.0.pdf)
 * [R Markdown Reference Guide](http://www.utstat.toronto.edu/reid/sta2201s/rmarkdown-reference.pdf)
+
+### Unix
+
+* [Unix cheatsheet](https://fosswire.com/post/2007/08/unixlinux-command-cheat-sheet/)
 
 
 ## Some important advanced coding concepts that you will want to learn if you continue coding a lot

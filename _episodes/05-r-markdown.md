@@ -13,7 +13,7 @@ objectives:
 - "To use Markdown to format our report."
 - "To understand how to use R code chunks to include or hide code, figures, and messages."
 - "To be aware of the various report formats that can be rendered using R Markdown."
-- "To practice using the Unix Shell, Github, and R through paired programming exercises. "
+- "To practice using the Unix Shell, and R through paired programming exercises. "
 keypoints:
   - "R Markdown is an easy way to create a report that integrates text, code, and figures."
   - "Options such as `include` and `echo` determine what parts of an R code chunk are included in the R Markdown report. "
@@ -225,16 +225,6 @@ Now we can knit our document to see how our report looks! Use the <kbd>knit</kbd
 
 ![]({{ page.root }}/fig/r-markdown/first_report_render.png)
 
-Amazing! We've created a report! Let's push this to GitHub to make sure we preserve this document.
-
-Returning to the command line:
-
-1. Check the status of our repository with the `git status`. This will tell us which files just changed.  
-1. Add the new files that we want tracked by git up with `git add <filename(s)>`.  This adds any file(s) we list to version control.  
-1. Commit the file or changes with `git commit -m "<your commit message>"` and add a message with the commit to describe the changes you are committing and it adds them to the git log.  
-1. Push those changes from our local computer to our github repo with `git push`. This will upload the changes to the git directory on the remote server.  
-If you don't remember how to do this, you can review the [git lesson]({{ page.root }}/03-intro-git-github.md).
-
 It's looking pretty good, but there seem to be a few extra bits that we don't need in the report. For example, the report shows that we load the tidyverse package and the accompanying messages.
 
 ![]({{ page.root }}/fig/r-markdown/tidyverse_messages.png)
@@ -368,8 +358,6 @@ gapminder_1997 %>%
 
 
 
-Now that we have a report we are happy with, let's push the changes to GitHub.
-
 ## Formatting
 _[Back to top](#contents)_
 
@@ -401,8 +389,12 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 > {: .solution}
 {: .challenge}
 
+> ## Using the "Visual" view for easy formatting
+> 
+> In newer versions of RStudio, we can switch to the "Visual" view when editing our documents. This makes the experience much more similar to writing in software like Microsoft Word or Google Docs. We can use formatting tools (like bolding and italicizing), insert pictures, and create tables without manually typing out the markdown syntax. The best part? If you then switch back to the "Source" view, you can see the markdown syntax RStudio has automatically created for you
+{: .callout}
 
-## Integrating it all together: Paired exercise
+## Integrating it all together: Make your own report!
 _[Back to top](#contents)_
 
 You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report.
@@ -414,11 +406,14 @@ Don't worry - if you have questions, the instructor and helpers are here to help
 1. Delete all the unnecessary Markdown and R code (everything below the setup R chunk).
 1. Save it to the `reports` directory using an informative file name.
 
-Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. 
+Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. These are nice exercises because we are all familiar with the data and have the solutions saved. 
 
-Don't worry if you don't finish all of the exercises, and it's not a race between groups!
-This is just a way for you to practice what you've learned.
-Also, you can switch off more or less frequently depending on how much you want to practice pushing and pulling to/from GitHub.
+That said, you're also welcome to branch out. Maybe you want to explore a new type of ggplot. Maybe you're learning to create interactive tables with `reactable`. Maybe you're trying to read in some of your own data into your report. 
+
+Just remember to use a combination of prose (writing) and code to document your the goals, process, and outputs of your analysis in your RMarkdown report.
+
+This is a way for you to practice what you've learned.
+
 
 **One note:** It may be helpful to copy and paste the questions into the R Markdown file as you go.
 
@@ -441,7 +436,7 @@ First we're going to start out with a few questions about the gapminder dataset.
 > 
 > ~~~
 > Rows: 1704 Columns: 6
-> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (2): country, continent
 > dbl (4): year, pop, lifeExp, gdpPercap
@@ -735,9 +730,10 @@ _[Back to top](#contents)_
 > New names:
 > Rows: 2420 Columns: 7
 > ── Column specification
-> ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> ─────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
 > (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set
+> `show_col_types = FALSE` to quiet this message.
 > • `` -> `...2`
 > ~~~
 > {: .output}
@@ -853,7 +849,7 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > ~~~
 > Rows: 2132 Columns: 7
-> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (4): country, series, footnotes, source
 > dbl (3): region, year, value

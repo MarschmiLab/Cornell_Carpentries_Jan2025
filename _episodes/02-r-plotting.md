@@ -73,13 +73,13 @@ library(tidyverse)
 
 
 ~~~
-── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
 ✔ purrr     1.0.2     
-── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -139,7 +139,7 @@ gapminder_1997 <- read_csv("gapminder_1997.csv")
 
 ~~~
 Rows: 142 Columns: 5
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
@@ -226,7 +226,7 @@ Do all functions need arguments? Let's test some other functions:
 
 
 ~~~
-[1] "2023-12-11"
+[1] "2023-12-12"
 ~~~
 {: .output}
 
@@ -290,7 +290,7 @@ read_csv(file = 'gapminder_1997.csv')
 
 ~~~
 Rows: 142 Columns: 5
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (3): pop, lifeExp, gdpPercap
@@ -365,7 +365,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > 
 > ~~~
-> [1] "2023-12-11"
+> [1] "2023-12-12"
 > ~~~
 > {: .output}
 > 
@@ -777,7 +777,7 @@ To start, we will read in the data without using the interactive RStudio file na
 
 ~~~
 Rows: 1704 Columns: 6
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): country, continent
 dbl (4): year, pop, lifeExp, gdpPercap
@@ -1211,19 +1211,6 @@ There are also lots of other fun options:
 > > ~~~
 > > #install.packages("wesanderson") # install package from GitHub
 > > library(wesanderson)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in library(wesanderson): there is no package called 'wesanderson'
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > ggplot(data = gapminder_1997) +
 > > aes(x = gdpPercap) +
 > > labs(x = "GDP Per Capita") +
@@ -1236,12 +1223,10 @@ There are also lots of other fun options:
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in wes_palette("Cavalcanti1"): could not find function "wes_palette"
-> > ~~~
-> > {: .error}
+> > <div class="figure" style="text-align: center">
+> > <img src="../fig/rmd-02-Color-1.png" alt="plot of chunk Color" width="612" />
+> > <p class="caption">plot of chunk Color</p>
+> > </div>
 > > {: .source}
 > {: .solution}
 {: .challenge}
@@ -1664,61 +1649,59 @@ animatedHansPlot
 
 ~~~
 
-Rendering [>-------------------------------------------] at 9.6 fps ~ eta:
-10s
-Rendering [>-------------------------------------------] at 9.4 fps ~ eta:
-10s
-Rendering [=>------------------------------------------] at 9.1 fps ~ eta:
+Rendering [>-------------------------------------------] at 9.2 fps ~ eta:
 11s
-Rendering [=>------------------------------------------] at 9.1 fps ~ eta:
-10s
-Rendering [==>-----------------------------------------] at 8.8 fps ~ eta:
+Rendering [>---------------------------------------------] at 9 fps ~ eta:
 11s
-Rendering [===>----------------------------------------] at 8.8 fps ~ eta:
+Rendering [=>------------------------------------------] at 8.5 fps ~ eta:
+11s
+Rendering [=>------------------------------------------] at 8.6 fps ~ eta:
+11s
+Rendering [==>-----------------------------------------] at 8.6 fps ~ eta:
+11s
+Rendering [===>----------------------------------------] at 8.6 fps ~ eta:
+11s
+Rendering [===>----------------------------------------] at 8.6 fps ~ eta:
 10s
-Rendering [====>---------------------------------------] at 8.8 fps ~ eta:
+Rendering [====>---------------------------------------] at 8.6 fps ~ eta:
 10s
-Rendering [====>---------------------------------------] at 8.7 fps ~ eta:
+Rendering [=====>--------------------------------------] at 8.6 fps ~ eta:
 10s
-Rendering [=====>--------------------------------------] at 8.7 fps ~ eta:
+Rendering [=====>--------------------------------------] at 8.5 fps ~ eta:
 10s
-Rendering [======>-------------------------------------] at 8.7 fps ~ eta:
+Rendering [======>-------------------------------------] at 8.5 fps ~ eta:
 10s
-Rendering [======>-------------------------------------] at 8.6 fps ~ eta:
+Rendering [=======>------------------------------------] at 8.5 fps ~ eta:
 10s
-Rendering [=======>------------------------------------] at 8.6 fps ~ eta:
-10s
-Rendering [=======>------------------------------------] at 8.6 fps ~ eta:
-9s
-Rendering [========>-----------------------------------] at 8.6 fps ~ eta:
-9s
-Rendering [=========>----------------------------------] at 8.6 fps ~ eta:
+Rendering [========>-----------------------------------] at 8.5 fps ~ eta:
 9s
 Rendering [=========>----------------------------------] at 8.5 fps ~ eta:
 9s
-Rendering [==========>---------------------------------] at 8.5 fps ~ eta:
+Rendering [=========>----------------------------------] at 8.4 fps ~ eta:
 9s
 Rendering [==========>---------------------------------] at 8.4 fps ~ eta:
 9s
 Rendering [===========>--------------------------------] at 8.4 fps ~ eta:
 9s
-Rendering [============>-------------------------------] at 8.4 fps ~ eta:
+Rendering [============>-------------------------------] at 8.3 fps ~ eta:
+9s
+Rendering [============>-------------------------------] at 8.3 fps ~ eta:
 8s
 Rendering [=============>------------------------------] at 8.3 fps ~ eta:
 8s
+Rendering [=============>------------------------------] at 8.2 fps ~ eta:
+8s
+Rendering [==============>-----------------------------] at 8.2 fps ~ eta:
+8s
 Rendering [==============>-----------------------------] at 8.3 fps ~ eta:
 8s
-Rendering [==============>-----------------------------] at 8.1 fps ~ eta:
+Rendering [===============>----------------------------] at 8.3 fps ~ eta:
 8s
-Rendering [===============>----------------------------] at 8.2 fps ~ eta:
-8s
-Rendering [================>---------------------------] at 8.2 fps ~ eta:
-8s
-Rendering [================>---------------------------] at 8.2 fps ~ eta:
+Rendering [================>---------------------------] at 8.3 fps ~ eta:
 7s
-Rendering [=================>--------------------------] at 8.3 fps ~ eta:
+Rendering [================>---------------------------] at 8.4 fps ~ eta:
 7s
-Rendering [==================>-------------------------] at 8.3 fps ~ eta:
+Rendering [=================>--------------------------] at 8.4 fps ~ eta:
 7s
 Rendering [==================>-------------------------] at 8.4 fps ~ eta:
 7s
@@ -1726,15 +1709,15 @@ Rendering [===================>------------------------] at 8.4 fps ~ eta:
 7s
 Rendering [===================>------------------------] at 8.4 fps ~ eta:
 6s
-Rendering [====================>-----------------------] at 8.4 fps ~ eta:
+Rendering [====================>-----------------------] at 8.5 fps ~ eta:
 6s
-Rendering [=====================>----------------------] at 8.4 fps ~ eta:
+Rendering [=====================>----------------------] at 8.5 fps ~ eta:
 6s
-Rendering [======================>---------------------] at 8.4 fps ~ eta:
+Rendering [======================>---------------------] at 8.5 fps ~ eta:
 6s
-Rendering [=======================>--------------------] at 8.4 fps ~ eta:
+Rendering [=======================>--------------------] at 8.5 fps ~ eta:
 5s
-Rendering [========================>-------------------] at 8.4 fps ~ eta:
+Rendering [========================>-------------------] at 8.5 fps ~ eta:
 5s
 Rendering [=========================>------------------] at 8.5 fps ~ eta:
 5s
@@ -1744,7 +1727,9 @@ Rendering [==========================>-----------------] at 8.5 fps ~ eta:
 4s
 Rendering [===========================>----------------] at 8.5 fps ~ eta:
 4s
-Rendering [============================>---------------] at 8.4 fps ~ eta:
+Rendering [============================>---------------] at 8.5 fps ~ eta:
+4s
+Rendering [=============================>--------------] at 8.5 fps ~ eta:
 4s
 Rendering [=============================>--------------] at 8.4 fps ~ eta:
 4s
@@ -1770,19 +1755,21 @@ Rendering [=====================================>------] at 8.3 fps ~ eta:
 2s
 Rendering [======================================>-----] at 8.3 fps ~ eta:
 1s
+Rendering [======================================>-----] at 8.4 fps ~ eta:
+1s
 Rendering [=======================================>----] at 8.4 fps ~ eta:
 1s
-Rendering [========================================>---] at 8.4 fps ~ eta:
+Rendering [========================================>---] at 8.3 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.4 fps ~ eta:
+Rendering [=========================================>--] at 8.3 fps ~ eta:
 1s
-Rendering [=========================================>--] at 8.4 fps ~ eta:
+Rendering [=========================================>--] at 8.3 fps ~ eta:
 0s
-Rendering [==========================================>-] at 8.4 fps ~ eta:
+Rendering [==========================================>-] at 8.3 fps ~ eta:
 0s
-Rendering [===========================================>] at 8.4 fps ~ eta:
+Rendering [===========================================>] at 8.3 fps ~ eta:
 0s
-Rendering [============================================] at 8.4 fps ~ eta: 0s
+Rendering [============================================] at 8.3 fps ~ eta: 0s
 ~~~
 {: .output}
 
