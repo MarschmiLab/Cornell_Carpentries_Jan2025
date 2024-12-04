@@ -1,6 +1,6 @@
 ---
 title: "The Unix Shell"
-teaching: 60
+teaching: 90
 exercises: 15
 questions:
 - "What is a command shell and why would I use one?"
@@ -243,14 +243,14 @@ ls
 
 ```
 list.txt
-un-report
+ontario-report
 notes.pdf
 Untitled.png
 ```
 {: .output}
 
 Your Desktop will likely look different, but the important thing is that you see the folder we worked in for the R plotting lesson.
-Is the `un-report` directory listed on your Desktop?
+Is the `ontario-report` directory listed on your Desktop?
 
 > ## Finding Your Desktop on OneDrive
 >
@@ -261,19 +261,19 @@ Is the `un-report` directory listed on your Desktop?
 > `cd 'OneDrive - Cornell University/Desktop'`
 > 
 > The apostrophes are necessary, because our file path has spaces in it, which Unix will otherwise interpret as separate arguments.
-> If you run `ls`, do you see the un-report folder now? 
+> If you run `ls`, do you see the ontario-report folder now? 
 {: .callout}
 
-How can we get into the `un-report` directory?
+How can we get into the `ontario-report` directory?
 
 ```
-cd un-report
+cd ontario-report
 ```
 {: .language-bash}
 
 We just went _down_ the directory tree again.
 
-Let's see what files are in `un-report`:
+Let's see what files are in `ontario-report`:
 ```
 ls
 ```
@@ -281,13 +281,11 @@ ls
 
 ```
 awesome_plot.jpg
-awesome_violin_plot.jpg
-base_R.R
-co2-un-data.csv
-gapminder_1997.csv
-gapminder_data.csv
-gdp_population.R
-rnd-un-data.csv
+awesome_box_plot.jpg
+buoy_data.csv
+plotting.R
+sample_data.csv
+taxon_abundance.csv
 ```
 {: .output}
 
@@ -324,33 +322,17 @@ pwd
 Everything that we've been doing is working with file paths. We tell the computer where we want to go using `cd` plus the file path. We can also tell the computer what files we want to list by giving a file path to `ls`:
 
 ```
-ls un-report
+ls ontario-report
 ```
 {: .language-bash}
 
 ```
 awesome_plot.jpg
-awesome_violin_plot.jpg
-base_R.R
-co2-un-data.csv
-gapminder_1997.csv
-gapminder_data.csv
-gdp_population.R
-rnd-un-data.csv
-```
-{: .output}
-
-
-```
-ls ..
-```
-{: .language-bash}
-
-```
-list.txt
-un-report
-notes.pdf
-Untitled.png
+awesome_box_plot.jpg
+buoy_data.csv
+plotting.R
+sample_data.csv
+taxon_abundance.csv
 ```
 {: .output}
 
@@ -373,8 +355,8 @@ It takes you back to your home directory!
 To get back to your projects directory you can use the following commands, depending on your operating system:
 
 ```
-cd Desktop/un-report
-cd "OneDrive - Cornell University/Desktop/un-report"
+cd Desktop/ontario-report
+cd "OneDrive - Cornell University/Desktop/ontario-report"
 ```
 {: .language-bash}
 
@@ -435,10 +417,10 @@ _[Back to top](#contents)_
 
 Now that we know how to move around your computer using the command line, our next step is to organize the project that we started in the [R plotting lesson]({{ page.root }}/01-r-plotting/)
 You might ask: why would I use the command line when I could just use the GUI?
-My best response is that if you ever need to use a high-performance computing cluster (such as Great Lakes at the University of Michigan), you’ll have no other option.
-You might also come to like it more than clicking around to get places once you get comfortable, because it’s a lot faster!
+My best response is that if you ever need to use a high-performance computing cluster (such as BioHPC at Cornell), you’ll have no other option.
+You might also come to like it more than clicking around to get places once you get comfortable, because it’s a lot faster! This is especially true if you are managing many files (like hundreds of sequencing files or BLAST hits) and want to sort and move them programmatically.
 
-First, let’s make sure we’re in the right directory (the `un-reports` directory):
+First, let’s make sure we’re in the right directory (the `ontario-reports` directory):
 
 ```
 pwd
@@ -446,9 +428,9 @@ pwd
 {: .language-bash}
 
 ```
-/home/USERNAME/Desktop/un-report
-/c/Users/USERNAME/Desktop/un-report
-/c/Users/USERNAME/OneDrive - Cornell University/Desktop/un-report
+/home/USERNAME/Desktop/ontario-report
+/c/Users/USERNAME/Desktop/ontario-report
+/c/Users/USERNAME/OneDrive - Cornell University/Desktop/ontario-report
 ```
 {: .output}
 
@@ -462,13 +444,11 @@ ls
 {: .language-bash}
 ```
 awesome_plot.jpg
-awesome_violin_plot.jpg
-base_R.R
-co2-un-data.csv
-gapminder_1997.csv
-gapminder_data.csv
-gdp_population.R
-rnd-un-data.csv
+awesome_box_plot.jpg
+buoy_data.csv
+plotting.R
+sample_data.csv
+taxon_abundance.csv
 ```
 {: .output}
 
@@ -483,20 +463,18 @@ One way is the following:
 ```
 .
 ├── code
-│   ├── base_R.R
-    └── gdp_population.R
+│   ├── plotting.R
 ├── data
-│   ├── co2-un-data.csv
-    └── gapminder_1997.csv
-    └── gapminder_data.csv
-    └── rnd-un-data.csv
+│   ├── buoy_data.csv
+    └── sample_data.csv
+    └── taxon_abundance.csv
 └── figures
-    ├── awesome_plot.jpg
-    └── awesome_violin_plot.jpg
+|   ├── awesome_plot.jpg
+    └── awesome_box_plot.jpg
 ```
 {: .language-bash}
 
-The R script goes in the code directory, the gapminder datasets go in the data directory, and the figures go in the figures directory.
+The R script goes in the code directory, the datasets go in the data directory, and the figures go in the figures directory.
 This way, all of the files are organized into a clearer overall structure.
 
 A few notes about naming files and directories:
@@ -524,14 +502,12 @@ ls
 {: .language-bash}
 ```
 awesome_plot.jpg
-awesome_violin_plot.jpg
-base_R.R
+awesome_box_plot.jpg
+buoy_data.csv
 code
-co2-un-data.csv
-gapminder_1997.csv
-gapminder_data.csv
-gdp_population.R
-rnd-un-data.csv
+plotting.R
+sample_data.csv
+taxon_abundance.csv
 ```
 {: .output}
 
@@ -552,7 +528,7 @@ Nothing in there yet, which is expected since we just made the directory.
 The next step is to move the `.R` file into the code directory. To do this, we use the `mv` command. The first argument after `mv` is the file you want to move, and the second argument is the place you want to move it:
 
 ```
-mv gdp_population.R code
+mv plotting.R code
 ```
 {: .language-bash}
 
@@ -564,45 +540,37 @@ ls
 {: .language-bash}
 ```
 awesome_plot.jpg
-awesome_violin_plot.jpg
-base_R.R
+awesome_box_plot.jpg
+buoy_data.csv
 code
-co2-un-data.csv
-gapminder_1997.csv
-gapminder_data.csv
-rnd-un-data.csv
+sample_data.csv
+taxon_abundance.csv
 ```
 {: .output}
 
-`gdp_population.R` is no longer there! Where did it go? Let’s check the code directory, where we moved it to:
+`plotting.R` is no longer there! Where did it go? Let’s check the code directory, where we moved it to:
 
 ```
 ls code
 ```
 {: .language-bash}
 ```
-gdp_population.R
+plotting.R
 ```
 {: .output}
 
-There it is! Let's also move our `base_R.R` file.
-
-```
-mv base_R.R code
-```
-{: .language-bash}
+There it is!
 
 > ## Creating directories and moving files
 >
 > Create a `data` directory and move all your csv files into the newly created `data` directory.
 > > ## Solution
-> > From the `un-report` directory:
+> > From the `ontario-report` directory:
 > >  ```
 > > mkdir data
-> > mv co2-un-data.csv data
-> > mv gapminder_data.csv data
-> > mv gapminder_1997.csv data
-> > mv rnd-un-data.csv data
+> > mv buoy_data.csv data
+> > mv sample_data.csv data
+> > mv taxon_abundance.csv data
 > > ```
 > {: .solution}
 {: .challenge}
@@ -620,7 +588,7 @@ Next, we have to move the figures. But we have so many figures! It’d be annoyi
 
 One example of a wildcard is the asterisk, `*`. This special character is interpreted as "multiple characters of any kind".
 
-Let’s see how we can use a wildcard to list only files with the extension `.jpg`:
+Let’s see how we can use a wildcard to list only files with the extension `.png`:
 
 ```
 ls *jpg
@@ -628,7 +596,7 @@ ls *jpg
 {: .language-bash}
 ```
 awesome_plot.jpg
-awesome_violin_plot.jpg
+awesome_box_plot.jpg
 ```
 {: .output}
 
@@ -647,13 +615,13 @@ ls *
 {: .language-bash}
 ```
 code:
-base_R.R gdp_population.R
+plotting.R
 
 data:
-co2-un-data.csv gapminder_1997.csv  gapminder_data.csv rnd-un-data.csv
+buoy_data.csv  sample_data.csv taxon_abundance.csv
 
 figures:
-awesome_plot.jpg    awesome_violin_plot.jpg
+awesome_plot.jpg    awesome_box_plot.jpg
 ```
 {: .output}
 
@@ -693,10 +661,10 @@ _[Back to top](#contents)_
 
 To view and navigate the contents of a file we can use the command `less`. This will open a full screen view of the file.
 
-For instance, we can run the command `less` on our `gapminder_data.csv` file:
+For instance, we can run the command `less` on our `sample_data.csv` file:
 
 ```
-less data/gapminder_data.csv
+less data/sample_data.csv
 ```
 
 ![]({{ page.root }}/fig/unix-shell/less_example.png)
@@ -706,7 +674,7 @@ To navigate, press `spacebar` to scroll to the next page and `b` to scroll up to
 One particularly useful flag for `less` is `-S` which cuts off really long lines (rather than having the text wrap around):
 
 ```
-less -S data/gapminder_data.csv
+less -S data/sample_data.csv
 ```
 
 To navigate, press `spacebar` to scroll to the next page and `b` to scroll up to the previous page. You can also use the up and down arrows to scroll line-by-line. Note that `less` defaults to line wrapping, meaning that any lines longer than the width of the screen will be wrapped to the next line, (to disable this use the option `-S` when running `less`, ex `less -S file.txt`). To exit less, press the letter `q`.
@@ -734,12 +702,12 @@ Beyond viewing the content of files, we may want to be able to edit or write fil
 Since we moved around files when we organized our project directory we will have to update our R script. The path we use to read in our dataset is no longer correct. We will use nano to update the path to our new directory structure.
 
 ```
-nano code/gdp_population.R
+nano code/plotting.R
 ```
 {: .language-bash}
 
 ```
-gapminder_data <- read_csv("data/gapminder_data.csv")
+sample_data <- read_csv("data/sample_data.csv")
 ```
 {: .output}
 
@@ -747,16 +715,16 @@ Great! Now as an exercise we can change the paths to write out figures.
 
 > ## Editing file paths with nano
 >
-> Use nano to edit the file paths of the figures saved in `code/gdp_population.R` to match our new directory structure.
+> Use nano to edit the file paths of the figures saved in `code/plotting.R` to match our new directory structure.
 > > ## Solution
 > > ```
-> > nano code/gdp_population.R
+> > nano code/plotting.R
 > > ```
 > > {: .language-bash}
-> > Edit the lines in `code/gdp_population.R` where plots are saved:
+> > Edit the lines in `code/plotting.R` where plots are saved:
 > >  ```
 > > ggsave("figures/awesome_plot.jpg", width=6, height=4)
-> > ggsave("figures/awesome_histogram.jpg", width=6, height=4)
+> > ggsave("figures/awesome_box_plot.jpg", width=6, height=4)
 > > ```
 > > {: .output}
 > {: .solution}
