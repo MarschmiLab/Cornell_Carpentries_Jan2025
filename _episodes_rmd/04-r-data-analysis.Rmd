@@ -19,6 +19,8 @@ keypoints:
 - "There are many useful functions in the `tidyverse` packages that can aid in data analysis."
 - "Assessing data source and structure is an important first step in analysis."
 - "Preparing data for analysis can take significant effort and planning."
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include=FALSE}
@@ -50,11 +52,11 @@ You can check this by seeing if the Files in the bottom right of RStudio are the
 
 Yesterday we spent a lot of time making plots in R using the ggplot2 package. Visualizing data using plots is a very powerful skill in R, but what if we would like to work with only a subset of our data? Or clean up messy data, calculate summary statistics, create a new variable, or join two datasets together? There are several different methods for doing this in R, and we will touch on a few today using functions the `dplyr` package.
 
-First, we will create a new RScript file for our work. Open RStudio. Choose "File" \> "New File" \> "RScript". We will save this file as `un_data_analysis.R`
+First, we will create a new RScript file for our work. Open RStudio. Choose "File" \> "New File" \> "RScript". We will save this file as `data_analysis.R`
 
 ### Loading in the data
 
-We will start by importing the complete gapminder dataset that we used yesterday into our fresh new R session. Yesterday we did this using a "point-and-click" commands. Today let's type them into the console ourselves: `gapminder_data <- read_csv("data/gapminder_data.csv")`
+We will start by importing the complete sample dataset that we used yesterday into our fresh new R session. Today let's type them into the console ourselves: `sample_data <- read_csv("data/sample_data.csv")`
 
 > ## Exercise
 >
@@ -66,7 +68,7 @@ We will start by importing the complete gapminder dataset that we used yesterday
 > {: .solution}
 {: .challenge}
 
-Now that we know what's wrong, We will use the `read_csv()` function from the Tidyverse `readr` package. Load the `tidyverse` package and gapminder dataset using the code below.
+Now that we know what's wrong, We will use the `read_csv()` function from the Tidyverse `readr` package. Load the `tidyverse` package and sample dataset using the code below.
 
 ```{r InitDplyr}
 library(tidyverse)
@@ -78,8 +80,8 @@ The output in your console shows that by doing this, we attach several useful pa
 
 Reload your data:
 
-```{r ReloadGapminder}
-gapminder_data <- read_csv("data/gapminder_data.csv")
+```{r Reloadsample}
+sample_data <- read_csv("data/sample_data.csv")
 ```
 
 Notice that the output of the `read_csv()` function is pretty informative. It tells us the name of all of our column headers as well as how it interpreted the data type. This birds-eye-view can help you take a quick look that everything is how we expect it to be.
@@ -92,54 +94,54 @@ Now we have the tools necessary to work through this lesson.
 
 [*Back to top*](#contents)
 
-Let's say we would like to know what is the mean (average) life expecteny in the dataset. R has a built in function function called `mean()` that will calculate this value for us. We can apply that function to our lifeExp column using the `summarize()` function. Here's what that looks like:
-```{r AvgLifeExp}
-summarize(gapminder_data, averageLifeExp=mean(lifeExp))
+Let's say we would like to know what is the mean (average) cell abundance in our dataset. R has a built in function function called `mean()` that will calculate this value for us. We can apply that function to our cells_per_ml column using the `summarize()` function. Here's what that looks like:
+```{r Avgcells_per_ml}
+summarize(sample_data, average_cells=mean(cells_per_ml))
 ```
 
 When we call `summarize()`, we can use any of the column names of our data object as values to pass to other functions. `summarize()` will return a new data object and our value will be returned as a column.
 
 > **Note:** The `summarize()` and `summarise()` perform identical functions.
 
-We name this new column so we can use in a future argument. So the `averageLifeExp=` part tells `summarize()` to use "averageLifeExp" as the name of the new column. Note that you don't have to quotes around this new name as long as it starts with a letter and doesn't include a space.
+We name this new column so we can use in a future argument. So the `average_cells=` part tells `summarize()` to use "average_cells" as the name of the new column. Note that you don't have to quotes around this new name as long as it starts with a letter and doesn't include a space.
 
 Instead of including the data as an argument, we can use the *pipe operator* `%>%` to pass the data value into the `summarize` function. 
 
-```{r AvgLifeExpWithPipe}
-gapminder_data %>% summarize(averageLifeExp=mean(lifeExp))
+```{r Avgcells_per_mlWithPipe}
+sample_data %>% summarize(average_cells=mean(cells_per_ml))
 ```
  
-This line of code will do the exact same thing as our first summary command, but the piping function tells R to use the `gapminder_data` dataframe as the first argument in the next function.
+This line of code will do the exact same thing as our first summary command, but the piping function tells R to use the `sample_data` dataframe as the first argument in the next function.
 
 This lets us "chain" together multiple functions, which will be helpful later. Note that the pipe (`%>%`) is a bit different from using the ggplot plus (`+`). Pipes take the output from the left side and use it as input to the right side. Plusses layer on additional information (right side) to a preexisting plot (left side). 
  
 We can also add an <kdb>Enter</kdb> to make it look nicer:  
-```{r AvgLifeExpWithPipe2}
-gapminder_data %>%
-  summarize(averageLifeExp=mean(lifeExp))
+```{r Avgcells_per_mlWithPipe2}
+sample_data %>%
+  summarize(average_cells=mean(cells_per_ml))
 ```
 
-Using the *pipe operator* `%>%` and enter command makes our code more readable. The  *pipe operator* `%>%` also helps to avoid using nested function and minimizes the need for new variables.
+Using the *pipe operator* `%>%` and enter command makes our code more readable. The  *pipe operator* `%>%` also helps to avoid using nested functions and minimizes the need for new variables.
 
 Since we use the pipe operator so often, there is a keyboard shortcut for it in RStudio. You can press <kdb>Ctrl</kdb>+<kdb>Shift</kdb>+<kdb>M<kdb> on Windows or <kdb>Cmd<kdb>+<kdb>Shift<kdb>+<kdb>M<kdb> on a Mac.
 
 > ## Pro tip: Saving a new dataframe
 > Notice that when we run the following code, we are not actually saving a new variable: 
-> ```{r AvgLifeExpWithPipe3, eval = FALSE}
-> gapminder_data %>%
->   summarize(averageLifeExp=mean(lifeExp))
+> ```{r Avgcells_per_mlWithPipe3, eval = FALSE}
+> sample_data %>%
+>   summarize(average_cells=mean(cells_per_ml))
 > ```
-> This simply outputs what we have created, but does not change actually change `gapminder_data` or save a new dataframe. To save a new dataframe, we could run: 
+> This simply outputs what we have created, but does not change actually change `sample_data` or save a new dataframe. To save a new dataframe, we could run: 
 > ```{r saveNewDF, eval = FALSE}
-> gapminder_data_summarized <- gapminder_data %>%
->   summarize(averageLifeExp=mean(lifeExp))
+> sample_data_summarized <- sample_data %>%
+>   summarize(average_cells=mean(cells_per_ml))
 > ```
-> Or if we want to change `gapminder_data` itself: 
+> Or if we want to change `sample_data` itself: 
 > ```{r overwriteDF, eval = FALSE}
-> gapminder_data <- gapminder_data %>%
->   summarize(averageLifeExp=mean(lifeExp))
+> sample_data <- sample_data %>%
+>   summarize(average_cells=mean(cells_per_ml))
 > ```
-> IMPORTANT: This would overwrite the existing `gapminder_data` object. 
+> IMPORTANT: This would overwrite the existing `sample_data` object. Let's not do this!
 > 
 > For now, we will not be saving dataframes, since we are just experimenting with `dyplr` functions, but it will be useful later on in this lesson. 
 > 
@@ -149,100 +151,85 @@ Since we use the pipe operator so often, there is a keyboard shortcut for it in 
 
 [*Back to top*](#contents)
 
-Let's take a look at the value we just calculated, which tells us the average life expectancy for all rows in the data was 59.5. That seems a bit low, doesn't it? What's going on?
+Let's take a look at the value we just calculated, which tells us the average cell abundance for all rows in the data was 4,046,023. However, we previously saw that cell abundance varied widely between our environmental groups. It may be more informative to calculate average cell abundance for each of those groups separately. 
 
-Well, remember the dataset contains rows from many different years and many different countries. It's likely that life expectancy has increased overtime, so it may not make sense to average over all the years at the same time.
+Let's start by just calculating cell abundance within the Deep group. To do that, we will use the `filter()` function to only use rows for that group before calculating the mean value.
 
-Use `summarize()` to find the most recent year in the data set. We can use the `max()` function to return the maximum value.
-
-> ## Practice using the `%>%` to summarize data
->
-> Find the mean population using the piping function.
->
-> > ## Solution:
-> >
-> > ```{r PipeExercise}
-> > gapminder_data %>%  
-> >  summarize(recent_year = max(year))
-> > ```
-> > 
-> {: .solution}
-{: .challenge}
-
-So we see that the most recent year in the dataset is 2007. Let's calculate the life expectancy for all countries for only that year. To do that, we will use the `filter()` function to only use rows for that year before calculating the mean value.
-
-```{r GapRecentLifeExp}
-gapminder_data %>%
-  filter(year == 2007) %>%
-  summarize(average=mean(lifeExp))
+```{r GapRecentcells_per_ml}
+sample_data %>%
+  filter(env_group == "Deep") %>%
+  summarize(average=mean(cells_per_ml))
 ```
 
 > ## Filtering the dataset
 >
-> What is the average GDP per capita for the first year in the dataset? *Hint: the column headers identified by `read_csv()` showed us there was a column called gdpPercap in the dataset*
+> What is the average chlorophyll concentration in Deep samples? *Hint: the column headers identified by `read_csv()` showed us there was a column called chlorophyll in the dataset*
 >
 > > ## Solution
 > >
-> > Identify the earliest year in our dataset using `min()` and `summarize()`
-> >
 > > ```{r FilterChallenge1}
-> > gapminder_data %>%
-> > summarize(first_year=min(year))
-> > ```
-> >
-> > We see here that the first year in the dataset is 1952. Filter to only 1952, and determin the average GDP per capita.
-> >
-> > ```{r FilterChallenge2}
-> > gapminder_data %>%
-> > filter(year == 1952) %>%
-> > summarize(average_gdp=mean(gdpPercap))
+> > sample_data %>%
+> > filter(env_group == "Deep") %>%
+> > summarize(average_chl=mean(chlorophyll))
 > > ```
 > > {: .source}
-> > By combining `filter()` and `summarize()` we were able to calculate the mean GDP per capita in the year 1952.
+> > By combining `filter()` and `summarize()` we were able to calculate the mean chlorophyll in the Deep samples.
+> {: .solution}
+>  What about in shallow September?
+>
+> > ## Solution
+> >
+> > ```{r FilterChallenge2}
+> > sample_data %>%
+> > filter(env_group == "Shallow_September") %>%
+> > summarize(average_chl=mean(chlorophyll))
+> > ```
+> > {: .source}
+> > Wow - much higher than in the deep samples!.
 > {: .solution}
 {: .challenge}
 
-Notice how the pipe operator (`%>%`) allows us to combine these two simple steps into a more complicated data extraction?. We took the data, filtered out the rows, then took the mean value. The argument we pass to `filter()` needs to be some expression that will return TRUE or FALSE. We can use comparisons like `>` (greater than) and `<` (less than) for example. Here we tested for equality using a double equals sign `==`. You use `==` (double equals) when testing if two values are equal, and you use `=` (single equals) when naming arguments that you are passing to functions. Try changing it to use `filter(year = 2007)` and see what happens.
+Notice how the pipe operator (`%>%`) allows us to combine these two simple steps into a more complicated data extraction?. We took the data, filtered out the rows, then took the mean value. The argument we pass to `filter()` needs to be some expression that will return TRUE or FALSE. We can use comparisons like `>` (greater than) and `<` (less than) for example. Here we tested for equality using a double equals sign `==`. You use `==` (double equals) when testing if two values are equal, and you use `=` (single equals) when naming arguments that you are passing to functions. Try changing it to use `filter(env_group = "Deep")` and see what happens.
 
 ## Grouping rows using `group_by()` {#grouping-rows-using-group_by}
 
 [*Back to top*](#contents)
 
-We see that the life expectancy in 2007 is much larger than the value we got using all of the rows. It seems life expectancy is increasing which is good news. But now we might be interested in calculating the average for each year. Rather that doing a bunch of different `filter()` statements, we can instead use the `group_by()` function. The function allows us to tell the code to treat the rows in logical groups, so rather than summarizing over all the rows, we will get one summary value for each group. Here's what that will look like:
+We see that the cell abundance in Deep samples is much lower than the value we got using all of the rows. We saw that by using filtering, we can calculate statistics for each group separately, but we need to do this one at a time. Rather that doing a bunch of different `filter()` statements, we can instead use the `group_by()` function. The function allows us to tell the code to treat the rows in logical groups, so rather than summarizing over all the rows, we will get one summary value for each group. Here's what that will look like:
 
-```{r GapLifeExpByYear}
-gapminder_data %>%
-  group_by(year) %>%
-  summarize(average=mean(lifeExp))
+```{r Gapcells_per_mlByYear}
+sample_data %>%
+  group_by(env_group) %>%
+  summarize(average=mean(cells_per_ml))
 ```
 
 The `group_by()` function expects you to pass in the name of a column (or multiple columns separated by comma) in your data. 
 
-Note that you might get a message about the summarize function regrouping the output by 'year'. This simply indicates what the function is grouping by. 
+Note that you might get a message about the summarize function regrouping the output by 'env_group'. This simply indicates what the function is grouping by. 
 
 > ## Grouping the data
 >
-> Try calculating the average life expectancy by continent.
+> Try calculating the average temperature by env_group.
 >
 > > ## Solution
 > >
 > > ```{r GroupByChallenge1}
-> > gapminder_data %>%
-> > group_by(continent) %>%
-> > summarize(average=mean(lifeExp))
+> > sample_data %>%
+> > group_by(env_group) %>%
+> > summarize(average=mean(temperature))
 > > ```
 > > {: .source}
 > >
-> > By combining `group_by()` and `summarize()` we are able to calculate the mean life expectancy by continent.
+> > By combining `group_by()` and `summarize()` we are able to calculate the mean temperature by environmental group.
 > {: .solution}
 {: .challenge}
 
-You can also create more than one new column when you call `summarize()`. To do so, you must separate your columns with a comma. Building on the code from the last exercise, let's add a new column that calculates the minimum life expectancy for each continent. 
+You can also create more than one new column when you call `summarize()`. To do so, you must separate your columns with a comma. Building on the code from the last exercise, let's add a new column that calculates the minimum cell abundance for each env_group. 
 
-```{r GapLifeExpMinMax}
-gapminder_data %>%
-  group_by(continent) %>%
-  summarize(average=mean(lifeExp), min=min(lifeExp))
+```{r Gapcells_per_mlMinMax}
+sample_data %>%
+  group_by(env_group) %>%
+  summarize(average=mean(cells_per_ml), min=min(cells_per_ml))
 ```
 
 
@@ -252,22 +239,23 @@ gapminder_data %>%
 
 Each time we ran `summarize()`, we got back fewer rows than passed in. We either got one row back, or one row per group. But sometimes we want to create a new column in our data without changing the number of rows. The function we use to create new columns is called `mutate()`.
 
-We have a column for the population and the GDP per capita. If we wanted to get the total GDP, we could multiply the per capita GDP values by the total population. Here's what such a `mutate()` command would look like:
+We have a column for the total nitrogen and the total phosphorus. Often, we also want to report the ratio between these two nutrients (researchers often report this as a molar ratio, but for simplicity we'll just use their masses). Here's what such a `mutate()` command would look like:
 
 ```{r GapMutate}
-gapminder_data %>%
-  mutate(gdp = pop * gdpPercap)
+sample_data %>%
+  mutate(tn_tp_ratio = total_nitrogen / total_phosphorus)
 ```
 
-This will add a new column called "gdp" to our data. We use the column names as if they were regular values that we want to perform mathematical operations on and provide the name in front of an equals sign like we have done with `summarize()`
+This will add a new column called "tn_tp_ratio" to our data. We use the column names as if they were regular values that we want to perform mathematical operations on and provide the name in front of an equals sign like we have done with `summarize()`
 
 > ## `mutate()`
-> We can also multiply by constants or other numbers using mutate - remember how in the plotting lesson we made a plot with population in millions? Try making a new column for this dataframe called popInMillions that is the population in million. 
+> We can also multiply by constants or other numbers using mutate - remember how in the plotting lesson we made a plot with cells_per_ml in millions? Try making a new column for this dataframe called cellsInMillions that is the cell abundance in millions. 
 > 
 > > ## Solution: 
 > > ```{r mutateExercise}  
-> > gapminder_data %>%  
-> > mutate(gdp = pop * gdpPercap, popInMillions = pop / 1000000)  
+> > sample_data %>%  
+> > mutate(tn_tp_ratio = total_nitrogen / total_phosphorus, 
+> >        cellsInMillions = cells_per_ml / 1000000)  
 > > ```  
 > {: .solution}
 {: .challenge}
@@ -277,249 +265,216 @@ This will add a new column called "gdp" to our data. We use the column names as 
 
 [*Back to top*](#contents)
 
-We use the `filter()` function to choose a subset of the rows from our data, but when we want to choose a subset of columns from our data we use `select()`. For example, if we only wanted to see the population ("pop") and year values, we can do:
+We use the `filter()` function to choose a subset of the rows from our data, but when we want to choose a subset of columns from our data we use `select()`. For example, if we only wanted to see the sample IDs ("sample_id") and depth values, we can do:
 
 ```{r GapSelect}
-gapminder_data %>%
-  select(pop, year)
+sample_data %>%
+  select(sample_id, depth)
 ```
 
-We can also use `select()` to drop/remove particular columns by putting a minus sign (`-`) in front of the column name. For example, if we want everything but the continent column, we can do:
+We can also use `select()` to drop/remove particular columns by putting a minus sign (`-`) in front of the column name. For example, if we want everything but the env_group column, we can do:
 
 ```{r GapSelectDrop}
-gapminder_data %>%
-  select(-continent)
+sample_data %>%
+  select(-env_group)
 ```
 
 > ## selecting columns 
-> Create a dataframe with only the `country`, `continent`, `year`, and `lifeExp` columns. 
+> Create a dataframe with only the `sample_id`, `env_group`, `depth`, `temperature`, and `cells_per_ml` columns. 
 > 
 > > ## Solution: 
 > > There are multiple ways to do this exercise. Here are two different possibilities. 
 > > 
 > > ```{r selectExerciseOption1}
-> > gapminder_data %>%
-> >   select(country, continent, year, lifeExp)
+> > sample_data %>%
+> >   select(sample_id, env_group, depth, temperature, cells_per_ml)
 > > ```
 > > ```{r selectExerciseOption2}
-> > gapminder_data %>%
-> >   select(-pop, -gdpPercap)
+> > sample_data %>%
+> >   select(-total_nitrogen, -total_phosphorus, -diss_org_carbon, -chlorophyll)
 > > ```
+> > Did you notice that the order of columns also changed, to match the order of arguments in the select function?
 > {: .solution}
 {: .challenge}
 
+> ## Pro tip: Selecting a range of columns
+> Sometimes, we want to select a range of contiguous columns. Rather than writing out each column name, we can use the `:` operator to selecting a range of columns
+> ```{r rangeofColumns, eval = FALSE}
+> sample_data %>%
+>   select(sample_id:temperature)
+> ```
+> We can also drop a range of columns in this way, though we need to include some extra parentheses:
+> ```{r rangeofColumns2, eval = FALSE}
+> sample_data %>%
+>   select(-(total_nitrogen:chlorophyll))
+> ```
+{: .callout}
 
 > ## Bonus: Using helper functions with `select()`
 >
-> The `select()` function has a bunch of helper functions that are handy if you are working with a dataset that has a lot of columns. You can see these helper functions on the `?select` help page. For example, let's say we wanted to select the year column and all the columns that start with the letter "c". You can do that with:
+> The `select()` function has a bunch of helper functions that are handy if you are working with a dataset that has a lot of columns. You can see these helper functions on the `?select` help page. For example, let's say we wanted to select the sample_id column and all the columns that start with "total". You can do that with:
 > 
 > ```{r GapSelectFancy}
-> gapminder_data %>%
->   select(year, starts_with("c"))
+> sample_data %>%
+>   select(sample_id, starts_with("total"))
 > ```
 > This returns just the three columns we are interested in. 
 >
 > > ## Using `select()` with a helper function
 > >
-> > Find a helper function on the help page that will choose all the columns that have "p" as their last letter (ie: "pop","lifeExp","gdpPerCap")
+> > Find a helper function on the help page that will choose all the columns that have "n" as their last letter
 > >
 > > > ## Solution
 > > >
 > > > The helper function `ends_with()` can help us here.
 > > >
 > > > ```{r GroupByChallenge2}
-> > > gapminder_data %>%
-> > > select(ends_with("p"))
+> > > sample_data %>%
+> > > select(ends_with("n"))
 > > > ```
 > > {: .solution}
 > {: .challenge}
 > 
 {: .solution}
 
-
-## Changing the shape of the data
-
-[*Back to top*](#contents)
-
-Data comes in many shapes and sizes, and one way we classify data is either "wide" or "long." Data that is "long" has one row per observation. The gapminder_data data is in a long format. We have one row for each country for each year and each different measurement for that country is in a different column. We might describe this data as "tidy" because it makes it easy to work with `ggplot2` and `dplyr` functions (this is where the "tidy" in "tidyverse" comes from). As tidy as it may be, sometimes we may want our data in a "wide" format. Typically in "wide" format each row represents a group of observations and each value is placed in a different column rather than a different row. For example maybe we want only one row per country and want to spread the life expectancy values into different columns (one for each year).
-
-The `tidyr` package contains the functions `pivot_wider` and `pivot_longer` that make it easy to switch between the two formats. The `tidyr` package is included in the `tidyverse` package so we don't need to do anything to load it.
-
-```{r PivotWider}
-gapminder_data %>%
-  select(country, continent, year, lifeExp) %>%
-  pivot_wider(names_from = year, values_from = lifeExp )
-```
-
-Notice here that we tell `pivot_wider()` which columns to pull the names we wish our new columns to be named from the year variable, and the values to populate those columns from the lifeExp variable. (Again, neither of which have to be in quotes in the code when there are no special characters or spaces - certainly an incentive not to use special characters or spaces!) We see that the resulting table has new columns by year, and the values populate it with our remaining variables dictating the rows.
-
-Before we move on to more data cleaning, let's create the final gapminder dataframe we will be working with for the rest of the lesson! 
-
-> ## Final Americas 2007 gapminder dataset
-> Read in the `gapminder_data.csv` file, filter out the year 2007 and the continent "Americas." Then drop the `year` and `continent` columns from the dataframe. Then save the new dataframe into a variable called `gapminder_data_2007`. 
-> 
-> > ## Solution: 
-> > ```{r LoadGapminder2007_solution}
-> > gapminder_data_2007 <- read_csv("data/gapminder_data.csv") %>%
-> >   filter(year == 2007 & continent == "Americas") %>%
-> >   select(-year, -continent)
-> > ```
-> {: .solution}
-{: .challenge}
-
-Awesome! This is the dataframe we will be using later on in this lesson. 
-
 # Cleaning up data
 
 [*Back to top*](#contents)
 
-Researchers are often pulling data from several sources, and the process of making data compatible with one another and prepared for analysis can be a large undertaking. Luckily, there are many functions that allow us to do this in R. We've been working with the gapminder dataset, which contains population and GDP data by year. In this section, we practice cleaning and preparing a second dataset containing CO2 emissions data by country and year, sourced from [the UN](https://data.un.org/_Docs/SYB/CSV/SYB63_310_202009_Carbon%20Dioxide%20Emission%20Estimates.csv).
+Researchers are often pulling data from several sources, and the process of making data compatible with one another and prepared for analysis can be a large undertaking. Luckily, there are many functions that allow us to do this in R. We've been working with the sample dataset, which contains metadata about each sample we collected. In this section, we practice cleaning and preparing a second dataset derived from sequencing data, which holds the relative abundances of the most abundant Phyla in each sample.
 
-It's always good to go into data cleaning with a clear goal in mind. Here, we'd like to prepare the CO2 UN data to be compatible with our gapminder data so we can directly compare GDP to CO2 emissions. To make this work, we'd like a data frame that contains a column with the country name, and columns for different ways of measuring CO2 emissions. We will also want the data to be collected as close to 2007 as possible (the last year we have data for in gapminder). Let's start with reading the data in using `read_csv()`
+It's always good to go into data cleaning with a clear goal in mind. Here, we'd like to prepare the taxon data to be compatible with our sample data so we can directly compare the abundance of specific Phyla to our sample data. To make this work, we'd like a data frame that contains a column with the sample ID, and columns for the abundances of each Phyla. Let's start with reading the data in using `read_csv()`
 
 ```{r CleanEmissionsData}
-read_csv("data/co2-un-data.csv")
+read_csv("data/taxon_abundance.csv")
 ```
 
-The output gives us a warning about missing column names being filled in with things like '...3', '...4', etc. Looking at the table that is outputted by `read_csv()` we can see that there appear to be two rows at the top of the file that contain information about the data in the table. The first is a header that tells us the table number and its name. Ideally, we'd skip that. We can do this using the `skip=` argument in read_csv by giving it a number of lines to skip.
+Hmmm, this looks a little weird. It is telling us that our table has 74 rows and just 1 column. Looking at the table that is outputted by `read_csv()` we can see that there appear to be two rows at the top of the file that contain extraneous information about the data in the table. Ideally, we'd skip those. We can do this using the `skip=` argument in read_csv by giving it a number of lines to skip.
 
 ```{r CleanEmissionsSkip}
-read_csv("data/co2-un-data.csv", skip=1)
+read_csv("data/taxon_abundance.csv", skip=2)
 ```
 
-Now we get a similar Warning message as before, but the outputted table looks better.
+This is working better - we now have 72 rows and 13 columns. However, we're also getting a message that `read_csv` has made a new column name. This can happen if your file has data in rows which lack a column name. In that case, `dplyr` creates new column names, which start with "...". Here, it looks like the final column contains information about the sequencing machine which generated the data. 
 
 > ## Warnings and Errors
 > It's important to differentiate between Warnings and Errors in R. A warning tells us, "you might want to know about this issue, but R still did what you asked". An error tells us, "there's something wrong with your code or your data and R didn't do what you asked". You need to fix any errors that arise. Warnings, are probably best to resolve or at least understand why they are coming up.
 {.callout}
 
-We can resolve this warning by telling `read_csv()` what the column names should be with the `col_names()` argument where we give it the column names we want within the c() function separated by commas. If we do this, then we need to set skip to 2 to also skip the column headings. Let's also save this dataframe to `co2_emissions_dirty` so that we don't have to read it in every time we want to clean it even more.
+Perhaps we should rename this column to something informative. We can use the `rename` function to do so. While we're at it, let's save this as an object which we can work with down the line.
 
-```{r CleanEmissionsColNames1}
-co2_emissions_dirty <- read_csv("data/co2-un-data.csv", skip=2,
-         col_names=c("region", "country", "year", "series", "value", "footnotes", "source"))
-co2_emissions_dirty
+```{r CleanEmissionsColName}
+taxon_dirty <- read_csv("data/taxon_abundance.csv", skip=2) %>%
+    rename(sequencer = ...13)
+
+glimpse(taxon_dirty)
 ```
 
-> ## Bonus: Another way to deal with this error
+
+> ## Bonus: Modifying multiple column names at once
 > 
-> There are often multiple ways to clean data. Here we  read in the table, get the warning and then fix the column names using the rename function.
-> 
-> ```{r CleanEmissionsRename}
-> read_csv("data/co2-un-data.csv", skip=1) %>%
->   rename(country=...2)
-> ```
->
 > Many data analysts prefer to have their column headings and variable names be in all lower case. We can use a variation of `rename()`, which is `rename_all()` that allows us to set all of the column headings to lower case by giving it the name of the tolower function, which makes everything lowercase.
 > 
 > ```{r CleanEmissionsRenameLower}
-> read_csv("data/co2-un-data.csv", skip=1) %>%
+> read_csv("data/taxon_abundance.csv", skip=2) %>%
 >  rename_all(tolower)
 > ```
 {: .solution}
 
-We previously saw how we can subset columns from a data frame using the select function. There are a lot of columns with extraneous information in this dataset, let's subset out the columns we are interested in. 
+We previously saw how we can subset columns from a data frame using the select function. There are a lot of columns with extraneous information in this dataset. For instance, while information like the number of sequencing reads, the DNA extraction date, and the lot_number might be useful to use in the lab, it won't be a part of our analysis. Let's subset out the columns we are interested in, which includes the sample IDs and taxon information (columns from Proteobacteria to Planctomycetota).
 
 > ## Reviewing selecting columns
-> Select the country, year, series, and value columns from our dataset. 
+> Select the columns of interest from our dataset. Note, there are multiple ways to do this.
 > 
 > > ## Solution: 
 > > ```{r CleanEmissionsSelect}
-> > 
-> > co2_emissions_dirty %>%
-> >   select(country, year, series, value)
+> > taxon_dirty %>%
+> >   select(sample_id, Proteobacteria:Planctomycetota)
+> > ```
+> > ```{r CleanEmissionsSelect2}
+> > taxon_dirty %>%
+> >   select(-(sequencing_reads:sequencer))
+> > ```
+> > ```{r CleanEmissionsSelect3}
+> > taxon_dirty %>%
+> >   select(sample_id, Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota)
 > > ```
 > {: .solution}
 {: .challenge}
 
-The series column has two methods of quantifying CO2 emissions - "Emissions (thousand metric tons of carbon dioxide)" and "Emissions per capita (metric tons of carbon dioxide)". Those are long titles that we'd like to shorten to make them easier to work with. We can shorten them to "total_emissions" and "per_capita_emissions" using the recode function. We need to do this within the mutate function where we will mutate the series column. The syntax in the recode function is to tell recode which column we want to recode and then what the old value (e.g. "Emissions (thousand metric tons of carbon dioxide)") should equal after recoding (e.g. "total").
-
-```{r CleanEmissionsMutateRecode}
-co2_emissions_dirty %>% 
-  select(country, year, series, value) %>%
-  mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total_emissions",
-                         "Emissions per capita (metric tons of carbon dioxide)" = "per_capita_emissions"))
-```
-
-Recall that we'd like to have separate columns for the two ways that we CO2 emissions data. To achieve this, we'll use the pivot_wider function that we saw previously. The columns we want to spread out are series (i.e. names_from) and value (i.e. values_from).
-
-```{r CleanEmissionsPivotWider}
-co2_emissions_dirty %>%
-  select(country, year, series, value) %>%
-  mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total_emission",
-                         "Emissions per capita (metric tons of carbon dioxide)" = "per_capita_emission")) %>%
-  pivot_wider(names_from=series, values_from=value)
-```
-
-Excellent! The last step before we can join this data frame is to get the most data that is for the year closest to 2007 so we can make a more direct comparison to the most recent data we have from gapminder. For the sake of time, we'll just tell you that we want data from 2005. 
-
-> ## Bonus: How did we determine that 2005 is the closest year to 2007? 
-> 
-> We want to make sure we pick a year that is close to 2005, but also a year that has a decent amount of data to work with. One useful tool is the `count()` function, which will tell us how many times a value is repeated in a column of a data frame. Let's use this function on the year column to see which years we have data for and to tell us whether we have a good number of countries represented in that year.
-> 
-> ```{r CleanEmissionsyearCountryCount}
-> co2_emissions_dirty %>%
->  select(country, year, series, value) %>%
->  mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total",
->                         "Emissions per capita (metric tons of carbon dioxide)" = "per_capita")) %>%
->   pivot_wider(names_from=series, values_from=value) %>%
->  count(year)
-> ```
-> 
-> It looks like we have data for 140 countries in 2005 and 2010. We chose 2005 because it is closer to 2007. 
-{: .solution}
-
-
-> ## Filtering rows and removing columns
-> Filter out data from 2005 and then drop the year column. (Since we will have only data from one year, it is now irrelevant.)
-> 
-> > ## Solution: 
-> > ```{r CleanEmissionsByYear}
-> > co2_emissions_dirty %>%
-> >  select(country, year, series, value) %>%
-> >  mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total",
-> >                         "Emissions per capita (metric tons of carbon dioxide)" = "per_capita")) %>%
-> >  pivot_wider(names_from=series, values_from=value) %>%
-> >  filter(year==2005) %>%
-> >  select(-year)
-> > ```
-> {: .solution}
-{: .challenge}
-
-
-Finally, let's go ahead and assign the output of this code chunk, which is the cleaned dataframe, to a variable name:
+Let's go ahead and assign the output of this code chunk, which is the cleaned dataframe, to a variable name:
 
 ```{r AssignCleanEmissions}
-co2_emissions <- co2_emissions_dirty %>%
-  select(country, year, series, value) %>%
-  mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total_emission",
-                         "Emissions per capita (metric tons of carbon dioxide)" = "per_capita_emission")) %>%
-  pivot_wider(names_from=series, values_from=value) %>%
-  filter(year==2005) %>%
-  select(-year)
+taxon_clean <- taxon_dirty %>% 
+  select(sample_id, Proteobacteria:Planctomycetota)
 ```
 
 > **Looking at your data:** You can get a look at your data-cleaning hard work by navigating to the **Environment** tab in RStudio and clicking the table icon next to the variable name. Notice when we do this, RStudio automatically runs the `View()` command. We've made a lot of progress!
 {.callout}
+
+## Changing the shape of the data
+
+[*Back to top*](#contents)
+
+Data comes in many shapes and sizes, and one way we classify data is either "wide" or "long." Data that is "long" has one row per observation, and each column represents a unique, independent variable. The sample_data data is in a long format. 
+
+In wide data, each row represents a group of observations and each value is placed in a different column rather than a different row. Our taxon data is in wide format, as taxa abundance is spread out across multiple columns which represent different species. To be honest, the lines between "wide" and "long" can be blurry. One clue that your data mind be wide is if you have multiple columns which all share the same units and scale, or add up to a larger whole. In our taxon abundance table, values in each row correspond to a fraction of that samples "whole" (100% of its composition).
+
+The `tidyr` package contains the functions `pivot_wider` and `pivot_longer` that make it easy to switch between the two formats. The `tidyr` package is included in the `tidyverse` package so we don't need to do anything to load it. Let's convert out taxon_clean to long format. 
+
+```{r PivotLonger}
+taxon_long <- taxon_clean %>%
+    pivot_longer(cols = Proteobacteria:Planctomycetota, 
+                 names_to = "Phylum",
+                 values_to = "Abundance")
+
+taxon_long
+```
+
+Notice how much longer our table is. We might describe this data as "tidy" because it makes it easy to work with `ggplot2` and `dplyr` functions (this is where the "tidy" in "tidyverse" comes from). For example, this allows us to use `group_by` to calculate the average relative abundance for each Phylum:
+
+```{r groupPhylum}
+taxon_long %>%
+    group_by(Phylum) %>%
+    summarize(avg_abund = mean(Abundance))
+```
+
+Long format is also, at times, necessary for specific types of plotting. For example, let's make a very common plot in microbial ecology: the stacked bar plot. Notice how we are piping our dataframe into our ggplot call.
+
+```{r stackedBars}
+taxon_long %>%
+    ggplot(aes(x = sample_id, y = Abundance, fill = Phylum)) + 
+    geom_col() + 
+    theme(axis.text.x = element_text(angle = 90))
+
+```
+
+Our bars don't add up perfectly to one, as our data doesn't include rarer Phyla. 
+
+If we want to return our data to wide format, we can use `pivot_wider`
+
+```{r pivotWider}
+taxon_long %>%
+    pivot_wider(names_from = "Phylum", values_from = "Abundance")
+```
 
 # Joining data frames
 
 [*Back to top*](#contents)
 
 
-Now we're ready to join our CO2 emissions data to the gapminder data. Previously we saw that we could read in and filter the gapminder data like this to get the data from the Americas for 2007 so we can create a new dataframe with our filtered data:
+Now we're ready to join our taxon data to the sample data. Previously we saw that we could read in and filter the sample data like this to get the data from the Americas for 2007 so we can create a new dataframe with our filtered data:
 
-```{r LoadGapminder2007}
-gapminder_data_2007 <- read_csv("data/gapminder_data.csv") %>%
-  filter(year == 2007 & continent == "Americas") %>%
-  select(-year, -continent)
+```{r Loadsample2007}
+head(sample_data, 6)
+head(taxon_clean, 6)
 ```
 
-Look at the data in `co2_emissions` and `gapminder_data_2007`. If you had to merge these two data frames together, which column would you use to merge them together? If you said "country" - good job!
+Look at the data in `taxon_clean` and `sample_data`. If you had to merge these two data frames together, which column would you use to merge them together? If you said "sample_id" - good job!
 
-We'll call country our "key". Now, when we join them together, can you think of any problems we might run into when we merge things? We might not have CO2 emissions data for all of the countries in the gapminder dataset and vice versa. Also, a country might be represented in both data frames but not by the same name in both places. As an example, write down the name of the country that the University of Michigan is in - we'll come back to your answer shortly!
+We'll call sample_id our "key". Now, when we join them together, can you think of any problems we might run into when we merge things? We might not have taxon data for all of the countries in the sample dataset and vice versa. 
 
-The dplyr package has a number of tools for joining data frames together depending on what we want to do with the rows of the data of countries that are not represented in both data frames. Here we'll be using `inner_join()` and `anti_join()`. 
+The dplyr package has a number of tools for joining data frames together depending on what we want to do with the rows of the data that are not represented in both data frames. Here we'll be using `inner_join()` and `anti_join()`. 
 
 In an "inner join", the new data frame only has those rows where the same key is found in both data frames. This is a very commonly used join.
 
@@ -534,96 +489,46 @@ In an "inner join", the new data frame only has those rows where the same key is
 
 Let's give the `inner_join()` function a try.
 ```{r InnerJoin}
-inner_join(gapminder_data, co2_emissions)
+inner_join(sample_data, taxon_clean)
 ```
 
-Do you see that we now have data from both data frames joined together in the same data frame? One thing to note about the output is that `inner_join()` tells us that that it joined by "country". We can make this explicit using the "by" argument in the join functions
+Do you see that we now have data from both data frames joined together in the same data frame? One thing to note about the output is that `inner_join()` tells us that that it joined by "sample_id". We can make this explicit using the "by" argument in the join functions
 
 ```{r InnerJoinByCountry}
-inner_join(gapminder_data, co2_emissions, by="country")
+inner_join(sample_data, taxon_clean, by="sample_id")
 ```
 
-One thing to notice is that gapminder data had 25 rows, but the output of our join only had 21. Let's investigate. It appears that there must have been countries in the gapminder data that did not appear in our co2_emissions data frame. 
+One thing to notice is that sample data had 71 rows, but the output of our join only had 32. Let's investigate. It appears that there must have been samples in the sample data that did not appear in our taxon_clean data frame. 
 
 Let's use `anti_join()` for this - this will show us the data for the keys on the left that are missing from the data frame on the right. 
 
 ```{r AntiJoin}
-anti_join(gapminder_data, co2_emissions, by="country")
-```
-We can see that the co2_emissions data were missing for Bolivia, Puerto Rico, United States, and Venezuela. 
-
-If we look at the co2_emissions data with `View()`, we will see that Bolivia, United States, and Venezuela are called different things in the co2_emissions data frame. They're called "Bolivia (Plurin. State of)", "United States of America", and "Venezuela (Boliv. Rep. of)". Puerto Rico isn't a country; it's part of the United States. Using `mutate()` and `recode()`, we can re-import the co2_emissions data so that the country names for Bolivia, United States, and Venezuela, match those in the gapminder data.
-
-```{r Co2Recode}
-co2_emissions <- read_csv("data/co2-un-data.csv", skip=2,
-                          col_names=c("region", "country", "year",
-                                      "series", "value", "footnotes", "source")) %>%
-  select(country, year, series, value) %>%
-  mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total",
-                         "Emissions per capita (metric tons of carbon dioxide)" = "per_capita")) %>%
-  pivot_wider(names_from=series, values_from=value) %>%
-  filter(year==2005) %>%
-  select(-year) %>%
-  mutate(country=recode(country,
-                        "Bolivia (Plurin. State of)" = "Bolivia",
-                        "United States of America" = "United States",
-                        "Venezuela (Boliv. Rep. of)" = "Venezuela")
-  )
-
-anti_join(gapminder_data, co2_emissions, by="country")
+anti_join(sample_data, taxon_clean, by="sample_id")
 ```
 
-Now we see that our recode enabled the join for all countries in the gapminder, and we are left with Puerto Rico. In the next exercise, let's recode Puerto Rico as United States in the gapminder data and then use `group_by()` and `summarize()` to aggregate the data; we'll use the population data to weight the life expectancy and GDP values.
+We can see that none of the joining worked for September samples! What's going on here? Well, let's look closer at those sample IDs. In our sample_data, our sample IDs used the full word "September", but in our taxon table it looks like someone shortened it to "Sep". As such, `inner_join` can recognize that these are matching keys. Let's use what we know about `mutate` alongside a new function, `str_replace`, to help them match. 
 
-
-In the gapminder data, let's recode Puerto Rico as United States. 
-```{r RecodePR}
-gapminder_data <- read_csv("data/gapminder_data.csv") %>%
-filter(year == 2007 & continent == "Americas") %>%
-select(-year, -continent) %>%
-mutate(country = recode(country, "Puerto Rico" = "United States")) 
+```{r CleanEmissionsMutateRecode}
+taxon_clean_goodSept <- taxon_clean %>%
+  mutate(sample_id = str_replace(sample_id, pattern = "Sep", replacement = "September"))
 ```
 
-Now we have to group Puerto Rico and the US together, aggregating and calculating the data for all of the other columns. This is a little tricky - we will need a weighted average of lifeExp and gdpPercap. 
+Now let's try with that inner join again.
 
-```{r RecodeJoinExercise2}
-gapminder_data <- read_csv("data/gapminder_data.csv") %>%
-  filter(year == 2007 & continent == "Americas") %>%
-  select(-year, -continent) %>%
-  mutate(country = recode(country, "Puerto Rico" = "United States")) %>%
-  group_by(country) %>%
-  summarize(lifeExp = sum(lifeExp * pop)/sum(pop),
-            gdpPercap = sum(gdpPercap * pop)/sum(pop),
-            pop = sum(pop)
-  )
+```{r final-innerJoin}
+inner_join(sample_data, taxon_clean_goodSept, by = "sample_id")
 ```
 
-Let's check to see if it worked! 
-```{r anticheckPRJoin}
-anti_join(gapminder_data, co2_emissions, by="country")
+Woohoo! We matched all of the samples from each table. Let's save this as a new dataframe, which we can use in later projects. 
+
+```{r save_joined}
+sample_and_taxon <- inner_join(sample_data, taxon_clean_goodSept, by = "sample_id")
 ```
-Now our `anti_join()` returns an empty data frame, which tells us that we have reconciled all of the keys from the gapminder data with the data in the co2_emissions data frame.
-
-Finally, let's use the `inner_join()` to create a new data frame:
-
-```{r CleanInnerJoin}
-gapminder_co2 <- inner_join(gapminder_data, co2_emissions, by="country")
-```
-
-One last thing! What if we're interested in distinguishing between countries in North America and South America? We want to create two groups - Canada, the United States, and Mexico in one and the other countries in another.  
-
-We can create a grouping variable using `mutate()` combined with an `if_else()` function - a very useful pairing.  
- 
-```{r GapRegion1}  
-gapminder_co2 %>%  
-mutate(region = if_else(country == "Canada" | country == "United States" | country == "Mexico", "north", "south"))  
-```  
-Let's look at the output - see how the Canada, US, and Mexico rows are all labeled as "north" and everything else is labeled as "south"  
 
 We have reached our data cleaning goals! One of the best aspects of doing all of these steps coded in R is that our efforts are reproducible, and the raw data is maintained. With good documentation of data cleaning and analysis steps, we could easily share our work with another researcher who would be able to repeat what we've done. However, it's also nice to have a saved `csv` copy of our clean data. That way we can access it later without needing to redo our data cleaning, and we can also share the cleaned data with collaborators. To save our dataframe, we'll use `write_csv()`. 
 
 ```{r writeCSV}
-write_csv(gapminder_co2, "data/gapminder_co2.csv")
+write_csv(sample_and_taxon, "data/sample_and_taxon.csv")
 ```
 
 Great - Now we can move on to the analysis! 
@@ -632,16 +537,16 @@ Great - Now we can move on to the analysis!
 
 [*Back to top*](#contents)
 
-For our analysis, we have two questions we'd like to answer. First, is there a relationship between the GDP of a country and the amount of CO2 emitted (per capita)? Second, Canada, the United States, and Mexico account for nearly half of the population of the Americas. What percent of the total CO2 production do they account for?
+Now comes the fun part! All this cleaning and joining has given us a dataset which allows us to look at how environmental variables affects the abundance of different microbial Phyla. For this portion, we are going to focus on the Phylum Chloroflexi. We want to figure out - where do species in this Phylum tend to live in Lake Ontario? Are there differences in its abundance between environmental groups?
 
-To answer the first question, we'll plot the CO2 emitted (on a per capita basis) against the GDP (on a per capita basis) using a scatter plot:
+To answer the first question, we'll plot the relative abundance of Chloroflexi against a station's depth using a scatter plot:
 
 ```{r PlotPercapCO2vsGDP}
-ggplot(gapminder_co2, aes(x=gdpPercap, y=per_capita)) +
-  geom_point() +
-  labs(x="GDP (per capita)",
-       y="CO2 emitted (per capita)",
-       title="There is a strong association between a nation's GDP \nand the amount of CO2 it produces"
+ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
+  geom_point()+
+  labs(x="Depth (m)",
+       y="Chloroflexi (Relative Abundance)",
+       title="There is a strong association between a station's depth \nand the abundance of Chloroflexi"
   )
 ```
 
@@ -650,54 +555,39 @@ ggplot(gapminder_co2, aes(x=gdpPercap, y=per_capita)) +
 To help clarify the association, we can add a fit line through the data using `geom_smooth()`
 
 ```{r PlotPercapCO2vsGDPSmooth}
-ggplot(gapminder_co2, aes(x=gdpPercap, y=per_capita)) +
-  geom_point() +
-  labs(x="GDP (per capita)",
-       y="CO2 emitted (per capita)",
-       title="There is a strong association between a nation's GDP \nand the amount of CO2 it produces"
+ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
+  geom_point()+
+  labs(x="Depth (m)",
+       y="Chloroflexi (Relative Abundance)",
+       title="There is a strong association between a station's depth \nand the abundance of Chloroflexi"
   ) +
   geom_smooth()
 ```
 
-We can force the line to be straight using `method="lm"` as an argument to `geom_smooth`
+By default, ggplot uses a funky model called "loess estimation" We can force the line to be a linear model (straight) using `method="lm"` as an argument to `geom_smooth`
 
 ```{r PlotPercapCO2vsGDP1SmoothLm}
-ggplot(gapminder_co2, aes(x=gdpPercap, y=per_capita)) +
-  geom_point() +
-  labs(x="GDP (per capita)",
-       y="CO2 emitted (per capita)",
-       title="There is a strong association between a nation's GDP \nand the amount of CO2 it produces"
+ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
+  geom_point()+
+  labs(x="Depth (m)",
+       y="Chloroflexi (Relative Abundance)",
+       title="There is a strong association between a station's depth \nand the abundance of Chloroflexi"
   ) +
   geom_smooth(method="lm")
 ```
 
-To answer our first question, as the title of our plot indicates there is indeed a strong association between a nation's GDP and the amount of CO2 it produces.
+To answer our first question, Chloroflexi appears to be much more abundant in the deeper samples from Lake Ontario!
 
-For the second question, we want to create two groups - Canada, the United States, and Mexico in one and the other countries in another.
-
-We can create a grouping variable using `mutate()` combined with an `if_else()` function - a very useful pairing.
-
-```{r GapRegion2}
-gapminder_co2 %>%
-  mutate(region = if_else(country == "Canada" | country == "United States" | country == "Mexico", "north", "south"))
-```
-
-Now we can use this column to repeat our `group_by()` and `summarize()` steps
+For the second question, we want to calculate the average abundance of Chloroflexi in our different environmental groups, using a combination of `group_by` and `summarize`. Let's also calculate the standard deviation, to give us a sense of the variance in each group.
 
 ```{r GapRegionGroupSummary}
-gapminder_co2 %>%
-  mutate(region = if_else(country == "Canada" |
-                            country == "United States" |
-                            country == "Mexico", "north", "south")) %>%
-  group_by(region) %>%
-  summarize(sumtotal = sum(total),
-            sumpop = sum(pop))
+sample_and_taxon %>%
+  group_by(env_group) %>%
+  summarize(avg_chloro = mean(Chloroflexi),
+            sd_chloro = sd(Chloroflexi))
 ```
 
-The `if_else()` statement reads like, "if country equals "Canada" OR `|` "United states" OR "Mexico", the new variable region should be "north", else "south"". It's worth exploring logical operators for "or" `|`, "and" `&&`, and "not" `!`, which opens up a great deal of possibilities for writing code to do what you want.
-
-We see that although Canada, the United States, and Mexico account for close to half the population of the Americas, they account for 88% of the CO2 emitted. We just did this math quickly by plugging the numbers from our table into the console to get the percentages. Can we make that a little more reproducible by calculating percentages for population (pop) and total emissions (total) into our data before summarizing?
-
+We see that Chloroflexi is most abundant in the Deep groups, relatively rare in Shallow May, and very rare in Shallow September. 
 
 # Bonus 
 
@@ -705,14 +595,12 @@ We see that although Canada, the United States, and Mexico account for close to 
 
 ### Sort data with `arrange()`
 
-The `arrange()` function allows us to sort our data by some value. Let's use the `gapminder_data` dataframe. We will take the average value for each continent in 2007 and then sort it so the continents with the longest life expectancy are on top. Which continent might you guess has be highest life expectancy before running the code?
+The `arrange()` function allows us to sort our data by some value. Let's use the `sample_data` dataframe. We will take the average value for each environmental group and then sort it so the environmental group with the highest cell abundance are on top. Which environmental group might you guess has the highest cell abundance before running the code?
 
-The helper function `ends_with()` can help us here.
 ```{r GapLifeContinentArrange}
-gapminder_data %>%
- filter(year==2007) %>%
- group_by(continent) %>%
- summarise(average= mean(lifeExp)) %>%
+sample_data %>%
+ group_by(env_group) %>%
+ summarise(average= mean(cells_per_ml)) %>%
  arrange(desc(average))
 ```
 
@@ -721,94 +609,29 @@ Notice there that we can use the column created the in the `summarize()` step ("
 
 ## Bonus exercises
 
-> ## Calculating percent
+> ## Calculating absolute abundance
 >
-> What percentage of the population and CO2 emissions in the Americas does the United States make up? What percentage of the population and CO2 emission does North America make up? 
+> Our data contains total cell abundance (`cells_per_ml`) alongside the relative abundance of each Phylum. If we wanted to get the absolute abundance of Chloroflexi (Cells of Chloroflexi per ml), how would we calculate that?
 >
 > > ## Solution
 > >
-> > Create a new variable using `mutate()` that calculates percentages for the pop and total variables.
+> > Create a new variable using `mutate()` that calculates absolute abundance of Chloroflexi.
 > >
 > > ```{r PopPercExercise}
-> > gapminder_co2 %>%
-> >   mutate(region = if_else(country == "Canada" | country == "United States" | country == "Mexico", "north", "south")) %>%
-> >   mutate(totalPercent = total/sum(total)*100,
-> >          popPercent = pop/sum(pop)*100)
+> > sample_and_taxon %>%
+> >   mutate(abs_Chloroflexi = cells_per_ml * Chloroflexi) %>%
+> >   glimpse()
 > > ```
 > >
-> > This table shows that the United states makes up 33% of the population of the Americas, but accounts for 77% of total emissions. Now let's take a look at population and emission for the two different continents: 
+> > Previously, we found that Deep samples had the greatest *relative* abundance of Chloroflexi. Do they also have the greatest *absolute* abundance of this taxa?
 > >
 > > ```{r}
-> > gapminder_co2 %>%
-> >   mutate(region = if_else(country == "Canada" | country == "United States" | country == "Mexico", "north", "south")) %>%
-> >   mutate(totalPercent = total/sum(total)*100,
-> >          popPercent = pop/sum(pop)*100) %>%
-> >   group_by(region) %>%
-> >   summarize(sumTotalPercent = sum(totalPercent),
-> >             sumPopPercent = sum(popPercent))
+> > sample_and_taxon %>%
+> >   mutate(abs_Chloroflexi = cells_per_ml * Chloroflexi) %>%
+> >   group_by(env_group) %>%
+> >   summarize(avg_chloro_relative = mean(Chloroflexi),
+> >             avg_chloro_absolute = mean(abs_Chloroflexi))
 > > ```
-> > 
-> {: .solution}
-{: .challenge}
-
-
-
-> ## CO2 bar plot
-> Create a bar plot of the percent of emissions for each country, colored by north and south america (HINT: use geom_col())  
-> > ## Solution 
-> > ```{r}
-> > gapminder_co2 %>% ggplot(aes(x = country, y = total_emissionsPercent, fill = region)) +  
-> > geom_col()  
-> > ```
-> {: .solution}
-> 
-> Now rotate the x-labels by 90 degrees (if you don't remember how, google it again or look at our code from the ggplot lesson)  
-> 
-> > ## Solution 
-> > ```{r}
-> > gapminder_co2 %>% ggplot(aes(x = country, y = total_emissionsPercent, fill = region)) +  
-> > geom_col() +  
-> > theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
-> > ```
-> {: .solution}
-> 
-> Reorder the bars in descending order. **Hint:** try Googling how to use the `reorder()` function with ggplot.
-> > ## Solution 
-> > ```{r}
-> > gapminder_co2 %>% ggplot(aes(x = reorder(country, - total_emissionsPercent), y = total_emissionsPercent, fill = region)) +  
-> > geom_col() +  
-> > theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
-> > ```
-> {: .solution}
-> 
-> Practice making it look pretty! 
-{: .challenge}
-
-
-> ## low emissions
-> Find the 3 countries with lowest per capita emissions. **Hint:** use the `arrange()` function. 
-> 
-> > ## Solution 
-> > ```{r} 
-> > gapminder_co2 %>% arrange(per_capita_emissions)  
-> > ```
-> {: .solution}
-> 
-> Create a bar chart for the per capita emissions for just those three countries. 
-> > ## Solution 
-> > ```{r} 
-> > gapminder_co2 %>% filter(country == "Haiti" | country == "Paraguay" | country == "Nicaragua") %>%  
-> > ggplot(aes(x = country, y = per_capita_emissions)) +  
-> > geom_col() 
-> > ```
-> {: .solution}
-> 
-> Reorder them in descending order. **Hint:** use the `reorder()` function. 
-> > ## Solution 
-> > ```{r} 
-> > gapminder_co2 %>% filter(country == "Haiti" | country == "Paraguay" | country == "Nicaragua") %>%  
-> > ggplot(aes(x = reorder(country, - per_capita_emissions), y = per_capita_emissions)) +  
-> > geom_col() 
-> > ```
+> > Looks like yes! However, the difference is much more slight between Deep and Shallow_May when we consider absolute abundance.
 > {: .solution}
 {: .challenge}
