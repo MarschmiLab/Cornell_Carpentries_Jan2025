@@ -45,24 +45,29 @@ set.seed(20210109)
 1. [Formatting](#formatting)
 1. [Integrating it all together: Paired exercise](#integrating-it-all-together-paired-exercise)
 
-Recall that our  goal is to generate a report to the United Nations on how a country's life expectancy is related to GDP.
+Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario
 
-> ## Discusion
+> ## Discussion
 > How do you usually share data analyses with your collaborators? Many people share them through a Word or PDF document, a spreadsheet, slides, a  graphic, etc.
 {: .discussion}
 
 ## What is R Markdown and why use it?
 _[Back to top](#contents)_
 
-In R Markdown, you can incorporate ordinary text (ex. experimental methods, analysis and discussion of results) alongside code and figures! (Some people write entire manuscripts in R Markdown.) This is useful for writing reproducible reports and publications, sharing work with collaborators, writing up homework, and keeping a bioinformatics notebook. Because the code is emedded in the document, the tables and figures are *reproducible*. Anyone can run the code and get the same results. If you find an error or want to add more to the report, you can just re-run the document and you'll have updated tables and figures! This concept of combining text and code is called "literate programming". To do this we use R Markdown, which combines Markdown (renders plain text) with R. You can output an html, PDF, or Word document that you can share with others. In fact, this webpage is an example of a rendered R markdown file!
+In R Markdown, you can incorporate ordinary text (ex. experimental methods, analysis and discussion of results) alongside code and figures! (Some people write entire manuscripts in R Markdown - if you're curious, talk to the Schmidt Lab!) This is useful for writing reproducible reports and publications, sharing work with collaborators, writing up homework, and keeping a bioinformatics notebook. Because the code is embedded in the document, the tables and figures are *reproducible*. Anyone can run the code and get the same results. If you find an error or want to add more to the report, you can just re-run the document and you'll have updated tables and figures! This concept of combining text and code is called "literate programming". To do this we use R Markdown, which combines Markdown (renders plain text) with R. You can output an html, PDF, or Word document that you can share with others. In fact, this webpage is an example of a rendered R markdown file!
 
 (If you are familiar with Jupyter notebooks in the Python programming environment, R Markdown is  R's equivalent of a Jupyter notebook.)
+
+> ## Other Options for Literate Programming
+> There are many options for combining code and prose. If you are familiar with Jupyter notebooks in the Python programming environment, R Markdown is  R's equivalent of a Jupyter notebook. The company which manages RStudio, Posit, has also invested considerable energy in a new document type "Quarto", which they encourage users to adopt as it does not rely on an R install. There are many similarities between Quarto and RMarkdown, but the community of Quarto users (and history of troubleshooting support) is still smaller. Maybe someday soon, we will be teaching Quarto documents instead!
+>
+{: .callout}
 
 ## Creating a reports directory
 _[Back to top](#contents)_
 
-To get started, let's use the Unix Shell to create a directory within `un-report` called `reports` where we will write our reports to the UN.
-First, open the Unix Shell and `cd` to `un-report`:
+To get started, let's use the Unix Shell to create a directory within `ontario-report` called `reports` where we will write our reports.
+First, open the Unix Shell and `cd` to `ontario-report`:
 
 ~~~
 pwd
@@ -71,7 +76,7 @@ mkdir reports
 {: .source}
 
 ~~~
-/home/USERNAME/Desktop/un-report/reports/
+/home/USERNAME/Desktop/ontario-report/reports/
 ~~~
 {: .output}
 
@@ -86,7 +91,7 @@ Now that we have a better understanding of what we can use R Markdown files for,
 To create an R Markdown file:
 - Open RStudio
 - Go to File &rarr; New File &rarr; R Markdown
-- Give your document a title, something like "A UN Report on the Relationship between GDP and Life Expectancy" (Note: this is not the same as the file name - it's just a title that will appear at the top of your report)
+- Give your document a title, something like "A Report on Lake Ontario's Microbes" (Note: this is not the same as the file name - it's just a title that will appear at the top of your report)
 - Keep the default output format as HTML.
 - R Markdown files always end in `.Rmd`
 
@@ -121,7 +126,6 @@ _[Back to top](#contents)_
 The next section is a *code chunk*, or embedded R code, that sets up options for all code chunks. Here is the default when you create a new R Markdown file:
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r setup, include=FALSE}\nknitr::opts_knit$set(root.dir = normalizePath("..")\n```\n')
 cat('```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE)\n```\n')
 ```
 
@@ -131,7 +135,7 @@ All code chunks have this format:
 cat('```{r}\n# Your code here\n```')
 ```
 
-All of the code is enclosed in 3 back ticks (`r cat("\x60\x60\x60")`), and the `{r}` part indicates that it's a chunk of R code.
+All of the code is enclosed in 3 back ticks and the `{r}` part indicates that it's a chunk of R code.
 
 You can also include other information within the curly brackets to indicate different information about that code chunk.
 For instance, the first code block is named "setup", and `include=FALSE` prevents code and results from showing up in the output file.
@@ -163,11 +167,11 @@ To render our documents into html format, we can "knit" them in R Studio.
 Usually, R Markdown renders documents from the directory where the document is saved (the location of the `.Rmd` file), but we want it to render from the main project directory where our `.Rproj` file is.
 This is because that's where all of our relative paths are from and it's good practice to have all of your relative paths from the main project directory.
 To change this default, click on the down arrow next to the "Knit" button at the top left of R Studio, go to "Knit Directory" and click "Project Directory".
-Now it will assume all of your relative paths for reading and writing files are from the `un-report` directory, rather than the `reports` directory.
+Now it will assume all of your relative paths for reading and writing files are from the `ontario-report` directory, rather than the `reports` directory.
 
 Now that we have that set up, let's start on the report!
 
-We're going to use the code you generated yesterday to plot GDP vs. Life Expectancy to include in the report. Recall that we needed a couple R packages to generate these plots. We can create a new code chunk to load the needed packages. You could also include this in the previous setup chunk, it's up to your personal preference.
+We're going to use the code you generated yesterday to plot cell abundance and temperature to include in the report. Recall that we needed a couple R packages to generate these plots. We can create a new code chunk to load the needed packages. You could also include this in the previous setup chunk, it's up to your personal preference.
 
 ```{r,comment=NA,echo=F,collapse=T}
 cat('```{r packages}\nlibrary(tidyverse)\n```\n')
@@ -176,28 +180,28 @@ cat('```{r packages}\nlibrary(tidyverse)\n```\n')
 Now, in a real report this is when we would type out the background and purpose of our analysis to provide context to our readers. However, since writing is not a focus of this workshop we will avoid lengthy prose and stick to short descriptions. You can copy the following text  into your own report below the package code chunk.
 
 ```
-This report was prepared to the attention of the United Nations. It analyzes the relationship between a country's GDP, its life expectancy and CO2 emissions. Our goal is to determine to what degree a country’s economic strength or weakness may be related to its public health status and impact on climate pollution. We hypothesize that both life expectancy and CO2 emissions increase with a country's GDP.
+This report was prepared to analyze environmental and microbial data from Lake Ontario. Our goal is to determine to how environmental variables like temperature affect the abundance of different Phyla of bacteria.
 ```
 
-Now, since we want to show our results comparing GDP and life expectancy by country, we need to read in this data so we can regenerate our plot. We will add another code chunk to prepare the data.
+Now, since we want to show our results comparing cell abundance and temperature, we need to read in this data so we can regenerate our plot. We will add another code chunk to prepare the data.
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r data}\ngapminder_1997 <- read_csv("data/gapminder_1997.csv")\n```\n')
+cat('```{r data}\nsample_and_taxon <- read_csv("data/sample_and_taxon.csv")\n```\n')
 ```
 
 Now that we have the data, we need to produce the plot. Let's create it!
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r gdp_lifeexp_1997}\nggplot(data = gapminder_1997) + \n
-  aes(x = gdpPercap, y = lifeExp, color=continent, size=pop/1000000) +\n
+cat('```{r cell_vs_temp}\nggplot(data = sample_and_taxon) + \n
+  aes(x = temperature, y = cells_per_ml/1000000, color=env_group) +\n
   geom_point() +\n
-  labs(x = "GDP Per Capita", y = "Life Expectancy",\n
-       title= "Do people in wealthy countries live longer?", size="Population (in millions)")\n```\n')
+  labs(x = "Temperature (Celsius)", y = "Cells(million/ml)",\n
+       title= "Are temperature and cell abundance linked?")\n```\n')
 ```
 
 Now we can knit our document to see how our report looks! Use the <kbd>knit</kbd> button in the top left of the screen.
 
-![]({{ page.root }}/fig/r-markdown/first_report_render.png)
+![]({{ page.root }}/fig/r-markdown/first-report-render.png)
 
 It's looking pretty good, but there seem to be a few extra bits that we don't need in the report. For example, the report shows that we load the tidyverse package and the accompanying messages.
 
@@ -216,8 +220,8 @@ We can also see the code that was used to generate the plot. Depending on the pu
 Oops! Now the plot doesn't show up in our report at all. This is because setting `include=FALSE` prevents anything in the code chunk from appearing in the report. Instead we can add `echo=FALSE`  to tell this code chunk that we don't want to see the code but just the output.
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r gdp_lifeexp_1997, echo=FALSE}\nggplot(data = gapminder_1997) + \n
-  aes(x = gdpPercap, y = lifeExp, color=continent, size=pop/1000000) +\n
+cat('```{r cell_vs_temp, echo=FALSE}\nggplot(data = sample_and_taxon) + \n
+  aes(x = temperature, y = cells_per_ml, color=env_group, size=pop/1000000) +\n
   geom_point() +\n
   labs(x = "GDP Per Capita", y = "Life Expectancy",\n
        title= "Do people in wealthy countries live longer?", size="Population (in millions)")\n```\n')
@@ -231,20 +235,18 @@ Before we finalize our report, let's look at a few other cool features. Sometime
 
 First, let's create a code chunk that summarizes features of our data that we can use to describe our plot to  our audience. Note that we set `include=FALSE` because we only want this step to happen in the background. For our purposes, we will calculate how many countries were included in the analysis, as well as the minimum and maximum GDP per capita values:
 
-```{r data_summary, message = FALSE}
-gapminder_1997 <- read_csv("data/gapminder_1997.csv")
-
-nCountries <- gapminder_1997 %>%
-  select(country) %>%
-  n_distinct()
-
-minGDP <- gapminder_1997 %>%
-  summarise(round(min(gdpPercap))) %>%
-  pull()
-
-maxGDP <- gapminder_1997 %>%
-  summarise(round(max(gdpPercap))) %>%
-  pull()
+```{r,comment=NA,echo=F,collapse=T}
+cat('```{r data_summary, include=FALSE}\nnSamples <- sample_and_taxon %>%\n
+  select(sample_id) %>%\n
+  n_distinct()\n
+\n
+minTemp <- sample_and_taxon %>%\n
+  summarise(round(min(temperature))) %>%\n
+  pull()\n
+\n
+maxTemp <- sample_and_taxon %>%\n
+  summarise(round(max(temperature))) %>%\n
+  pull()\n```\n')
 ```
 
 Now, all we need to do is reference the values we just computed to describe our
@@ -256,10 +258,8 @@ that R will automatically update these values every time our data might change
 (if we were to decide to drop or add countries to this  analysis, for example).
 
 ```
-The above plot shows the relationship between GDP per capita and life expectancy
-for a total of `r '\x60r nCountries \x60'` countries. For this set of countries,
-economic wealth ranged from a minimum of USD `r '\x60r minGDP\x60'`
-to a maximum of USD `r '\x60r maxGDP\x60'` per capita.
+The above plot shows the relationship between cell abundance and temperature for a total of `r '\x60r nSamples \x60'` samples. For this set of samples, temperature ranged from a minimum of `r '\x60r minTemp\x60'`°C
+to a maximum `r '\x60r maxTemp\x60'`°C.
 ```
 {: .code}
 
@@ -275,15 +275,15 @@ Columns are separated by the pipe key <kbd>|</kbd> located above <kbd>Enter</kbd
 When we knit the report again, the code above will render like this:
 ![]({{ page.root }}/fig/r-markdown/table_format.png)
 
-Here's the text that we need to include to creata summary table of our data:
+Here's the text that we need to include to create a summary table of our data:
 
 ```{r, echo = FALSE}
 cat('```
 |Summary of Data|
 |------|------|
-|Number of Countries|`r nCountries`|
-|Minimum GDP per capita|`r minGDP`|
-|Maximum GDP per capita|`r maxGDP`|
+|Number of Samples|`r nSamples`|
+|Minimum Temperature|`r minTemp`|
+|Maximum Temperature|`r maxTemp`|
 
 ```')
 ```
@@ -293,15 +293,16 @@ This will render like this:
 
 ![]({{ page.root }}/fig/r-markdown/table_fillin.png)
 
-This is useful if we are reporting a few values, but can get tedious for larger tables. Another way we can add tables to our reports is using an R function called `kable()`. Since this is an R function, we will use it within a code chunk. We can give the `kable()` function a data table and it will format it to a nice looking table in the report. For example, we could use the following code to generate a table of all the countries in Oceania. The rendered version should look almost exactly as it does on this webpage. 
+This is useful if we are reporting a few values, but can get tedious for larger tables. Another way we can add tables to our reports is using an R function called `kable()`. Since this is an R function, we will use it within a code chunk. We can give the `kable()` function a data table and it will format it to a nice looking table in the report. For example, we could use the following code to generate a table of all the Deep samples. The rendered version should look almost exactly as it does on this webpage. 
 
 ```{r,comment=NA, collapse=T}
 # load library
 library(knitr)
 
 # print kable
-gapminder_1997 %>%
-  filter(continent == "Oceania") %>%
+sample_and_taxon %>%
+  filter(env_group == "Deep") %>%
+  select(sample_id, env_group, cells_per_ml, temperature) %>%
   kable()
 ```
 
@@ -344,16 +345,16 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 ## Integrating it all together: Make your own report!
 _[Back to top](#contents)_
 
-You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report.
-Now, you're going to work in pairs to practice everything you learned.
-Don't worry - if you have questions, the instructor and helpers are here to help you out!
+You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report. Don't worry - if you have questions, the instructor and helpers are here to help you out!
 
 1. Make a new R Markdown file.
 1. Give it an informative title.
 1. Delete all the unnecessary Markdown and R code (everything below the setup R chunk).
-1. Save it to the `reports` directory using an informative file name.
+1. Save it to the `reports` directory as LASTNAME_Ontario_Report.Rmd
 
-Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. These are nice exercises because we are all familiar with the data and have the solutions saved. 
+Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working! 
+
+The exercises below give you some ideas of directions to pursue. However, you're welcome to branch out. Maybe you have your own hypotheses you'd like to test. These are nice exercises because we are all familiar with the data and have the solutions saved. 
 
 That said, you're also welcome to branch out. Maybe you want to explore a new type of ggplot. Maybe you're learning to create interactive tables with `reactable`. Maybe you're trying to read in some of your own data into your report. 
 
@@ -361,8 +362,7 @@ Just remember to use a combination of prose (writing) and code to document your 
 
 This is a way for you to practice what you've learned.
 
-
-**One note:** It may be helpful to copy and paste the questions into the R Markdown file as you go.
+Once you're done, 
 
 ### Exercises using the gapminder data
 _[Back to top](#contents)_
@@ -387,7 +387,7 @@ _[Back to top](#contents)_
 > ```{r}
 > ggplot(gapminder, aes(x=year,y=pop)) +
 > geom_point() +
-> facet_wrap(vars(continent))
+> facet_wrap(vars(env_group))
 > ```
 {: .solution}
 
@@ -399,13 +399,13 @@ _[Back to top](#contents)_
 > ```
 {: .solution}
 
-[4] Plot year vs. population separated into a plot for each continent but excluding the 2 outlier countries.
+[4] Plot year vs. population separated into a plot for each env_group but excluding the 2 outlier countries.
 
 > ## Solution
 > ```{r}
 > gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop)) +
 > geom_point() +
-> facet_wrap(vars(continent))
+> facet_wrap(vars(env_group))
 > ```
 {: .solution}
 
@@ -419,7 +419,7 @@ _[Back to top](#contents)_
 > ```{r}
 > gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop)) +
 > geom_point() +
-> facet_wrap(vars(continent)) +
+> facet_wrap(vars(env_group)) +
 > theme(axis.text.x=element_text(angle=90))
 > ```
 {: .solution}
@@ -430,7 +430,7 @@ _[Back to top](#contents)_
 > ```{r}
 > gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop,group=country)) +
 > geom_line() +
-> facet_wrap(vars(continent)) +
+> facet_wrap(vars(env_group)) +
 > theme(axis.text.x=element_text(angle=90))
 > ```
 {: .solution}
@@ -442,7 +442,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> filter(gapminder, year==1982) %>% slice_max(lifeExp)
+> filter(gapminder, year==1982) %>% slice_max(cells_per_ml)
 > ```
 {: .solution}
 
@@ -450,7 +450,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r}
-> gapminder %>% group_by(year) %>% select(country,year,lifeExp) %>% slice_max(lifeExp) %>% print(n=Inf)
+> gapminder %>% group_by(year) %>% select(country,year,cells_per_ml) %>% slice_max(cells_per_ml) %>% print(n=Inf)
 > ```
 {: .solution}
 
@@ -458,7 +458,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> gapminder %>% filter(continent=='Asia') %>% ggplot(aes(x=as.character(year),y=lifeExp)) +
+> gapminder %>% filter(env_group=='Asia') %>% ggplot(aes(x=as.character(year),y=cells_per_ml)) +
 > geom_boxplot() +
 > ylab('Life expectancy') +
 > xlab('')
@@ -472,17 +472,17 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r}
-> gapminder %>% filter(continent == 'Asia') %>% group_by(year) %>% slice_min(lifeExp)
+> gapminder %>% filter(env_group == 'Asia') %>% group_by(year) %>% slice_min(cells_per_ml)
 > ```
 {: .solution}
 
-[11] Make a boxplot for the life expectancies of the countries over time for each continent. Try to fix the x and y axis labels and text, too. Feel free to change the theme if you'd like.
+[11] Make a boxplot for the life expectancies of the countries over time for each env_group. Try to fix the x and y axis labels and text, too. Feel free to change the theme if you'd like.
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> gapminder %>% ggplot(aes(x=as.character(year),y=lifeExp)) +
+> gapminder %>% ggplot(aes(x=as.character(year),y=cells_per_ml)) +
 > geom_boxplot() +
-> facet_wrap(~continent) +
+> facet_wrap(~env_group) +
 > theme_bw() +
 > theme(axis.text.x=element_text(angle=90)) +
 > xlab('') +
@@ -494,7 +494,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> filter(gapminder, year == 1952 | year == 2007) %>% select('country','year',lifeExp) %>% pivot_wider(names_from=year,values_from=lifeExp) %>% mutate(diff=`2007`-`1952`) %>% slice_max(diff)
+> filter(gapminder, year == 1952 | year == 2007) %>% select('country','year',cells_per_ml) %>% pivot_wider(names_from=year,values_from=cells_per_ml) %>% mutate(diff=`2007`-`1952`) %>% slice_max(diff)
 > ```
 {: .solution}
 
@@ -502,7 +502,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> filter(gapminder, year == 1952 | year == 2007) %>% select('country','year',lifeExp) %>% pivot_wider(names_from=year,values_from=lifeExp) %>% mutate(diff=`2007`-`1952`) %>% filter(diff < 0)
+> filter(gapminder, year == 1952 | year == 2007) %>% select('country','year',cells_per_ml) %>% pivot_wider(names_from=year,values_from=cells_per_ml) %>% mutate(diff=`2007`-`1952`) %>% filter(diff < 0)
 > ```
 {: .solution}
 

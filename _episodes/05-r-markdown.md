@@ -39,24 +39,29 @@ keypoints:
 1. [Formatting](#formatting)
 1. [Integrating it all together: Paired exercise](#integrating-it-all-together-paired-exercise)
 
-Recall that our  goal is to generate a report to the United Nations on how a country's life expectancy is related to GDP.
+Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario
 
-> ## Discusion
+> ## Discussion
 > How do you usually share data analyses with your collaborators? Many people share them through a Word or PDF document, a spreadsheet, slides, a  graphic, etc.
 {: .discussion}
 
 ## What is R Markdown and why use it?
 _[Back to top](#contents)_
 
-In R Markdown, you can incorporate ordinary text (ex. experimental methods, analysis and discussion of results) alongside code and figures! (Some people write entire manuscripts in R Markdown.) This is useful for writing reproducible reports and publications, sharing work with collaborators, writing up homework, and keeping a bioinformatics notebook. Because the code is emedded in the document, the tables and figures are *reproducible*. Anyone can run the code and get the same results. If you find an error or want to add more to the report, you can just re-run the document and you'll have updated tables and figures! This concept of combining text and code is called "literate programming". To do this we use R Markdown, which combines Markdown (renders plain text) with R. You can output an html, PDF, or Word document that you can share with others. In fact, this webpage is an example of a rendered R markdown file!
+In R Markdown, you can incorporate ordinary text (ex. experimental methods, analysis and discussion of results) alongside code and figures! (Some people write entire manuscripts in R Markdown - if you're curious, talk to the Schmidt Lab!) This is useful for writing reproducible reports and publications, sharing work with collaborators, writing up homework, and keeping a bioinformatics notebook. Because the code is embedded in the document, the tables and figures are *reproducible*. Anyone can run the code and get the same results. If you find an error or want to add more to the report, you can just re-run the document and you'll have updated tables and figures! This concept of combining text and code is called "literate programming". To do this we use R Markdown, which combines Markdown (renders plain text) with R. You can output an html, PDF, or Word document that you can share with others. In fact, this webpage is an example of a rendered R markdown file!
 
 (If you are familiar with Jupyter notebooks in the Python programming environment, R Markdown is  R's equivalent of a Jupyter notebook.)
+
+> ## Other Options for Literate Programming
+> There are many options for combining code and prose. If you are familiar with Jupyter notebooks in the Python programming environment, R Markdown is  R's equivalent of a Jupyter notebook. The company which manages RStudio, Posit, has also invested considerable energy in a new document type "Quarto", which they encourage users to adopt as it does not rely on an R install. There are many similarities between Quarto and RMarkdown, but the community of Quarto users (and history of troubleshooting support) is still smaller. Maybe someday soon, we will be teaching Quarto documents instead!
+>
+{: .callout}
 
 ## Creating a reports directory
 _[Back to top](#contents)_
 
-To get started, let's use the Unix Shell to create a directory within `un-report` called `reports` where we will write our reports to the UN.
-First, open the Unix Shell and `cd` to `un-report`:
+To get started, let's use the Unix Shell to create a directory within `ontario-report` called `reports` where we will write our reports.
+First, open the Unix Shell and `cd` to `ontario-report`:
 
 ~~~
 pwd
@@ -65,7 +70,7 @@ mkdir reports
 {: .source}
 
 ~~~
-/home/USERNAME/Desktop/un-report/reports/
+/home/USERNAME/Desktop/ontario-report/reports/
 ~~~
 {: .output}
 
@@ -80,7 +85,7 @@ Now that we have a better understanding of what we can use R Markdown files for,
 To create an R Markdown file:
 - Open RStudio
 - Go to File &rarr; New File &rarr; R Markdown
-- Give your document a title, something like "A UN Report on the Relationship between GDP and Life Expectancy" (Note: this is not the same as the file name - it's just a title that will appear at the top of your report)
+- Give your document a title, something like "A Report on Lake Ontario's Microbes" (Note: this is not the same as the file name - it's just a title that will appear at the top of your report)
 - Keep the default output format as HTML.
 - R Markdown files always end in `.Rmd`
 
@@ -117,15 +122,6 @@ The next section is a *code chunk*, or embedded R code, that sets up options for
 
 ~~~
 ```{r setup, include=FALSE}
-knitr::opts_knit$set(root.dir = normalizePath("..")
-```
-~~~
-{: .output}
-
-
-
-~~~
-```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ~~~
@@ -141,7 +137,7 @@ All code chunks have this format:
 ~~~
 {: .output}
 
-All of the code is enclosed in 3 back ticks (), and the `{r}` part indicates that it's a chunk of R code.
+All of the code is enclosed in 3 back ticks and the `{r}` part indicates that it's a chunk of R code.
 
 You can also include other information within the curly brackets to indicate different information about that code chunk.
 For instance, the first code block is named "setup", and `include=FALSE` prevents code and results from showing up in the output file.
@@ -173,11 +169,11 @@ To render our documents into html format, we can "knit" them in R Studio.
 Usually, R Markdown renders documents from the directory where the document is saved (the location of the `.Rmd` file), but we want it to render from the main project directory where our `.Rproj` file is.
 This is because that's where all of our relative paths are from and it's good practice to have all of your relative paths from the main project directory.
 To change this default, click on the down arrow next to the "Knit" button at the top left of R Studio, go to "Knit Directory" and click "Project Directory".
-Now it will assume all of your relative paths for reading and writing files are from the `un-report` directory, rather than the `reports` directory.
+Now it will assume all of your relative paths for reading and writing files are from the `ontario-report` directory, rather than the `reports` directory.
 
 Now that we have that set up, let's start on the report!
 
-We're going to use the code you generated yesterday to plot GDP vs. Life Expectancy to include in the report. Recall that we needed a couple R packages to generate these plots. We can create a new code chunk to load the needed packages. You could also include this in the previous setup chunk, it's up to your personal preference.
+We're going to use the code you generated yesterday to plot cell abundance and temperature to include in the report. Recall that we needed a couple R packages to generate these plots. We can create a new code chunk to load the needed packages. You could also include this in the previous setup chunk, it's up to your personal preference.
 
 
 ~~~
@@ -190,15 +186,15 @@ library(tidyverse)
 Now, in a real report this is when we would type out the background and purpose of our analysis to provide context to our readers. However, since writing is not a focus of this workshop we will avoid lengthy prose and stick to short descriptions. You can copy the following text  into your own report below the package code chunk.
 
 ```
-This report was prepared to the attention of the United Nations. It analyzes the relationship between a country's GDP, its life expectancy and CO2 emissions. Our goal is to determine to what degree a country’s economic strength or weakness may be related to its public health status and impact on climate pollution. We hypothesize that both life expectancy and CO2 emissions increase with a country's GDP.
+This report was prepared to analyze environmental and microbial data from Lake Ontario. Our goal is to determine to how environmental variables like temperature affect the abundance of different Phyla of bacteria.
 ```
 
-Now, since we want to show our results comparing GDP and life expectancy by country, we need to read in this data so we can regenerate our plot. We will add another code chunk to prepare the data.
+Now, since we want to show our results comparing cell abundance and temperature, we need to read in this data so we can regenerate our plot. We will add another code chunk to prepare the data.
 
 
 ~~~
 ```{r data}
-gapminder_1997 <- read_csv("data/gapminder_1997.csv")
+sample_and_taxon <- read_csv("data/sample_and_taxon.csv")
 ```
 ~~~
 {: .output}
@@ -207,23 +203,23 @@ Now that we have the data, we need to produce the plot. Let's create it!
 
 
 ~~~
-```{r gdp_lifeexp_1997}
-ggplot(data = gapminder_1997) + 
+```{r cell_vs_temp}
+ggplot(data = sample_and_taxon) + 
 
-  aes(x = gdpPercap, y = lifeExp, color=continent, size=pop/1000000) +
+  aes(x = temperature, y = cells_per_ml/1000000, color=env_group) +
 
   geom_point() +
 
-  labs(x = "GDP Per Capita", y = "Life Expectancy",
+  labs(x = "Temperature (Celsius)", y = "Cells(million/ml)",
 
-       title= "Do people in wealthy countries live longer?", size="Population (in millions)")
+       title= "Are temperature and cell abundance linked?")
 ```
 ~~~
 {: .output}
 
 Now we can knit our document to see how our report looks! Use the <kbd>knit</kbd> button in the top left of the screen.
 
-![]({{ page.root }}/fig/r-markdown/first_report_render.png)
+![]({{ page.root }}/fig/r-markdown/first-report-render.png)
 
 It's looking pretty good, but there seem to be a few extra bits that we don't need in the report. For example, the report shows that we load the tidyverse package and the accompanying messages.
 
@@ -247,10 +243,10 @@ Oops! Now the plot doesn't show up in our report at all. This is because setting
 
 
 ~~~
-```{r gdp_lifeexp_1997, echo=FALSE}
-ggplot(data = gapminder_1997) + 
+```{r cell_vs_temp, echo=FALSE}
+ggplot(data = sample_and_taxon) + 
 
-  aes(x = gdpPercap, y = lifeExp, color=continent, size=pop/1000000) +
+  aes(x = temperature, y = cells_per_ml, color=env_group, size=pop/1000000) +
 
   geom_point() +
 
@@ -271,21 +267,31 @@ First, let's create a code chunk that summarizes features of our data that we ca
 
 
 ~~~
-gapminder_1997 <- read_csv("data/gapminder_1997.csv")
+```{r data_summary, include=FALSE}
+nSamples <- sample_and_taxon %>%
 
-nCountries <- gapminder_1997 %>%
-  select(country) %>%
+  select(sample_id) %>%
+
   n_distinct()
 
-minGDP <- gapminder_1997 %>%
-  summarise(round(min(gdpPercap))) %>%
+
+
+minTemp <- sample_and_taxon %>%
+
+  summarise(round(min(temperature))) %>%
+
   pull()
 
-maxGDP <- gapminder_1997 %>%
-  summarise(round(max(gdpPercap))) %>%
+
+
+maxTemp <- sample_and_taxon %>%
+
+  summarise(round(max(temperature))) %>%
+
   pull()
+```
 ~~~
-{: .language-r}
+{: .output}
 
 Now, all we need to do is reference the values we just computed to describe our
 plot. To do this, we enclose each value in one set of backticks 
@@ -296,10 +302,8 @@ that R will automatically update these values every time our data might change
 (if we were to decide to drop or add countries to this  analysis, for example).
 
 ```
-The above plot shows the relationship between GDP per capita and life expectancy
-for a total of `r nCountries ` countries. For this set of countries,
-economic wealth ranged from a minimum of USD `r minGDP`
-to a maximum of USD `r maxGDP` per capita.
+The above plot shows the relationship between cell abundance and temperature for a total of `r nSamples ` samples. For this set of samples, temperature ranged from a minimum of `r minTemp`°C
+to a maximum `r maxTemp`°C.
 ```
 {: .code}
 
@@ -315,16 +319,16 @@ Columns are separated by the pipe key <kbd>|</kbd> located above <kbd>Enter</kbd
 When we knit the report again, the code above will render like this:
 ![]({{ page.root }}/fig/r-markdown/table_format.png)
 
-Here's the text that we need to include to creata summary table of our data:
+Here's the text that we need to include to create a summary table of our data:
 
 
 ~~~
 ```
 |Summary of Data|
 |------|------|
-|Number of Countries|`r nCountries`|
-|Minimum GDP per capita|`r minGDP`|
-|Maximum GDP per capita|`r maxGDP`|
+|Number of Samples|`r nSamples`|
+|Minimum Temperature|`r minTemp`|
+|Maximum Temperature|`r maxTemp`|
 
 ```
 ~~~
@@ -335,7 +339,7 @@ This will render like this:
 
 ![]({{ page.root }}/fig/r-markdown/table_fillin.png)
 
-This is useful if we are reporting a few values, but can get tedious for larger tables. Another way we can add tables to our reports is using an R function called `kable()`. Since this is an R function, we will use it within a code chunk. We can give the `kable()` function a data table and it will format it to a nice looking table in the report. For example, we could use the following code to generate a table of all the countries in Oceania. The rendered version should look almost exactly as it does on this webpage. 
+This is useful if we are reporting a few values, but can get tedious for larger tables. Another way we can add tables to our reports is using an R function called `kable()`. Since this is an R function, we will use it within a code chunk. We can give the `kable()` function a data table and it will format it to a nice looking table in the report. For example, we could use the following code to generate a table of all the Deep samples. The rendered version should look almost exactly as it does on this webpage. 
 
 
 ~~~
@@ -343,20 +347,19 @@ This is useful if we are reporting a few values, but can get tedious for larger 
 library(knitr)
 
 # print kable
-gapminder_1997 %>%
-  filter(continent == "Oceania") %>%
+sample_and_taxon %>%
+  filter(env_group == "Deep") %>%
+  select(sample_id, env_group, cells_per_ml, temperature) %>%
   kable()
 ~~~
 {: .language-r}
 
 
 
-|country     |      pop|continent | lifeExp| gdpPercap|
-|:-----------|--------:|:---------|-------:|---------:|
-|Australia   | 18565243|Oceania   |   78.83|  26997.94|
-|New Zealand |  3676187|Oceania   |   77.55|  21050.41|
-
-
+~~~
+Error: object 'sample_and_taxon' not found
+~~~
+{: .error}
 
 ## Formatting
 _[Back to top](#contents)_
@@ -397,16 +400,16 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 ## Integrating it all together: Make your own report!
 _[Back to top](#contents)_
 
-You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report.
-Now, you're going to work in pairs to practice everything you learned.
-Don't worry - if you have questions, the instructor and helpers are here to help you out!
+You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report. Don't worry - if you have questions, the instructor and helpers are here to help you out!
 
 1. Make a new R Markdown file.
 1. Give it an informative title.
 1. Delete all the unnecessary Markdown and R code (everything below the setup R chunk).
-1. Save it to the `reports` directory using an informative file name.
+1. Save it to the `reports` directory as LASTNAME_Ontario_Report.Rmd
 
-Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. These are nice exercises because we are all familiar with the data and have the solutions saved. 
+Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working! 
+
+The exercises below give you some ideas of directions to pursue. However, you're welcome to branch out. Maybe you have your own hypotheses you'd like to test. These are nice exercises because we are all familiar with the data and have the solutions saved. 
 
 That said, you're also welcome to branch out. Maybe you want to explore a new type of ggplot. Maybe you're learning to create interactive tables with `reactable`. Maybe you're trying to read in some of your own data into your report. 
 
@@ -414,8 +417,7 @@ Just remember to use a combination of prose (writing) and code to document your 
 
 This is a way for you to practice what you've learned.
 
-
-**One note:** It may be helpful to copy and paste the questions into the R Markdown file as you go.
+Once you're done, 
 
 ### Exercises using the gapminder data
 _[Back to top](#contents)_
@@ -435,16 +437,9 @@ First we're going to start out with a few questions about the gapminder dataset.
 > 
 > 
 > ~~~
-> Rows: 1704 Columns: 6
-> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────
-> Delimiter: ","
-> chr (2): country, continent
-> dbl (4): year, pop, lifeExp, gdpPercap
-> 
-> ℹ Use `spec()` to retrieve the full column specification for this data.
-> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> Error: 'data/gapminder_data.csv' does not exist in current working directory ('/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/Cornell_Carpentries_Jan2025/_episodes_rmd').
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 #### Investigating population over time.
@@ -457,14 +452,16 @@ _[Back to top](#contents)_
 > ~~~
 > ggplot(gapminder, aes(x=year,y=pop)) +
 > geom_point() +
-> facet_wrap(vars(continent))
+> facet_wrap(vars(env_group))
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-13</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'gapminder' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [3] It seems like there are 2 outliers - which countries are those?
@@ -479,30 +476,28 @@ _[Back to top](#contents)_
 > 
 > 
 > ~~~
-> # A tibble: 2 × 1
->   country
->   <chr>  
-> 1 China  
-> 2 India  
+> Error: object 'gapminder' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
-[4] Plot year vs. population separated into a plot for each continent but excluding the 2 outlier countries.
+[4] Plot year vs. population separated into a plot for each env_group but excluding the 2 outlier countries.
 
 > ## Solution
 > 
 > ~~~
 > gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop)) +
 > geom_point() +
-> facet_wrap(vars(continent))
+> facet_wrap(vars(env_group))
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-15</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'gapminder' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 
@@ -516,15 +511,17 @@ _[Back to top](#contents)_
 > ~~~
 > gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop)) +
 > geom_point() +
-> facet_wrap(vars(continent)) +
+> facet_wrap(vars(env_group)) +
 > theme(axis.text.x=element_text(angle=90))
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-16</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'gapminder' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [6] It's hard to see which country is which here. Can you change the scatter plot to a line plot so we can get a better sense of trends over time? **Hint:**  This website has more information: https://www.r-graph-gallery.com/line-chart-several-groups-ggplot2.html
@@ -534,15 +531,17 @@ _[Back to top](#contents)_
 > ~~~
 > gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop,group=country)) +
 > geom_line() +
-> facet_wrap(vars(continent)) +
+> facet_wrap(vars(env_group)) +
 > theme(axis.text.x=element_text(angle=90))
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-17" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-17</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'gapminder' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 #### Looking into life expectancy a bit more.
@@ -553,12 +552,9 @@ _[Back to top](#contents)_
 > ## Solution
 > 
 > ~~~
-> # A tibble: 1 × 6
->   country  year       pop continent lifeExp gdpPercap
->   <chr>   <dbl>     <dbl> <chr>       <dbl>     <dbl>
-> 1 Japan    1982 118454974 Asia         77.1    19384.
+> Error: object 'gapminder' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 [8] Now, do the same thing but for all years! **Hint:** Use the `group_by()` function.
@@ -566,40 +562,26 @@ _[Back to top](#contents)_
 > ## Solution
 > 
 > ~~~
-> gapminder %>% group_by(year) %>% select(country,year,lifeExp) %>% slice_max(lifeExp) %>% print(n=Inf)
+> gapminder %>% group_by(year) %>% select(country,year,cells_per_ml) %>% slice_max(cells_per_ml) %>% print(n=Inf)
 > ~~~
 > {: .language-r}
 > 
 > 
 > 
 > ~~~
-> # A tibble: 12 × 3
-> # Groups:   year [12]
->    country  year lifeExp
->    <chr>   <dbl>   <dbl>
->  1 Norway   1952    72.7
->  2 Iceland  1957    73.5
->  3 Iceland  1962    73.7
->  4 Sweden   1967    74.2
->  5 Sweden   1972    74.7
->  6 Iceland  1977    76.1
->  7 Japan    1982    77.1
->  8 Japan    1987    78.7
->  9 Japan    1992    79.4
-> 10 Japan    1997    80.7
-> 11 Japan    2002    82  
-> 12 Japan    2007    82.6
+> Error: object 'gapminder' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 [9] Make a boxplot for the life expectancies of the countries in Asia for each year (year is the x axis, life expectancy is the y axis). Also fix the x and y axis labels.
 
 > ## Solution
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-20-1.png" alt="plot of chunk unnamed-chunk-20" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-20</p>
-> </div>
+> 
+> ~~~
+> Error: object 'gapminder' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 ##### Bonus questions: come back to these if you have time at the end
@@ -610,40 +592,26 @@ _[Back to top](#contents)_
 > ## Solution
 > 
 > ~~~
-> gapminder %>% filter(continent == 'Asia') %>% group_by(year) %>% slice_min(lifeExp)
+> gapminder %>% filter(env_group == 'Asia') %>% group_by(year) %>% slice_min(cells_per_ml)
 > ~~~
 > {: .language-r}
 > 
 > 
 > 
 > ~~~
-> # A tibble: 12 × 6
-> # Groups:   year [12]
->    country      year      pop continent lifeExp gdpPercap
->    <chr>       <dbl>    <dbl> <chr>       <dbl>     <dbl>
->  1 Afghanistan  1952  8425333 Asia         28.8      779.
->  2 Afghanistan  1957  9240934 Asia         30.3      821.
->  3 Afghanistan  1962 10267083 Asia         32.0      853.
->  4 Afghanistan  1967 11537966 Asia         34.0      836.
->  5 Afghanistan  1972 13079460 Asia         36.1      740.
->  6 Cambodia     1977  6978607 Asia         31.2      525.
->  7 Afghanistan  1982 12881816 Asia         39.9      978.
->  8 Afghanistan  1987 13867957 Asia         40.8      852.
->  9 Afghanistan  1992 16317921 Asia         41.7      649.
-> 10 Afghanistan  1997 22227415 Asia         41.8      635.
-> 11 Afghanistan  2002 25268405 Asia         42.1      727.
-> 12 Afghanistan  2007 31889923 Asia         43.8      975.
+> Error: object 'gapminder' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
-[11] Make a boxplot for the life expectancies of the countries over time for each continent. Try to fix the x and y axis labels and text, too. Feel free to change the theme if you'd like.
+[11] Make a boxplot for the life expectancies of the countries over time for each env_group. Try to fix the x and y axis labels and text, too. Feel free to change the theme if you'd like.
 
 > ## Solution
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-22-1.png" alt="plot of chunk unnamed-chunk-22" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-22</p>
-> </div>
+> 
+> ~~~
+> Error: object 'gapminder' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [12] Which country has had the greatest increase in life expectancy from 1952 to 2007? **Hint:** You might want to use the `pivot_wider()` function to get your data in a format with columns for: country, 1952 life expectancy, 2007 life expectancy, and the difference between 2007 and 1992 life expectancy.
@@ -651,12 +619,9 @@ _[Back to top](#contents)_
 > ## Solution
 > 
 > ~~~
-> # A tibble: 1 × 4
->   country `1952` `2007`  diff
->   <chr>    <dbl>  <dbl> <dbl>
-> 1 Oman      37.6   75.6  38.1
+> Error: object 'gapminder' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 [13] What countries had a decrease in life expectancy from 1952 to 2007?
@@ -664,13 +629,9 @@ _[Back to top](#contents)_
 > ## Solution
 > 
 > ~~~
-> # A tibble: 2 × 4
->   country   `1952` `2007`  diff
->   <chr>      <dbl>  <dbl> <dbl>
-> 1 Swaziland   41.4   39.6 -1.79
-> 2 Zimbabwe    48.5   43.5 -4.96
+> Error: object 'gapminder' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 ### Exercises integrating a new dataset
@@ -727,16 +688,9 @@ _[Back to top](#contents)_
 > 
 > 
 > ~~~
-> New names:
-> Rows: 2420 Columns: 7
-> ── Column specification
-> ─────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
-> (4): ...2, Series, Footnotes, Source dbl (3): Region/Country/Area, Year, Value
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set
-> `show_col_types = FALSE` to quiet this message.
-> • `` -> `...2`
+> Error: 'data/rnd-un-data.csv' does not exist in current working directory ('/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/Cornell_Carpentries_Jan2025/_episodes_rmd').
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 [2] Next, take a look at the `series` column (or whatever you renamed it to), and make the titles shorter and with no spaces to make them easier to work with.
@@ -754,6 +708,13 @@ _[Back to top](#contents)_
 > "Gross domestic expenditure on R & D: Private non-profit (%)" = 'non_profit'))
 > ~~~
 > {: .language-r}
+> 
+> 
+> 
+> ~~~
+> Error: object 'rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [3] Next, make a column for each of the data types in the `series` column (or whatever you renamed it to). This should give you the following columns: country name, year, expenditure in general, % of funds from business, % of funds from government, % of funds from higher ed, % of funds from non-profit, % of funds from abroad, % of funds from non-specified sources.
@@ -764,6 +725,13 @@ _[Back to top](#contents)_
 > rnd <- rnd %>% pivot_wider(names_from=series,values_from=value)
 > ~~~
 > {: .language-r}
+> 
+> 
+> 
+> ~~~
+> Error: object 'rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 Note that there is a lot of missing data.  
@@ -783,10 +751,12 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-28-1.png" alt="plot of chunk unnamed-chunk-28" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-28</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [5] Plot the expenditure by year (discrete x vs continuous y) using a scatter plot. Feel free to try to make the plot more legible if you want.
@@ -800,10 +770,12 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-29-1.png" alt="plot of chunk unnamed-chunk-29" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-29</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [6] Plot the expenditure by year (discrete x vs continuous y) using a violin plot or a boxplot.
@@ -817,10 +789,12 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-30-1.png" alt="plot of chunk unnamed-chunk-30" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-30</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 ### Combining the CO2 and R&D datasets
@@ -848,16 +822,9 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > 
 > ~~~
-> Rows: 2132 Columns: 7
-> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────
-> Delimiter: ","
-> chr (4): country, series, footnotes, source
-> dbl (3): region, year, value
-> 
-> ℹ Use `spec()` to retrieve the full column specification for this data.
-> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> Error: 'data/co2-un-data.csv' does not exist in current working directory ('/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/Cornell_Carpentries_Jan2025/_episodes_rmd').
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 [8] Merge the CO2 dataset and the R&D dataset together. Keep only the following colums: country, year, total CO2 emissions, CO2 emissions per capita, and percent of GDP used for R&D.
@@ -872,9 +839,9 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > 
 > ~~~
-> Joining with `by = join_by(country, year)`
+> Error in UseMethod("full_join"): no applicable method for 'full_join' applied to an object of class "ts"
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 [9] **BONUS:** After merging the data sets, there is some missing data. How many `NA`s are present in each data column for the R&D data set? How may these missing data affect our intuitive observation in a plot and/or summary statistic? (e.g.,  `ggplot` removes `NA`s but stat functions (e.g., `median()`) often ask for specific input regarding how to deal with `NA`s).
@@ -889,27 +856,9 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > 
 > ~~~
-> Warning: `funs()` was deprecated in dplyr 0.8.0.
-> ℹ Please use a list of either functions or lambdas:
-> 
-> # Simple named list: list(mean = mean, median = median)
-> 
-> # Auto named with `tibble::lst()`: tibble::lst(mean, median)
-> 
-> # Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+> Error: object 'co2_rnd' not found
 > ~~~
-> {: .warning}
-> 
-> 
-> 
-> ~~~
-> # A tibble: 1 × 5
->   country  year total per_capita gdp_pct
->     <int> <int> <int>      <int>   <int>
-> 1       0     0   274        274     880
-> ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 [10] You might have noticed that we don't have both CO2 data _and_ R&D data for all years. Filter the merged dataset so that you only keep country/year combinations that have both CO2 and R&D data (i.e., only keep rows for which CO2 and R&D values are not missing). **HINT:** Search the internet for the use of `is.na()` and ! (the "not operator") to help you here.
@@ -920,6 +869,13 @@ Unfortunately, we don't have the exact same dates for all of them.
 > co2_rnd <- co2_rnd %>% filter(!is.na(total) & !is.na(gdp_pct))
 > ~~~
 > {: .language-r}
+> 
+> 
+> 
+> ~~~
+> Error: object 'co2_rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [11] How many countries per year do you have after filtering? **HINT:** You can use `summarize(count=n())` to help you out.
@@ -934,16 +890,9 @@ Unfortunately, we don't have the exact same dates for all of them.
 > 
 > 
 > ~~~
-> # A tibble: 5 × 2
->    year count
->   <dbl> <int>
-> 1  2005    83
-> 2  2010    86
-> 3  2015    94
-> 4  2016    11
-> 5  2017    57
+> Error: object 'co2_rnd' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 #### Plotting with the CO2 and R&D datasets together
@@ -961,10 +910,12 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-36-1.png" alt="plot of chunk unnamed-chunk-36" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-36</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'co2_rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 
@@ -981,10 +932,12 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-37-1.png" alt="plot of chunk unnamed-chunk-37" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-37</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'co2_rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 [14] Identify the countries that have five time points for both C02 emissions and R&D.
@@ -999,14 +952,9 @@ _[Back to top](#contents)_
 > 
 > 
 > ~~~
-> # A tibble: 3 × 2
->   country    count
->   <chr>      <int>
-> 1 Azerbaijan     5
-> 2 Cuba           5
-> 3 Panama         5
+> Error: object 'co2_rnd' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 **BONUS**
@@ -1023,10 +971,12 @@ _[Back to top](#contents)_
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-05-unnamed-chunk-39-1.png" alt="plot of chunk unnamed-chunk-39" width="612" />
-> <p class="caption">plot of chunk unnamed-chunk-39</p>
-> </div>
+> 
+> 
+> ~~~
+> Error: object 'co2_rnd' not found
+> ~~~
+> {: .error}
 {: .solution}
 
 
@@ -1049,24 +999,9 @@ _[Back to top](#contents)_
 > 
 > 
 > ~~~
-> # A tibble: 13 × 2
->    year_count country_count
->         <int>         <int>
->  1          1            16
->  2          2            17
->  3          3            14
->  4          4            22
->  5          5            33
->  6          6            17
->  7          7            13
->  8          8             4
->  9          9             7
-> 10         10             1
-> 11         11             1
-> 12         12             2
-> 13         13             1
+> Error: object 'rnd' not found
 > ~~~
-> {: .output}
+> {: .error}
 {: .solution}
 
 
