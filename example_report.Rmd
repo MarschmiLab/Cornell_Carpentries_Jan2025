@@ -1,0 +1,53 @@
+---
+title: "A Report on Lake Ontario's Microbes"
+author: "Augustus Pendleton"
+date: "01/14/2025"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE}
+library(tidyverse)
+```
+
+This report was prepared to analyze environmental and microbial data from Lake Ontario. Our goal is to determine to how environmental variables like temperature affect the abundance of different Phyla of bacteria.
+
+```{r data}
+sample_and_taxon <- read_csv("data/sample_and_taxon.csv")
+```
+
+```{r cell_vs_temp, echo=FALSE}
+ggplot(data = sample_and_taxon) + 
+  aes(x = temperature, y = cells_per_ml/1000000, color=env_group) +
+  geom_point() +
+  labs(x = "Temperature (Celsius)", y = "Cells(million/ml)",
+       title= "Are temperature and cell abundance linked?")
+```
+
+```{r data_summary, include = FALSE}
+nSamples <- sample_and_taxon %>%
+  select(sample_id) %>%
+  n_distinct()
+
+minTemp <- sample_and_taxon %>%
+  summarise(round(min(temperature))) %>%
+  pull()
+
+maxTemp <- sample_and_taxon %>%
+  summarise(round(max(temperature))) %>%
+  pull()
+```
+
+The above plot shows the relationship between cell abundance and temperature for a total of `r nSamples` samples. For this set of samples, temperature ranged from a minimum of `r minTemp`°C
+to a maximum of `r maxTemp`°C.
+
+|Summary of Data|
+|------|------|
+|Number of Samples|`r nSamples`|
+|Minimum Temperature|`r minTemp`|
+|Maximum Temperature|`r maxTemp`|
