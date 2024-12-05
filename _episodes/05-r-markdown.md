@@ -437,7 +437,7 @@ _[Back to top](#contents)_
 > 
 > ~~~
 > Rows: 71 Columns: 15
-> ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr  (2): sample_id, env_group
 > dbl (13): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus...
@@ -550,501 +550,87 @@ First, let's remind ourselves how we looked at Chloroflexi across env_groups. Ma
 > <img src="../fig/rmd-05-unnamed-chunk-16-1.png" width="540" style="display: block; margin: auto;" />
 {: .solution}
 
-[6] It's hard to see which country is which here. Can you change the scatter plot to a line plot so we can get a better sense of trends over time? **Hint:**  This website has more information: https://www.r-graph-gallery.com/line-chart-several-groups-ggplot2.html
+[7] Now, we want to analyze multiple Phyla at once. Because our taxa abundances are in wide format, we can't use multiple Phyla in a single ggplot. As such, we will need to convert our data to long format. Using `pivot_longer`, convert the columns containing our Phyla abundances from wide to long.
 
 > ## Solution
 > 
 > ~~~
-> sample_and_taxon %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=temperature,y=pop,group=country)) +
-> geom_line() +
-> facet_wrap(vars(env_group)) +
-> theme(axis.text.x=element_text(angle=90))
+> sample_and_taxon %>%
+>   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance")
 > ~~~
 > {: .language-r}
 > 
 > 
 > 
 > ~~~
-> Error in `filter()`:
-> ℹ In argument: `country != "China" & country != "India"`.
-> Caused by error:
-> ! object 'country' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-#### Looking into life expectancy a bit more.
-_[Back to top](#contents)_
-
-[7] What country had the highest life expectancy in 1982? **Hint:** use the `slice_max()` function to get the row for a maximum value in a dataset. You can use `?slice_max` and/or the internet to learn more about how to use the function.
-
-> ## Solution
-> 
-> ~~~
-> # A tibble: 0 × 15
-> # ℹ 15 variables: sample_id <chr>, env_group <chr>, depth <dbl>,
-> #   cells_per_ml <dbl>, temperature <dbl>, total_nitrogen <dbl>,
-> #   total_phosphorus <dbl>, diss_org_carbon <dbl>, chlorophyll <dbl>,
-> #   Proteobacteria <dbl>, Actinobacteriota <dbl>, Bacteroidota <dbl>,
-> #   Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
+> # A tibble: 426 × 11
+>    sample_id env_group   depth cells_per_ml temperature total_nitrogen
+>    <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
+>  1 May_12_B  Deep         103.     2058864.        4.07            465
+>  2 May_12_B  Deep         103.     2058864.        4.07            465
+>  3 May_12_B  Deep         103.     2058864.        4.07            465
+>  4 May_12_B  Deep         103.     2058864.        4.07            465
+>  5 May_12_B  Deep         103.     2058864.        4.07            465
+>  6 May_12_B  Deep         103.     2058864.        4.07            465
+>  7 May_12_E  Shallow_May    5      4696827.        7.01            465
+>  8 May_12_E  Shallow_May    5      4696827.        7.01            465
+>  9 May_12_E  Shallow_May    5      4696827.        7.01            465
+> 10 May_12_E  Shallow_May    5      4696827.        7.01            465
+> # ℹ 416 more rows
+> # ℹ 5 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
+> #   chlorophyll <dbl>, Phylum <chr>, Abundance <dbl>
 > ~~~
 > {: .output}
 {: .solution}
 
-[8] Now, do the same thing but for all temperatures! **Hint:** Use the `group_by()` function.
+You can see that we've now made size rows per sample, one for each Phylum. This does mean that our metadata has been duplicated, which is okay right now.
+
+Now, our data is in the correct format for plotting with ggplot. In the end, we want a plot that shows, for each env_group, the relative abundance of each Phylum. There are actually many plotting styles we could use to answer that question! We'll try out three. 
+
+[8] Pipe your long dataframe into a boxplot with env_group on the x-axis, and Abundance on the y-axis. Use fill to differentiate different Phyla
 
 > ## Solution
 > 
 > ~~~
-> sample_and_taxon %>% group_by(temperature) %>% select(country,temperature,cells_per_ml) %>% slice_max(cells_per_ml) %>% print(n=Inf)
+> sample_and_taxon %>%
+>   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
+>   ggplot(aes(x = env_group, y = Abundance, fill = Phylum)) + 
+>   geom_boxplot()
 > ~~~
 > {: .language-r}
 > 
-> 
-> 
-> ~~~
-> Error in `select()`:
-> ! Can't select columns that don't exist.
-> ✖ Column `country` doesn't exist.
-> ~~~
-> {: .error}
+> <img src="../fig/rmd-05-unnamed-chunk-18-1.png" width="540" style="display: block; margin: auto;" />
 {: .solution}
 
-[9] Make a boxplot for the life expectancies of the countries in Asia for each temperature (temperature is the x axis, life expectancy is the y axis). Also fix the x and y axis labels.
+[9] Okay, what does this plot tell us? Make sure to write a quick summary in your report. Next, make a new plot, where Phylum is now on the x-axis, and the fill is determined by the env_group.
 
 > ## Solution
+> 
+> ~~~
+> sample_and_taxon %>%
+>   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
+>   ggplot(aes(x = Phylum, y = Abundance, fill = env_group)) + 
+>   geom_boxplot()
+> ~~~
+> {: .language-r}
+> 
+> <img src="../fig/rmd-05-unnamed-chunk-19-1.png" width="540" style="display: block; margin: auto;" />
+{: .solution}
+
+[10] Which do you prefer? Which do you feel is easier to understand? Finally, let's use faceting, rather than fill, to separate out Phyla
+
+> ## Solution
+> 
+> ~~~
+> sample_and_taxon %>%
+>   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
+>   ggplot(aes(x = env_group, y = Abundance)) + 
+>   geom_boxplot() + 
+>   facet_wrap(~Phylum)
+> ~~~
+> {: .language-r}
+> 
 > <img src="../fig/rmd-05-unnamed-chunk-20-1.png" width="540" style="display: block; margin: auto;" />
 {: .solution}
 
-##### Bonus questions: come back to these if you have time at the end
-_[Back to top](#contents)_
-
-[10] What are the outliers in life expectancy in Asia for each temperature (lower life expectancy)?
-
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>% filter(env_group == 'Asia') %>% group_by(temperature) %>% slice_min(cells_per_ml)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> # A tibble: 0 × 15
-> # Groups:   temperature [0]
-> # ℹ 15 variables: sample_id <chr>, env_group <chr>, depth <dbl>,
-> #   cells_per_ml <dbl>, temperature <dbl>, total_nitrogen <dbl>,
-> #   total_phosphorus <dbl>, diss_org_carbon <dbl>, chlorophyll <dbl>,
-> #   Proteobacteria <dbl>, Actinobacteriota <dbl>, Bacteroidota <dbl>,
-> #   Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
-> ~~~
-> {: .output}
-{: .solution}
-
-[11] Make a boxplot for the life expectancies of the countries over time for each env_group. Try to fix the x and y axis labels and text, too. Feel free to change the theme if you'd like.
-
-> ## Solution
-> <img src="../fig/rmd-05-unnamed-chunk-22-1.png" width="540" style="display: block; margin: auto;" />
-{: .solution}
-
-[12] Which country has had the greatest increase in life expectancy from 1952 to 2007? **Hint:** You might want to use the `pivot_wider()` function to get your data in a format with columns for: country, 1952 life expectancy, 2007 life expectancy, and the difference between 2007 and 1992 life expectancy.
-
-> ## Solution
-> 
-> ~~~
-> Error in `select()`:
-> ! Can't select columns that don't exist.
-> ✖ Column `country` doesn't exist.
-> ~~~
-> {: .error}
-{: .solution}
-
-[13] What countries had a decrease in life expectancy from 1952 to 2007?
-
-> ## Solution
-> 
-> ~~~
-> Error in `select()`:
-> ! Can't select columns that don't exist.
-> ✖ Column `country` doesn't exist.
-> ~~~
-> {: .error}
-{: .solution}
-
-### Exercises integrating a new dataset
-_[Back to top](#contents)_
-
-**If you finished the questions involving the sample_and_taxon dataset (bonus questions are optional), move on to these questions next. Note that we don't expect you to finish all of these! You can also use them as practice after the workshop if you'd like.**
-
-Now that you've practiced what you've learned with the sample_and_taxon data, you're going to try using what we've learned to explore a new dataset.
-
-#### Preview of the data
-_[Back to top](#contents)_
-
-This dataset has information on the gross domestic expenditure on research and development (R&D) for different countries. We're going to use it to practice the data analysis workflow that you learned over the course of the workshop.
-
-_Data:_ Gross domestic expenditure on research and development (R & D)
-
-_Data source:_ [UN data](http://data.un.org), under "Science and technology"
-
-_Data path:_ `data/SYB63_286_202009_GDP_on_RnD.csv`
-
-Raw csv file:
-
-```
-T27,Gross domestic expenditure on research and development (R&D),,,,,
-Region/Country/Area,,temperature,Series,Value,Footnotes,Source
-1,"Total, all countries or areas",2005,Gross domestic expenditure on R & D: as a percentage of GDP (%),1.5261,,"United Nations Educational, Scientific and Cultural Organization (UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, last accessed June 2020."
-1,"Total, all countries or areas",2010,Gross domestic expenditure on R & D: as a percentage of GDP (%),1.6189,,"United Nations Educational, Scientific and Cultural Organization (UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, last accessed June 2020."
-...
-32,Argentina,2017,Gross domestic expenditure on R & D: Business enterprises (%),16.5161,,"United Nations Educational, Scientific and Cultural Organization (UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, last accessed June 2020."
-...
-```
-
-CO2 dataset (UN data) preview:
-
-```
-T24,CO2 emission estimates,,,,,
-Region/Country/Area,,temperature,Series,Value,Footnotes,Source
-8,Albania,1975,Emissions (thousand metric tons of carbon dioxide),4338.3340,,"International Energy Agency, IEA World Energy Balances 2019 and 2006 IPCC Guidelines for Greenhouse Gas Inventories, last accessed June 2020."
-8,Albania,1985,Emissions (thousand metric tons of carbon dioxide),6929.9260,,"International Energy Agency, IEA World Energy Balances 2019 and 2006 IPCC Guidelines for Greenhouse Gas Inventories, last accessed June 2020."
-```
-
-#### Reading in and cleaning the data
-_[Back to top](#contents)_
-
-[1] First, read in the data. Note that you need to skip the first line of the file because that's just a title for the whole dataset (see above). Also rename the columns to something more informative (as you learned, there are lots of ways to do this, and different preferences - feel free to use whichever method you want!).
-
-> ## Solution
-> 
-> ~~~
-> rnd <- read_csv('data/rnd-un-data.csv', skip = 1) %>% rename(country='...2') %>% rename_all(tolower)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: 'data/rnd-un-data.csv' does not exist in current working directory ('/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/Cornell_Carpentries_Jan2025/_episodes_rmd').
-> ~~~
-> {: .error}
-{: .solution}
-
-[2] Next, take a look at the `series` column (or whatever you renamed it to), and make the titles shorter and with no spaces to make them easier to work with.
-
-> ## Solution
-> 
-> ~~~
-> rnd <- rnd %>% mutate(series=recode(series,
->                "Gross domestic expenditure on R & D: as a percentage of GDP (%)" = 'gdp_pct',
-> "Gross domestic expenditure on R & D: Business enterprises (%)" = 'business',
-> "Gross domestic expenditure on R & D: Government (%)" = 'government',
-> "Gross domestic expenditure on R & D: Higher education (%)" = 'higher_ed',
-> "Gross domestic expenditure on R & D: Funds from abroad (%)" = 'abroad',
-> "Gross domestic expenditure on R & D: Not distributed (%)" = 'not_distributed',
-> "Gross domestic expenditure on R & D: Private non-profit (%)" = 'non_profit'))
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-[3] Next, make a column for each of the data types in the `series` column (or whatever you renamed it to). This should give you the following columns: country name, temperature, expenditure in general, % of funds from business, % of funds from government, % of funds from higher ed, % of funds from non-profit, % of funds from abroad, % of funds from non-specified sources.
-
-> ## Solution
-> 
-> ~~~
-> rnd <- rnd %>% pivot_wider(names_from=series,values_from=value)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-Note that there is a lot of missing data.  
-
-Now we have our data set up in a way that makes it easier to work with. Feel free to clean up the data more before moving on to the next step if you'd like.
-
-#### Plotting with the R & D dataset
-_[Back to top](#contents)_
-
-[4] Plot the distribution of percent expenditure using a histogram. Observe the range and how heavy the "tails" are. **Note:** You will likely get a note and a warning. Feel free to change the number of bins as the note describes. Why do you get warnings? (Hint: Look at the column you're plotting.). **Bonus:** Plot the same exact data in a way in which you don't get warnings.
-
-> ## Solution
-> 
-> ~~~
-> rnd %>% filter(!is.na(gdp_pct)) %>% ggplot(aes(x=gdp_pct)) +
-> geom_histogram(bins=30)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-[5] Plot the expenditure by temperature (discrete x vs continuous y) using a scatter plot. Feel free to try to make the plot more legible if you want.
-
-> ## Solution
-> 
-> ~~~
-> rnd %>% filter(!is.na(gdp_pct)) %>% ggplot(aes(x=as.character(temperature), y=gdp_pct)) +
-> geom_point(alpha=0.5) +
-> xlab('')
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-[6] Plot the expenditure by temperature (discrete x vs continuous y) using a violin plot or a boxplot.
-
-> ## Solution
-> 
-> ~~~
-> rnd %>% filter(!is.na(gdp_pct)) %>% ggplot(aes(x=as.character(temperature), y=gdp_pct)) +
-> geom_violin() +
-> xlab('')
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-### Combining the CO2 and R&D datasets
-_[Back to top](#contents)_
-
-Now we're going to work with the CO2 and R&D datasets together.
-
-Unfortunately, we don't have the exact same dates for all of them.
-
-[7] First, read in the CO2 dataset. You can use the code from the [R for data analysis]({{ page.root }}/04-r-data-analysis) lesson to clean the CO2 data.
-
-> ## Solution
-> 
-> ~~~
-> # read in and clean CO2 data
-> co2 <- read_csv("data/co2-un-data.csv", skip=2,
-> col_names=c("region", "country", "temperature", "series", "value", "footnotes", "source")) %>%
-> select(country, temperature, series, value) %>%
-> mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total",
-> "Emissions per capita (metric tons of carbon dioxide)" = "per_capita")) %>%
-> pivot_wider(names_from=series, values_from=value)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: 'data/co2-un-data.csv' does not exist in current working directory ('/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/Cornell_Carpentries_Jan2025/_episodes_rmd').
-> ~~~
-> {: .error}
-{: .solution}
-
-[8] Merge the CO2 dataset and the R&D dataset together. Keep only the following colums: country, temperature, total CO2 emissions, CO2 emissions per capita, and percent of GDP used for R&D.
-
-> ## Solution
-> 
-> ~~~
-> co2_rnd <- full_join(co2, rnd) %>% select(country, temperature, total, per_capita, gdp_pct)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error in UseMethod("full_join"): no applicable method for 'full_join' applied to an object of class "ts"
-> ~~~
-> {: .error}
-{: .solution}
-
-[9] **BONUS:** After merging the data sets, there is some missing data. How many `NA`s are present in each data column for the R&D data set? How may these missing data affect our intuitive observation in a plot and/or summary statistic? (e.g.,  `ggplot` removes `NA`s but stat functions (e.g., `median()`) often ask for specific input regarding how to deal with `NA`s).
-
-> ## Solution
-> 
-> ~~~
-> co2_rnd %>% summarize_all(funs(sum(is.na(.))))
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'co2_rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-[10] You might have noticed that we don't have both CO2 data _and_ R&D data for all temperatures. Filter the merged dataset so that you only keep country/temperature combinations that have both CO2 and R&D data (i.e., only keep rows for which CO2 and R&D values are not missing). **HINT:** Search the internet for the use of `is.na()` and ! (the "not operator") to help you here.
-
-> ## Solution
-> 
-> ~~~
-> co2_rnd <- co2_rnd %>% filter(!is.na(total) & !is.na(gdp_pct))
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'co2_rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-[11] How many countries per year do you have after filtering? **HINT:** You can use `summarize(count=n())` to help you out.
-
-> ## Solution
-> 
-> ~~~
-> co2_rnd %>% group_by(year) %>% summarize(count=n())
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'co2_rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-#### Plotting with the CO2 and R&D datasets together
-_[Back to top](#contents)_
-
-[12] Plot R&D expenditure vs. CO2 emission for each country using a scatter plot. You can choose total or per-capita CO2 emissions, or both. Make sure you have informative x and y axis labels.
-
-> ## Solution
-> 
-> ~~~
-> ggplot(co2_rnd, aes(x=gdp_pct,y=per_capita)) +
-> geom_point() +
-> ylab('Per-capita CO2 emissiosn') +
-> xlab('Percent of GDP spent on R&D')
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'co2_rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-
-[13] Next, facet the above plot by year.
-
-> ## Solution
-> 
-> ~~~
-> ggplot(co2_rnd, aes(x=gdp_pct,y=per_capita)) +
-> geom_point() +
-> ylab('Per-capita CO2 emissiosn') +
-> xlab('Percent of GDP spent on R&D') +
-> facet_wrap(vars(year))
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'co2_rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-[14] Identify the countries that have five time points for both C02 emissions and R&D.
-
-> ## Solution
-> 
-> ~~~
-> co2_rnd %>% group_by(country) %>% summarize(count=n()) %>% filter(count==5)
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'co2_rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-**BONUS**
-
-[14] For three of the countries you identified, plot the Percent of GDP spent on R&D and the per-capita CO2 emissions over time on the same plot. Color the two different values differently. **HINTS:** Use `pivot_longer` to get the data in the right format. Search the internet for how you can use `%in%`. Also remember the  `c()` function from earlier in the workshop that can be used to combine values into a vector or list.
-
-> ## Solution
-> 
-> ~~~
-> co2_rnd %>% filter(country %in% c('Azerbaijan','Cuba','Panama')) %>% pivot_longer(c(per_capita,gdp_pct)) %>% ggplot(aes(x=year,y=value,col=name)) +
-> geom_line() +
-> facet_wrap(vars(country))+
-> scale_color_discrete(name = "", labels = c("GDP %", "CO2 Per Capita"))
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'co2_rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-
-#### Bonus questions
-_[Back to top](#contents)_
-
-[15] For the R&D dataset, each country can have data for one or multiple years. What is the range of numbers of yearly data points for each country, and how many countries  are there for each value within the range? (e.g., x countries have two different years and y have five  years)
-
-> ## Solution
-> 
-> ~~~
-> rnd %>% 
->  group_by(country) %>% 
->  summarize(year_count = n()) %>% 
->  group_by(year_count) %>% 
->  summarize(country_count = n())
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Error: object 'rnd' not found
-> ~~~
-> {: .error}
-{: .solution}
-
-
-[16] Create an R Markdown report with some of the information from these exercises. Decide exactly what you want to focus your report on, and then also perform additional analyses to include in your report. Also make sure your figures are legible and understandable!
-
-> ## Solution
-> Use the info from the R markdown lesson to create a pretty report. 
-{: .solution}
+If you want to investigate this dataset further, consider changing the x-axis to a continuous variable, like temperature, rather than the categorical env_group. Can you find associations between different environmental conditions and the abundance of specific taxa?
