@@ -25,12 +25,8 @@ knitr_fig_path("05-")
 
 ```{r deps, echo=FALSE, message=FALSE}
 library(tidyverse)
-```
-
-
-```{r echo=FALSE}
-# prevents jitter plots from changing
-set.seed(20210109)
+set.seed(0314)
+sample_and_taxon <- read_csv("data/sample_and_taxon.csv")
 ```
 
 ### Contents
@@ -48,7 +44,7 @@ set.seed(20210109)
 Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario
 
 > ## Discussion
-> How do you usually share data analyses with your collaborators? Many people share them through a Word or PDF document, a spreadsheet, slides, a  graphic, etc.
+> How do you usually share data analyses with your collaborators? Add your usual workflow to the Etherpad.
 {: .discussion}
 
 ## What is R Markdown and why use it?
@@ -96,7 +92,7 @@ To create an R Markdown file:
 - R Markdown files always end in `.Rmd`
 
 > ## R Markdown Outputs
-> The default output for an R Markdown report is HTML, but you can also use R Markdown to [output other report formats](https://rmarkdown.rstudio.com/lesson-9.html). For example, you can generate PDF reports using R Markdown, but you must [install TeX](https://www.latex-project.org/get/) to do this.
+> The default output for an R Markdown report is HTML, but you can also use R Markdown to [output other report formats](https://rmarkdown.rstudio.com/lesson-9.html). For example, you can generate PDF reports using R Markdown, but you must [install some form of LaTeX](https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html) to do this.
 >
 {: .callout}
 
@@ -114,8 +110,8 @@ Here's an example:
 ```
 ---
 title: 'Writing Reports with R Markdown'
-author: "Zena Lapp"
-date: "11/18/2020"
+author: "Augustus Pendleton"
+date: "01/14/2025"
 output: html_document
 ---
 ```
@@ -192,10 +188,10 @@ cat('```{r data}\nsample_and_taxon <- read_csv("data/sample_and_taxon.csv")\n```
 Now that we have the data, we need to produce the plot. Let's create it!
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r cell_vs_temp}\nggplot(data = sample_and_taxon) + \n
-  aes(x = temperature, y = cells_per_ml/1000000, color=env_group) +\n
-  geom_point() +\n
-  labs(x = "Temperature (Celsius)", y = "Cells(million/ml)",\n
+cat('```{r cell_vs_temp}\nggplot(data = sample_and_taxon) +
+  aes(x = temperature, y = cells_per_ml/1000000, color=env_group) +
+  geom_point() +
+  labs(x = "Temperature (Celsius)", y = "Cells(million/ml)",
        title= "Are temperature and cell abundance linked?")\n```\n')
 ```
 
@@ -220,10 +216,10 @@ We can also see the code that was used to generate the plot. Depending on the pu
 Oops! Now the plot doesn't show up in our report at all. This is because setting `include=FALSE` prevents anything in the code chunk from appearing in the report. Instead we can add `echo=FALSE`  to tell this code chunk that we don't want to see the code but just the output.
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r cell_vs_temp, echo=FALSE}\nggplot(data = sample_and_taxon) + \n
-  aes(x = temperature, y = cells_per_ml, color=env_group, size=pop/1000000) +\n
-  geom_point() +\n
-  labs(x = "GDP Per Capita", y = "Life Expectancy",\n
+cat('```{r cell_vs_temp, echo=FALSE}\nggplot(data = sample_and_taxon) +
+  aes(x = temperature, y = cells_per_ml, color=env_group, size=pop/1000000) +
+  geom_point() +
+  labs(x = "GDP Per Capita", y = "Life Expectancy",
        title= "Do people in wealthy countries live longer?", size="Population (in millions)")\n```\n')
 ```
 
@@ -236,16 +232,16 @@ Before we finalize our report, let's look at a few other cool features. Sometime
 First, let's create a code chunk that summarizes features of our data that we can use to describe our plot to  our audience. Note that we set `include=FALSE` because we only want this step to happen in the background. For our purposes, we will calculate how many countries were included in the analysis, as well as the minimum and maximum GDP per capita values:
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r data_summary, include=FALSE}\nnSamples <- sample_and_taxon %>%\n
-  select(sample_id) %>%\n
-  n_distinct()\n
-\n
-minTemp <- sample_and_taxon %>%\n
-  summarise(round(min(temperature))) %>%\n
-  pull()\n
-\n
-maxTemp <- sample_and_taxon %>%\n
-  summarise(round(max(temperature))) %>%\n
+cat('```{r data_summary, include=FALSE}\nnSamples <- sample_and_taxon %>%
+  select(sample_id) %>%
+  n_distinct()
+
+minTemp <- sample_and_taxon %>%
+  summarise(round(min(temperature))) %>%
+  pull()
+
+maxTemp <- sample_and_taxon %>%
+  summarise(round(max(temperature))) %>%
   pull()\n```\n')
 ```
 

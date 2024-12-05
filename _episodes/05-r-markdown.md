@@ -24,9 +24,6 @@ keypoints:
 
 
 
-
-
-
 ### Contents
 1. [What is R Markdown and why use it?](#why-use-r-markdown)
 1. [Creating a reports directory](#creating-a-reports-directory)
@@ -42,7 +39,7 @@ keypoints:
 Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario
 
 > ## Discussion
-> How do you usually share data analyses with your collaborators? Many people share them through a Word or PDF document, a spreadsheet, slides, a  graphic, etc.
+> How do you usually share data analyses with your collaborators? Add your usual workflow to the Etherpad.
 {: .discussion}
 
 ## What is R Markdown and why use it?
@@ -90,7 +87,7 @@ To create an R Markdown file:
 - R Markdown files always end in `.Rmd`
 
 > ## R Markdown Outputs
-> The default output for an R Markdown report is HTML, but you can also use R Markdown to [output other report formats](https://rmarkdown.rstudio.com/lesson-9.html). For example, you can generate PDF reports using R Markdown, but you must [install TeX](https://www.latex-project.org/get/) to do this.
+> The default output for an R Markdown report is HTML, but you can also use R Markdown to [output other report formats](https://rmarkdown.rstudio.com/lesson-9.html). For example, you can generate PDF reports using R Markdown, but you must [install some form of LaTeX](https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html) to do this.
 >
 {: .callout}
 
@@ -108,8 +105,8 @@ Here's an example:
 ```
 ---
 title: 'Writing Reports with R Markdown'
-author: "Zena Lapp"
-date: "11/18/2020"
+author: "Augustus Pendleton"
+date: "01/14/2025"
 output: html_document
 ---
 ```
@@ -204,14 +201,10 @@ Now that we have the data, we need to produce the plot. Let's create it!
 
 ~~~
 ```{r cell_vs_temp}
-ggplot(data = sample_and_taxon) + 
-
+ggplot(data = sample_and_taxon) +
   aes(x = temperature, y = cells_per_ml/1000000, color=env_group) +
-
   geom_point() +
-
   labs(x = "Temperature (Celsius)", y = "Cells(million/ml)",
-
        title= "Are temperature and cell abundance linked?")
 ```
 ~~~
@@ -244,14 +237,10 @@ Oops! Now the plot doesn't show up in our report at all. This is because setting
 
 ~~~
 ```{r cell_vs_temp, echo=FALSE}
-ggplot(data = sample_and_taxon) + 
-
+ggplot(data = sample_and_taxon) +
   aes(x = temperature, y = cells_per_ml, color=env_group, size=pop/1000000) +
-
   geom_point() +
-
   labs(x = "GDP Per Capita", y = "Life Expectancy",
-
        title= "Do people in wealthy countries live longer?", size="Population (in millions)")
 ```
 ~~~
@@ -269,25 +258,15 @@ First, let's create a code chunk that summarizes features of our data that we ca
 ~~~
 ```{r data_summary, include=FALSE}
 nSamples <- sample_and_taxon %>%
-
   select(sample_id) %>%
-
   n_distinct()
 
-
-
 minTemp <- sample_and_taxon %>%
-
   summarise(round(min(temperature))) %>%
-
   pull()
 
-
-
 maxTemp <- sample_and_taxon %>%
-
   summarise(round(max(temperature))) %>%
-
   pull()
 ```
 ~~~
@@ -357,9 +336,35 @@ sample_and_taxon %>%
 
 
 ~~~
-Error: object 'sample_and_taxon' not found
+
+
+|sample_id       |env_group | cells_per_ml| temperature|
+|:---------------|:---------|------------:|-----------:|
+|May_12_B        |Deep      |      2058864|     4.07380|
+|May_29_B        |Deep      |      2153086|     4.66955|
+|May_33_B        |Deep      |      2293177|     3.87050|
+|May_41_B        |Deep      |      2422141|     3.76370|
+|May_55_B        |Deep      |      1847686|     3.66830|
+|May_64_B        |Deep      |      1631065|     3.67740|
+|May_74_B        |Deep      |      2270042|     4.86530|
+|September_12_B  |Deep      |      1703592|     4.19650|
+|September_12_M  |Deep      |      2304545|     4.75550|
+|September_33_B  |Deep      |      1246414|     3.97670|
+|September_33_M  |Deep      |      1793411|     4.16960|
+|September_38_B  |Deep      |      1783244|     5.26790|
+|September_38_E  |Deep      |      1989859|     6.83795|
+|September_41_B  |Deep      |      1394350|     3.83100|
+|September_41_M  |Deep      |      2067910|     3.93275|
+|September_55_B  |Deep      |      1594241|     3.77870|
+|September_55_M  |Deep      |      2008431|     3.92295|
+|September_64_B  |Deep      |      1459993|     3.76020|
+|September_64_M  |Deep      |      1852089|     3.98550|
+|September_717_B |Deep      |      1575429|     4.02260|
+|September_717_M |Deep      |      2024282|     4.85345|
+
+
 ~~~
-{: .error}
+{: .output}
 
 ## Formatting
 _[Back to top](#contents)_
@@ -409,15 +414,11 @@ You've learned so much in the past two days - how to use the Unix Shell to move 
 
 Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working! 
 
-The exercises below give you some ideas of directions to pursue. However, you're welcome to branch out. Maybe you have your own hypotheses you'd like to test. These are nice exercises because we are all familiar with the data and have the solutions saved. 
+The exercises below give you some ideas of directions to pursue. These are nice exercises because we have the solutions saved. However, you're welcome to branch out as well! Maybe you have your own hypotheses you'd like to test. Maybe you want to explore a new type of ggplot. Perhaps you want to run some statistical tests.  
 
-That said, you're also welcome to branch out. Maybe you want to explore a new type of ggplot. Maybe you're learning to create interactive tables with `reactable`. Maybe you're trying to read in some of your own data into your report. 
+Just remember to use a combination of prose (writing) and code to document the goals, process, and outputs of your analysis in your RMarkdown report. 
 
-Just remember to use a combination of prose (writing) and code to document your the goals, process, and outputs of your analysis in your RMarkdown report.
-
-This is a way for you to practice what you've learned.
-
-Once you're done, 
+Once you're done, *add* your report to your Git repo, *commit* those changes, and *push* those changes to Github. If you feel comfortable, post a link to the repo on the Etherpad, and change your repo's settings to *Public*, so that others in the class can admire what you've accomplished!
 
 ### Exercises using the gapminder data
 _[Back to top](#contents)_
