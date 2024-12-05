@@ -216,11 +216,11 @@ We can also see the code that was used to generate the plot. Depending on the pu
 Oops! Now the plot doesn't show up in our report at all. This is because setting `include=FALSE` prevents anything in the code chunk from appearing in the report. Instead we can add `echo=FALSE`  to tell this code chunk that we don't want to see the code but just the output.
 
 ```{r,comment=NA,echo=F,collapse=T}
-cat('```{r cell_vs_temp, echo=FALSE}\nggplot(data = sample_and_taxon) +
-  aes(x = temperature, y = cells_per_ml, color=env_group, size=pop/1000000) +
+cat('```{r cell_vs_temp, echo = FALSE}\nggplot(data = sample_and_taxon) +
+  aes(x = temperature, y = cells_per_ml/1000000, color=env_group) +
   geom_point() +
-  labs(x = "GDP Per Capita", y = "Life Expectancy",
-       title= "Do people in wealthy countries live longer?", size="Population (in millions)")\n```\n')
+  labs(x = "Temperature (Celsius)", y = "Cells(million/ml)",
+       title= "Are temperature and cell abundance linked?")\n```\n')
 ```
 
 When we knit this again, our plot is back!
@@ -341,78 +341,94 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 ## Integrating it all together: Make your own report!
 _[Back to top](#contents)_
 
-You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report. Don't worry - if you have questions, the instructor and helpers are here to help you out!
+You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report which you can share with Collaborators via Github! Don't worry - if you have questions, the instructor and helpers are here to help you out!
 
 1. Make a new R Markdown file.
 1. Give it an informative title.
 1. Delete all the unnecessary Markdown and R code (everything below the setup R chunk).
 1. Save it to the `reports` directory as LASTNAME_Ontario_Report.Rmd
 
-Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working! 
+Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working. 
 
 The exercises below give you some ideas of directions to pursue. These are nice exercises because we have the solutions saved. However, you're welcome to branch out as well! Maybe you have your own hypotheses you'd like to test. Maybe you want to explore a new type of ggplot. Perhaps you want to run some statistical tests.  
 
 Just remember to use a combination of prose (writing) and code to document the goals, process, and outputs of your analysis in your RMarkdown report. 
 
-Once you're done, *add* your report to your Git repo, *commit* those changes, and *push* those changes to Github. If you feel comfortable, post a link to the repo on the Etherpad, and change your repo's settings to *Public*, so that others in the class can admire what you've accomplished!
+Once you're done, *add* your report to your Git repo, *commit* those changes, and *push* those changes to Github. If you feel comfortable, post a link to the repo on the Etherpad, and [change your repo's settings to **Public**](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility#changing-a-repositorys-visibility), so that others in the class can admire what you've accomplished!
 
-### Exercises using the gapminder data
+### Exercises using the sample_and_taxon data
 _[Back to top](#contents)_
 
-First we're going to start out with a few questions about the gapminder dataset.
-
-[1] The very first step is to read in the gapminder dataset, so do that first! Also load the `tidyverse` package.
+[1] The very first step is to read in the sample_and_taxon dataset, so do that first! Also load the `tidyverse` package.
 
 > ## Solution
 > ```{r}
 > library(tidyverse)
-> gapminder <- read_csv('data/gapminder_data.csv')
+> sample_and_taxon <- read_csv('data/sample_and_taxon.csv')
 > ```
 {: .solution}
 
-#### Investigating population over time.
+#### Investigating nutrients and cell density
 _[Back to top](#contents)_
 
-[2] Make a scatter plot of year vs. population, separated into a plot for each contient. **Hint:** you can use `facet_wrap(vars(column_name))` to separate into different plots based on that column.
+[2] Make a scatter plot of total_nitrogen vs. cells_per_ml, separated into a plot for each env_group. **Hint:** you can use `facet_wrap(~column_name)` to separate into different plots based on that column.
 
 > ## Solution
 > ```{r}
-> ggplot(gapminder, aes(x=year,y=pop)) +
+> ggplot(sample_and_taxon, aes(x=total_nitrogen,y=cells_per_ml)) +
 > geom_point() +
-> facet_wrap(vars(env_group))
+> facet_wrap(~env_group)
 > ```
 {: .solution}
 
-[3] It seems like there are 2 outliers - which countries are those?
+[3] It seems like there is an outlier in Shallow_May with very high nitrogen levels. What is this sample? Use a combination of `filter` and `arrange` to find out.
 
 > ## Solution
 > ```{r}
-> gapminder %>% filter(pop > 1e9) %>% select(country) %>% unique()
+> sample_and_taxon %>% 
+>  filter(env_group == "Shallow_May") %>% 
+>  arrange(desc(total_nitrogen))
 > ```
 {: .solution}
 
-[4] Plot year vs. population separated into a plot for each env_group but excluding the 2 outlier countries.
+[4] Where was this sample again? Let's look at a map:
+
+<img src="{{ page.root }}/fig/r-plotting/station_map.png" width="600"/>
+
+Wow! This sample is right outside of Toronto.
+
+We also see that Shallow September has four strange points, with high nitrogen and low cell counts. Let's use a new geom, `geom_text` to figure out what those samples are (this might take some googling!). Also, let's use `filter` to only plot samples from "Shallow_September".
 
 > ## Solution
 > ```{r}
-> gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop)) +
-> geom_point() +
-> facet_wrap(vars(env_group))
+> sample_and_taxon %>%
+>   filter(env_group == "Shallow_September") %>%
+>   ggplot(aes(x = total_nitrogen, y = cells_per_ml)) + 
+>   geom_text(aes(label = sample_id))
 > ```
 {: .solution}
 
+Interesting...these are mostly from Station 35. I wonder why these stations have such high nitrogen and such low cell abundances? 
 
-#### Bonus questions: come back to these if you have time at the end
+> ## Solution
+> ![]({{ page.root }}/fig/r-markdown/upwelling_surface.png)
+> Here, I show surface temperatures across the lake in September. Station 35 was on the edge an upwelling event, where cold, nutrient rich water is pulled to the surface of the lake! Stn. 38, which was smack dab in the upwelling itself, was so similar to deep samples that it its env_group is is "Deep" rather than "Shallow_September".
+{: .solution}
+
+If you want to investigate this phenomenon further, spend time analyzing the relative composition of Phyla in these upwelling stations compared to the rest of Shallow_September. If you want to go further, you can use the buoy_data from the Niagara and South Shore buoys to see if you can detect when this upwelling event began.
+
+#### Comparing Dominant Phylum Across Environmental Groups
 _[Back to top](#contents)_
 
-[5] In the plot above, the years look kind of messy. Can you rotate the x axis text 90 degrees so that the years are more readable? Feel free to search the internet if you don't know how to do this!
+[6] We want to know which Phyla tend to live in which environments. Previously, we focused on Chloroflexi, and found it preferred Deep environments. What if we want to look at the relative abundances of all our Phyla between env_groups at once?
+
+First, let's remind ourselves how we looked at Chloroflexi across env_groups. Make a boxplot with env_group on the x-axis, and Chloroflexi relative abundance on the y axis.
 
 > ## Solution
 > ```{r}
-> gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop)) +
-> geom_point() +
-> facet_wrap(vars(env_group)) +
-> theme(axis.text.x=element_text(angle=90))
+> sample_and_taxon %>%
+>   ggplot(aes(x = env_group, y = Chloroflexi)) + 
+>   geom_boxplot()
 > ```
 {: .solution}
 
@@ -420,7 +436,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r}
-> gapminder %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=year,y=pop,group=country)) +
+> sample_and_taxon %>% filter(country != 'China' & country != 'India') %>% ggplot(aes(x=temperature,y=pop,group=country)) +
 > geom_line() +
 > facet_wrap(vars(env_group)) +
 > theme(axis.text.x=element_text(angle=90))
@@ -434,23 +450,23 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> filter(gapminder, year==1982) %>% slice_max(cells_per_ml)
+> filter(sample_and_taxon, temperature==1982) %>% slice_max(cells_per_ml)
 > ```
 {: .solution}
 
-[8] Now, do the same thing but for all years! **Hint:** Use the `group_by()` function.
+[8] Now, do the same thing but for all temperatures! **Hint:** Use the `group_by()` function.
 
 > ## Solution
 > ```{r}
-> gapminder %>% group_by(year) %>% select(country,year,cells_per_ml) %>% slice_max(cells_per_ml) %>% print(n=Inf)
+> sample_and_taxon %>% group_by(temperature) %>% select(country,temperature,cells_per_ml) %>% slice_max(cells_per_ml) %>% print(n=Inf)
 > ```
 {: .solution}
 
-[9] Make a boxplot for the life expectancies of the countries in Asia for each year (year is the x axis, life expectancy is the y axis). Also fix the x and y axis labels.
+[9] Make a boxplot for the life expectancies of the countries in Asia for each temperature (temperature is the x axis, life expectancy is the y axis). Also fix the x and y axis labels.
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> gapminder %>% filter(env_group=='Asia') %>% ggplot(aes(x=as.character(year),y=cells_per_ml)) +
+> sample_and_taxon %>% filter(env_group=='Asia') %>% ggplot(aes(x=as.character(temperature),y=cells_per_ml)) +
 > geom_boxplot() +
 > ylab('Life expectancy') +
 > xlab('')
@@ -460,11 +476,11 @@ _[Back to top](#contents)_
 ##### Bonus questions: come back to these if you have time at the end
 _[Back to top](#contents)_
 
-[10] What are the outliers in life expectancy in Asia for each year (lower life expectancy)?
+[10] What are the outliers in life expectancy in Asia for each temperature (lower life expectancy)?
 
 > ## Solution
 > ```{r}
-> gapminder %>% filter(env_group == 'Asia') %>% group_by(year) %>% slice_min(cells_per_ml)
+> sample_and_taxon %>% filter(env_group == 'Asia') %>% group_by(temperature) %>% slice_min(cells_per_ml)
 > ```
 {: .solution}
 
@@ -472,7 +488,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> gapminder %>% ggplot(aes(x=as.character(year),y=cells_per_ml)) +
+> sample_and_taxon %>% ggplot(aes(x=as.character(temperature),y=cells_per_ml)) +
 > geom_boxplot() +
 > facet_wrap(~env_group) +
 > theme_bw() +
@@ -486,7 +502,7 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> filter(gapminder, year == 1952 | year == 2007) %>% select('country','year',cells_per_ml) %>% pivot_wider(names_from=year,values_from=cells_per_ml) %>% mutate(diff=`2007`-`1952`) %>% slice_max(diff)
+> filter(sample_and_taxon, temperature == 1952 | temperature == 2007) %>% select('country','temperature',cells_per_ml) %>% pivot_wider(names_from=temperature,values_from=cells_per_ml) %>% mutate(diff=`2007`-`1952`) %>% slice_max(diff)
 > ```
 {: .solution}
 
@@ -494,16 +510,16 @@ _[Back to top](#contents)_
 
 > ## Solution
 > ```{r,comment=NA,echo=F,collapse=T}
-> filter(gapminder, year == 1952 | year == 2007) %>% select('country','year',cells_per_ml) %>% pivot_wider(names_from=year,values_from=cells_per_ml) %>% mutate(diff=`2007`-`1952`) %>% filter(diff < 0)
+> filter(sample_and_taxon, temperature == 1952 | temperature == 2007) %>% select('country','temperature',cells_per_ml) %>% pivot_wider(names_from=temperature,values_from=cells_per_ml) %>% mutate(diff=`2007`-`1952`) %>% filter(diff < 0)
 > ```
 {: .solution}
 
 ### Exercises integrating a new dataset
 _[Back to top](#contents)_
 
-**If you finished the questions involving the gapminder dataset (bonus questions are optional), move on to these questions next. Note that we don't expect you to finish all of these! You can also use them as practice after the workshop if you'd like.**
+**If you finished the questions involving the sample_and_taxon dataset (bonus questions are optional), move on to these questions next. Note that we don't expect you to finish all of these! You can also use them as practice after the workshop if you'd like.**
 
-Now that you've practiced what you've learned with the gapminder data, you're going to try using what we've learned to explore a new dataset.
+Now that you've practiced what you've learned with the sample_and_taxon data, you're going to try using what we've learned to explore a new dataset.
 
 #### Preview of the data
 _[Back to top](#contents)_
@@ -520,7 +536,7 @@ Raw csv file:
 
 ```
 T27,Gross domestic expenditure on research and development (R&D),,,,,
-Region/Country/Area,,Year,Series,Value,Footnotes,Source
+Region/Country/Area,,temperature,Series,Value,Footnotes,Source
 1,"Total, all countries or areas",2005,Gross domestic expenditure on R & D: as a percentage of GDP (%),1.5261,,"United Nations Educational, Scientific and Cultural Organization (UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, last accessed June 2020."
 1,"Total, all countries or areas",2010,Gross domestic expenditure on R & D: as a percentage of GDP (%),1.6189,,"United Nations Educational, Scientific and Cultural Organization (UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, last accessed June 2020."
 ...
@@ -532,7 +548,7 @@ CO2 dataset (UN data) preview:
 
 ```
 T24,CO2 emission estimates,,,,,
-Region/Country/Area,,Year,Series,Value,Footnotes,Source
+Region/Country/Area,,temperature,Series,Value,Footnotes,Source
 8,Albania,1975,Emissions (thousand metric tons of carbon dioxide),4338.3340,,"International Energy Agency, IEA World Energy Balances 2019 and 2006 IPCC Guidelines for Greenhouse Gas Inventories, last accessed June 2020."
 8,Albania,1985,Emissions (thousand metric tons of carbon dioxide),6929.9260,,"International Energy Agency, IEA World Energy Balances 2019 and 2006 IPCC Guidelines for Greenhouse Gas Inventories, last accessed June 2020."
 ```
@@ -563,7 +579,7 @@ _[Back to top](#contents)_
 > ```
 {: .solution}
 
-[3] Next, make a column for each of the data types in the `series` column (or whatever you renamed it to). This should give you the following columns: country name, year, expenditure in general, % of funds from business, % of funds from government, % of funds from higher ed, % of funds from non-profit, % of funds from abroad, % of funds from non-specified sources.
+[3] Next, make a column for each of the data types in the `series` column (or whatever you renamed it to). This should give you the following columns: country name, temperature, expenditure in general, % of funds from business, % of funds from government, % of funds from higher ed, % of funds from non-profit, % of funds from abroad, % of funds from non-specified sources.
 
 > ## Solution
 > ```{r}
@@ -587,21 +603,21 @@ _[Back to top](#contents)_
 > ```
 {: .solution}
 
-[5] Plot the expenditure by year (discrete x vs continuous y) using a scatter plot. Feel free to try to make the plot more legible if you want.
+[5] Plot the expenditure by temperature (discrete x vs continuous y) using a scatter plot. Feel free to try to make the plot more legible if you want.
 
 > ## Solution
 > ```{r}
-> rnd %>% filter(!is.na(gdp_pct)) %>% ggplot(aes(x=as.character(year), y=gdp_pct)) +
+> rnd %>% filter(!is.na(gdp_pct)) %>% ggplot(aes(x=as.character(temperature), y=gdp_pct)) +
 > geom_point(alpha=0.5) +
 > xlab('')
 > ```
 {: .solution}
 
-[6] Plot the expenditure by year (discrete x vs continuous y) using a violin plot or a boxplot.
+[6] Plot the expenditure by temperature (discrete x vs continuous y) using a violin plot or a boxplot.
 
 > ## Solution
 > ```{r}
-> rnd %>% filter(!is.na(gdp_pct)) %>% ggplot(aes(x=as.character(year), y=gdp_pct)) +
+> rnd %>% filter(!is.na(gdp_pct)) %>% ggplot(aes(x=as.character(temperature), y=gdp_pct)) +
 > geom_violin() +
 > xlab('')
 > ```
@@ -620,19 +636,19 @@ Unfortunately, we don't have the exact same dates for all of them.
 > ```{r}
 > # read in and clean CO2 data
 > co2 <- read_csv("data/co2-un-data.csv", skip=2,
-col_names=c("region", "country", "year", "series", "value", "footnotes", "source")) %>%
-select(country, year, series, value) %>%
+col_names=c("region", "country", "temperature", "series", "value", "footnotes", "source")) %>%
+select(country, temperature, series, value) %>%
 mutate(series = recode(series, "Emissions (thousand metric tons of carbon dioxide)" = "total",
 "Emissions per capita (metric tons of carbon dioxide)" = "per_capita")) %>%
 pivot_wider(names_from=series, values_from=value)
 > ```
 {: .solution}
 
-[8] Merge the CO2 dataset and the R&D dataset together. Keep only the following colums: country, year, total CO2 emissions, CO2 emissions per capita, and percent of GDP used for R&D.
+[8] Merge the CO2 dataset and the R&D dataset together. Keep only the following colums: country, temperature, total CO2 emissions, CO2 emissions per capita, and percent of GDP used for R&D.
 
 > ## Solution
 > ```{r}
-> co2_rnd <- full_join(co2, rnd) %>% select(country, year, total, per_capita, gdp_pct)
+> co2_rnd <- full_join(co2, rnd) %>% select(country, temperature, total, per_capita, gdp_pct)
 > ```
 {: .solution}
 
@@ -644,7 +660,7 @@ pivot_wider(names_from=series, values_from=value)
 > ```
 {: .solution}
 
-[10] You might have noticed that we don't have both CO2 data _and_ R&D data for all years. Filter the merged dataset so that you only keep country/year combinations that have both CO2 and R&D data (i.e., only keep rows for which CO2 and R&D values are not missing). **HINT:** Search the internet for the use of `is.na()` and ! (the "not operator") to help you here.
+[10] You might have noticed that we don't have both CO2 data _and_ R&D data for all temperatures. Filter the merged dataset so that you only keep country/temperature combinations that have both CO2 and R&D data (i.e., only keep rows for which CO2 and R&D values are not missing). **HINT:** Search the internet for the use of `is.na()` and ! (the "not operator") to help you here.
 
 > ## Solution
 > ```{r}
