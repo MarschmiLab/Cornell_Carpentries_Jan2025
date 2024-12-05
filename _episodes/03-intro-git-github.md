@@ -1270,9 +1270,7 @@ repository `ontario-report`.
 ![Creating a Repository on GitHub (Step 2)]({{ page.root }}/fig/git/github-create-repo-02.png)
 
 As soon as the repository is created, GitHub displays a page with a URL and some
-information on how to configure your local repository:
-
-![Creating a Repository on GitHub (Step 3)]({{ page.root }}/fig/git/github-create-repo-03.png)
+information on how to configure your local repository.
 
 This effectively does the following on GitHub's servers:
 
