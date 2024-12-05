@@ -439,18 +439,18 @@ This will add a new column called "tn_tp_ratio" to our data. We use the column n
 > > 
 > > ~~~
 > > # A tibble: 71 × 11
-> >    sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll tn_tp_ratio cellsInMillions
-> >    <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>       <dbl>           <dbl>
-> >  1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05       123.             2.06
-> >  2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53       106.             4.70
-> >  3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2         88.3            4.81
-> >  4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55       105.             3.74
-> >  5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48       118.             2.15
-> >  6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79       140.             3.12
-> >  7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44       127.             2.57
-> >  8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22       121.             2.29
-> >  9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44        71.2            5.48
-> > 10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27       124.             3.11
+> >    sample_id env_group depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll tn_tp_ratio cellsInMillions
+> >    <chr>     <chr>     <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>       <dbl>           <dbl>
+> >  1 May_12_B  Deep       103.     2058864.        4.07            465             3.78            2.48        0.05       123.             2.06
+> >  2 May_12_E  Shallow_…    5      4696827.        7.01            465             4.39            2.38        2.53       106.             4.70
+> >  3 May_12_M  Shallow_…   15      4808339.        6.14            474             5.37            2.60        3.2         88.3            4.81
+> >  4 May_17_E  Shallow_…    5      3738681.        5.99            492             4.67            2.44        0.55       105.             3.74
+> >  5 May_29_B  Deep        27      2153086.        4.67            525             4.44            2.40        0.48       118.             2.15
+> >  6 May_29_E  Shallow_…    5      3124920.        5.97            521             3.71            2.28        0.79       140.             3.12
+> >  7 May_29_M  Shallow_…   19      2566156.        5.69            539             4.23            2.33        0.44       127.             2.57
+> >  8 May_33_B  Deep       135      2293177.        3.87            505             4.18            2.34        0.22       121.             2.29
+> >  9 May_33_E  Shallow_…    5      5480859.        7.93            473             6.64            2.51        3.44        71.2            5.48
+> > 10 May_33_M  Shallow_…   20      3114433.        4.53            515             4.14            2.23        1.27       124.             3.11
 > > # ℹ 61 more rows
 > > ~~~
 > > {: .output}
@@ -726,18 +726,18 @@ chr (10): Taxon Abundance from Lake Ontario, ...2, ...3, ...4, ...5, ...6, ...7,
 
 ~~~
 # A tibble: 73 × 10
-   `Taxon Abundance from Lake Ontario` ...2                ...3                ...4                ...5                 ...6   ...7  ...8  ...9  ...10
-   <chr>                               <chr>               <chr>               <chr>               <chr>                <chr>  <chr> <chr> <chr> <chr>
- 1 Schmidt Lab                         2023                <NA>                <NA>                <NA>                 <NA>   <NA>  <NA>  <NA>  ,    
- 2 sample_id                           Proteobacteria      Actinobacteriota    Bacteroidota        Chloroflexi          Verru… Cyan… Lot_… <NA>  <NA> 
- 3 Sep_43_B                            0.4750424903837557  0.14116870918686822 0.072457285982646   0.005154754450308614 0.113… 0.14… 1720… MiSeq <NA> 
- 4 Sep_29_E                            0.4532027397871533  0.18427745922670175 0.08144619709511161 0.006882934338814395 0.127… 0.11… <NA>  MiSeq <NA> 
- 5 Sep_62_B                            0.4445189001548922  0.22247366281816092 0.11902538695609188 0.008414715866023662 0.074… 0.08… <NA>  MiSeq <NA> 
- 6 May_8_E                             0.44319281443068753 0.1948738307322036  0.2632806490831948  0.05237823487085329  0.037… 6.94… 1720… MiSeq <NA> 
- 7 Sep_62_E                            0.44124389783423684 0.20572502270050613 0.09990919797538457 0.005726820760399528 0.100… 0.10… <NA>  MiSeq <NA> 
- 8 May_38_E                            0.4396651527295396  0.17521595867842193 0.3104016386143022  0.016430670585092174 0.039… 8.01… 1720… MiSeq <NA> 
- 9 Sep_12_E                            0.43588136704802166 0.21974786854186404 0.07703854842235662 0.00970633243459885  0.103… 0.11… 1720… MiSeq <NA> 
-10 May_17_E                            0.4351187991214858  0.19107690632203736 0.21576243805928202 0.08498357323071895  0.057… 0.00… 1720… MiSeq <NA> 
+   `Taxon Abundance from Lake Ontario` ...2                ...3                ...4                ...5         ...6  ...7  ...8  ...9  ...10
+   <chr>                               <chr>               <chr>               <chr>               <chr>        <chr> <chr> <chr> <chr> <chr>
+ 1 Schmidt Lab                         2023                <NA>                <NA>                <NA>         <NA>  <NA>  <NA>  <NA>  ,    
+ 2 sample_id                           Proteobacteria      Actinobacteriota    Bacteroidota        Chloroflexi  Verr… Cyan… Lot_… <NA>  <NA> 
+ 3 Sep_43_B                            0.4750424903837557  0.14116870918686822 0.072457285982646   0.005154754… 0.11… 0.14… 1720… MiSeq <NA> 
+ 4 Sep_29_E                            0.4532027397871533  0.18427745922670175 0.08144619709511161 0.006882934… 0.12… 0.11… <NA>  MiSeq <NA> 
+ 5 Sep_62_B                            0.4445189001548922  0.22247366281816092 0.11902538695609188 0.008414715… 0.07… 0.08… <NA>  MiSeq <NA> 
+ 6 May_8_E                             0.44319281443068753 0.1948738307322036  0.2632806490831948  0.052378234… 0.03… 6.94… 1720… MiSeq <NA> 
+ 7 Sep_62_E                            0.44124389783423684 0.20572502270050613 0.09990919797538457 0.005726820… 0.10… 0.10… <NA>  MiSeq <NA> 
+ 8 May_38_E                            0.4396651527295396  0.17521595867842193 0.3104016386143022  0.016430670… 0.03… 8.01… 1720… MiSeq <NA> 
+ 9 Sep_12_E                            0.43588136704802166 0.21974786854186404 0.07703854842235662 0.009706332… 0.10… 0.11… 1720… MiSeq <NA> 
+10 May_17_E                            0.4351187991214858  0.19107690632203736 0.21576243805928202 0.084983573… 0.05… 0.00… 1720… MiSeq <NA> 
 # ℹ 63 more rows
 ~~~
 {: .output}
@@ -1240,20 +1240,20 @@ Joining with `by = join_by(sample_id)`
 
 ~~~
 # A tibble: 32 × 15
-   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota
-   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>
- 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129
- 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186
- 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287
- 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191
- 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280
- 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206
- 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310
- 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162
- 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205
-10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208
 # ℹ 22 more rows
-# ℹ 4 more variables: Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
+# ℹ 5 more variables: Actinobacteriota <dbl>, Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
 ~~~
 {: .output}
 
@@ -1269,20 +1269,20 @@ inner_join(sample_data, taxon_clean, by="sample_id")
 
 ~~~
 # A tibble: 32 × 15
-   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota
-   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>
- 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129
- 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186
- 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287
- 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191
- 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280
- 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206
- 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310
- 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162
- 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205
-10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208
 # ℹ 22 more rows
-# ℹ 4 more variables: Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
+# ℹ 5 more variables: Actinobacteriota <dbl>, Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
 ~~~
 {: .output}
 
@@ -1327,15 +1327,17 @@ sample_data$sample_id
 
 
 ~~~
- [1] "May_12_B"        "May_12_E"        "May_12_M"        "May_17_E"        "May_29_B"        "May_29_E"        "May_29_M"        "May_33_B"       
- [9] "May_33_E"        "May_33_M"        "May_35_B"        "May_35_E"        "May_35_M"        "May_38_E"        "May_38_M"        "May_41_B"       
-[17] "May_41_E"        "May_43_E"        "May_48_B"        "May_48_E"        "May_55_B"        "May_55_E"        "May_55_M"        "May_64_B"       
-[25] "May_64_E"        "May_64_M"        "May_66_E"        "May_717_E"       "May_74_B"        "May_74_E"        "May_74_M"        "May_8_E"        
-[33] "September_12_B"  "September_12_E"  "September_12_M"  "September_17_B"  "September_17_E"  "September_29_B"  "September_29_E"  "September_29_M" 
-[41] "September_33_B"  "September_33_E"  "September_33_M"  "September_35_B"  "September_35_E"  "September_35_M"  "September_38_B"  "September_38_E" 
-[49] "September_41_B"  "September_41_E"  "September_41_M"  "September_43_B"  "September_43_E"  "September_48_B"  "September_48_E"  "September_48_M" 
-[57] "September_55_B"  "September_55_E"  "September_55_M"  "September_62_B"  "September_62_E"  "September_64_B"  "September_64_E"  "September_64_M" 
-[65] "September_66_B"  "September_66_E"  "September_717_B" "September_717_E" "September_717_M" "September_8_B"   "September_8_E"  
+ [1] "May_12_B"        "May_12_E"        "May_12_M"        "May_17_E"        "May_29_B"        "May_29_E"        "May_29_M"       
+ [8] "May_33_B"        "May_33_E"        "May_33_M"        "May_35_B"        "May_35_E"        "May_35_M"        "May_38_E"       
+[15] "May_38_M"        "May_41_B"        "May_41_E"        "May_43_E"        "May_48_B"        "May_48_E"        "May_55_B"       
+[22] "May_55_E"        "May_55_M"        "May_64_B"        "May_64_E"        "May_64_M"        "May_66_E"        "May_717_E"      
+[29] "May_74_B"        "May_74_E"        "May_74_M"        "May_8_E"         "September_12_B"  "September_12_E"  "September_12_M" 
+[36] "September_17_B"  "September_17_E"  "September_29_B"  "September_29_E"  "September_29_M"  "September_33_B"  "September_33_E" 
+[43] "September_33_M"  "September_35_B"  "September_35_E"  "September_35_M"  "September_38_B"  "September_38_E"  "September_41_B" 
+[50] "September_41_E"  "September_41_M"  "September_43_B"  "September_43_E"  "September_48_B"  "September_48_E"  "September_48_M" 
+[57] "September_55_B"  "September_55_E"  "September_55_M"  "September_62_B"  "September_62_E"  "September_64_B"  "September_64_E" 
+[64] "September_64_M"  "September_66_B"  "September_66_E"  "September_717_B" "September_717_E" "September_717_M" "September_8_B"  
+[71] "September_8_E"  
 ~~~
 {: .output}
 
@@ -1349,12 +1351,13 @@ taxon_clean$sample_id
 
 
 ~~~
- [1] "Sep_43_B"  "Sep_29_E"  "Sep_62_B"  "May_8_E"   "Sep_62_E"  "May_38_E"  "Sep_12_E"  "May_17_E"  "May_66_E"  "Sep_8_B"   "Sep_48_B"  "Sep_33_E" 
-[13] "May_64_B"  "Sep_48_E"  "Sep_55_E"  "May_12_B"  "May_29_B"  "Sep_48_M"  "May_35_E"  "May_33_B"  "Sep_66_E"  "May_48_E"  "Sep_35_B"  "Sep_64_E" 
-[25] "Sep_41_E"  "Sep_29_M"  "Sep_66_B"  "May_48_B"  "May_717_E" "Sep_29_B"  "May_64_E"  "May_29_E"  "May_38_M"  "Sep_8_E"   "May_35_M"  "May_74_B" 
-[37] "Sep_717_E" "Sep_17_B"  "May_41_B"  "Sep_43_E"  "Sep_64_B"  "May_35_B"  "May_64_M"  "May_55_M"  "May_33_M"  "May_43_E"  "May_12_E"  "Sep_35_E" 
-[49] "May_55_E"  "Sep_17_E"  "May_41_E"  "May_74_E"  "May_33_E"  "Sep_55_B"  "May_29_M"  "Sep_33_M"  "May_74_M"  "Sep_12_B"  "Sep_38_B"  "Sep_33_B" 
-[61] "Sep_35_M"  "Sep_38_E"  "Sep_41_B"  "May_12_M"  "Sep_41_M"  "Sep_12_M"  "Sep_717_B" "Sep_64_M"  "Sep_55_M"  "May_55_B"  "Sep_717_M"
+ [1] "Sep_43_B"  "Sep_29_E"  "Sep_62_B"  "May_8_E"   "Sep_62_E"  "May_38_E"  "Sep_12_E"  "May_17_E"  "May_66_E"  "Sep_8_B"   "Sep_48_B" 
+[12] "Sep_33_E"  "May_64_B"  "Sep_48_E"  "Sep_55_E"  "May_12_B"  "May_29_B"  "Sep_48_M"  "May_35_E"  "May_33_B"  "Sep_66_E"  "May_48_E" 
+[23] "Sep_35_B"  "Sep_64_E"  "Sep_41_E"  "Sep_29_M"  "Sep_66_B"  "May_48_B"  "May_717_E" "Sep_29_B"  "May_64_E"  "May_29_E"  "May_38_M" 
+[34] "Sep_8_E"   "May_35_M"  "May_74_B"  "Sep_717_E" "Sep_17_B"  "May_41_B"  "Sep_43_E"  "Sep_64_B"  "May_35_B"  "May_64_M"  "May_55_M" 
+[45] "May_33_M"  "May_43_E"  "May_12_E"  "Sep_35_E"  "May_55_E"  "Sep_17_E"  "May_41_E"  "May_74_E"  "May_33_E"  "Sep_55_B"  "May_29_M" 
+[56] "Sep_33_M"  "May_74_M"  "Sep_12_B"  "Sep_38_B"  "Sep_33_B"  "Sep_35_M"  "Sep_38_E"  "Sep_41_B"  "May_12_M"  "Sep_41_M"  "Sep_12_M" 
+[67] "Sep_717_B" "Sep_64_M"  "Sep_55_M"  "May_55_B"  "Sep_717_M"
 ~~~
 {: .output}
 
@@ -1379,20 +1382,20 @@ inner_join(sample_data, taxon_clean_goodSept, by = "sample_id")
 
 ~~~
 # A tibble: 71 × 15
-   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota
-   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>
- 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129
- 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186
- 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287
- 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191
- 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280
- 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206
- 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310
- 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162
- 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205
-10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208
 # ℹ 61 more rows
-# ℹ 4 more variables: Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
+# ℹ 5 more variables: Actinobacteriota <dbl>, Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>, Cyanobacteria <dbl>
 ~~~
 {: .output}
 
@@ -1565,22 +1568,22 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > ~~~
 > > Rows: 71
 > > Columns: 16
-> > $ sample_id         <chr> "May_12_B", "May_12_E", "May_12_M", "May_17_E", "May_29_B", "May_29_E", "May_29_M", "May_33_B", "May_33_E", "May_33_M", "M…
-> > $ env_group         <chr> "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow…
-> > $ depth             <dbl> 102.8, 5.0, 15.0, 5.0, 27.0, 5.0, 19.0, 135.0, 5.0, 20.0, 27.0, 5.0, 10.0, 5.0, 14.0, 127.0, 5.0, 5.0, 35.0, 5.0, 189.0, 5…
-> > $ cells_per_ml      <dbl> 2058864, 4696827, 4808339, 3738681, 2153086, 3124920, 2566156, 2293177, 5480859, 3114433, 3066162, 5417617, 4610370, 58117…
-> > $ temperature       <dbl> 4.07380, 7.01270, 6.13500, 5.99160, 4.66955, 5.97390, 5.68550, 3.87050, 7.93390, 4.53155, 6.57370, 11.22760, 11.06450, 12.…
-> > $ total_nitrogen    <dbl> 465, 465, 474, 492, 525, 521, 539, 505, 473, 515, 479, 441, 450, 416, 449, 475, 435, 499, 477, 472, 475, 468, 460, 488, 44…
-> > $ total_phosphorus  <dbl> 3.78, 4.39, 5.37, 4.67, 4.44, 3.71, 4.23, 4.18, 6.64, 4.14, 4.32, 8.98, 5.99, 8.27, 8.66, 2.52, 5.46, 5.48, 2.31, 2.66, 6.…
-> > $ diss_org_carbon   <dbl> 2.478, 2.380, 2.601, 2.435, 2.396, 2.283, 2.334, 2.343, 2.508, 2.232, 2.613, 2.567, 2.628, 2.692, 2.692, 2.389, 2.437, 2.4…
-> > $ chlorophyll       <dbl> 0.05, 2.53, 3.20, 0.55, 0.48, 0.79, 0.44, 0.22, 3.44, 1.27, 1.26, 3.96, 2.44, 3.32, 4.84, 0.21, 2.84, 0.56, 0.24, 0.38, 0.…
-> > $ Proteobacteria    <dbl> 0.4120986, 0.3389293, 0.2762080, 0.4351188, 0.4100639, 0.3622527, 0.3110194, 0.4034387, 0.3012852, 0.2077626, 0.3433637, 0…
-> > $ Actinobacteriota  <dbl> 0.1288958, 0.1861232, 0.2866884, 0.1910769, 0.2801239, 0.2062492, 0.3100247, 0.1624027, 0.2048393, 0.3409799, 0.1543572, 0…
-> > $ Bacteroidota      <dbl> 0.08065717, 0.23470807, 0.21659843, 0.21576244, 0.11036293, 0.27980345, 0.20001474, 0.08615012, 0.31681303, 0.19946045, 0.…
-> > $ Chloroflexi       <dbl> 0.194635644, 0.080866893, 0.070320609, 0.084983573, 0.130649915, 0.083230440, 0.136388756, 0.164581873, 0.053744394, 0.087…
-> > $ Verrucomicrobiota <dbl> 0.13249532, 0.10878214, 0.09991639, 0.05752092, 0.06055977, 0.06269371, 0.03606823, 0.13660756, 0.08463046, 0.11408929, 0.…
-> > $ Cyanobacteria     <dbl> 2.482454e-04, 9.574640e-03, 1.262830e-02, 1.288730e-03, 0.000000e+00, 4.535719e-04, 3.315772e-04, 2.399992e-04, 1.077903e-…
-> > $ abs_Chloroflexi   <dbl> 400728.37, 379817.78, 338125.36, 317726.48, 281300.48, 260088.49, 349994.76, 377415.41, 294565.42, 273092.26, 222588.52, 9…
+> > $ sample_id         <chr> "May_12_B", "May_12_E", "May_12_M", "May_17_E", "May_29_B", "May_29_E", "May_29_M", "May_33_B", "May_33_E", "May_…
+> > $ env_group         <chr> "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Deep", "Shallow_May",…
+> > $ depth             <dbl> 102.8, 5.0, 15.0, 5.0, 27.0, 5.0, 19.0, 135.0, 5.0, 20.0, 27.0, 5.0, 10.0, 5.0, 14.0, 127.0, 5.0, 5.0, 35.0, 5.0,…
+> > $ cells_per_ml      <dbl> 2058864, 4696827, 4808339, 3738681, 2153086, 3124920, 2566156, 2293177, 5480859, 3114433, 3066162, 5417617, 46103…
+> > $ temperature       <dbl> 4.07380, 7.01270, 6.13500, 5.99160, 4.66955, 5.97390, 5.68550, 3.87050, 7.93390, 4.53155, 6.57370, 11.22760, 11.0…
+> > $ total_nitrogen    <dbl> 465, 465, 474, 492, 525, 521, 539, 505, 473, 515, 479, 441, 450, 416, 449, 475, 435, 499, 477, 472, 475, 468, 460…
+> > $ total_phosphorus  <dbl> 3.78, 4.39, 5.37, 4.67, 4.44, 3.71, 4.23, 4.18, 6.64, 4.14, 4.32, 8.98, 5.99, 8.27, 8.66, 2.52, 5.46, 5.48, 2.31,…
+> > $ diss_org_carbon   <dbl> 2.478, 2.380, 2.601, 2.435, 2.396, 2.283, 2.334, 2.343, 2.508, 2.232, 2.613, 2.567, 2.628, 2.692, 2.692, 2.389, 2…
+> > $ chlorophyll       <dbl> 0.05, 2.53, 3.20, 0.55, 0.48, 0.79, 0.44, 0.22, 3.44, 1.27, 1.26, 3.96, 2.44, 3.32, 4.84, 0.21, 2.84, 0.56, 0.24,…
+> > $ Proteobacteria    <dbl> 0.4120986, 0.3389293, 0.2762080, 0.4351188, 0.4100639, 0.3622527, 0.3110194, 0.4034387, 0.3012852, 0.2077626, 0.3…
+> > $ Actinobacteriota  <dbl> 0.1288958, 0.1861232, 0.2866884, 0.1910769, 0.2801239, 0.2062492, 0.3100247, 0.1624027, 0.2048393, 0.3409799, 0.1…
+> > $ Bacteroidota      <dbl> 0.08065717, 0.23470807, 0.21659843, 0.21576244, 0.11036293, 0.27980345, 0.20001474, 0.08615012, 0.31681303, 0.199…
+> > $ Chloroflexi       <dbl> 0.194635644, 0.080866893, 0.070320609, 0.084983573, 0.130649915, 0.083230440, 0.136388756, 0.164581873, 0.0537443…
+> > $ Verrucomicrobiota <dbl> 0.13249532, 0.10878214, 0.09991639, 0.05752092, 0.06055977, 0.06269371, 0.03606823, 0.13660756, 0.08463046, 0.114…
+> > $ Cyanobacteria     <dbl> 2.482454e-04, 9.574640e-03, 1.262830e-02, 1.288730e-03, 0.000000e+00, 4.535719e-04, 3.315772e-04, 2.399992e-04, 1…
+> > $ abs_Chloroflexi   <dbl> 400728.37, 379817.78, 338125.36, 317726.48, 281300.48, 260088.49, 349994.76, 377415.41, 294565.42, 273092.26, 222…
 > > ~~~
 > > {: .output}
 > >
