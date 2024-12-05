@@ -51,7 +51,7 @@ Go to the etherpad and write down your name, role, affiliation, and work/researc
 ## The "goal" of the workshop
 
 Now that we all know each other, let's learn a bit more about why we're here. 
-We have gathered data, looking at the microbial communities of Lake Ontario. We want to analyze this data in a way that is reproducible and approachable, and share our findings with the world. By the end of the workshop, you will have written a report which combines plots, stats, and analysis (prose) that helps the reader understand how physical conditions in Lake Ontario can affect its microbial communities.
+We have gathered data looking at the microbial communities of Lake Ontario. We want to analyze this data in a way that is reproducible and approachable, and share our findings with the world. By the end of the workshop, you will have written a report which combines plots, stats, and analysis (prose) that helps the reader understand how physical conditions in Lake Ontario can affect its microbial communities.
 
 To get to that point, we'll need to learn how to manage data, make plots, and generate reports. The next section discusses in more detail exactly what we will cover.
 

@@ -7,11 +7,17 @@ title: Setup
 1. Install the following software (<a href="#install">all instructions are below</a>).
     - [R](https://www.r-project.org/)
     - [RStudio](https://rstudio.com/), an integrated development environment for R
-    - For Windows users: Git for Windows. This will install a Bash "emulator" we'll use for the Unix lesson.
+    - For Windows users: [Git for Windows](https://gitforwindows.org/). This will install both a Bash "emulator" we'll use for the Unix lesson and the version control system git.
+    
+2. Make a Github account. 
+    - This is necessary for the git/Github lesson. 
+    - You can choose what email you use to set up your account, it will not matter if it is a personal or Cornell email.
+    - Accept Github's default privacy settings (I promise you won't get spam mail). 
+
 
 Instructions to install each of these tools are available on the [course website.](https://marschmilab.github.io/2023-12-12-Cornell-Micro/)
 
-1. After you have installed everything above, download [un-report.zip](https://github.com/gus-pendleton/intro-curriculum-r/raw/1a3ec452e73f33dfaf9141c182a4085782313b9a/files/un-report.zip). You'll need the files included during the workshop.
+1. After you have installed everything above, download [ontario-report.zip](https://github.com/gus-pendleton/intro-curriculum-r/raw/1a3ec452e73f33dfaf9141c182a4085782313b9a/files/un-report.zip). You'll need the files included during the workshop.
     1. Move `un-report.zip` to your Desktop and unzip it (usually double-clicking it will work).
     1. Start up **RStudio**. In the upper left menu, select `File` > `Open`. In the window that opens, go to the `un-report/` folder on your Desktop and select the file `check_setup.R` to open it in RStudio.
     1. Click the **`Source`** button to run the script. This script will make sure that everything is installed and setup correctly. You should see output printed to the console window (usually the lower left pane in RStudio).

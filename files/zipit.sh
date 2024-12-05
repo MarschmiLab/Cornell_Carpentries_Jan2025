@@ -1,2 +1,2 @@
 #!/bin/bash
-zip -r un-report.zip un-report/*
+zip -r ontario-report.zip ontario-report/*

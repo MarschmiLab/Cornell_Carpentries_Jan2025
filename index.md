@@ -6,11 +6,11 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 
 {% include gh_variables.html %}
 
-This is a custom curriculum for Carpentries workshops at Cornell which is borrowed and adapted from lessons by the University of Michigan Carpentries instance.
+This is a custom curriculum for Carpentries workshops at Cornell which is borrowed and adapted from lessons by the University of Michigan Carpentries.
 While it is based on The Carpentries curriculum and teaching practices, 
 it is not officially overseen by The Carpentries organization. 
 We welcome any feedback or questions to us through 
-[GitHub](https://github.com/UMCarpentries/intro-curriculum-r). 
+[GitHub](https://github.com/MarschmiLab/Cornell_Carpentries_Jan2025). 
 
 The curriculum is developed for complete beginners interested in 
 learning reproducible data science techniques and integrates instruction 
