@@ -45,9 +45,9 @@ editor_options:
 
 # Getting Started
 
-First, navigate to the un-reports directory however you'd like and open `un-report.Rproj`.
-This should open the un-report R project in RStudio.
-You can check this by seeing if the Files in the bottom right of RStudio are the ones in your `un-report` directory.
+First, navigate to the ontario-reports directory however you'd like and open `ontario-report.Rproj`.
+This should open the ontario-report R project in RStudio.
+You can check this by seeing if the Files in the bottom right of RStudio are the ones in your `ontario-report` directory.
 
 Yesterday we spent a lot of time making plots in R using the ggplot2 package. Visualizing data using plots is a very powerful skill in R, but what if we would like to work with only a subset of our data? Or clean up messy data, calculate summary statistics, create a new variable, or join two datasets together? There are several different methods for doing this in R, and we will touch on a few today using functions the `dplyr` package.
 
@@ -78,13 +78,13 @@ library(tidyverse)
 
 
 ~~~
-── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
-── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -107,10 +107,10 @@ sample_data <- read_csv("data/sample_data.csv")
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
-dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus,...
+dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -300,7 +300,7 @@ sample_data %>%
 > {: .solution}
 {: .challenge}
 
-Notice how the pipe operator (`%>%`) allows us to combine these two simple steps into a more complicated data extraction?. We took the data, filtered out the rows, then took the mean value. The argument we pass to `filter()` needs to be some expression that will return TRUE or FALSE. We can use comparisons like `>` (greater than) and `<` (less than) for example. Here we tested for equality using a double equals sign `==`. You use `==` (double equals) when testing if two values are equal, and you use `=` (single equals) when naming arguments that you are passing to functions. Try changing it to use `filter(env_group = "Deep")` and see what happens.
+Notice how the pipe operator (`%>%`) allows us to combine these two simple steps into a more complicated data extraction?. We took the data, filtered out the rows, then took the mean value. The argument we pass to `filter()` needs to be some expression that will return TRUE or FALSE. We can use comparisons like `>` (greater than) and `<` (less than) for example. Here we tested for equality using a double equals sign `==`. You can also use `!=` to mean "doesn't equal". You use `==` (double equals) when testing if two values are equal, and you use `=` (single equals) when naming arguments that you are passing to functions. Try changing it to use `filter(env_group = "Deep")` and see what happens.
 
 ## Grouping rows using `group_by()` {#grouping-rows-using-group_by}
 
@@ -405,21 +405,19 @@ sample_data %>%
 
 ~~~
 # A tibble: 71 × 10
-   sample_id env_group   depth cells_per_ml temperature total_nitrogen
-   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
- 1 May_12_B  Deep         103.     2058864.        4.07            465
- 2 May_12_E  Shallow_May    5      4696827.        7.01            465
- 3 May_12_M  Shallow_May   15      4808339.        6.14            474
- 4 May_17_E  Shallow_May    5      3738681.        5.99            492
- 5 May_29_B  Deep          27      2153086.        4.67            525
- 6 May_29_E  Shallow_May    5      3124920.        5.97            521
- 7 May_29_M  Shallow_May   19      2566156.        5.69            539
- 8 May_33_B  Deep         135      2293177.        3.87            505
- 9 May_33_E  Shallow_May    5      5480859.        7.93            473
-10 May_33_M  Shallow_May   20      3114433.        4.53            515
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll tn_tp_ratio
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>       <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05       123. 
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53       106. 
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2         88.3
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55       105. 
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48       118. 
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79       140. 
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44       127. 
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22       121. 
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44        71.2
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27       124. 
 # ℹ 61 more rows
-# ℹ 4 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-#   chlorophyll <dbl>, tn_tp_ratio <dbl>
 ~~~
 {: .output}
 
@@ -441,21 +439,19 @@ This will add a new column called "tn_tp_ratio" to our data. We use the column n
 > > 
 > > ~~~
 > > # A tibble: 71 × 11
-> >    sample_id env_group   depth cells_per_ml temperature total_nitrogen
-> >    <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
-> >  1 May_12_B  Deep         103.     2058864.        4.07            465
-> >  2 May_12_E  Shallow_May    5      4696827.        7.01            465
-> >  3 May_12_M  Shallow_May   15      4808339.        6.14            474
-> >  4 May_17_E  Shallow_May    5      3738681.        5.99            492
-> >  5 May_29_B  Deep          27      2153086.        4.67            525
-> >  6 May_29_E  Shallow_May    5      3124920.        5.97            521
-> >  7 May_29_M  Shallow_May   19      2566156.        5.69            539
-> >  8 May_33_B  Deep         135      2293177.        3.87            505
-> >  9 May_33_E  Shallow_May    5      5480859.        7.93            473
-> > 10 May_33_M  Shallow_May   20      3114433.        4.53            515
+> >    sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll tn_tp_ratio cellsInMillions
+> >    <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>       <dbl>           <dbl>
+> >  1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05       123.             2.06
+> >  2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53       106.             4.70
+> >  3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2         88.3            4.81
+> >  4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55       105.             3.74
+> >  5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48       118.             2.15
+> >  6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79       140.             3.12
+> >  7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44       127.             2.57
+> >  8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22       121.             2.29
+> >  9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44        71.2            5.48
+> > 10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27       124.             3.11
 > > # ℹ 61 more rows
-> > # ℹ 5 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-> > #   chlorophyll <dbl>, tn_tp_ratio <dbl>, cellsInMillions <dbl>
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -508,20 +504,19 @@ sample_data %>%
 
 ~~~
 # A tibble: 71 × 8
-   sample_id depth cells_per_ml temperature total_nitrogen total_phosphorus
-   <chr>     <dbl>        <dbl>       <dbl>          <dbl>            <dbl>
- 1 May_12_B   103.     2058864.        4.07            465             3.78
- 2 May_12_E     5      4696827.        7.01            465             4.39
- 3 May_12_M    15      4808339.        6.14            474             5.37
- 4 May_17_E     5      3738681.        5.99            492             4.67
- 5 May_29_B    27      2153086.        4.67            525             4.44
- 6 May_29_E     5      3124920.        5.97            521             3.71
- 7 May_29_M    19      2566156.        5.69            539             4.23
- 8 May_33_B   135      2293177.        3.87            505             4.18
- 9 May_33_E     5      5480859.        7.93            473             6.64
-10 May_33_M    20      3114433.        4.53            515             4.14
+   sample_id depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll
+   <chr>     <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>
+ 1 May_12_B   103.     2058864.        4.07            465             3.78            2.48        0.05
+ 2 May_12_E     5      4696827.        7.01            465             4.39            2.38        2.53
+ 3 May_12_M    15      4808339.        6.14            474             5.37            2.60        3.2 
+ 4 May_17_E     5      3738681.        5.99            492             4.67            2.44        0.55
+ 5 May_29_B    27      2153086.        4.67            525             4.44            2.40        0.48
+ 6 May_29_E     5      3124920.        5.97            521             3.71            2.28        0.79
+ 7 May_29_M    19      2566156.        5.69            539             4.23            2.33        0.44
+ 8 May_33_B   135      2293177.        3.87            505             4.18            2.34        0.22
+ 9 May_33_E     5      5480859.        7.93            473             6.64            2.51        3.44
+10 May_33_M    20      3114433.        4.53            515             4.14            2.23        1.27
 # ℹ 61 more rows
-# ℹ 2 more variables: diss_org_carbon <dbl>, chlorophyll <dbl>
 ~~~
 {: .output}
 
@@ -702,7 +697,7 @@ Warning: One or more parsing issues, call `problems()` on your data frame for de
 
 ~~~
 Rows: 73 Columns: 1
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (1): Relative Abundances of Taxa in Lake Ontario
 
@@ -715,18 +710,18 @@ chr (1): Relative Abundances of Taxa in Lake Ontario
 
 ~~~
 # A tibble: 73 × 1
-   `Relative Abundances of Taxa in Lake Ontario`                                
-   <chr>                                                                        
- 1 Schmidt Lab, 2023                                                            
- 2 sample_id,Proteobacteria,Actinobacteriota,Bacteroidota,Chloroflexi,Verrucomi…
- 3 Sep_43_B,0.4750424903837557,0.14116870918686822,0.072457285982646,0.00515475…
- 4 Sep_29_E,0.4532027397871533,0.18427745922670175,0.08144619709511161,0.006882…
- 5 Sep_62_B,0.4445189001548922,0.22247366281816092,0.11902538695609188,0.008414…
- 6 May_8_E,0.44319281443068753,0.1948738307322036,0.2632806490831948,0.05237823…
- 7 Sep_62_E,0.44124389783423684,0.20572502270050613,0.09990919797538457,0.00572…
- 8 May_38_E,0.4396651527295396,0.17521595867842193,0.3104016386143022,0.0164306…
- 9 Sep_12_E,0.43588136704802166,0.21974786854186404,0.07703854842235662,0.00970…
-10 May_17_E,0.4351187991214858,0.19107690632203736,0.21576243805928202,0.084983…
+   `Relative Abundances of Taxa in Lake Ontario`                                                                                                                                                                       
+   <chr>                                                                                                                                                                                                               
+ 1 Schmidt Lab, 2023                                                                                                                                                                                                   
+ 2 sample_id,Proteobacteria,Actinobacteriota,Bacteroidota,Chloroflexi,Verrucomicrobiota,Cyanobacteria,Planctomycetota,sequencing_reads,perc_reads_retained,Extraction_Date,Lot_Number,                                 
+ 3 Sep_43_B,0.4750424903837557,0.14116870918686822,0.072457285982646,0.005154754450308614,0.11356114142588777,0.14148179622506485,0.036429913230163695,78341,67.55654362396726,20231007.5,172033163, MiSeq Sequencer   
+ 4 Sep_29_E,0.4532027397871533,0.18427745922670175,0.08144619709511161,0.006882934338814395,0.12767452756520375,0.1136520827290779,0.025836103612146104,73370,67.04807015935938,20231011,NA, MiSeq Sequencer           
+ 5 Sep_62_B,0.4445189001548922,0.22247366281816092,0.11902538695609188,0.008414715866023662,0.07473278333754435,0.08943107293119928,0.025474838241917597,70483,71.15438503541827,20231008.5,NA, MiSeq Sequencer        
+ 6 May_8_E,0.44319281443068753,0.1948738307322036,0.2632806490831948,0.05237823487085329,0.03761506587598938,6.947373644641838e-4,0.0020097759471999605,58185,68.44234708674301,20230614.5,172033163, MiSeq Sequencer  
+ 7 Sep_62_E,0.44124389783423684,0.20572502270050613,0.09990919797538457,0.005726820760399528,0.10034073234979457,0.10234556913090771,0.03154696082926523,89830,69.57811054899217,20231013.5,NA, MiSeq Sequencer        
+ 8 May_38_E,0.4396651527295396,0.17521595867842193,0.3104016386143022,0.016430670585092174,0.03927331017900079,8.014961261020571e-4,0.0056995280078368515,61580,57.03312763884378,20230615,172033163, MiSeq Sequencer  
+ 9 Sep_12_E,0.43588136704802166,0.21974786854186404,0.07703854842235662,0.00970633243459885,0.10388399038111201,0.11340085987029075,0.02840486774029002,58568.5,68.09693556299425,20231007.5,172033163, MiSeq Sequencer
+10 May_17_E,0.4351187991214858,0.19107690632203736,0.21576243805928202,0.08498357323071895,0.057520919173034694,0.0012887299656943712,0.002105530648176719,55062,66.34078050124333,20230615,172033163, MiSeq Sequencer 
 # ℹ 63 more rows
 ~~~
 {: .output}
@@ -745,10 +740,10 @@ read_csv("data/taxon_abundance.csv", skip=2)
 New names:
 Rows: 71 Columns: 13
 ── Column specification
-────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
-(2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verru...
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to
-quiet this message.
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+(2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota, sequencing_reads, perc_reads_retained,
+Extraction_Date, Lot_Number
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -> `...13`
 ~~~
 {: .output}
@@ -757,22 +752,19 @@ quiet this message.
 
 ~~~
 # A tibble: 71 × 13
-   sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi
-   <chr>              <dbl>            <dbl>        <dbl>       <dbl>
- 1 Sep_43_B           0.475            0.141       0.0725     0.00515
- 2 Sep_29_E           0.453            0.184       0.0814     0.00688
- 3 Sep_62_B           0.445            0.222       0.119      0.00841
- 4 May_8_E            0.443            0.195       0.263      0.0524 
- 5 Sep_62_E           0.441            0.206       0.0999     0.00573
- 6 May_38_E           0.440            0.175       0.310      0.0164 
- 7 Sep_12_E           0.436            0.220       0.0770     0.00971
- 8 May_17_E           0.435            0.191       0.216      0.0850 
- 9 May_66_E           0.431            0.139       0.315      0.0205 
-10 Sep_8_B            0.429            0.163       0.118      0.00483
+   sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota sequencing_reads perc_reads_retained Extraction_Date Lot_Number ...13          
+   <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>            <dbl>               <dbl>           <dbl>      <dbl> <chr>          
+ 1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364            78341                 67.6       20231008.  172033163 MiSeq Sequencer
+ 2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258            73370                 67.0       20231011          NA MiSeq Sequencer
+ 3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255            70483                 71.2       20231008.         NA MiSeq Sequencer
+ 4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201           58185                 68.4       20230614.  172033163 MiSeq Sequencer
+ 5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315            89830                 69.6       20231014.         NA MiSeq Sequencer
+ 6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570           61580                 57.0       20230615   172033163 MiSeq Sequencer
+ 7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284            58568.                68.1       20231008.  172033163 MiSeq Sequencer
+ 8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211           55062                 66.3       20230615   172033163 MiSeq Sequencer
+ 9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703           50591                 64.7       20230614   172033163 MiSeq Sequencer
+10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183            76739                 66.2       20231016.         NA MiSeq Sequencer
 # ℹ 61 more rows
-# ℹ 8 more variables: Verrucomicrobiota <dbl>, Cyanobacteria <dbl>,
-#   Planctomycetota <dbl>, sequencing_reads <dbl>, perc_reads_retained <dbl>,
-#   Extraction_Date <dbl>, Lot_Number <dbl>, ...13 <chr>
 ~~~
 {: .output}
 
@@ -797,10 +789,10 @@ taxon_dirty <- read_csv("data/taxon_abundance.csv", skip=2) %>%
 New names:
 Rows: 71 Columns: 13
 ── Column specification
-────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
-(2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verru...
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to
-quiet this message.
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+(2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota, sequencing_reads, perc_reads_retained,
+Extraction_Date, Lot_Number
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -> `...13`
 ~~~
 {: .output}
@@ -817,19 +809,19 @@ glimpse(taxon_dirty)
 ~~~
 Rows: 71
 Columns: 13
-$ sample_id           <chr> "Sep_43_B", "Sep_29_E", "Sep_62_B", "May_8_E", "Se…
-$ Proteobacteria      <dbl> 0.4750425, 0.4532027, 0.4445189, 0.4431928, 0.4412…
-$ Actinobacteriota    <dbl> 0.1411687, 0.1842775, 0.2224737, 0.1948738, 0.2057…
-$ Bacteroidota        <dbl> 0.07245729, 0.08144620, 0.11902539, 0.26328065, 0.…
-$ Chloroflexi         <dbl> 0.005154754, 0.006882934, 0.008414716, 0.052378235…
-$ Verrucomicrobiota   <dbl> 0.11356114, 0.12767453, 0.07473278, 0.03761507, 0.…
-$ Cyanobacteria       <dbl> 0.1414817962, 0.1136520827, 0.0894310729, 0.000694…
-$ Planctomycetota     <dbl> 0.0364299132, 0.0258361036, 0.0254748382, 0.002009…
-$ sequencing_reads    <dbl> 78341.0, 73370.0, 70483.0, 58185.0, 89830.0, 61580…
-$ perc_reads_retained <dbl> 67.55654, 67.04807, 71.15439, 68.44235, 69.57811, …
-$ Extraction_Date     <dbl> 20231008, 20231011, 20231008, 20230614, 20231014, …
-$ Lot_Number          <dbl> 172033163, NA, NA, 172033163, NA, 172033163, 17203…
-$ sequencer           <chr> "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Seque…
+$ sample_id           <chr> "Sep_43_B", "Sep_29_E", "Sep_62_B", "May_8_E", "Sep_62_E", "May_38_E", "Sep_12_E", "May_17_E", "May_66_E", "Sep_8_B", "Sep_48_B", "Sep_33_E", "May_64_B", "Sep_48_E", "Sep_55_E", "May_12_B", "May_29_B", "Sep_48_M", "May_35_E", "May_33_B", "Sep_66_E", "May_48_E", "Sep_35_B", "Sep_64_E", "Sep_41_E", "Sep_29_M", "Sep_66_B"…
+$ Proteobacteria      <dbl> 0.4750425, 0.4532027, 0.4445189, 0.4431928, 0.4412439, 0.4396652, 0.4358814, 0.4351188, 0.4313813, 0.4288899, 0.4274834, 0.4200872, 0.4198061, 0.3022994, 0.4144140, 0.4120986, 0.4100639, 0.2685380, 0.2735303, 0.4034387, 0.3638486, 0.2261881, 0.2700629, 0.2961704, 0.3912453, 0.3907228, 0.3878351, 0.3118055, 0.3838429, 0…
+$ Actinobacteriota    <dbl> 0.1411687, 0.1842775, 0.2224737, 0.1948738, 0.2057250, 0.1752160, 0.2197479, 0.1910769, 0.1393020, 0.1625545, 0.2083425, 0.2261068, 0.1511316, 0.4160405, 0.2109463, 0.1288958, 0.2801239, 0.4063734, 0.2545076, 0.1624027, 0.4021972, 0.3996764, 0.3971490, 0.3936785, 0.2777504, 0.2214536, 0.3622646, 0.3860994, 0.2080040, 0…
+$ Bacteroidota        <dbl> 0.07245729, 0.08144620, 0.11902539, 0.26328065, 0.09990920, 0.31040164, 0.07703855, 0.21576244, 0.31506849, 0.11755815, 0.06837403, 0.09826895, 0.03825185, 0.09005572, 0.08108439, 0.08065717, 0.11036293, 0.10660143, 0.40546531, 0.08615012, 0.06281135, 0.22171504, 0.11000456, 0.09560161, 0.08729590, 0.10041462, 0.075574…
+$ Chloroflexi         <dbl> 0.005154754, 0.006882934, 0.008414716, 0.052378235, 0.005726821, 0.016430671, 0.009706332, 0.084983573, 0.020506096, 0.004828029, 0.006450380, 0.004245723, 0.227214557, 0.012456581, 0.005931647, 0.194635644, 0.130649915, 0.010558675, 0.017401661, 0.164581873, 0.010769379, 0.059936186, 0.047300095, 0.007935688, 0.005740…
+$ Verrucomicrobiota   <dbl> 0.11356114, 0.12767453, 0.07473278, 0.03761507, 0.10034073, 0.03927331, 0.10388399, 0.05752092, 0.06927434, 0.16453356, 0.12571074, 0.08853025, 0.09491086, 0.08251805, 0.08653750, 0.13249532, 0.06055977, 0.07091693, 0.03086644, 0.13660756, 0.06613241, 0.08856083, 0.10496294, 0.06617045, 0.08500721, 0.10786498, 0.061273…
+$ Cyanobacteria       <dbl> 1.414818e-01, 1.136521e-01, 8.943107e-02, 6.947374e-04, 1.023456e-01, 8.014961e-04, 1.134009e-01, 1.288730e-03, 1.422872e-03, 8.864435e-02, 1.175307e-01, 1.226346e-01, 2.454289e-04, 5.866171e-02, 1.527538e-01, 2.482454e-04, 0.000000e+00, 9.605280e-02, 1.654150e-04, 2.399992e-04, 5.577215e-02, 1.221318e-04, 2.429707e-02…
+$ Planctomycetota     <dbl> 3.642991e-02, 2.583610e-02, 2.547484e-02, 2.009776e-03, 3.154696e-02, 5.699528e-03, 2.840487e-02, 2.105531e-03, 7.030661e-03, 1.828996e-02, 3.150652e-02, 2.808224e-02, 2.960924e-02, 2.363875e-02, 3.241818e-02, 1.917131e-02, 1.161715e-03, 2.622088e-02, 5.557945e-03, 1.362236e-02, 2.667677e-02, 1.831977e-04, 2.473187e-02…
+$ sequencing_reads    <dbl> 78341.0, 73370.0, 70483.0, 58185.0, 89830.0, 61580.0, 58568.5, 55062.0, 50591.0, 76739.0, 87956.5, 67702.5, 45961.0, 100127.5, 79983.0, 71039.0, 45226.0, 78413.0, 68500.0, 84895.5, 65110.5, 56051.0, 88359.0, 95472.5, 90383.0, 79500.5, 77409.5, 84513.0, 28443.5, 98530.0, 53059.5, 93816.0, 63019.0, 61425.5, 85157.0, 8364…
+$ perc_reads_retained <dbl> 67.55654, 67.04807, 71.15439, 68.44235, 69.57811, 57.03313, 68.09694, 66.34078, 64.65344, 66.16349, 66.49785, 67.80229, 63.50735, 69.18597, 64.32270, 64.58260, 63.74193, 68.17803, 63.66861, 65.15251, 71.55226, 65.66241, 62.36501, 69.51072, 66.16372, 65.56962, 72.30351, 61.34352, 47.87845, 66.02235, 57.84935, 65.50162, …
+$ Extraction_Date     <dbl> 20231008, 20231011, 20231008, 20230614, 20231014, 20230615, 20231008, 20230615, 20230614, 20231016, 20231010, 20231008, 20230616, 20231011, 20231014, 20230615, 20230615, 20231012, 20230615, 20230616, 20231013, 20230609, 20231011, 20231012, 20231013, 20231013, 20231014, 20230609, 20230614, 20231014, 20230614, 20230615, …
+$ Lot_Number          <dbl> 172033163, NA, NA, 172033163, NA, 172033163, 172033163, 172033163, 172033163, NA, NA, NA, 172033163, NA, NA, 172033163, 172033163, NA, 172033163, 172033163, NA, 172033163, NA, NA, NA, NA, NA, 172033163, 172033163, NA, 172033163, 172033163, 172033163, NA, 172033163, 172033163, 172033163, NA, 172033163, NA, NA, 172033163…
+$ sequencer           <chr> "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Sequencer…
 ~~~
 {: .output}
 
@@ -851,10 +843,10 @@ $ sequencer           <chr> "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Seque�
 > New names:
 > Rows: 71 Columns: 13
 > ── Column specification
-> ────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
-> (2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verru...
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to
-> quiet this message.
+> ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
+> (2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota, sequencing_reads, perc_reads_retained,
+> Extraction_Date, Lot_Number
+> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 > • `` -> `...13`
 > ~~~
 > {: .output}
@@ -863,22 +855,19 @@ $ sequencer           <chr> "MiSeq Sequencer", "MiSeq Sequencer", "MiSeq Seque�
 > 
 > ~~~
 > # A tibble: 71 × 13
->    sample_id proteobacteria actinobacteriota bacteroidota chloroflexi
->    <chr>              <dbl>            <dbl>        <dbl>       <dbl>
->  1 Sep_43_B           0.475            0.141       0.0725     0.00515
->  2 Sep_29_E           0.453            0.184       0.0814     0.00688
->  3 Sep_62_B           0.445            0.222       0.119      0.00841
->  4 May_8_E            0.443            0.195       0.263      0.0524 
->  5 Sep_62_E           0.441            0.206       0.0999     0.00573
->  6 May_38_E           0.440            0.175       0.310      0.0164 
->  7 Sep_12_E           0.436            0.220       0.0770     0.00971
->  8 May_17_E           0.435            0.191       0.216      0.0850 
->  9 May_66_E           0.431            0.139       0.315      0.0205 
-> 10 Sep_8_B            0.429            0.163       0.118      0.00483
+>    sample_id proteobacteria actinobacteriota bacteroidota chloroflexi verrucomicrobiota cyanobacteria planctomycetota sequencing_reads perc_reads_retained extraction_date lot_number ...13          
+>    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>            <dbl>               <dbl>           <dbl>      <dbl> <chr>          
+>  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364            78341                 67.6       20231008.  172033163 MiSeq Sequencer
+>  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258            73370                 67.0       20231011          NA MiSeq Sequencer
+>  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255            70483                 71.2       20231008.         NA MiSeq Sequencer
+>  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201           58185                 68.4       20230614.  172033163 MiSeq Sequencer
+>  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315            89830                 69.6       20231014.         NA MiSeq Sequencer
+>  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570           61580                 57.0       20230615   172033163 MiSeq Sequencer
+>  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284            58568.                68.1       20231008.  172033163 MiSeq Sequencer
+>  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211           55062                 66.3       20230615   172033163 MiSeq Sequencer
+>  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703           50591                 64.7       20230614   172033163 MiSeq Sequencer
+> 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183            76739                 66.2       20231016.         NA MiSeq Sequencer
 > # ℹ 61 more rows
-> # ℹ 8 more variables: verrucomicrobiota <dbl>, cyanobacteria <dbl>,
-> #   planctomycetota <dbl>, sequencing_reads <dbl>, perc_reads_retained <dbl>,
-> #   extraction_date <dbl>, lot_number <dbl>, ...13 <chr>
 > ~~~
 > {: .output}
 {: .solution}
@@ -900,21 +889,19 @@ We previously saw how we can subset columns from a data frame using the select f
 > > 
 > > ~~~
 > > # A tibble: 71 × 8
-> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi
-> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>
-> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515
-> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688
-> >  3 Sep_62_B           0.445            0.222       0.119      0.00841
-> >  4 May_8_E            0.443            0.195       0.263      0.0524 
-> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573
-> >  6 May_38_E           0.440            0.175       0.310      0.0164 
-> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971
-> >  8 May_17_E           0.435            0.191       0.216      0.0850 
-> >  9 May_66_E           0.431            0.139       0.315      0.0205 
-> > 10 Sep_8_B            0.429            0.163       0.118      0.00483
+> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364 
+> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258 
+> >  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255 
+> >  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201
+> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315 
+> >  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570
+> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284 
+> >  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211
+> >  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703
+> > 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183 
 > > # ℹ 61 more rows
-> > # ℹ 3 more variables: Verrucomicrobiota <dbl>, Cyanobacteria <dbl>,
-> > #   Planctomycetota <dbl>
 > > ~~~
 > > {: .output}
 > > 
@@ -928,21 +915,19 @@ We previously saw how we can subset columns from a data frame using the select f
 > > 
 > > ~~~
 > > # A tibble: 71 × 8
-> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi
-> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>
-> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515
-> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688
-> >  3 Sep_62_B           0.445            0.222       0.119      0.00841
-> >  4 May_8_E            0.443            0.195       0.263      0.0524 
-> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573
-> >  6 May_38_E           0.440            0.175       0.310      0.0164 
-> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971
-> >  8 May_17_E           0.435            0.191       0.216      0.0850 
-> >  9 May_66_E           0.431            0.139       0.315      0.0205 
-> > 10 Sep_8_B            0.429            0.163       0.118      0.00483
+> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364 
+> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258 
+> >  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255 
+> >  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201
+> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315 
+> >  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570
+> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284 
+> >  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211
+> >  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703
+> > 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183 
 > > # ℹ 61 more rows
-> > # ℹ 3 more variables: Verrucomicrobiota <dbl>, Cyanobacteria <dbl>,
-> > #   Planctomycetota <dbl>
 > > ~~~
 > > {: .output}
 > > 
@@ -956,21 +941,19 @@ We previously saw how we can subset columns from a data frame using the select f
 > > 
 > > ~~~
 > > # A tibble: 71 × 8
-> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi
-> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>
-> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515
-> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688
-> >  3 Sep_62_B           0.445            0.222       0.119      0.00841
-> >  4 May_8_E            0.443            0.195       0.263      0.0524 
-> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573
-> >  6 May_38_E           0.440            0.175       0.310      0.0164 
-> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971
-> >  8 May_17_E           0.435            0.191       0.216      0.0850 
-> >  9 May_66_E           0.431            0.139       0.315      0.0205 
-> > 10 Sep_8_B            0.429            0.163       0.118      0.00483
+> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364 
+> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258 
+> >  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255 
+> >  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201
+> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315 
+> >  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570
+> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284 
+> >  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211
+> >  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703
+> > 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183 
 > > # ℹ 61 more rows
-> > # ℹ 3 more variables: Verrucomicrobiota <dbl>, Cyanobacteria <dbl>,
-> > #   Planctomycetota <dbl>
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -1066,10 +1049,7 @@ taxon_long %>%
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-04-stackedBars-1.png" alt="plot of chunk stackedBars" width="612" />
-<p class="caption">plot of chunk stackedBars</p>
-</div>
+<img src="../fig/rmd-04-stackedBars-1.png" width="540" style="display: block; margin: auto;" />
 
 Our bars don't add up perfectly to one, as our data doesn't include rarer Phyla. 
 
@@ -1086,21 +1066,19 @@ taxon_long %>%
 
 ~~~
 # A tibble: 71 × 8
-   sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi
-   <chr>              <dbl>            <dbl>        <dbl>       <dbl>
- 1 Sep_43_B           0.475            0.141       0.0725     0.00515
- 2 Sep_29_E           0.453            0.184       0.0814     0.00688
- 3 Sep_62_B           0.445            0.222       0.119      0.00841
- 4 May_8_E            0.443            0.195       0.263      0.0524 
- 5 Sep_62_E           0.441            0.206       0.0999     0.00573
- 6 May_38_E           0.440            0.175       0.310      0.0164 
- 7 Sep_12_E           0.436            0.220       0.0770     0.00971
- 8 May_17_E           0.435            0.191       0.216      0.0850 
- 9 May_66_E           0.431            0.139       0.315      0.0205 
-10 Sep_8_B            0.429            0.163       0.118      0.00483
+   sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+   <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+ 1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364 
+ 2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258 
+ 3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255 
+ 4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201
+ 5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315 
+ 6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570
+ 7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284 
+ 8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211
+ 9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703
+10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183 
 # ℹ 61 more rows
-# ℹ 3 more variables: Verrucomicrobiota <dbl>, Cyanobacteria <dbl>,
-#   Planctomycetota <dbl>
 ~~~
 {: .output}
 
@@ -1121,16 +1099,14 @@ head(sample_data, 6)
 
 ~~~
 # A tibble: 6 × 9
-  sample_id env_group   depth cells_per_ml temperature total_nitrogen
-  <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
-1 May_12_B  Deep         103.     2058864.        4.07            465
-2 May_12_E  Shallow_May    5      4696827.        7.01            465
-3 May_12_M  Shallow_May   15      4808339.        6.14            474
-4 May_17_E  Shallow_May    5      3738681.        5.99            492
-5 May_29_B  Deep          27      2153086.        4.67            525
-6 May_29_E  Shallow_May    5      3124920.        5.97            521
-# ℹ 3 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-#   chlorophyll <dbl>
+  sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll
+  <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>
+1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05
+2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53
+3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2 
+4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55
+5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48
+6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79
 ~~~
 {: .output}
 
@@ -1145,16 +1121,14 @@ head(taxon_clean, 6)
 
 ~~~
 # A tibble: 6 × 8
-  sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi
-  <chr>              <dbl>            <dbl>        <dbl>       <dbl>
-1 Sep_43_B           0.475            0.141       0.0725     0.00515
-2 Sep_29_E           0.453            0.184       0.0814     0.00688
-3 Sep_62_B           0.445            0.222       0.119      0.00841
-4 May_8_E            0.443            0.195       0.263      0.0524 
-5 Sep_62_E           0.441            0.206       0.0999     0.00573
-6 May_38_E           0.440            0.175       0.310      0.0164 
-# ℹ 3 more variables: Verrucomicrobiota <dbl>, Cyanobacteria <dbl>,
-#   Planctomycetota <dbl>
+  sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+  <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364 
+2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258 
+3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255 
+4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201
+5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315 
+6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570
 ~~~
 {: .output}
 
@@ -1193,23 +1167,19 @@ Joining with `by = join_by(sample_id)`
 
 ~~~
 # A tibble: 32 × 16
-   sample_id env_group   depth cells_per_ml temperature total_nitrogen
-   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
- 1 May_12_B  Deep         103.     2058864.        4.07            465
- 2 May_12_E  Shallow_May    5      4696827.        7.01            465
- 3 May_12_M  Shallow_May   15      4808339.        6.14            474
- 4 May_17_E  Shallow_May    5      3738681.        5.99            492
- 5 May_29_B  Deep          27      2153086.        4.67            525
- 6 May_29_E  Shallow_May    5      3124920.        5.97            521
- 7 May_29_M  Shallow_May   19      2566156.        5.69            539
- 8 May_33_B  Deep         135      2293177.        3.87            505
- 9 May_33_E  Shallow_May    5      5480859.        7.93            473
-10 May_33_M  Shallow_May   20      3114433.        4.53            515
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129       0.0807      0.195             0.132       0.000248        0.0192  
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186       0.235       0.0809            0.109       0.00957         0.0219  
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287       0.217       0.0703            0.0999      0.0126          0.0176  
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191       0.216       0.0850            0.0575      0.00129         0.00211 
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280       0.110       0.131             0.0606      0               0.00116 
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206       0.280       0.0832            0.0627      0.000454        0.000958
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310       0.200       0.136             0.0361      0.000332        0.00122 
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162       0.0862      0.165             0.137       0.000240        0.0136  
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205       0.317       0.0537            0.0846      0.0108          0.0102  
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341       0.199       0.0877            0.114       0.00374         0.0132  
 # ℹ 22 more rows
-# ℹ 10 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-#   chlorophyll <dbl>, Proteobacteria <dbl>, Actinobacteriota <dbl>,
-#   Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>,
-#   Cyanobacteria <dbl>, Planctomycetota <dbl>
 ~~~
 {: .output}
 
@@ -1225,23 +1195,19 @@ inner_join(sample_data, taxon_clean, by="sample_id")
 
 ~~~
 # A tibble: 32 × 16
-   sample_id env_group   depth cells_per_ml temperature total_nitrogen
-   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
- 1 May_12_B  Deep         103.     2058864.        4.07            465
- 2 May_12_E  Shallow_May    5      4696827.        7.01            465
- 3 May_12_M  Shallow_May   15      4808339.        6.14            474
- 4 May_17_E  Shallow_May    5      3738681.        5.99            492
- 5 May_29_B  Deep          27      2153086.        4.67            525
- 6 May_29_E  Shallow_May    5      3124920.        5.97            521
- 7 May_29_M  Shallow_May   19      2566156.        5.69            539
- 8 May_33_B  Deep         135      2293177.        3.87            505
- 9 May_33_E  Shallow_May    5      5480859.        7.93            473
-10 May_33_M  Shallow_May   20      3114433.        4.53            515
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129       0.0807      0.195             0.132       0.000248        0.0192  
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186       0.235       0.0809            0.109       0.00957         0.0219  
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287       0.217       0.0703            0.0999      0.0126          0.0176  
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191       0.216       0.0850            0.0575      0.00129         0.00211 
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280       0.110       0.131             0.0606      0               0.00116 
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206       0.280       0.0832            0.0627      0.000454        0.000958
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310       0.200       0.136             0.0361      0.000332        0.00122 
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162       0.0862      0.165             0.137       0.000240        0.0136  
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205       0.317       0.0537            0.0846      0.0108          0.0102  
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341       0.199       0.0877            0.114       0.00374         0.0132  
 # ℹ 22 more rows
-# ℹ 10 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-#   chlorophyll <dbl>, Proteobacteria <dbl>, Actinobacteriota <dbl>,
-#   Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>,
-#   Cyanobacteria <dbl>, Planctomycetota <dbl>
 ~~~
 {: .output}
 
@@ -1259,21 +1225,19 @@ anti_join(sample_data, taxon_clean, by="sample_id")
 
 ~~~
 # A tibble: 39 × 9
-   sample_id      env_group        depth cells_per_ml temperature total_nitrogen
-   <chr>          <chr>            <dbl>        <dbl>       <dbl>          <dbl>
- 1 September_12_B Deep             102       1703592.        4.20            564
- 2 September_12_E Shallow_Septemb…   5       4930739.       18.1             526
- 3 September_12_M Deep              52       2304545.        4.76            517
- 4 September_17_B Shallow_Septemb…  10.9     6942213.       18.1             385
- 5 September_17_E Shallow_Septemb…   5       7261861.       18.4             396
- 6 September_29_B Shallow_Septemb…  27.9     6168187.       19.0             358
- 7 September_29_E Shallow_Septemb…   5       5582205.       19.0             336
- 8 September_29_M Shallow_Septemb…  15       5681149.       19.0             378
- 9 September_33_B Deep             135.      1246414.        3.98            506
-10 September_33_E Shallow_Septemb…   5       7027388.       19.2             370
+   sample_id      env_group         depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll
+   <chr>          <chr>             <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>
+ 1 September_12_B Deep              102       1703592.        4.20            564             1.69            2.42        0.05
+ 2 September_12_E Shallow_September   5       4930739.       18.1             526             3.12            2.96        2.89
+ 3 September_12_M Deep               52       2304545.        4.76            517             2.25            2.58        0.37
+ 4 September_17_B Shallow_September  10.9     6942213.       18.1             385             2.67            2.69        2.28
+ 5 September_17_E Shallow_September   5       7261861.       18.4             396             3.48            2.73        2.74
+ 6 September_29_B Shallow_September  27.9     6168187.       19.0             358             4.28            2.88        2.12
+ 7 September_29_E Shallow_September   5       5582205.       19.0             336             2.68            2.81        2.21
+ 8 September_29_M Shallow_September  15       5681149.       19.0             378             5.08            2.75        2.24
+ 9 September_33_B Deep              135.      1246414.        3.98            506             4.15            2.49        0.05
+10 September_33_E Shallow_September   5       7027388.       19.2             370             4.72            2.58        2.5 
 # ℹ 29 more rows
-# ℹ 3 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-#   chlorophyll <dbl>
 ~~~
 {: .output}
 
@@ -1298,23 +1262,19 @@ inner_join(sample_data, taxon_clean_goodSept, by = "sample_id")
 
 ~~~
 # A tibble: 71 × 16
-   sample_id env_group   depth cells_per_ml temperature total_nitrogen
-   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
- 1 May_12_B  Deep         103.     2058864.        4.07            465
- 2 May_12_E  Shallow_May    5      4696827.        7.01            465
- 3 May_12_M  Shallow_May   15      4808339.        6.14            474
- 4 May_17_E  Shallow_May    5      3738681.        5.99            492
- 5 May_29_B  Deep          27      2153086.        4.67            525
- 6 May_29_E  Shallow_May    5      3124920.        5.97            521
- 7 May_29_M  Shallow_May   19      2566156.        5.69            539
- 8 May_33_B  Deep         135      2293177.        3.87            505
- 9 May_33_E  Shallow_May    5      5480859.        7.93            473
-10 May_33_M  Shallow_May   20      3114433.        4.53            515
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129       0.0807      0.195             0.132       0.000248        0.0192  
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186       0.235       0.0809            0.109       0.00957         0.0219  
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287       0.217       0.0703            0.0999      0.0126          0.0176  
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191       0.216       0.0850            0.0575      0.00129         0.00211 
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280       0.110       0.131             0.0606      0               0.00116 
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206       0.280       0.0832            0.0627      0.000454        0.000958
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310       0.200       0.136             0.0361      0.000332        0.00122 
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162       0.0862      0.165             0.137       0.000240        0.0136  
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205       0.317       0.0537            0.0846      0.0108          0.0102  
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341       0.199       0.0877            0.114       0.00374         0.0132  
 # ℹ 61 more rows
-# ℹ 10 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-#   chlorophyll <dbl>, Proteobacteria <dbl>, Actinobacteriota <dbl>,
-#   Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>,
-#   Cyanobacteria <dbl>, Planctomycetota <dbl>
 ~~~
 {: .output}
 
@@ -1355,10 +1315,7 @@ ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-04-PlotPercapCO2vsGDP-1.png" alt="plot of chunk PlotPercapCO2vsGDP" width="612" />
-<p class="caption">plot of chunk PlotPercapCO2vsGDP</p>
-</div>
+<img src="../fig/rmd-04-PlotPercapCO2vsGDP-1.png" width="540" style="display: block; margin: auto;" />
 
 *Tip:* Notice we used the `\n` in our title to get a new line to prevent it from getting cut off.
 
@@ -1383,10 +1340,7 @@ ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
 ~~~
 {: .output}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-04-PlotPercapCO2vsGDPSmooth-1.png" alt="plot of chunk PlotPercapCO2vsGDPSmooth" width="612" />
-<p class="caption">plot of chunk PlotPercapCO2vsGDPSmooth</p>
-</div>
+<img src="../fig/rmd-04-PlotPercapCO2vsGDPSmooth-1.png" width="540" style="display: block; margin: auto;" />
 
 By default, ggplot uses a funky model called "loess estimation" We can force the line to be a linear model (straight) using `method="lm"` as an argument to `geom_smooth`
 
@@ -1409,10 +1363,7 @@ ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
 ~~~
 {: .output}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-04-PlotPercapCO2vsGDP1SmoothLm-1.png" alt="plot of chunk PlotPercapCO2vsGDP1SmoothLm" width="612" />
-<p class="caption">plot of chunk PlotPercapCO2vsGDP1SmoothLm</p>
-</div>
+<img src="../fig/rmd-04-PlotPercapCO2vsGDP1SmoothLm-1.png" width="540" style="display: block; margin: auto;" />
 
 To answer our first question, Chloroflexi appears to be much more abundant in the deeper samples from Lake Ontario!
 
@@ -1496,23 +1447,23 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > ~~~
 > > Rows: 71
 > > Columns: 17
-> > $ sample_id         <chr> "May_12_B", "May_12_E", "May_12_M", "May_17_E", "May…
-> > $ env_group         <chr> "Deep", "Shallow_May", "Shallow_May", "Shallow_May",…
-> > $ depth             <dbl> 102.8, 5.0, 15.0, 5.0, 27.0, 5.0, 19.0, 135.0, 5.0, …
-> > $ cells_per_ml      <dbl> 2058864, 4696827, 4808339, 3738681, 2153086, 3124920…
-> > $ temperature       <dbl> 4.07380, 7.01270, 6.13500, 5.99160, 4.66955, 5.97390…
-> > $ total_nitrogen    <dbl> 465, 465, 474, 492, 525, 521, 539, 505, 473, 515, 47…
-> > $ total_phosphorus  <dbl> 3.78, 4.39, 5.37, 4.67, 4.44, 3.71, 4.23, 4.18, 6.64…
-> > $ diss_org_carbon   <dbl> 2.478, 2.380, 2.601, 2.435, 2.396, 2.283, 2.334, 2.3…
-> > $ chlorophyll       <dbl> 0.05, 2.53, 3.20, 0.55, 0.48, 0.79, 0.44, 0.22, 3.44…
-> > $ Proteobacteria    <dbl> 0.4120986, 0.3389293, 0.2762080, 0.4351188, 0.410063…
-> > $ Actinobacteriota  <dbl> 0.1288958, 0.1861232, 0.2866884, 0.1910769, 0.280123…
-> > $ Bacteroidota      <dbl> 0.08065717, 0.23470807, 0.21659843, 0.21576244, 0.11…
-> > $ Chloroflexi       <dbl> 0.19463564, 0.08086689, 0.07032061, 0.08498357, 0.13…
-> > $ Verrucomicrobiota <dbl> 0.13249532, 0.10878214, 0.09991639, 0.05752092, 0.06…
-> > $ Cyanobacteria     <dbl> 2.482454e-04, 9.574640e-03, 1.262830e-02, 1.288730e-…
-> > $ Planctomycetota   <dbl> 1.917131e-02, 2.186641e-02, 1.763061e-02, 2.105531e-…
-> > $ abs_Chloroflexi   <dbl> 400728.37, 379817.78, 338125.36, 317726.48, 281300.4…
+> > $ sample_id         <chr> "May_12_B", "May_12_E", "May_12_M", "May_17_E", "May_29_B", "May_29_E", "May_29_M", "May_33_B", "May_33_E", "May_33_M", "May_35_B", "May_35_E", "May_35_M", "May_38_E", "May_38_M", "May_41_B", "May_41_E", "May_43_E", "May_48_B", "May_48_E", "May_55_B", "May_55_E", "May_55_M", "May_64_B", "May_64_E", "May_64_M", "May_66_E"…
+> > $ env_group         <chr> "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Deep", "Sha…
+> > $ depth             <dbl> 102.8, 5.0, 15.0, 5.0, 27.0, 5.0, 19.0, 135.0, 5.0, 20.0, 27.0, 5.0, 10.0, 5.0, 14.0, 127.0, 5.0, 5.0, 35.0, 5.0, 189.0, 5.0, 13.0, 224.0, 5.0, 14.0, 5.0, 5.0, 66.0, 5.0, 14.0, 5.0, 102.0, 5.0, 52.0, 10.9, 5.0, 27.9, 5.0, 15.0, 134.9, 5.0, 68.5, 26.7, 5.0, 14.4, 16.6, 5.0, 126.0, 5.0, 63.9, 15.6, 5.0, 31.5, 5.0, 16.5, 18…
+> > $ cells_per_ml      <dbl> 2058864, 4696827, 4808339, 3738681, 2153086, 3124920, 2566156, 2293177, 5480859, 3114433, 3066162, 5417617, 4610370, 5811795, 5432987, 2422141, 4044801, 2787020, 2300782, 4260222, 1847686, 4134620, 2583447, 1631065, 4079544, 3870687, 5262156, 4197941, 2270042, 3173752, 2976664, 4578830, 1703592, 4930739, 2304545, 6942213…
+> > $ temperature       <dbl> 4.07380, 7.01270, 6.13500, 5.99160, 4.66955, 5.97390, 5.68550, 3.87050, 7.93390, 4.53155, 6.57370, 11.22760, 11.06450, 12.38160, 11.27240, 3.76370, 7.03630, 5.87970, 4.79060, 6.80945, 3.66830, 6.09525, 5.03470, 3.67740, 7.95300, 5.83795, 12.33240, 10.20990, 4.86530, 9.26610, 8.66090, 8.43110, 4.19650, 18.12280, 4.75550, …
+> > $ total_nitrogen    <dbl> 465, 465, 474, 492, 525, 521, 539, 505, 473, 515, 479, 441, 450, 416, 449, 475, 435, 499, 477, 472, 475, 468, 460, 488, 448, 476, 489, 477, 450, 472, 465, 640, 564, 526, 517, 385, 396, 358, 336, 378, 506, 370, 521, 528, 501, 553, 582, 526, 483, 336, 508, 346, 362, 329, 310, 364, 475, 330, 464, 338, 314, 472, 313, 479, 31…
+> > $ total_phosphorus  <dbl> 3.78, 4.39, 5.37, 4.67, 4.44, 3.71, 4.23, 4.18, 6.64, 4.14, 4.32, 8.98, 5.99, 8.27, 8.66, 2.52, 5.46, 5.48, 2.31, 2.66, 6.36, 5.44, 9.06, 8.19, 9.77, 7.89, 5.54, 3.43, 5.17, 4.45, 1.76, 7.36, 1.69, 3.12, 2.25, 2.67, 3.48, 4.28, 2.68, 5.08, 4.15, 4.72, 3.56, 4.45, 4.28, 4.26, 4.29, 4.43, 4.10, 4.46, 5.30, 4.29, 4.41, 4.43…
+> > $ diss_org_carbon   <dbl> 2.478, 2.380, 2.601, 2.435, 2.396, 2.283, 2.334, 2.343, 2.508, 2.232, 2.613, 2.567, 2.628, 2.692, 2.692, 2.389, 2.437, 2.498, 2.179, 2.733, 2.300, 3.416, 2.337, 2.436, 2.385, 2.348, 2.803, 2.198, 2.406, 2.942, 2.528, 2.438, 2.416, 2.963, 2.584, 2.687, 2.734, 2.884, 2.814, 2.750, 2.487, 2.578, 2.233, 2.475, 2.452, 2.387, …
+> > $ chlorophyll       <dbl> 0.05, 2.53, 3.20, 0.55, 0.48, 0.79, 0.44, 0.22, 3.44, 1.27, 1.26, 3.96, 2.44, 3.32, 4.84, 0.21, 2.84, 0.56, 0.24, 0.38, 0.16, 4.96, 2.92, 0.05, 9.72, 5.80, 2.06, 0.44, 0.05, 4.80, 4.80, 2.22, 0.05, 2.89, 0.37, 2.28, 2.74, 2.12, 2.21, 2.24, 0.05, 2.50, 0.25, 1.14, 1.85, 1.28, 0.51, 1.01, 0.05, 2.18, 0.23, 2.13, 2.45, 2.13…
+> > $ Proteobacteria    <dbl> 0.4120986, 0.3389293, 0.2762080, 0.4351188, 0.4100639, 0.3622527, 0.3110194, 0.4034387, 0.3012852, 0.2077626, 0.3433637, 0.2735303, 0.3264333, 0.4396652, 0.2525063, 0.3554822, 0.2793332, 0.3143624, 0.3118055, 0.2261881, 0.2423041, 0.3347266, 0.3416274, 0.4198061, 0.2991887, 0.2604853, 0.4313813, 0.3838429, 0.3578029, 0.3…
+> > $ Actinobacteriota  <dbl> 0.1288958, 0.1861232, 0.2866884, 0.1910769, 0.2801239, 0.2062492, 0.3100247, 0.1624027, 0.2048393, 0.3409799, 0.1543572, 0.2545076, 0.1676583, 0.1752160, 0.3217450, 0.2477603, 0.2577409, 0.3391037, 0.3860994, 0.3996764, 0.1819236, 0.1400352, 0.1341170, 0.1511316, 0.1447149, 0.1718088, 0.1393020, 0.2080040, 0.1757700, 0.1…
+> > $ Bacteroidota      <dbl> 0.08065717, 0.23470807, 0.21659843, 0.21576244, 0.11036293, 0.27980345, 0.20001474, 0.08615012, 0.31681303, 0.19946045, 0.27736195, 0.40546531, 0.35952622, 0.31040164, 0.35964685, 0.11214682, 0.32158229, 0.24188905, 0.14595699, 0.22171504, 0.06191825, 0.27154102, 0.19225491, 0.03825185, 0.37278025, 0.34166069, 0.31506849…
+> > $ Chloroflexi       <dbl> 0.194635644, 0.080866893, 0.070320609, 0.084983573, 0.130649915, 0.083230440, 0.136388756, 0.164581873, 0.053744394, 0.087686015, 0.072595159, 0.017401661, 0.030159296, 0.016430671, 0.016913524, 0.161782307, 0.068663721, 0.065082082, 0.082742468, 0.059936186, 0.215837043, 0.080944601, 0.126817431, 0.227214557, 0.05112558…
+> > $ Verrucomicrobiota <dbl> 0.13249532, 0.10878214, 0.09991639, 0.05752092, 0.06055977, 0.06269371, 0.03606823, 0.13660756, 0.08463046, 0.11408929, 0.09701781, 0.03086644, 0.08049790, 0.03927331, 0.03014035, 0.09602481, 0.06207085, 0.03777328, 0.06960976, 0.08856083, 0.13568056, 0.10258641, 0.11458520, 0.09491086, 0.08476746, 0.09360120, 0.06927434…
+> > $ Cyanobacteria     <dbl> 2.482454e-04, 9.574640e-03, 1.262830e-02, 1.288730e-03, 0.000000e+00, 4.535719e-04, 3.315772e-04, 2.399992e-04, 1.077903e-02, 3.742059e-03, 7.064404e-04, 1.654150e-04, 4.660982e-04, 8.014961e-04, 1.875687e-03, 2.720250e-04, 1.497071e-03, 3.890142e-05, 4.277755e-05, 1.221318e-04, 7.554297e-04, 9.844900e-03, 8.492949e-03, …
+> > $ Planctomycetota   <dbl> 1.917131e-02, 2.186641e-02, 1.763061e-02, 2.105531e-03, 1.161715e-03, 9.575406e-04, 1.215783e-03, 1.362236e-02, 1.015716e-02, 1.324515e-02, 1.902343e-02, 5.557945e-03, 1.121377e-02, 5.699528e-03, 7.341052e-03, 7.326539e-03, 2.461530e-03, 5.835214e-05, 2.138877e-05, 1.831977e-04, 1.198435e-01, 3.630307e-02, 4.861070e-02, …
+> > $ abs_Chloroflexi   <dbl> 400728.37, 379817.78, 338125.36, 317726.48, 281300.48, 260088.49, 349994.76, 377415.41, 294565.42, 273092.26, 222588.52, 94275.54, 139045.52, 95491.68, 91890.96, 391859.64, 277731.08, 181385.05, 190372.40, 255341.43, 398799.17, 334675.13, 327626.09, 370601.70, 208569.06, 262447.29, 107906.27, 81809.24, 448416.19, 183581.…
 > > ~~~
 > > {: .output}
 > >

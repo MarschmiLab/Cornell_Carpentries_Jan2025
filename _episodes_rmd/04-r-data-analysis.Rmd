@@ -26,6 +26,8 @@ editor_options:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
+options(pillar.width = 350,
+        width = 350)
 ```
 
 ### Contents
@@ -46,9 +48,9 @@ knitr_fig_path("04-")
 
 # Getting Started
 
-First, navigate to the un-reports directory however you'd like and open `un-report.Rproj`.
-This should open the un-report R project in RStudio.
-You can check this by seeing if the Files in the bottom right of RStudio are the ones in your `un-report` directory.
+First, navigate to the ontario-reports directory however you'd like and open `ontario-report.Rproj`.
+This should open the ontario-report R project in RStudio.
+You can check this by seeing if the Files in the bottom right of RStudio are the ones in your `ontario-report` directory.
 
 Yesterday we spent a lot of time making plots in R using the ggplot2 package. Visualizing data using plots is a very powerful skill in R, but what if we would like to work with only a subset of our data? Or clean up messy data, calculate summary statistics, create a new variable, or join two datasets together? There are several different methods for doing this in R, and we will touch on a few today using functions the `dplyr` package.
 
@@ -189,7 +191,7 @@ sample_data %>%
 > {: .solution}
 {: .challenge}
 
-Notice how the pipe operator (`%>%`) allows us to combine these two simple steps into a more complicated data extraction?. We took the data, filtered out the rows, then took the mean value. The argument we pass to `filter()` needs to be some expression that will return TRUE or FALSE. We can use comparisons like `>` (greater than) and `<` (less than) for example. Here we tested for equality using a double equals sign `==`. You use `==` (double equals) when testing if two values are equal, and you use `=` (single equals) when naming arguments that you are passing to functions. Try changing it to use `filter(env_group = "Deep")` and see what happens.
+Notice how the pipe operator (`%>%`) allows us to combine these two simple steps into a more complicated data extraction?. We took the data, filtered out the rows, then took the mean value. The argument we pass to `filter()` needs to be some expression that will return TRUE or FALSE. We can use comparisons like `>` (greater than) and `<` (less than) for example. Here we tested for equality using a double equals sign `==`. You can also use `!=` to mean "doesn't equal". You use `==` (double equals) when testing if two values are equal, and you use `=` (single equals) when naming arguments that you are passing to functions. Try changing it to use `filter(env_group = "Deep")` and see what happens.
 
 ## Grouping rows using `group_by()` {#grouping-rows-using-group_by}
 
