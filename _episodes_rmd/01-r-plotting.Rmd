@@ -415,7 +415,12 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 >  Sys.Date()  # outputs the current date
 >  getwd()     # outputs our current working directory (folder)
 >  sum(5, 6)   # adds numbers
+> ```
+> ```{r FunctionsComments3, eval = FALSE}
 >  read_csv(file = 'sample_data.csv') # reads in csv file
+> ```
+> ```{r FunctionsComments4, echo = FALSE}
+>  read_csv(file = 'data/sample_data.csv') # reads in csv file
 > ```
 {: .callout}
 

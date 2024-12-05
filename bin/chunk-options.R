@@ -30,8 +30,8 @@ knitr_fig_path <- function(prefix) {
 opts_chunk$set(tidy = FALSE, results = "markup", comment = NA,
                fig.align = "center", fig.path = "fig/rmd-",
                fig.process = fix_fig_path,
-               fig.width = 8.5, fig.height = 8.5,
-               fig.retina = 2,
+               fig.width = 7.5, fig.height = 6.5,
+               fig.retina = 2, fig.cap="",
                error = TRUE)
 
 # The hooks below add html tags to the code chunks and their output so that they

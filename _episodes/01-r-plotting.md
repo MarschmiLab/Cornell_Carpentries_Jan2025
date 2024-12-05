@@ -177,13 +177,13 @@ library(tidyverse)
 
 
 ~~~
-── Attaching core tidyverse packages ───────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
-── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -243,7 +243,7 @@ sample_data <- read_csv("sample_data.csv")
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
 dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -448,7 +448,7 @@ read_csv(file = 'sample_data.csv')
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
 dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -545,19 +545,42 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > ~~~
 > {: .output}
 > 
-> 
-> 
 > ~~~
 >  read_csv(file = 'sample_data.csv') # reads in csv file
 > ~~~
 > {: .language-r}
 > 
+> ~~~
+> Rows: 71 Columns: 9
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> Delimiter: ","
+> chr (2): sample_id, env_group
+> dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
+> 
+> ℹ Use `spec()` to retrieve the full column specification for this data.
+> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> ~~~
+> {: .output}
+> 
 > 
 > 
 > ~~~
-> Error: 'sample_data.csv' does not exist in current working directory ('/Users/augustuspendleton/Desktop/Coding/Carpentries_Workshops/Cornell_Carpentries_Jan2025/_episodes_rmd').
+> # A tibble: 71 × 9
+>    sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll
+>    <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>
+>  1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05
+>  2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53
+>  3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2 
+>  4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55
+>  5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48
+>  6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79
+>  7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44
+>  8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22
+>  9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44
+> 10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27
+> # ℹ 61 more rows
 > ~~~
-> {: .error}
+> {: .output}
 {: .callout}
 
 
@@ -576,10 +599,7 @@ ggplot(data=sample_data)
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-ggplotDataOnly-1.png" alt="plot of chunk ggplotDataOnly" width="612" />
-<p class="caption">plot of chunk ggplotDataOnly</p>
-</div>
+<img src="../fig/rmd-01-ggplotDataOnly-1.png" width="540" style="display: block; margin: auto;" />
 
 To run code that you've typed in the editor, you have a few options. Remember
 that the quickest way to run the code is by pressing
@@ -620,10 +640,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-ggplotX-1.png" alt="plot of chunk ggplotX" width="612" />
-<p class="caption">plot of chunk ggplotX</p>
-</div>
+<img src="../fig/rmd-01-ggplotX-1.png" width="540" style="display: block; margin: auto;" />
 
 Note that we've added this new function call to a second line just to make it
 easier to read. To do this we make sure that the `+` is at the end of the first
@@ -644,10 +661,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddXLabel-1.png" alt="plot of chunk FirstPlotAddXLabel" width="612" />
-<p class="caption">plot of chunk FirstPlotAddXLabel</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotAddXLabel-1.png" width="540" style="display: block; margin: auto;" />
 
 OK. That looks better. 
 
@@ -679,10 +693,7 @@ OK. That looks better.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-FirstPlotAddY-1.png" alt="plot of chunk FirstPlotAddY" width="612" />
-> > <p class="caption">plot of chunk FirstPlotAddY</p>
-> > </div>
+> > <img src="../fig/rmd-01-FirstPlotAddY-1.png" width="540" style="display: block; margin: auto;" />
 > > {: .source}
 > {: .solution}
 {: .challenge}
@@ -707,10 +718,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddPoints-1.png" alt="plot of chunk FirstPlotAddPoints" width="612" />
-<p class="caption">plot of chunk FirstPlotAddPoints</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotAddPoints-1.png" width="540" style="display: block; margin: auto;" />
 
 Now we're really getting somewhere. It finally looks like a proper plot!  We can
 now see a trend in the data. It looks like samples with a higher temperature tend to
@@ -730,10 +738,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddTitle-1.png" alt="plot of chunk FirstPlotAddTitle" width="612" />
-<p class="caption">plot of chunk FirstPlotAddTitle</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotAddTitle-1.png" width="540" style="display: block; margin: auto;" />
 
 No one can deny we've made a very handsome plot! But now looking at the data, we
 might be curious about learning more - for example, it seems like the data separates into two distinct groups. We know that there are pieces of data in the `sample_data`
@@ -754,10 +759,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddColor-1.png" alt="plot of chunk FirstPlotAddColor" width="612" />
-<p class="caption">plot of chunk FirstPlotAddColor</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotAddColor-1.png" width="540" style="display: block; margin: auto;" />
 
 Here we can see that Deep samples have fewer cells than Shallow waters. Notice that when we add a mapping for
 color, ggplot automatically provided a legend for us. It took care of assigning
@@ -781,10 +783,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddSize-1.png" alt="plot of chunk FirstPlotAddSize" width="612" />
-<p class="caption">plot of chunk FirstPlotAddSize</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotAddSize-1.png" width="540" style="display: block; margin: auto;" />
 
 There doesn't seem to be a very strong association with chlorophyll, besides low chlorophyll in deep samples. We got another legend here for size
 which is nice, but the titles aren't very informative. Let's change those, using another calls to `labs()`
@@ -805,10 +804,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotAddchlorophyll-1.png" alt="plot of chunk FirstPlotAddchlorophyll" width="612" />
-<p class="caption">plot of chunk FirstPlotAddchlorophyll</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotAddchlorophyll-1.png" width="540" style="display: block; margin: auto;" />
 
 While we're at it, I don't love the scientific notation along the y-axis. Let's change it by dividing our `cells_per_ml` by 1,000,000 and updating our axis title to match.
 
@@ -828,10 +824,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotNiceYAxis-1.png" alt="plot of chunk FirstPlotNiceYAxis" width="612" />
-<p class="caption">plot of chunk FirstPlotNiceYAxis</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotNiceYAxis-1.png" width="540" style="display: block; margin: auto;" />
 
 This works because you can treat the columns in the aesthetic mappings just like
 any other variables and can use functions to transform or change them at plot
@@ -901,10 +894,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-FirstPlotCondensed-1.png" alt="plot of chunk FirstPlotCondensed" width="612" />
-<p class="caption">plot of chunk FirstPlotCondensed</p>
-</div>
+<img src="../fig/rmd-01-FirstPlotCondensed-1.png" width="540" style="display: block; margin: auto;" />
 
 # Plotting for data exploration
 _[Back to top](#contents)_
@@ -925,7 +915,7 @@ To start, we will read in the data using `read_csv`.
 
 ~~~
 Rows: 2945 Columns: 6
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (4): sensor, buoy, depth, month
 dbl (2): day_of_year, temperature
@@ -978,10 +968,7 @@ This dataset has six variables. We have four buoy locations ("Niagara", "Toronto
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-01-PlotFullGapminder-1.png" alt="plot of chunk PlotFullGapminder" width="612" />
-> <p class="caption">plot of chunk PlotFullGapminder</p>
-> </div>
+> <img src="../fig/rmd-01-PlotFullGapminder-1.png" width="540" style="display: block; margin: auto;" />
 >
 {: .challenge}
 
@@ -1022,10 +1009,7 @@ Our plot has a lot of points in columns which makes it hard to see trends over t
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapMinderLinePlotBad-1.png" alt="plot of chunk GapMinderLinePlotBad" width="612" />
-<p class="caption">plot of chunk GapMinderLinePlotBad</p>
-</div>
+<img src="../fig/rmd-01-GapMinderLinePlotBad-1.png" width="540" style="display: block; margin: auto;" />
 
 Hmm. This doesn't look right. By setting the color value, we got a line for each depth, but the line covers all four buoy locations as well. What we really want is a line for each temperature sensor. We need to tell ggplot that we want to connect the values for each `sensor` value instead. To do this, we need to use the `group=` aesthetic.
 
@@ -1037,10 +1021,7 @@ Hmm. This doesn't look right. By setting the color value, we got a line for each
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapMinderLinePlot-1.png" alt="plot of chunk GapMinderLinePlot" width="612" />
-<p class="caption">plot of chunk GapMinderLinePlot</p>
-</div>
+<img src="../fig/rmd-01-GapMinderLinePlot-1.png" width="540" style="display: block; margin: auto;" />
 
 That's looking much better! 
 
@@ -1056,10 +1037,7 @@ That's looking much better!
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-gapminderMoreLines-1.png" alt="plot of chunk gapminderMoreLines" width="612" />
-> > <p class="caption">plot of chunk gapminderMoreLines</p>
-> > </div>
+> > <img src="../fig/rmd-01-gapminderMoreLines-1.png" width="540" style="display: block; margin: auto;" />
 > > (The Toronto buoy warms up much slower compared to the other three buoys/)
 > {: .solution}
 {: .challenge}
@@ -1083,10 +1061,7 @@ We are going to return to our `sample_data` dataframe to practice some new plot 
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapBox-1.png" alt="plot of chunk GapBox" width="612" />
-> > <p class="caption">plot of chunk GapBox</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapBox-1.png" width="540" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -1104,10 +1079,7 @@ This type of visualization makes it easy to compare the range and spread of valu
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapViol-1.png" alt="plot of chunk GapViol" width="612" />
-> > <p class="caption">plot of chunk GapViol</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapViol-1.png" width="540" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -1124,10 +1096,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolin-1.png" alt="plot of chunk GapViolin" width="612" />
-<p class="caption">plot of chunk GapViolin</p>
-</div>
+<img src="../fig/rmd-01-GapViolin-1.png" width="540" style="display: block; margin: auto;" />
 
 Box plots are a great way to see the overall spread of your data. However, it is good practice to also give your reader as sense of how many observations have gone into your boxplots. To do so, we can plot each observation as an individual point, on top of the boxplot.
 
@@ -1140,10 +1109,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinPoints-1.png" alt="plot of chunk GapViolinPoints" width="612" />
-<p class="caption">plot of chunk GapViolinPoints</p>
-</div>
+<img src="../fig/rmd-01-GapViolinPoints-1.png" width="540" style="display: block; margin: auto;" />
 
 OK, we've drawn the points but most of them stack up on top of each other. One way to make it easier to see all the data is to "jitter" the points, or move them around randomly so they don't stack up on top of each other. To do this, we use `geom_jitter` rather than `geom_point`
 
@@ -1156,10 +1122,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitter-1.png" alt="plot of chunk GapViolinJitter" width="612" />
-<p class="caption">plot of chunk GapViolinJitter</p>
-</div>
+<img src="../fig/rmd-01-GapViolinJitter-1.png" width="540" style="display: block; margin: auto;" />
 
 Be aware that these movements are random so your plot will look a bit different each time you run it!
 
@@ -1174,10 +1137,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitterLayers-1.png" alt="plot of chunk GapViolinJitterLayers" width="612" />
-<p class="caption">plot of chunk GapViolinJitterLayers</p>
-</div>
+<img src="../fig/rmd-01-GapViolinJitterLayers-1.png" width="540" style="display: block; margin: auto;" />
 
 Since we plot the `geom_jitter` layer first, the violin plot layer is placed on top of the `geom_jitter` layer, so we cannot see most of the points.
 
@@ -1191,10 +1151,7 @@ ggplot(data = sample_data, mapping = aes(x = env_group, y = cells_per_ml)) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitter2-1.png" alt="plot of chunk GapViolinJitter2" width="612" />
-<p class="caption">plot of chunk GapViolinJitter2</p>
-</div>
+<img src="../fig/rmd-01-GapViolinJitter2-1.png" width="540" style="display: block; margin: auto;" />
 
 However, we can also use aesthetic values for only one layer of our plot. To do that, you an place an additional `aes()` inside of that layer. For example, what if we want to change the size for the points so they are scaled by chlorophyll, but we don't want to change the box plot? We can do:
 
@@ -1207,10 +1164,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinJitterAes-1.png" alt="plot of chunk GapViolinJitterAes" width="612" />
-<p class="caption">plot of chunk GapViolinJitterAes</p>
-</div>
+<img src="../fig/rmd-01-GapViolinJitterAes-1.png" width="540" style="display: block; margin: auto;" />
 
 Both `geom_boxplot` and `geom_jitter` will inherit the default values of `aes(env_group, cells_per_ml)` but only `geom_jitter` will also use `aes(size = chlorophyll)`.
 
@@ -1255,10 +1209,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinColor-1.png" alt="plot of chunk GapViolinColor" width="612" />
-<p class="caption">plot of chunk GapViolinColor</p>
-</div>
+<img src="../fig/rmd-01-GapViolinColor-1.png" width="540" style="display: block; margin: auto;" />
 
 Well, that didn't get all that colorful. That's because objects like these boxplots have two different parts that have a color: the shape outline, and the inner part of the shape. For geoms that have an inner part, you change the fill color with `fill=` rather than `color=`, so let's try that instead
 
@@ -1270,10 +1221,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinFill-1.png" alt="plot of chunk GapViolinFill" width="612" />
-<p class="caption">plot of chunk GapViolinFill</p>
-</div>
+<img src="../fig/rmd-01-GapViolinFill-1.png" width="540" style="display: block; margin: auto;" />
 
 That's some plot now isn't it! So "pink" maybe wasn't the prettiest color. R knows lots of color names. You can see the full list if you run `colors()` in the console. Since there are so many, you can randomly choose 10 if you run `sample(colors(), size = 10)`.
 
@@ -1292,10 +1240,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinFillMap-1.png" alt="plot of chunk GapViolinFillMap" width="612" />
-<p class="caption">plot of chunk GapViolinFillMap</p>
-</div>
+<img src="../fig/rmd-01-GapViolinFillMap-1.png" width="540" style="display: block; margin: auto;" />
 
 But what if we want to specify specific colors for our plots? The colors that
 ggplot uses are determined by the color "scale". Each aesthetic value we can
@@ -1311,10 +1256,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinFillMan-1.png" alt="plot of chunk GapViolinFillMan" width="612" />
-<p class="caption">plot of chunk GapViolinFillMan</p>
-</div>
+<img src="../fig/rmd-01-GapViolinFillMan-1.png" width="540" style="display: block; margin: auto;" />
 
 Sometimes manually choosing colors is frustrating. There are many packages which produce pre-made palettes which you can supply to your data. A common one is `RColorBrewer`. We can use the palettes from RColorBrewer using the `scale_color_brewer` function. 
 
@@ -1327,10 +1269,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapViolinFillBrew-1.png" alt="plot of chunk GapViolinFillBrew" width="612" />
-<p class="caption">plot of chunk GapViolinFillBrew</p>
-</div>
+<img src="../fig/rmd-01-GapViolinFillBrew-1.png" width="540" style="display: block; margin: auto;" />
 
 The `scale_color_brewer()` function is just one of many you can use to change
 colors. There are bunch of "palettes" that are build in. You can view them all
@@ -1370,10 +1309,7 @@ There are also lots of other fun options:
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-Color-1.png" alt="plot of chunk Color" width="612" />
-> > <p class="caption">plot of chunk Color</p>
-> > </div>
+> > <img src="../fig/rmd-01-Color-1.png" width="540" style="display: block; margin: auto;" />
 > > {: .source}
 > {: .solution}
 {: .challenge}
@@ -1389,10 +1325,7 @@ There are also lots of other fun options:
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapViolinFillSoln-1.png" alt="plot of chunk GapViolinFillSoln" width="612" />
-> > <p class="caption">plot of chunk GapViolinFillSoln</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapViolinFillSoln-1.png" width="540" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -1406,10 +1339,7 @@ There are also lots of other fun options:
 > ~~~
 > {: .language-r}
 > 
-> <div class="figure" style="text-align: center">
-> <img src="../fig/rmd-01-GapViolinAesFillMap-1.png" alt="plot of chunk GapViolinAesFillMap" width="612" />
-> <p class="caption">plot of chunk GapViolinAesFillMap</p>
-> </div>
+> <img src="../fig/rmd-01-GapViolinAesFillMap-1.png" width="540" style="display: block; margin: auto;" />
 > Why doesn't this work? How can you fix it? Where does that color come from?
 >
 > > ## Solution
@@ -1437,10 +1367,7 @@ ggplot(sample_data) +
 ~~~
 {: .output}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapLifeHist-1.png" alt="plot of chunk GapLifeHist" width="612" />
-<p class="caption">plot of chunk GapLifeHist</p>
-</div>
+<img src="../fig/rmd-01-GapLifeHist-1.png" width="540" style="display: block; margin: auto;" />
 
 You should not only see the plot in the plot window, but also a message telling you to choose a better bin value. Histograms can look very different depending on the number of bars you decide to draw. The default is 30. Let's try setting a different value by explicitly passing a `bin=` argument to the `geom_histogram` later.
 
@@ -1452,10 +1379,7 @@ ggplot(sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapLifeHistBins-1.png" alt="plot of chunk GapLifeHistBins" width="612" />
-<p class="caption">plot of chunk GapLifeHistBins</p>
-</div>
+<img src="../fig/rmd-01-GapLifeHistBins-1.png" width="540" style="display: block; margin: auto;" />
 
 Try different values like 5 or 50 to see how the plot changes.
 
@@ -1471,10 +1395,7 @@ Try different values like 5 or 50 to see how the plot changes.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens1-1.png" alt="plot of chunk GapLifeDens1" width="612" />
-> > <p class="caption">plot of chunk GapLifeDens1</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapLifeDens1-1.png" width="540" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -1490,10 +1411,7 @@ Try different values like 5 or 50 to see how the plot changes.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens2-1.png" alt="plot of chunk GapLifeDens2" width="612" />
-> > <p class="caption">plot of chunk GapLifeDens2</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapLifeDens2-1.png" width="540" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -1512,10 +1430,7 @@ ggplot(data = sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapLifeHistBinsClassicTheme-1.png" alt="plot of chunk GapLifeHistBinsClassicTheme" width="612" />
-<p class="caption">plot of chunk GapLifeHistBinsClassicTheme</p>
-</div>
+<img src="../fig/rmd-01-GapLifeHistBinsClassicTheme-1.png" width="540" style="display: block; margin: auto;" />
 
 Try out a few other themes, to see which you like: `theme_bw()`, `theme_linedraw()`, `theme_minimal()`.
 
@@ -1532,10 +1447,7 @@ Try out a few other themes, to see which you like: `theme_bw()`, `theme_linedraw
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens3-1.png" alt="plot of chunk GapLifeDens3" width="612" />
-> > <p class="caption">plot of chunk GapLifeDens3</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapLifeDens3-1.png" width="540" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -1552,10 +1464,7 @@ ggplot(sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapNoFacet-1.png" alt="plot of chunk GapNoFacet" width="612" />
-<p class="caption">plot of chunk GapNoFacet</p>
-</div>
+<img src="../fig/rmd-01-GapNoFacet-1.png" width="540" style="display: block; margin: auto;" />
 
 The first time we made this plot, we colored the points differently for each of the env_groups. This time let's actually draw a separate box for each env_group. We can do this with `facet_wrap()`
 
@@ -1568,10 +1477,7 @@ ggplot(sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapFacetWrap-1.png" alt="plot of chunk GapFacetWrap" width="612" />
-<p class="caption">plot of chunk GapFacetWrap</p>
-</div>
+<img src="../fig/rmd-01-GapFacetWrap-1.png" width="540" style="display: block; margin: auto;" />
 Note that `facet_wrap` requires this `~` in order to pass in the column names. You can it the `~` as "facet **by** this. We can see in this output that we get a separate box with a label for each env_group so that only the points for that env_group are in that box.
 
 > ## Bonus Exercise: Free axes on facetted plots
@@ -1587,10 +1493,7 @@ Note that `facet_wrap` requires this `~` in order to pass in the column names. Y
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens4-1.png" alt="plot of chunk GapLifeDens4" width="612" />
-> > <p class="caption">plot of chunk GapLifeDens4</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapLifeDens4-1.png" width="540" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(sample_data) +
@@ -1600,10 +1503,7 @@ Note that `facet_wrap` requires this `~` in order to pass in the column names. Y
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens4-2.png" alt="plot of chunk GapLifeDens4" width="612" />
-> > <p class="caption">plot of chunk GapLifeDens4</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapLifeDens4-2.png" width="540" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggplot(sample_data) +
@@ -1613,10 +1513,7 @@ Note that `facet_wrap` requires this `~` in order to pass in the column names. Y
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-GapLifeDens4-3.png" alt="plot of chunk GapLifeDens4" width="612" />
-> > <p class="caption">plot of chunk GapLifeDens4</p>
-> > </div>
+> > <img src="../fig/rmd-01-GapLifeDens4-3.png" width="540" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -1631,10 +1528,7 @@ ggplot(sample_data) +
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-GapFacetGrid-1.png" alt="plot of chunk GapFacetGrid" width="612" />
-<p class="caption">plot of chunk GapFacetGrid</p>
-</div>
+<img src="../fig/rmd-01-GapFacetGrid-1.png" width="540" style="display: block; margin: auto;" />
 
 Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom. We also used the function `vars()` to make it clear we're referencing the column `env_group`.
 
@@ -1667,10 +1561,7 @@ ggsave("awesome_plot.jpg", width=6, height=4)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <div class="figure" style="text-align: center">
-> > <img src="../fig/rmd-01-savingPlotExercise-1.png" alt="plot of chunk savingPlotExercise" width="612" />
-> > <p class="caption">plot of chunk savingPlotExercise</p>
-> > </div>
+> > <img src="../fig/rmd-01-savingPlotExercise-1.png" width="540" style="display: block; margin: auto;" />
 > > 
 > > ~~~
 > > ggsave("awesome_histogram.jpg", width=6, height=4)
@@ -1699,10 +1590,7 @@ box_plot
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-outputViolinPlot-1.png" alt="plot of chunk outputViolinPlot" width="612" />
-<p class="caption">plot of chunk outputViolinPlot</p>
-</div>
+<img src="../fig/rmd-01-outputViolinPlot-1.png" width="540" style="display: block; margin: auto;" />
 
 We can also add changes to the plot. Let's say we want our violin plot to have the black-and-white theme:
 
@@ -1712,10 +1600,7 @@ box_plot + theme_bw()
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-violinPlotBWTheme-1.png" alt="plot of chunk violinPlotBWTheme" width="612" />
-<p class="caption">plot of chunk violinPlotBWTheme</p>
-</div>
+<img src="../fig/rmd-01-violinPlotBWTheme-1.png" width="540" style="display: block; margin: auto;" />
 
 Watch out! Adding the theme does not change the `violin_plot` object! If we want to change the object, we need to store our changes:
 
@@ -1725,10 +1610,7 @@ box_plot
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-violinPlotBWThemeUpdated-1.png" alt="plot of chunk violinPlotBWThemeUpdated" width="612" />
-<p class="caption">plot of chunk violinPlotBWThemeUpdated</p>
-</div>
+<img src="../fig/rmd-01-violinPlotBWThemeUpdated-1.png" width="540" style="display: block; margin: auto;" />
 
 ~~~
 box_plot <- box_plot + theme_bw()
@@ -1737,10 +1619,7 @@ box_plot
 ~~~
 {: .language-r}
 
-<div class="figure" style="text-align: center">
-<img src="../fig/rmd-01-violinPlotBWThemeUpdated-2.png" alt="plot of chunk violinPlotBWThemeUpdated" width="612" />
-<p class="caption">plot of chunk violinPlotBWThemeUpdated</p>
-</div>
+<img src="../fig/rmd-01-violinPlotBWThemeUpdated-2.png" width="540" style="display: block; margin: auto;" />
 
 We can also save any plot object we have named, even if they were not the plot that we ran most recently. We just have to tell `ggsave()` which plot we want to save:
 
