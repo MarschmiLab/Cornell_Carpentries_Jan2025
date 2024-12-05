@@ -215,10 +215,12 @@ cd Desktop
 ```
 {: .language-bash}
 
+Copy: Ctrl Ins
+Paste: Shift Ins
 > ## Copy and Paste in Windows Bash Emulator
 >
-> One of my biggest frustrations when I began using a bash emulator on windows is that my normal commands for paste (Ctrl + v) didn't work! 
-> In Git Bash (our bash emulator), we can instead use Ctrl + Shift + Insert.
+> One of my biggest frustrations when I began using a bash emulator on Windows is that my normal commands for copy (<kbd>Ctrl</kbd>+<kbd>c</kbd>) paste (<kbd>Ctrl</kbd>+<kbd>v</kbd>) didn't work! 
+> In Git Bash (our bash emulator), we can instead right click and select those options manually, or use <kbd>Ctrl</kbd>+<kbd>Ins</kbd> for copy and <kbd>Shift</kbd>+<kbd>Ins</kbd>.
 {: .callout}
 
 Let's see if we're in the right place:
@@ -561,6 +563,13 @@ plotting.R
 
 There it is!
 
+> ## My plotting.R file has disappeared!
+>
+> If you can't find your plotting.R file anywhere, make sure to call a helper over. In Unix, the `mv` command is also how we rename a file. Recall that the command has three parts: the mv command itself, the file we want to move, and the destination for that file. If second argument (the destination), is not a directory, or does not yet exist, the shell renames the first argument (the file) as the second argument. As such, if the code directory did not exist before running our `mv` command, we have now renamed our plotting.R file to "code".
+> Remember that we can use ls -F to see if outputs are directories or files, and if necessary, we can use a second mv command to fix our mistake. Then we can remake a code directory, and try moving our plotting.R file into it.
+>
+{: .callout}
+
 > ## Creating directories and moving files
 >
 > Create a `data` directory and move all your csv files into the newly created `data` directory.
@@ -588,7 +597,7 @@ Next, we have to move the figures. But we have so many figures! It’d be annoyi
 
 One example of a wildcard is the asterisk, `*`. This special character is interpreted as "multiple characters of any kind".
 
-Let’s see how we can use a wildcard to list only files with the extension `.png`:
+Let’s see how we can use a wildcard to list only files with the extension `.jpg`:
 
 ```
 ls *jpg
