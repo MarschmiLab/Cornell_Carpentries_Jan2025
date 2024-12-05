@@ -26,8 +26,8 @@ editor_options:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
-options(pillar.width = 220,
-        width = 220)
+options(pillar.width = 50,
+        width = 50)
 ```
 
 ### Contents
@@ -515,7 +515,15 @@ Let's use `anti_join()` for this - this will show us the data for the keys on th
 anti_join(sample_data, taxon_clean, by="sample_id")
 ```
 
-We can see that none of the joining worked for September samples! What's going on here? Well, let's look closer at those sample IDs. In our sample_data, our sample IDs used the full word "September", but in our taxon table it looks like someone shortened it to "Sep". As such, `inner_join` can recognize that these are matching keys. Let's use what we know about `mutate` alongside a new function, `str_replace`, to help them match. 
+We can see that none of the joining worked for September samples! What's going on here? Well, let's look closer at those sample IDs. If I want to pull just a single column from a datatable, I can use the `$` notation
+
+```{r examine_sample_ids}
+sample_data$sample_id
+
+taxon_clean$sample_id
+```
+
+In our sample_data, our sample IDs used the full word "September", but in our taxon table it looks like someone shortened it to "Sep". As such, `inner_join` can't recognize that these are matching keys. Let's use what we know about `mutate` alongside a new function, `str_replace`, to help them match. 
 
 ```{r CleanEmissionsMutateRecode}
 taxon_clean_goodSept <- taxon_clean %>%
