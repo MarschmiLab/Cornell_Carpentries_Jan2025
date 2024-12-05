@@ -687,6 +687,22 @@ read_csv("data/taxon_abundance.csv")
 
 
 ~~~
+New names:
+• `` -> `...2`
+• `` -> `...3`
+• `` -> `...4`
+• `` -> `...5`
+• `` -> `...6`
+• `` -> `...7`
+• `` -> `...8`
+• `` -> `...9`
+• `` -> `...10`
+~~~
+{: .output}
+
+
+
+~~~
 Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
   dat <- vroom(...)
   problems(dat)
@@ -696,10 +712,10 @@ Warning: One or more parsing issues, call `problems()` on your data frame for de
 
 
 ~~~
-Rows: 73 Columns: 1
+Rows: 73 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
-chr (1): Relative Abundances of Taxa in Lake Ontario
+chr (10): Taxon Abundance from Lake Ontario, ...2, ...3, ...4, ...5, ...6, ...7, ...8, ...9, ...10
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -709,19 +725,19 @@ chr (1): Relative Abundances of Taxa in Lake Ontario
 
 
 ~~~
-# A tibble: 73 × 1
-   `Relative Abundances of Taxa in Lake Ontario`                                                                                                                                                                       
-   <chr>                                                                                                                                                                                                               
- 1 Schmidt Lab, 2023                                                                                                                                                                                                   
- 2 sample_id,Proteobacteria,Actinobacteriota,Bacteroidota,Chloroflexi,Verrucomicrobiota,Cyanobacteria,Planctomycetota,sequencing_reads,perc_reads_retained,Extraction_Date,Lot_Number,                                 
- 3 Sep_43_B,0.4750424903837557,0.14116870918686822,0.072457285982646,0.005154754450308614,0.11356114142588777,0.14148179622506485,0.036429913230163695,78341,67.55654362396726,20231007.5,172033163, MiSeq Sequencer   
- 4 Sep_29_E,0.4532027397871533,0.18427745922670175,0.08144619709511161,0.006882934338814395,0.12767452756520375,0.1136520827290779,0.025836103612146104,73370,67.04807015935938,20231011,NA, MiSeq Sequencer           
- 5 Sep_62_B,0.4445189001548922,0.22247366281816092,0.11902538695609188,0.008414715866023662,0.07473278333754435,0.08943107293119928,0.025474838241917597,70483,71.15438503541827,20231008.5,NA, MiSeq Sequencer        
- 6 May_8_E,0.44319281443068753,0.1948738307322036,0.2632806490831948,0.05237823487085329,0.03761506587598938,6.947373644641838e-4,0.0020097759471999605,58185,68.44234708674301,20230614.5,172033163, MiSeq Sequencer  
- 7 Sep_62_E,0.44124389783423684,0.20572502270050613,0.09990919797538457,0.005726820760399528,0.10034073234979457,0.10234556913090771,0.03154696082926523,89830,69.57811054899217,20231013.5,NA, MiSeq Sequencer        
- 8 May_38_E,0.4396651527295396,0.17521595867842193,0.3104016386143022,0.016430670585092174,0.03927331017900079,8.014961261020571e-4,0.0056995280078368515,61580,57.03312763884378,20230615,172033163, MiSeq Sequencer  
- 9 Sep_12_E,0.43588136704802166,0.21974786854186404,0.07703854842235662,0.00970633243459885,0.10388399038111201,0.11340085987029075,0.02840486774029002,58568.5,68.09693556299425,20231007.5,172033163, MiSeq Sequencer
-10 May_17_E,0.4351187991214858,0.19107690632203736,0.21576243805928202,0.08498357323071895,0.057520919173034694,0.0012887299656943712,0.002105530648176719,55062,66.34078050124333,20230615,172033163, MiSeq Sequencer 
+# A tibble: 73 × 10
+   `Taxon Abundance from Lake Ontario` ...2                ...3                ...4                ...5                 ...6                 ...7                  ...8       ...9  ...10
+   <chr>                               <chr>               <chr>               <chr>               <chr>                <chr>                <chr>                 <chr>      <chr> <chr>
+ 1 Schmidt Lab                         2023                <NA>                <NA>                <NA>                 <NA>                 <NA>                  <NA>       <NA>  ,    
+ 2 sample_id                           Proteobacteria      Actinobacteriota    Bacteroidota        Chloroflexi          Verrucomicrobiota    Cyanobacteria         Lot_Number <NA>  <NA> 
+ 3 Sep_43_B                            0.4750424903837557  0.14116870918686822 0.072457285982646   0.005154754450308614 0.11356114142588777  0.14148179622506485   172033163  MiSeq <NA> 
+ 4 Sep_29_E                            0.4532027397871533  0.18427745922670175 0.08144619709511161 0.006882934338814395 0.12767452756520375  0.1136520827290779    <NA>       MiSeq <NA> 
+ 5 Sep_62_B                            0.4445189001548922  0.22247366281816092 0.11902538695609188 0.008414715866023662 0.07473278333754435  0.08943107293119928   <NA>       MiSeq <NA> 
+ 6 May_8_E                             0.44319281443068753 0.1948738307322036  0.2632806490831948  0.05237823487085329  0.03761506587598938  6.947373644641838e-4  172033163  MiSeq <NA> 
+ 7 Sep_62_E                            0.44124389783423684 0.20572502270050613 0.09990919797538457 0.005726820760399528 0.10034073234979457  0.10234556913090771   <NA>       MiSeq <NA> 
+ 8 May_38_E                            0.4396651527295396  0.17521595867842193 0.3104016386143022  0.016430670585092174 0.03927331017900079  8.014961261020571e-4  172033163  MiSeq <NA> 
+ 9 Sep_12_E                            0.43588136704802166 0.21974786854186404 0.07703854842235662 0.00970633243459885  0.10388399038111201  0.11340085987029075   172033163  MiSeq <NA> 
+10 May_17_E                            0.4351187991214858  0.19107690632203736 0.21576243805928202 0.08498357323071895  0.057520919173034694 0.0012887299656943712 172033163  MiSeq <NA> 
 # ℹ 63 more rows
 ~~~
 {: .output}
@@ -744,32 +760,51 @@ read_csv("data/taxon_abundance.csv", skip=2)
 
 ~~~
 New names:
-Rows: 71 Columns: 13
-── Column specification
-──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
-(2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota, sequencing_reads, perc_reads_retained, Extraction_Date,
-Lot_Number
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-• `` -> `...13`
+• `` -> `...9`
+• `` -> `...10`
 ~~~
 {: .output}
 
 
 
 ~~~
-# A tibble: 71 × 13
-   sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Planctomycetota sequencing_reads perc_reads_retained Extraction_Date Lot_Number ...13          
-   <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>            <dbl>               <dbl>           <dbl>      <dbl> <chr>          
- 1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364            78341                 67.6       20231008.  172033163 MiSeq Sequencer
- 2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258            73370                 67.0       20231011          NA MiSeq Sequencer
- 3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255            70483                 71.2       20231008.         NA MiSeq Sequencer
- 4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201           58185                 68.4       20230614.  172033163 MiSeq Sequencer
- 5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315            89830                 69.6       20231014.         NA MiSeq Sequencer
- 6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570           61580                 57.0       20230615   172033163 MiSeq Sequencer
- 7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284            58568.                68.1       20231008.  172033163 MiSeq Sequencer
- 8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211           55062                 66.3       20230615   172033163 MiSeq Sequencer
- 9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703           50591                 64.7       20230614   172033163 MiSeq Sequencer
-10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183            76739                 66.2       20231016.         NA MiSeq Sequencer
+Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+  dat <- vroom(...)
+  problems(dat)
+~~~
+{: .warning}
+
+
+
+~~~
+Rows: 71 Columns: 10
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): sample_id, ...9
+dbl (7): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Lot_Number
+lgl (1): ...10
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+~~~
+{: .output}
+
+
+
+~~~
+# A tibble: 71 × 10
+   sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Lot_Number ...9  ...10
+   <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>      <dbl> <chr> <lgl>
+ 1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141     172033163 MiSeq NA   
+ 2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            NA MiSeq NA   
+ 3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           NA MiSeq NA   
+ 4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695  172033163 MiSeq NA   
+ 5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            NA MiSeq NA   
+ 6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801  172033163 MiSeq NA   
+ 7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113     172033163 MiSeq NA   
+ 8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129   172033163 MiSeq NA   
+ 9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142   172033163 MiSeq NA   
+10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           NA MiSeq NA   
 # ℹ 61 more rows
 ~~~
 {: .output}
@@ -794,24 +829,34 @@ taxon_dirty <- read_csv("data/taxon_abundance.csv", skip=2) %>%
 
 ~~~
 New names:
-Rows: 71 Columns: 13
-── Column specification
-──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
-(2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota, sequencing_reads, perc_reads_retained, Extraction_Date,
-Lot_Number
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-• `` -> `...13`
+• `` -> `...9`
+• `` -> `...10`
 ~~~
 {: .output}
 
 
 
 ~~~
-Error in `select()`:
-! Can't select columns that don't exist.
-✖ Column `...10` doesn't exist.
+Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+  dat <- vroom(...)
+  problems(dat)
 ~~~
-{: .error}
+{: .warning}
+
+
+
+~~~
+Rows: 71 Columns: 10
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): sample_id, ...9
+dbl (7): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Lot_Number
+lgl (1): ...10
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+~~~
+{: .output}
 
 
 
@@ -823,9 +868,17 @@ head(taxon_dirty, 6)
 
 
 ~~~
-Error: object 'taxon_dirty' not found
+# A tibble: 6 × 9
+  sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria Lot_Number sequencer
+  <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>      <dbl> <chr>    
+1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141     172033163 MiSeq    
+2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            NA MiSeq    
+3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           NA MiSeq    
+4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695  172033163 MiSeq    
+5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            NA MiSeq    
+6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801  172033163 MiSeq    
 ~~~
-{: .error}
+{: .output}
 
 
 > ## Bonus: Modifying multiple column names at once
@@ -843,32 +896,51 @@ Error: object 'taxon_dirty' not found
 > 
 > ~~~
 > New names:
-> Rows: 71 Columns: 13
-> ── Column specification
-> ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── Delimiter: "," chr
-> (2): sample_id, ...13 dbl (11): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota, sequencing_reads, perc_reads_retained, Extraction_Date,
-> Lot_Number
-> ℹ Use `spec()` to retrieve the full column specification for this data. ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-> • `` -> `...13`
+> • `` -> `...9`
+> • `` -> `...10`
 > ~~~
 > {: .output}
 > 
 > 
 > 
 > ~~~
-> # A tibble: 71 × 13
->    sample_id proteobacteria actinobacteriota bacteroidota chloroflexi verrucomicrobiota cyanobacteria planctomycetota sequencing_reads perc_reads_retained extraction_date lot_number ...13          
->    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>           <dbl>            <dbl>               <dbl>           <dbl>      <dbl> <chr>          
->  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141            0.0364            78341                 67.6       20231008.  172033163 MiSeq Sequencer
->  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            0.0258            73370                 67.0       20231011          NA MiSeq Sequencer
->  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           0.0255            70483                 71.2       20231008.         NA MiSeq Sequencer
->  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695         0.00201           58185                 68.4       20230614.  172033163 MiSeq Sequencer
->  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            0.0315            89830                 69.6       20231014.         NA MiSeq Sequencer
->  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801         0.00570           61580                 57.0       20230615   172033163 MiSeq Sequencer
->  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113            0.0284            58568.                68.1       20231008.  172033163 MiSeq Sequencer
->  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129          0.00211           55062                 66.3       20230615   172033163 MiSeq Sequencer
->  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142          0.00703           50591                 64.7       20230614   172033163 MiSeq Sequencer
-> 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           0.0183            76739                 66.2       20231016.         NA MiSeq Sequencer
+> Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+>   dat <- vroom(...)
+>   problems(dat)
+> ~~~
+> {: .warning}
+> 
+> 
+> 
+> ~~~
+> Rows: 71 Columns: 10
+> ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> Delimiter: ","
+> chr (2): sample_id, ...9
+> dbl (7): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Lot_Number
+> lgl (1): ...10
+> 
+> ℹ Use `spec()` to retrieve the full column specification for this data.
+> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> ~~~
+> {: .output}
+> 
+> 
+> 
+> ~~~
+> # A tibble: 71 × 10
+>    sample_id proteobacteria actinobacteriota bacteroidota chloroflexi verrucomicrobiota cyanobacteria lot_number ...9  ...10
+>    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>      <dbl> <chr> <lgl>
+>  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141     172033163 MiSeq NA   
+>  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114            NA MiSeq NA   
+>  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894           NA MiSeq NA   
+>  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695  172033163 MiSeq NA   
+>  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102            NA MiSeq NA   
+>  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801  172033163 MiSeq NA   
+>  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113     172033163 MiSeq NA   
+>  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129   172033163 MiSeq NA   
+>  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142   172033163 MiSeq NA   
+> 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886           NA MiSeq NA   
 > # ℹ 61 more rows
 > ~~~
 > {: .output}
@@ -890,9 +962,22 @@ We previously saw how we can subset columns from a data frame using the select f
 > > 
 > > 
 > > ~~~
-> > Error: object 'taxon_dirty' not found
+> > # A tibble: 71 × 7
+> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141   
+> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114   
+> >  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894  
+> >  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695
+> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102   
+> >  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801
+> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113   
+> >  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129 
+> >  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142 
+> > 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886  
+> > # ℹ 61 more rows
 > > ~~~
-> > {: .error}
+> > {: .output}
 > > 
 > > ~~~
 > > taxon_dirty %>%
@@ -903,9 +988,22 @@ We previously saw how we can subset columns from a data frame using the select f
 > > 
 > > 
 > > ~~~
-> > Error: object 'taxon_dirty' not found
+> > # A tibble: 71 × 7
+> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141   
+> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114   
+> >  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894  
+> >  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695
+> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102   
+> >  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801
+> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113   
+> >  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129 
+> >  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142 
+> > 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886  
+> > # ℹ 61 more rows
 > > ~~~
-> > {: .error}
+> > {: .output}
 > > 
 > > ~~~
 > > taxon_dirty %>%
@@ -916,9 +1014,22 @@ We previously saw how we can subset columns from a data frame using the select f
 > > 
 > > 
 > > ~~~
-> > Error: object 'taxon_dirty' not found
+> > # A tibble: 71 × 7
+> >    sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+> >    <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+> >  1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141   
+> >  2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114   
+> >  3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894  
+> >  4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695
+> >  5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102   
+> >  6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801
+> >  7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113   
+> >  8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129 
+> >  9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142 
+> > 10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886  
+> > # ℹ 61 more rows
 > > ~~~
-> > {: .error}
+> > {: .output}
 > {: .solution}
 {: .challenge}
 
@@ -930,13 +1041,6 @@ taxon_clean <- taxon_dirty %>%
   select(sample_id:Cyanobacteria)
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error: object 'taxon_dirty' not found
-~~~
-{: .error}
 
 > **Looking at your data:** You can get a look at your data-cleaning hard work by navigating to the **Environment** tab in RStudio and clicking the table icon next to the variable name. Notice when we do this, RStudio automatically runs the `View()` command. We've made a lot of progress!
 {.callout}
@@ -957,19 +1061,7 @@ taxon_long <- taxon_clean %>%
     pivot_longer(cols = Proteobacteria:Cyanobacteria, 
                  names_to = "Phylum",
                  values_to = "Abundance")
-~~~
-{: .language-r}
 
-
-
-~~~
-Error: object 'taxon_clean' not found
-~~~
-{: .error}
-
-
-
-~~~
 taxon_long
 ~~~
 {: .language-r}
@@ -977,9 +1069,22 @@ taxon_long
 
 
 ~~~
-Error: object 'taxon_long' not found
+# A tibble: 426 × 3
+   sample_id Phylum            Abundance
+   <chr>     <chr>                 <dbl>
+ 1 Sep_43_B  Proteobacteria      0.475  
+ 2 Sep_43_B  Actinobacteriota    0.141  
+ 3 Sep_43_B  Bacteroidota        0.0725 
+ 4 Sep_43_B  Chloroflexi         0.00515
+ 5 Sep_43_B  Verrucomicrobiota   0.114  
+ 6 Sep_43_B  Cyanobacteria       0.141  
+ 7 Sep_29_E  Proteobacteria      0.453  
+ 8 Sep_29_E  Actinobacteriota    0.184  
+ 9 Sep_29_E  Bacteroidota        0.0814 
+10 Sep_29_E  Chloroflexi         0.00688
+# ℹ 416 more rows
 ~~~
-{: .error}
+{: .output}
 
 Notice how much longer our table is. We might describe this data as "tidy" because it makes it easy to work with `ggplot2` and `dplyr` functions (this is where the "tidy" in "tidyverse" comes from). For example, this allows us to use `group_by` to calculate the average relative abundance for each Phylum:
 
@@ -994,9 +1099,17 @@ taxon_long %>%
 
 
 ~~~
-Error: object 'taxon_long' not found
+# A tibble: 6 × 2
+  Phylum            avg_abund
+  <chr>                 <dbl>
+1 Actinobacteriota     0.233 
+2 Bacteroidota         0.160 
+3 Chloroflexi          0.0805
+4 Cyanobacteria        0.0363
+5 Proteobacteria       0.334 
+6 Verrucomicrobiota    0.103 
 ~~~
-{: .error}
+{: .output}
 
 Long format is also, at times, necessary for specific types of plotting. For example, let's make a very common plot in microbial ecology: the stacked bar plot. Notice how we are piping our dataframe into our ggplot call.
 
@@ -1009,12 +1122,7 @@ taxon_long %>%
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error: object 'taxon_long' not found
-~~~
-{: .error}
+<img src="../fig/rmd-04-stackedBars-1.png" width="540" style="display: block; margin: auto;" />
 
 Our bars don't add up perfectly to one, as our data doesn't include all Phyla in the original dataset. 
 
@@ -1030,9 +1138,22 @@ taxon_long %>%
 
 
 ~~~
-Error: object 'taxon_long' not found
+# A tibble: 71 × 7
+   sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+   <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+ 1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141   
+ 2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114   
+ 3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894  
+ 4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695
+ 5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102   
+ 6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801
+ 7 Sep_12_E           0.436            0.220       0.0770     0.00971            0.104       0.113   
+ 8 May_17_E           0.435            0.191       0.216      0.0850             0.0575      0.00129 
+ 9 May_66_E           0.431            0.139       0.315      0.0205             0.0693      0.00142 
+10 Sep_8_B            0.429            0.163       0.118      0.00483            0.165       0.0886  
+# ℹ 61 more rows
 ~~~
-{: .error}
+{: .output}
 
 # Joining data frames
 
@@ -1072,9 +1193,17 @@ head(taxon_clean, 6)
 
 
 ~~~
-Error: object 'taxon_clean' not found
+# A tibble: 6 × 7
+  sample_id Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+  <chr>              <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+1 Sep_43_B           0.475            0.141       0.0725     0.00515            0.114       0.141   
+2 Sep_29_E           0.453            0.184       0.0814     0.00688            0.128       0.114   
+3 Sep_62_B           0.445            0.222       0.119      0.00841            0.0747      0.0894  
+4 May_8_E            0.443            0.195       0.263      0.0524             0.0376      0.000695
+5 Sep_62_E           0.441            0.206       0.0999     0.00573            0.100       0.102   
+6 May_38_E           0.440            0.175       0.310      0.0164             0.0393      0.000801
 ~~~
-{: .error}
+{: .output}
 
 Look at the data in `taxon_clean` and `sample_data`. If you had to merge these two data frames together, which column would you use to merge them together? If you said "sample_id" - good job!
 
@@ -1103,9 +1232,29 @@ inner_join(sample_data, taxon_clean)
 
 
 ~~~
-Error: object 'taxon_clean' not found
+Joining with `by = join_by(sample_id)`
 ~~~
-{: .error}
+{: .output}
+
+
+
+~~~
+# A tibble: 32 × 15
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129       0.0807      0.195             0.132       0.000248
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186       0.235       0.0809            0.109       0.00957 
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287       0.217       0.0703            0.0999      0.0126  
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191       0.216       0.0850            0.0575      0.00129 
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280       0.110       0.131             0.0606      0       
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206       0.280       0.0832            0.0627      0.000454
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310       0.200       0.136             0.0361      0.000332
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162       0.0862      0.165             0.137       0.000240
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205       0.317       0.0537            0.0846      0.0108  
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341       0.199       0.0877            0.114       0.00374 
+# ℹ 22 more rows
+~~~
+{: .output}
 
 Do you see that we now have data from both data frames joined together in the same data frame? One thing to note about the output is that `inner_join()` tells us that that it joined by "sample_id". We can make this explicit using the "by" argument in the join functions
 
@@ -1118,9 +1267,22 @@ inner_join(sample_data, taxon_clean, by="sample_id")
 
 
 ~~~
-Error: object 'taxon_clean' not found
+# A tibble: 32 × 15
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129       0.0807      0.195             0.132       0.000248
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186       0.235       0.0809            0.109       0.00957 
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287       0.217       0.0703            0.0999      0.0126  
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191       0.216       0.0850            0.0575      0.00129 
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280       0.110       0.131             0.0606      0       
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206       0.280       0.0832            0.0627      0.000454
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310       0.200       0.136             0.0361      0.000332
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162       0.0862      0.165             0.137       0.000240
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205       0.317       0.0537            0.0846      0.0108  
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341       0.199       0.0877            0.114       0.00374 
+# ℹ 22 more rows
 ~~~
-{: .error}
+{: .output}
 
 One thing to notice is that sample data had 71 rows, but the output of our join only had 32. Let's investigate. It appears that there must have been samples in the sample data that did not appear in our taxon_clean data frame. 
 
@@ -1135,9 +1297,22 @@ anti_join(sample_data, taxon_clean, by="sample_id")
 
 
 ~~~
-Error: object 'taxon_clean' not found
+# A tibble: 39 × 9
+   sample_id      env_group         depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll
+   <chr>          <chr>             <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>
+ 1 September_12_B Deep              102       1703592.        4.20            564             1.69            2.42        0.05
+ 2 September_12_E Shallow_September   5       4930739.       18.1             526             3.12            2.96        2.89
+ 3 September_12_M Deep               52       2304545.        4.76            517             2.25            2.58        0.37
+ 4 September_17_B Shallow_September  10.9     6942213.       18.1             385             2.67            2.69        2.28
+ 5 September_17_E Shallow_September   5       7261861.       18.4             396             3.48            2.73        2.74
+ 6 September_29_B Shallow_September  27.9     6168187.       19.0             358             4.28            2.88        2.12
+ 7 September_29_E Shallow_September   5       5582205.       19.0             336             2.68            2.81        2.21
+ 8 September_29_M Shallow_September  15       5681149.       19.0             378             5.08            2.75        2.24
+ 9 September_33_B Deep              135.      1246414.        3.98            506             4.15            2.49        0.05
+10 September_33_E Shallow_September   5       7027388.       19.2             370             4.72            2.58        2.5 
+# ℹ 29 more rows
 ~~~
-{: .error}
+{: .output}
 
 We can see that none of the joining worked for September samples! What's going on here? Well, let's look closer at those sample IDs. In our sample_data, our sample IDs used the full word "September", but in our taxon table it looks like someone shortened it to "Sep". As such, `inner_join` can recognize that these are matching keys. Let's use what we know about `mutate` alongside a new function, `str_replace`, to help them match. 
 
@@ -1147,13 +1322,6 @@ taxon_clean_goodSept <- taxon_clean %>%
   mutate(sample_id = str_replace(sample_id, pattern = "Sep", replacement = "September"))
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error: object 'taxon_clean' not found
-~~~
-{: .error}
 
 Now let's try with that inner join again.
 
@@ -1166,9 +1334,22 @@ inner_join(sample_data, taxon_clean_goodSept, by = "sample_id")
 
 
 ~~~
-Error: object 'taxon_clean_goodSept' not found
+# A tibble: 71 × 15
+   sample_id env_group   depth cells_per_ml temperature total_nitrogen total_phosphorus diss_org_carbon chlorophyll Proteobacteria Actinobacteriota Bacteroidota Chloroflexi Verrucomicrobiota Cyanobacteria
+   <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>            <dbl>           <dbl>       <dbl>          <dbl>            <dbl>        <dbl>       <dbl>             <dbl>         <dbl>
+ 1 May_12_B  Deep         103.     2058864.        4.07            465             3.78            2.48        0.05          0.412            0.129       0.0807      0.195             0.132       0.000248
+ 2 May_12_E  Shallow_May    5      4696827.        7.01            465             4.39            2.38        2.53          0.339            0.186       0.235       0.0809            0.109       0.00957 
+ 3 May_12_M  Shallow_May   15      4808339.        6.14            474             5.37            2.60        3.2           0.276            0.287       0.217       0.0703            0.0999      0.0126  
+ 4 May_17_E  Shallow_May    5      3738681.        5.99            492             4.67            2.44        0.55          0.435            0.191       0.216       0.0850            0.0575      0.00129 
+ 5 May_29_B  Deep          27      2153086.        4.67            525             4.44            2.40        0.48          0.410            0.280       0.110       0.131             0.0606      0       
+ 6 May_29_E  Shallow_May    5      3124920.        5.97            521             3.71            2.28        0.79          0.362            0.206       0.280       0.0832            0.0627      0.000454
+ 7 May_29_M  Shallow_May   19      2566156.        5.69            539             4.23            2.33        0.44          0.311            0.310       0.200       0.136             0.0361      0.000332
+ 8 May_33_B  Deep         135      2293177.        3.87            505             4.18            2.34        0.22          0.403            0.162       0.0862      0.165             0.137       0.000240
+ 9 May_33_E  Shallow_May    5      5480859.        7.93            473             6.64            2.51        3.44          0.301            0.205       0.317       0.0537            0.0846      0.0108  
+10 May_33_M  Shallow_May   20      3114433.        4.53            515             4.14            2.23        1.27          0.208            0.341       0.199       0.0877            0.114       0.00374 
+# ℹ 61 more rows
 ~~~
-{: .error}
+{: .output}
 
 Woohoo! We matched all of the samples from each table. Let's save this as a new dataframe, which we can use in later projects. 
 
@@ -1178,13 +1359,6 @@ sample_and_taxon <- inner_join(sample_data, taxon_clean_goodSept, by = "sample_i
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error: object 'taxon_clean_goodSept' not found
-~~~
-{: .error}
-
 We have reached our data cleaning goals! One of the best aspects of doing all of these steps coded in R is that our efforts are reproducible, and the raw data is maintained. With good documentation of data cleaning and analysis steps, we could easily share our work with another researcher who would be able to repeat what we've done. However, it's also nice to have a saved `csv` copy of our clean data. That way we can access it later without needing to redo our data cleaning, and we can also share the cleaned data with collaborators. To save our dataframe, we'll use `write_csv()`. 
 
 
@@ -1192,13 +1366,6 @@ We have reached our data cleaning goals! One of the best aspects of doing all of
 write_csv(sample_and_taxon, "data/sample_and_taxon.csv")
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error: object 'sample_and_taxon' not found
-~~~
-{: .error}
 
 Great - Now we can move on to the analysis! 
 
@@ -1221,12 +1388,7 @@ ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error: object 'sample_and_taxon' not found
-~~~
-{: .error}
+<img src="../fig/rmd-04-PlotPercapCO2vsGDP-1.png" width="540" style="display: block; margin: auto;" />
 
 *Tip:* Notice we used the `\n` in our title to get a new line to prevent it from getting cut off.
 
@@ -1247,9 +1409,11 @@ ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
 
 
 ~~~
-Error: object 'sample_and_taxon' not found
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ~~~
-{: .error}
+{: .output}
+
+<img src="../fig/rmd-04-PlotPercapCO2vsGDPSmooth-1.png" width="540" style="display: block; margin: auto;" />
 
 By default, ggplot uses a funky model called "loess estimation" We can force the line to be a linear model (straight) using `method="lm"` as an argument to `geom_smooth`
 
@@ -1268,9 +1432,11 @@ ggplot(sample_and_taxon, aes(x=depth, y=Chloroflexi)) +
 
 
 ~~~
-Error: object 'sample_and_taxon' not found
+`geom_smooth()` using formula = 'y ~ x'
 ~~~
-{: .error}
+{: .output}
+
+<img src="../fig/rmd-04-PlotPercapCO2vsGDP1SmoothLm-1.png" width="540" style="display: block; margin: auto;" />
 
 To answer our first question, Chloroflexi appears to be much more abundant in the deeper samples from Lake Ontario!
 
@@ -1288,9 +1454,14 @@ sample_and_taxon %>%
 
 
 ~~~
-Error: object 'sample_and_taxon' not found
+# A tibble: 3 × 3
+  env_group         avg_chloro sd_chloro
+  <chr>                  <dbl>     <dbl>
+1 Deep                  0.183     0.0539
+2 Shallow_May           0.0631    0.0315
+3 Shallow_September     0.0116    0.0101
 ~~~
-{: .error}
+{: .output}
 
 We see that Chloroflexi is most abundant in the Deep groups, relatively rare in Shallow May, and very rare in Shallow September. 
 
@@ -1347,9 +1518,26 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error: object 'sample_and_taxon' not found
+> > Rows: 71
+> > Columns: 16
+> > $ sample_id         <chr> "May_12_B", "May_12_E", "May_12_M", "May_17_E", "May_29_B", "May_29_E", "May_29_M", "May_33_B", "May_33_E", "May_33_M", "May_35_B", "May_35_E", "May_35_M", "May_38_E", "May_38_M", "May_41_B", "May_41_E", "May_43_E", "May_48_B", "May_48_E", "May_55_B", "May_55_E", "May_55_…
+> > $ env_group         <chr> "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", "Deep", "Shallow_May", "Shallow_May", "Shallow_May", "Shallow_May", …
+> > $ depth             <dbl> 102.8, 5.0, 15.0, 5.0, 27.0, 5.0, 19.0, 135.0, 5.0, 20.0, 27.0, 5.0, 10.0, 5.0, 14.0, 127.0, 5.0, 5.0, 35.0, 5.0, 189.0, 5.0, 13.0, 224.0, 5.0, 14.0, 5.0, 5.0, 66.0, 5.0, 14.0, 5.0, 102.0, 5.0, 52.0, 10.9, 5.0, 27.9, 5.0, 15.0, 134.9, 5.0, 68.5, 26.7, 5.0, 14.4, 16.6, 5.0…
+> > $ cells_per_ml      <dbl> 2058864, 4696827, 4808339, 3738681, 2153086, 3124920, 2566156, 2293177, 5480859, 3114433, 3066162, 5417617, 4610370, 5811795, 5432987, 2422141, 4044801, 2787020, 2300782, 4260222, 1847686, 4134620, 2583447, 1631065, 4079544, 3870687, 5262156, 4197941, 2270042, 3173752, 29…
+> > $ temperature       <dbl> 4.07380, 7.01270, 6.13500, 5.99160, 4.66955, 5.97390, 5.68550, 3.87050, 7.93390, 4.53155, 6.57370, 11.22760, 11.06450, 12.38160, 11.27240, 3.76370, 7.03630, 5.87970, 4.79060, 6.80945, 3.66830, 6.09525, 5.03470, 3.67740, 7.95300, 5.83795, 12.33240, 10.20990, 4.86530, 9.266…
+> > $ total_nitrogen    <dbl> 465, 465, 474, 492, 525, 521, 539, 505, 473, 515, 479, 441, 450, 416, 449, 475, 435, 499, 477, 472, 475, 468, 460, 488, 448, 476, 489, 477, 450, 472, 465, 640, 564, 526, 517, 385, 396, 358, 336, 378, 506, 370, 521, 528, 501, 553, 582, 526, 483, 336, 508, 346, 362, 329, 31…
+> > $ total_phosphorus  <dbl> 3.78, 4.39, 5.37, 4.67, 4.44, 3.71, 4.23, 4.18, 6.64, 4.14, 4.32, 8.98, 5.99, 8.27, 8.66, 2.52, 5.46, 5.48, 2.31, 2.66, 6.36, 5.44, 9.06, 8.19, 9.77, 7.89, 5.54, 3.43, 5.17, 4.45, 1.76, 7.36, 1.69, 3.12, 2.25, 2.67, 3.48, 4.28, 2.68, 5.08, 4.15, 4.72, 3.56, 4.45, 4.28, 4.…
+> > $ diss_org_carbon   <dbl> 2.478, 2.380, 2.601, 2.435, 2.396, 2.283, 2.334, 2.343, 2.508, 2.232, 2.613, 2.567, 2.628, 2.692, 2.692, 2.389, 2.437, 2.498, 2.179, 2.733, 2.300, 3.416, 2.337, 2.436, 2.385, 2.348, 2.803, 2.198, 2.406, 2.942, 2.528, 2.438, 2.416, 2.963, 2.584, 2.687, 2.734, 2.884, 2.814,…
+> > $ chlorophyll       <dbl> 0.05, 2.53, 3.20, 0.55, 0.48, 0.79, 0.44, 0.22, 3.44, 1.27, 1.26, 3.96, 2.44, 3.32, 4.84, 0.21, 2.84, 0.56, 0.24, 0.38, 0.16, 4.96, 2.92, 0.05, 9.72, 5.80, 2.06, 0.44, 0.05, 4.80, 4.80, 2.22, 0.05, 2.89, 0.37, 2.28, 2.74, 2.12, 2.21, 2.24, 0.05, 2.50, 0.25, 1.14, 1.85, 1.…
+> > $ Proteobacteria    <dbl> 0.4120986, 0.3389293, 0.2762080, 0.4351188, 0.4100639, 0.3622527, 0.3110194, 0.4034387, 0.3012852, 0.2077626, 0.3433637, 0.2735303, 0.3264333, 0.4396652, 0.2525063, 0.3554822, 0.2793332, 0.3143624, 0.3118055, 0.2261881, 0.2423041, 0.3347266, 0.3416274, 0.4198061, 0.299188…
+> > $ Actinobacteriota  <dbl> 0.1288958, 0.1861232, 0.2866884, 0.1910769, 0.2801239, 0.2062492, 0.3100247, 0.1624027, 0.2048393, 0.3409799, 0.1543572, 0.2545076, 0.1676583, 0.1752160, 0.3217450, 0.2477603, 0.2577409, 0.3391037, 0.3860994, 0.3996764, 0.1819236, 0.1400352, 0.1341170, 0.1511316, 0.144714…
+> > $ Bacteroidota      <dbl> 0.08065717, 0.23470807, 0.21659843, 0.21576244, 0.11036293, 0.27980345, 0.20001474, 0.08615012, 0.31681303, 0.19946045, 0.27736195, 0.40546531, 0.35952622, 0.31040164, 0.35964685, 0.11214682, 0.32158229, 0.24188905, 0.14595699, 0.22171504, 0.06191825, 0.27154102, 0.192254…
+> > $ Chloroflexi       <dbl> 0.194635644, 0.080866893, 0.070320609, 0.084983573, 0.130649915, 0.083230440, 0.136388756, 0.164581873, 0.053744394, 0.087686015, 0.072595159, 0.017401661, 0.030159296, 0.016430671, 0.016913524, 0.161782307, 0.068663721, 0.065082082, 0.082742468, 0.059936186, 0.215837043,…
+> > $ Verrucomicrobiota <dbl> 0.13249532, 0.10878214, 0.09991639, 0.05752092, 0.06055977, 0.06269371, 0.03606823, 0.13660756, 0.08463046, 0.11408929, 0.09701781, 0.03086644, 0.08049790, 0.03927331, 0.03014035, 0.09602481, 0.06207085, 0.03777328, 0.06960976, 0.08856083, 0.13568056, 0.10258641, 0.114585…
+> > $ Cyanobacteria     <dbl> 2.482454e-04, 9.574640e-03, 1.262830e-02, 1.288730e-03, 0.000000e+00, 4.535719e-04, 3.315772e-04, 2.399992e-04, 1.077903e-02, 3.742059e-03, 7.064404e-04, 1.654150e-04, 4.660982e-04, 8.014961e-04, 1.875687e-03, 2.720250e-04, 1.497071e-03, 3.890142e-05, 4.277755e-05, 1.2213…
+> > $ abs_Chloroflexi   <dbl> 400728.37, 379817.78, 338125.36, 317726.48, 281300.48, 260088.49, 349994.76, 377415.41, 294565.42, 273092.26, 222588.52, 94275.54, 139045.52, 95491.68, 91890.96, 391859.64, 277731.08, 181385.05, 190372.40, 255341.43, 398799.17, 334675.13, 327626.09, 370601.70, 208569.06, …
 > > ~~~
-> > {: .error}
+> > {: .output}
 > >
 > > Previously, we found that Deep samples had the greatest *relative* abundance of Chloroflexi. Do they also have the greatest *absolute* abundance of this taxa?
 > >
@@ -1366,9 +1554,14 @@ Notice there that we can use the column created the in the `summarize()` step ("
 > > 
 > > 
 > > ~~~
-> > Error: object 'sample_and_taxon' not found
+> > # A tibble: 3 × 3
+> >   env_group         avg_chloro_relative avg_chloro_absolute
+> >   <chr>                           <dbl>               <dbl>
+> > 1 Deep                           0.183              332349.
+> > 2 Shallow_May                    0.0631             229210.
+> > 3 Shallow_September              0.0116              62915.
 > > ~~~
-> > {: .error}
+> > {: .output}
 > > Looks like yes! However, the difference is much more slight between Deep and Shallow_May when we consider absolute abundance.
 > {: .solution}
 {: .challenge}
