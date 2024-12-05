@@ -26,8 +26,8 @@ editor_options:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
-options(pillar.width = 350,
-        width = 350)
+options(pillar.width = 300,
+        width = 300)
 ```
 
 ### Contents
@@ -343,7 +343,7 @@ sample_data %>%
 
 [*Back to top*](#contents)
 
-Researchers are often pulling data from several sources, and the process of making data compatible with one another and prepared for analysis can be a large undertaking. Luckily, there are many functions that allow us to do this in R. We've been working with the sample dataset, which contains metadata about each sample we collected. In this section, we practice cleaning and preparing a second dataset derived from sequencing data, which holds the relative abundances of the most abundant Phyla in each sample.
+Researchers are often pulling data from several sources, and the process of making data compatible with one another and prepared for analysis can be a large undertaking. Luckily, there are many functions that allow us to do this in R. We've been working with the sample dataset, which contains metadata about each sample we collected. In this section, we practice cleaning and preparing a second dataset derived from sequencing data, which holds the relative abundances of the most abundant Phyla in our dataset.
 
 It's always good to go into data cleaning with a clear goal in mind. Here, we'd like to prepare the taxon data to be compatible with our sample data so we can directly compare the abundance of specific Phyla to our sample data. To make this work, we'd like a data frame that contains a column with the sample ID, and columns for the abundances of each Phyla. Let's start with reading the data in using `read_csv()`
 
@@ -351,25 +351,32 @@ It's always good to go into data cleaning with a clear goal in mind. Here, we'd 
 read_csv("data/taxon_abundance.csv")
 ```
 
-Hmmm, this looks a little weird. It is telling us that our table has 74 rows and just 1 column. Looking at the table that is outputted by `read_csv()` we can see that there appear to be two rows at the top of the file that contain extraneous information about the data in the table. Ideally, we'd skip those. We can do this using the `skip=` argument in read_csv by giving it a number of lines to skip.
+Hmmm, this looks a little weird. It is telling us that our table has 74 rows and 10 columns. What in the world is going on here? 
+
+Let's go to the file in the **Files** pane and select "View File".
+
+![]({{ page.root }}/fig/r-data-analysis/taxon_file_screenshot.png)
+
+Now, we begin to see at least one of the problems. It looks like there are two descriptive titles at the top of our file, which aren't part of the data table itself. Ideally, we'd skip those. We can do this using the `skip=` argument in read_csv by giving it a number of lines to skip.
 
 ```{r CleanEmissionsSkip}
 read_csv("data/taxon_abundance.csv", skip=2)
 ```
 
-This is working better - we now have 72 rows and 13 columns. However, we're also getting a message that `read_csv` has made a new column name. This can happen if your file has data in rows which lack a column name. In that case, `dplyr` creates new column names, which start with "...". Here, it looks like the final column contains information about the sequencing machine which generated the data. 
+This is working better - we now have 71 rows and 10 columns. However, we're also getting a message that `read_csv` has made some new column names. This can happen if your file has data in rows which lack a column name. In that case, `dplyr` creates new column names, which start with "...". Here, it looks like the final column contains information about the sequencing machine which generated the data. There is also another column that looks completely empty.
 
 > ## Warnings and Errors
 > It's important to differentiate between Warnings and Errors in R. A warning tells us, "you might want to know about this issue, but R still did what you asked". An error tells us, "there's something wrong with your code or your data and R didn't do what you asked". You need to fix any errors that arise. Warnings, are probably best to resolve or at least understand why they are coming up.
 {.callout}
 
-Perhaps we should rename this column to something informative. We can use the `rename` function to do so. While we're at it, let's save this as an object which we can work with down the line.
+Perhaps we should rename this column to something informative, and drop that empty column. We can use the `rename` function to do so. While we're at it, let's save this as an object which we can work with down the line. I'm going to use the `glimpse` function to see an overview of this table.
 
 ```{r CleanEmissionsColName}
 taxon_dirty <- read_csv("data/taxon_abundance.csv", skip=2) %>%
-    rename(sequencer = ...13)
+    select(-...10) %>%
+    rename(sequencer = ...9)
 
-glimpse(taxon_dirty)
+head(taxon_dirty, 6)
 ```
 
 
@@ -383,7 +390,7 @@ glimpse(taxon_dirty)
 > ```
 {: .solution}
 
-We previously saw how we can subset columns from a data frame using the select function. There are a lot of columns with extraneous information in this dataset. For instance, while information like the number of sequencing reads, the DNA extraction date, and the lot_number might be useful to use in the lab, it won't be a part of our analysis. Let's subset out the columns we are interested in, which includes the sample IDs and taxon information (columns from Proteobacteria to Planctomycetota).
+We previously saw how we can subset columns from a data frame using the select function. There are some columns with extraneous information in this dataset. For instance, while information like the sequencer and extraction kit lot_number might be useful to use in the lab, it won't be a part of our analysis. Let's subset out the columns we are interested in, which includes the sample IDs and taxon information (columns from Proteobacteria to Cyanobacteria).
 
 > ## Reviewing selecting columns
 > Select the columns of interest from our dataset. Note, there are multiple ways to do this.
@@ -391,15 +398,15 @@ We previously saw how we can subset columns from a data frame using the select f
 > > ## Solution: 
 > > ```{r CleanEmissionsSelect}
 > > taxon_dirty %>%
-> >   select(sample_id, Proteobacteria:Planctomycetota)
+> >   select(sample_id:Cyanobacteria)
 > > ```
 > > ```{r CleanEmissionsSelect2}
 > > taxon_dirty %>%
-> >   select(-(sequencing_reads:sequencer))
+> >   select(-Lot_Number, -sequencer)
 > > ```
 > > ```{r CleanEmissionsSelect3}
 > > taxon_dirty %>%
-> >   select(sample_id, Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Planctomycetota)
+> >   select(sample_id, Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria)
 > > ```
 > {: .solution}
 {: .challenge}
@@ -408,7 +415,7 @@ Let's go ahead and assign the output of this code chunk, which is the cleaned da
 
 ```{r AssignCleanEmissions}
 taxon_clean <- taxon_dirty %>% 
-  select(sample_id, Proteobacteria:Planctomycetota)
+  select(sample_id:Cyanobacteria)
 ```
 
 > **Looking at your data:** You can get a look at your data-cleaning hard work by navigating to the **Environment** tab in RStudio and clicking the table icon next to the variable name. Notice when we do this, RStudio automatically runs the `View()` command. We've made a lot of progress!
@@ -420,13 +427,13 @@ taxon_clean <- taxon_dirty %>%
 
 Data comes in many shapes and sizes, and one way we classify data is either "wide" or "long." Data that is "long" has one row per observation, and each column represents a unique, independent variable. The sample_data data is in a long format. 
 
-In wide data, each row represents a group of observations and each value is placed in a different column rather than a different row. Our taxon data is in wide format, as taxa abundance is spread out across multiple columns which represent different species. To be honest, the lines between "wide" and "long" can be blurry. One clue that your data mind be wide is if you have multiple columns which all share the same units and scale, or add up to a larger whole. In our taxon abundance table, values in each row correspond to a fraction of that samples "whole" (100% of its composition).
+In wide data, each row represents a group of observations and each value is placed in a different column rather than a different row. Our taxon data is in wide format, as taxa abundance is spread out across multiple columns which represent different species. To be honest, the lines between "wide" and "long" can be blurry. One clue that your data might be wide is if you have multiple columns which all share the same units and scale, or add up to a larger whole. In our taxon abundance table, values in each row correspond to a fraction of that samples "whole" (100% of its composition).
 
 The `tidyr` package contains the functions `pivot_wider` and `pivot_longer` that make it easy to switch between the two formats. The `tidyr` package is included in the `tidyverse` package so we don't need to do anything to load it. Let's convert out taxon_clean to long format. 
 
 ```{r PivotLonger}
 taxon_long <- taxon_clean %>%
-    pivot_longer(cols = Proteobacteria:Planctomycetota, 
+    pivot_longer(cols = Proteobacteria:Cyanobacteria, 
                  names_to = "Phylum",
                  values_to = "Abundance")
 
@@ -451,7 +458,7 @@ taxon_long %>%
 
 ```
 
-Our bars don't add up perfectly to one, as our data doesn't include rarer Phyla. 
+Our bars don't add up perfectly to one, as our data doesn't include all Phyla in the original dataset. 
 
 If we want to return our data to wide format, we can use `pivot_wider`
 
