@@ -354,15 +354,11 @@ You've learned so much in the past two days - how to use the Unix Shell to move 
 
 Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working! 
 
-The exercises below give you some ideas of directions to pursue. However, you're welcome to branch out. Maybe you have your own hypotheses you'd like to test. These are nice exercises because we are all familiar with the data and have the solutions saved. 
+The exercises below give you some ideas of directions to pursue. These are nice exercises because we have the solutions saved. However, you're welcome to branch out as well! Maybe you have your own hypotheses you'd like to test. Maybe you want to explore a new type of ggplot. Perhaps you want to run some statistical tests.  
 
-That said, you're also welcome to branch out. Maybe you want to explore a new type of ggplot. Maybe you're learning to create interactive tables with `reactable`. Maybe you're trying to read in some of your own data into your report. 
+Just remember to use a combination of prose (writing) and code to document the goals, process, and outputs of your analysis in your RMarkdown report. 
 
-Just remember to use a combination of prose (writing) and code to document your the goals, process, and outputs of your analysis in your RMarkdown report.
-
-This is a way for you to practice what you've learned.
-
-Once you're done, 
+Once you're done, *add* your report to your Git repo, *commit* those changes, and *push* those changes to Github. If you feel comfortable, post a link to the repo on the Etherpad, and change your repo's settings to *Public*, so that others in the class can admire what you've accomplished!
 
 ### Exercises using the gapminder data
 _[Back to top](#contents)_

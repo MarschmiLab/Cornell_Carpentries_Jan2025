@@ -27,11 +27,13 @@ editor_options:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("01-")
+options(pillar.width = 300,
+        width = 300)
 ```
 
 ```{r echo=FALSE}
 # prevents jitter plots from changing
-set.seed(20210109)
+set.seed(0314)
 ```
 
 
@@ -51,24 +53,21 @@ set.seed(20210109)
     + [Plot themes](#plot-themes)
     + [Facets](#facets)
     + [Saving plots](#saving-plots)
-1. [Bonus](#bonus)
-    + [Creating complex plots](#creating-complex-plots)
-      + [Animated plots](#animated-plots)
-      + [Map plots](#map-plots)
 1. [Glossary of terms](#glossary-of-terms)
 
 
 > ## Bonus: why learn to program?
 > Share why you're interested in learning how to code.
 > > ## Solution:
-> > There are lots of different reasons, including to perform data analysis and generate figures. I'm sure you have morespecific reasons for why you'd like to learn!
+> > There are lots of different reasons, including to perform data analysis and generate figures. I'm sure you have more specific reasons for why you'd like to learn! Add a 
 > {: .solution}
 {: .challenge}
 
 # Introduction to R and RStudio
 _[Back to top](#contents)_
 
-Over this workshop, we will be testing the hypothesis that a country's Cells per mL is related to the total value of its finished goods and services, also known as the Gross Domestic Product (GDP).
+Over this workshop, we will be working with data from the Schmidt Lab, here at Cornell. They collected microbial samples across Lake Ontario on the US EPA *RV Lake Guardian*. They want to understand how environmental conditions in the lake (things like temperature and nutrients) affect the abundance of different bacterial taxa. 
+
 To test this hypothesis, we'll need two things: data and a platform to analyze the data.
 
 You already [downloaded the data]({{ page.root }}/setup.html). But what platform will we use to analyze the data? We have many options!
@@ -102,7 +101,7 @@ On the left you'll have a panel with three tabs - Console, Terminal, and Jobs. T
 
 <img src="{{ page.root }}/fig/r-plotting/history.png" width="700"/>
 
-In the lower right panel are tabs for Files, Plots, Packages, Help, and Viewer. You used the Packages tab to install tidyverse.
+In the lower right panel are tabs for Files, Plots, Packages, Help, and Viewer.
 
 We'll spend more time in each of these tabs as we go through the workshop, so we won't spend a lot of time discussing them now.
 
@@ -130,7 +129,7 @@ When the smaller window opens, select "Existing Directory" and then the "Browse"
 
 <img src="{{ page.root }}/fig/r-plotting/browse.png" width="600"/>
 
-Navigate to the directory that contains your code and data from the setup instructions and click the "Open" button.
+Navigate to the directory that contains your code and data from the setup instructions and click the "Open" button. Note that in the screenshots below, this folder says "un-report" - for us, it should say "ontario-report".
 
 <img src="{{ page.root }}/fig/r-plotting/navigate_to_project.png" width="600"/>
 
@@ -142,7 +141,7 @@ Did you notice anything change?
 
 In the lower right corner of your RStudio session, you should notice that your
 Files tab is now your project directory. You'll also see a file called
-un-report.Rproj in that directory.
+ontario-report.Rproj in that directory.
 
 From now on, you should start RStudio by double clicking on that file. This will
 make sure you are in the correct directory when you run your analysis.
@@ -169,7 +168,7 @@ _[Back to top](#contents)_
 In this session we will learn how to read data into R and plot it, allowing us to explore how environmental variables affect the microbes of Lake Ontario. We'll use functions from the `tidyverse` to make working with our data easier. 
 
 > ## The tidyverse vs Base R
-> If you've used R before, you may have learned commands that are different than the ones we will be using during this workshop. We will be focusing on functions from the [tidyverse](https://www.tidyverse.org/). The "tidyverse" is a collection of R packages that have been designed to work well together and offer many convenient features that do not come with a fresh install of R (aka "base R"). These packages are very chlorophyllular and have a lot of developer support including many staff members from RStudio. These functions generally help you to write code that is easier to read and maintain. We believe learning these tools will help you become more productive more quickly.
+> If you've used R before, you may have learned commands that are different than the ones we will be using during this workshop. We will be focusing on functions from the [tidyverse](https://www.tidyverse.org/). The "tidyverse" is a collection of R packages that have been designed to work well together and offer many convenient features that do not come with a fresh install of R (aka "base R"). These packages are very popular and have a lot of developer support including many staff members from RStudio. These functions generally help you to write code that is easier to read and maintain. We believe learning these tools will help you become more productive more quickly.
 {: .callout}
 
 
@@ -231,11 +230,11 @@ sample_data <- read_csv("sample_data.csv")
 sample_data <- read_csv("../data/sample_data.csv")
 ```
 
-After you've imported your data, a table will open in a new tab in the top left corner of RStudio. This is a quick way to browse your data to make sure everything looks like it has been imported correctly. To review the data, click on the new tab.
+Look at the "Environment" tab. Here you will see a list of all the objects you've created or imported during your R session. Do you see an object called `sample_data`? Click on the small table to the right of `sample_data` to View our dataset. This is a quick way to browse your data to make sure everything looks like it has been imported correctly.
 
 We see that our data has 9 columns (variables).
 
-Each row contains a unique Sample Id ("sample_id"), the depth of the sample ("depth"), the number of microbial cells per mL ("cells_per_ml"), and environmental data like temperature ("temperature", in °C), total nitrogen ("total_nitrogen", in µg N/L), total phosphorus ("total_phosphorus", in µg P/L), dissolved organic carbon ("diss_org_carbon", in mg C/L), and Chlorophyll-a ("chlorophyll", in µg/L). 
+Each row contains a unique Sample Id ("sample_id"), the depth of the sample ("depth", in meters), the number of microbial cells per mL ("cells_per_ml"), and environmental data like temperature ("temperature", in °C), total nitrogen ("total_nitrogen", in µg N/L), total phosphorus ("total_phosphorus", in µg P/L), dissolved organic carbon ("diss_org_carbon", in mg C/L), and Chlorophyll-a ("chlorophyll", in µg/L). 
 
 The Sample ID corresponds to the month, station, and depth of the sample (E for "epilimnion", M for "mid", and B for "bottom"). Below, you can see a map of where these stations are in Lake Ontario. Stations 62 was only sampled in September, while Station 74 was only sampled in May. 
 
@@ -244,8 +243,6 @@ The Sample ID corresponds to the month, station, and depth of the sample (E for 
 We also found that the samples fell into three main groups based on their depth (shallow vs. deep) and the month in which they were collected (May or September). Deep samples were similar between months, so they are in the same group. These classifications are held in the "env_group" column.
 
 After we've reviewed the data, you'll want to make sure to click the tab in the upper left to return to your `plotting.R` file so we can return to our R script.
-
-Now look in the **Environment** tab in the upper right corner of RStudio. Here you will see a list of all the objects you've created or imported during your R session. You will now see `sample_data` listed here as well.
 
 > ## Data frames vs. tibbles
 > Functions from the "tidyverse" such as `read_csv` work with objects called "tibbles", which are a specialized kind of "data.frame." Another common way to store data is a "data.table". All of these types of data objects (tibbles, data.frames, and data.tables) can be used with the commands we will learn in this lesson to make plots. We may sometimes use these terms interchangeably.
@@ -320,7 +317,7 @@ The next part of the command is `read_csv("sample_data.csv")`. This has a few di
 read_csv()
 ```
 
-We get an error message. Don't panic! Error messages chlorophyll up all the time, and can be super helpful in debugging code.
+We get an error message. Don't panic! Error messages pop up all the time, and can be super helpful in debugging code.
 
 In this case, the message tells us "argument "file" is missing, with no default." Many functions, including `read_csv`, require additional pieces of information to do their job. We call these additional values "arguments" or "parameters." You pass **arguments** to a function by placing values in between the parenthesis. A function takes in these arguments and does a bunch of "magic" behind the scenes to output something we're interested in.
 
@@ -348,9 +345,14 @@ Do all functions need arguments? Let's test some other functions:
 
 ```{r FunctionsNoArgs}
 Sys.Date()
-getwd()
 ```
 
+```{r FunctionsNoArgs2, eval = FALSE}
+getwd()
+```
+```{r FunctionNoArgs3, echo = FALSE}
+cat("\"/Users/augustuspendleton/Desktop/ontario-report\"")
+```
 
 While some functions, like those above, don't need any arguments, in other
 functions we may want to use multiple arguments. When we're using multiple
