@@ -356,7 +356,7 @@ Just remember to use a combination of prose (writing) and code to document the g
 
 Once you're done, *add* your report to your Git repo, *commit* those changes, and *push* those changes to Github. If you feel comfortable, post a link to the repo on the Etherpad, and [change your repo's settings to **Public**](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility#changing-a-repositorys-visibility), so that others in the class can admire what you've accomplished!
 
-### Exercises using the sample_and_taxon data
+### Bonus Exercises
 _[Back to top](#contents)_
 
 [1] The very first step is to read in the sample_and_taxon dataset, so do that first! Also load the `tidyverse` package.
@@ -412,7 +412,7 @@ Interesting...these are mostly from Station 35. I wonder why these stations have
 
 > ## Solution
 > ![]({{ page.root }}/fig/r-markdown/upwelling_surface.png)
-> Here, I show surface temperatures across the lake in September. Station 35 was on the edge an upwelling event, where cold, nutrient rich water is pulled to the surface of the lake! Stn. 38, which was smack dab in the upwelling itself, was so similar to deep samples that it its env_group is is "Deep" rather than "Shallow_September".
+> Here, I show surface temperatures across the lake in September. Station 35 was on the edge an upwelling event, where cold, nutrient rich water is pulled to the surface of the lake! Stn. 38, which was smack dab in the upwelling itself, was so similar to deep samples that its env_group is "Deep" rather than "Shallow_September".
 {: .solution}
 
 If you want to investigate this phenomenon further, spend time analyzing the relative composition of Phyla in these upwelling stations compared to the rest of Shallow_September. If you want to go further, you can use the buoy_data from the Niagara and South Shore buoys to see if you can detect when this upwelling event began.
@@ -480,3 +480,14 @@ Now, our data is in the correct format for plotting with ggplot. In the end, we 
 {: .solution}
 
 If you want to investigate this dataset further, consider changing the x-axis to a continuous variable, like temperature, rather than the categorical env_group. Can you find associations between different environmental conditions and the abundance of specific taxa?
+
+### Bonus-Bonus: Let your creativity shine!
+
+If you've gotten this far, feel free to let your creativity shine. Consider:
+
+1. Make your plots beautiful and professional:
+ - Alter axis labels
+ - Use `theme` to change the font size of axis and legend text
+ - Using or creating a beautiful palette from a new package
+2. Render your report in different formats, including pdf or docx
+3. Find a partner and use Github to collaborate on a shared RMarkdown document.
