@@ -17,9 +17,9 @@ title: Setup
 
 Instructions to install each of these tools are available on the [course website.](https://marschmilab.github.io/2023-12-12-Cornell-Micro/)
 
-1. After you have installed everything above, download [ontario-report.zip](https://github.com/gus-pendleton/intro-curriculum-r/raw/1a3ec452e73f33dfaf9141c182a4085782313b9a/files/un-report.zip). You'll need the files included during the workshop.
-    1. Move `un-report.zip` to your Desktop and unzip it (usually double-clicking it will work).
-    1. Start up **RStudio**. In the upper left menu, select `File` > `Open`. In the window that opens, go to the `un-report/` folder on your Desktop and select the file `check_setup.R` to open it in RStudio.
+1. After you have installed everything above, download [ontario-report.zip](https://github.com/MarschmiLab/Cornell_Carpentries_Jan2025/raw/refs/heads/Jan2025/files/ontario-report.zip). You'll need the files included during the workshop.
+    1. Move `ontario-report.zip` to your Desktop and unzip it (usually double-clicking it will work).
+    1. Start up **RStudio**. In the upper left menu, select `File` > `Open`. In the window that opens, go to the `ontario-report/` folder on your Desktop and select the file `check_setup.R` to open it in RStudio.
     1. Click the **`Source`** button to run the script. This script will make sure that everything is installed and setup correctly. You should see output printed to the console window (usually the lower left pane in RStudio).
     1. Take a screenshot of the console output (or copy & paste it) into an email and send it to the lead instructor.
 
