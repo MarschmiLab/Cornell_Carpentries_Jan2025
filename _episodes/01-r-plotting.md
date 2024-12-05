@@ -606,7 +606,7 @@ that the quickest way to run the code is by pressing
 <kbd>Ctrl</kbd>+<kbd>Enter</kbd> on your keyboard. This will run the line of
 code that currently contains your cursor or any highlighted code.
 
-When we run this code, the **Plots** tab will chlorophyll to the front in the lower
+When we run this code, the **Plots** tab will pop to the front in the lower
 right corner of the RStudio screen. Right now, we just see a big grey rectangle.
 
 What we've done is created a ggplot object and told it we will be using the data
@@ -741,7 +741,7 @@ ggplot(data = sample_data) +
 <img src="../fig/rmd-01-FirstPlotAddTitle-1.png" width="540" style="display: block; margin: auto;" />
 
 No one can deny we've made a very handsome plot! But now looking at the data, we
-might be curious about learning more - for example, it seems like the data separates into two distinct groups. We know that there are pieces of data in the `sample_data`
+might be curious about learning more - for example, it seems like the data separates into at least two distinct groups. We know that there are pieces of data in the `sample_data`
 object that we haven't used yet. Maybe we are curious if the trend between temperature and cell abundance is consistent between our three environmental groups. One thing we
 could do is use a different color for each of these groups. To map the
 `env_group` of each point to a color, we will again use the `aes()` function:
@@ -761,7 +761,7 @@ ggplot(data = sample_data) +
 
 <img src="../fig/rmd-01-FirstPlotAddColor-1.png" width="540" style="display: block; margin: auto;" />
 
-Here we can see that Deep samples have fewer cells than Shallow waters. Notice that when we add a mapping for
+Here we can see that Deep samples have fewer cells than Shallow samples. Notice that when we add a mapping for
 color, ggplot automatically provided a legend for us. It took care of assigning
 different colors to each of our unique values of the `env_group` variable. (Note
 that when we mapped the x and y values, those drew the actual axis labels, so in
@@ -814,7 +814,7 @@ ggplot(data = sample_data) +
   aes(x = temperature) +
   labs(x = "Temperature (C)") +
   aes(y = cells_per_ml/1000000) +
-  labs(y = "Cells (million/mL)") +
+  labs(y = "Cells (millions/mL)") +
   geom_point() +
   labs(title = "Does temperature affect microbial abundance?") +
   aes(color = env_group) +
@@ -847,11 +847,11 @@ the plot in its own window.
 > >   aes(x = temperature) +
 > >   labs(x = "Temperature (C)") +
 > >   aes(y = cells_per_ml/1000000) +
-> >   labs(y = "Cells (million/mL)") +
+> >   labs(y = "Cells (millions/mL)") +
 > >   geom_point() +
 > >   labs(title = "Does temperature affect microbial abundance?") +
 > >   aes(color = env_group) +
-> >   aes(size = chlorophyll/) +
+> >   aes(size = chlorophyll) +
 > >   aes(shape = env_group) +
 > >   labs(size = "Chlorophyll (ug/L)",
 > >        color = "Environmental Group",
@@ -859,15 +859,7 @@ the plot in its own window.
 > > ~~~
 > > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in parse(text = input): <text>:9:26: unexpected ')'
-> > 8:   aes(color = env_group) +
-> > 9:   aes(size = chlorophyll/)
-> >                             ^
-> > ~~~
-> > {: .error}
+> > <img src="../fig/rmd-01-Shape-1.png" width="540" style="display: block; margin: auto;" />
 > > {: .source}
 > {: .solution}
 {: .challenge}
@@ -887,7 +879,7 @@ ggplot(data = sample_data) +
       size = chlorophyll) +
   geom_point() +
   labs(x = "Temperature (C)", 
-       y = "Cells (million/mL)",
+       y = "Cells (millions/mL)",
        title = "Does temperature affect microbial abundance?",
        size = "Chlorophyll (ug/L)",
        color = "Environmental Group")
@@ -913,17 +905,6 @@ To do so, we will read in a new dataset, called `buoy_data.csv`. This file conta
 To start, we will read in the data using `read_csv`.
 
 
-~~~
-Rows: 2945 Columns: 6
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): sensor, buoy, depth, month
-dbl (2): day_of_year, temperature
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-~~~
-{: .output}
 
 > ## Read in your own data
 >
@@ -950,9 +931,37 @@ Let's take a look at the full dataset. We could use `View()`, the way we did for
 
 ~~~
 dim(buoy_data)
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 2945    6
+~~~
+{: .output}
+
+
+
+~~~
 head(buoy_data)
 ~~~
 {: .language-r}
+
+
+
+~~~
+# A tibble: 6 × 6
+  sensor         buoy    depth  day_of_year month   temperature
+  <chr>          <chr>   <chr>        <dbl> <chr>         <dbl>
+1 Niagara_Bottom Niagara Bottom           1 January        3.81
+2 Niagara_Bottom Niagara Bottom           2 January        3.80
+3 Niagara_Bottom Niagara Bottom           3 January        3.76
+4 Niagara_Bottom Niagara Bottom           4 January        3.56
+5 Niagara_Bottom Niagara Bottom           5 January        3.18
+6 Niagara_Bottom Niagara Bottom           6 January        3.19
+~~~
+{: .output}
 
 This dataset has six variables. We have four buoy locations ("Niagara", "Toronto","South Shore", and "Point Petre"), and temperature sensors at two depths: the surface and the bottom for each location. `sensor` is a combination of these values, to create a unique idea for each temperature sensor. We also have `day_of_year`, where 1 corresponds to January 1st, and that days corresponding `month`. Finally, we have `temperature`, in degrees Celsius.
 
@@ -972,7 +981,7 @@ This dataset has six variables. We have four buoy locations ("Niagara", "Toronto
 >
 {: .challenge}
 
-Hmm, the plot we created in the last exercise isn't very clear. What's going on? Since the dataset is more complex, the plotting options we used for the smaller dataset aren't as useful for interpreting these data. Luckily, we can add additional attributes to our plots that will make patterns more apparent. For example, we can generate a different type of plot - perhaps a line plot - and assign attributes for columns where we might expect to see patterns.
+Hmm, the plot we created in the last exercise is a good start but it's hard to tell which points should be connected in this time series. What's going on? Since the dataset is more complex, the plotting options we used for the smaller dataset aren't as useful for interpreting these data. Luckily, we can add additional attributes to our plots that will make patterns more apparent. For example, we can generate a different type of plot - perhaps a line plot - and assign attributes for columns where we might expect to see patterns.
 
 Let's review the columns and the types of data stored in our dataset to decide how we should group things together. To get an overview of our data object, we can look at the structure of `buoy_data` using the `str()` function.
 
@@ -1038,9 +1047,71 @@ That's looking much better!
 > > {: .language-r}
 > > 
 > > <img src="../fig/rmd-01-gapminderMoreLines-1.png" width="540" style="display: block; margin: auto;" />
-> > (The Toronto buoy warms up much slower compared to the other three buoys/)
+> > The Toronto buoy warms up much slower compared to the other three buoys.
 > {: .solution}
 {: .challenge}
+
+## Facets
+_[Back to top](#contents)_
+
+The plot we made above does a good job of demonstrating the overall differences between surface and bottom sensors. However, it in some sections it's difficult to see trends for each buoy because the lines vary so much on top of each other. If you have a lot of different columns to try to plot or have distinguishable subgroups in your data, a powerful plotting technique called faceting might come in handy. When you facet your plot, you basically make a bunch of smaller plots and combine them together into a single image. Luckily, `ggplot` makes this very easy. Let's start with our plot from above.
+
+
+~~~
+ggplot(data = buoy_data) +
+  aes(x = day_of_year, y = temperature, group = sensor, color = depth) +
+    geom_line()
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-GapNoFacet-1.png" width="540" style="display: block; margin: auto;" />
+
+Now, let's make four separate plots, which correspond to each buoy. We can do this with `facet_wrap()`
+
+
+~~~
+ggplot(data = buoy_data) +
+  aes(x = day_of_year, y = temperature, group = sensor, color = depth) +
+  geom_line() + 
+  facet_wrap(~buoy)
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-GapFacetWrap-1.png" width="540" style="display: block; margin: auto;" />
+
+Note that `facet_wrap` requires this `~` in order to pass in the column names. You can it the `~` as "facet **by** this. We can see in this output that we get a separate box with a label for each buoy so that only the lines for the buoy are in that box. Now it is much easier to see trends in our data! We see that while surface waters are often much warmer than bottom waters, there can be sudden drops in temperature. As limnologists (people who study lakes), we call these "upwellings". Through our analyses, we can see these upwellings appear much more common near Toronto than they do near Niagara!
+
+> ## Bonus Exercise: Free axes on facetted plots
+> Often, the range of values between facets is very different; for example, Toronto's max temperature is five degrees less than the South Shore station. Perhaps we want to emphasise the trends within each group, with less concern about comparing values between facets. We can modify the range of facet axes by adding the argument `scales = ` inside our `facet_wrap` command.
+>
+> > ## Example solution
+> > 
+> > ~~~
+> > ggplot(data = buoy_data) +
+> >   aes(x = day_of_year, y = temperature, group = sensor, color = depth) +
+> >   geom_line() +
+> >   facet_wrap(~buoy, scales = "free_y")
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-01-GapLifeDens4-1.png" width="540" style="display: block; margin: auto;" />
+> {: .solution}
+{: .challenge}
+
+The other faceting function ggplot provides is `facet_grid()`. The main difference is that `facet_grid()` will make sure all of your smaller boxes share a common axis. In this example, we will stack all the boxes on top of each other into rows so that their x axes all line up.
+
+
+~~~
+ggplot(data = buoy_data) +
+  aes(x = day_of_year, y = temperature, group = sensor, color = depth) +
+  geom_line() + 
+  facet_grid(rows = vars(buoy))
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-01-GapFacetGrid-1.png" width="540" style="display: block; margin: auto;" />
+
+Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom. We also used the function `vars()` to make it clear we're referencing the column `env_group`.
 
 ## Discrete Plots
 _[Back to top](#contents)_
@@ -1295,17 +1366,17 @@ There are also lots of other fun options:
 > > 
 > > 
 > > ~~~
-> > #install.packages("wesanderson") # install package from GitHub
+> > #install.packages("wesanderson") # install package
 > > library(wesanderson)
 > > ggplot(data = sample_data) +
-> > aes(x = temperature) +
-> > labs(x = "Temperature (C)") +
-> > aes(y = cells_per_ml) +
-> > labs(y = "Cells per mL") +
-> > geom_point() +
-> > labs(title = "Does temperature affect microbial abundance?") +
-> > aes(color = env_group) +
-> > scale_color_manual(values = wes_palette('Cavalcanti1'))
+> >   aes(x = temperature) +
+> >   labs(x = "Temperature (C)") +
+> >   aes(y = cells_per_ml) +
+> >   labs(y = "Cells per mL") +
+> >   geom_point() +
+> >   labs(title = "Does temperature affect microbial abundance?") +
+> >   aes(color = env_group) +
+> >   scale_color_manual(values = wes_palette('Cavalcanti1'))
 > > ~~~
 > > {: .language-r}
 > > 
@@ -1350,7 +1421,7 @@ There are also lots of other fun options:
 ## Univariate Plots
 _[Back to top](#contents)_
 
-We jumped right into making plots with multiple columns. But what if we wanted to take a look at just one column? In that case, we only need to specify a mapping for `x` and choose an appropriate geom. Let's start with a [histogram](https://www.thoughtco.com/what-is-a-histogram-3126359) to see the range and spread of the cell abundance values
+We jumped right into making plots using multiple variables. But what if we wanted to take a look at just one column? In that case, we only need to specify a mapping for `x` and choose an appropriate geom. Let's start with a [histogram](https://www.thoughtco.com/what-is-a-histogram-3126359) to see the range and spread of the cell abundance values
 
 
 ~~~
@@ -1375,7 +1446,7 @@ You should not only see the plot in the plot window, but also a message telling 
 ~~~
 ggplot(sample_data) +
   aes(x = cells_per_ml) +
-  geom_histogram(bins=20)
+  geom_histogram(bins=10)
 ~~~
 {: .language-r}
 
@@ -1451,87 +1522,6 @@ Try out a few other themes, to see which you like: `theme_bw()`, `theme_linedraw
 > {: .solution}
 {: .challenge}
 
-## Facets
-_[Back to top](#contents)_
-
-If you have a lot of different columns to try to plot or have distinguishable subgroups in your data, a powerful plotting technique called faceting might come in handy. When you facet your plot, you basically make a bunch of smaller plots and combine them together into a single image. Luckily, `ggplot` makes this very easy. Let's start with a simplified version of our first plot
-
-
-~~~
-ggplot(sample_data) +
-  aes(x = temperature, y = cells_per_ml) +
-  geom_point()
-~~~
-{: .language-r}
-
-<img src="../fig/rmd-01-GapNoFacet-1.png" width="540" style="display: block; margin: auto;" />
-
-The first time we made this plot, we colored the points differently for each of the env_groups. This time let's actually draw a separate box for each env_group. We can do this with `facet_wrap()`
-
-
-~~~
-ggplot(sample_data) +
-  aes(x = temperature, y = cells_per_ml) +
-  geom_point() +
-  facet_wrap(~env_group)
-~~~
-{: .language-r}
-
-<img src="../fig/rmd-01-GapFacetWrap-1.png" width="540" style="display: block; margin: auto;" />
-Note that `facet_wrap` requires this `~` in order to pass in the column names. You can it the `~` as "facet **by** this. We can see in this output that we get a separate box with a label for each env_group so that only the points for that env_group are in that box.
-
-> ## Bonus Exercise: Free axes on facetted plots
-> Often, the range of values between facets is very different; for example, Deep samples have fewer cells and lower temperatures. Perhaps we want to emphasise the trends within each group, with less concern about comparing values between facets. We can modify the range of facet axes by adding the argument `scales = ` inside our `facet_wrap` command. Experiment with supplying three unique values to this argument: "free", "free_x" and "free_y"
->
-> > ## Example solution
-> > 
-> > ~~~
-> > ggplot(sample_data) +
-> >   aes(x = temperature, y = cells_per_ml) +
-> >   geom_point() +
-> >   facet_wrap(~env_group, scales = "free")
-> > ~~~
-> > {: .language-r}
-> > 
-> > <img src="../fig/rmd-01-GapLifeDens4-1.png" width="540" style="display: block; margin: auto;" />
-> > 
-> > ~~~
-> > ggplot(sample_data) +
-> >   aes(x = temperature, y = cells_per_ml) +
-> >   geom_point() +
-> >   facet_wrap(~env_group, scales = "free_x")
-> > ~~~
-> > {: .language-r}
-> > 
-> > <img src="../fig/rmd-01-GapLifeDens4-2.png" width="540" style="display: block; margin: auto;" />
-> > 
-> > ~~~
-> > ggplot(sample_data) +
-> >   aes(x = temperature, y = cells_per_ml) +
-> >   geom_point() +
-> >   facet_wrap(~env_group, scales = "free_y")
-> > ~~~
-> > {: .language-r}
-> > 
-> > <img src="../fig/rmd-01-GapLifeDens4-3.png" width="540" style="display: block; margin: auto;" />
-> {: .solution}
-{: .challenge}
-
-The other faceting function ggplot provides is `facet_grid()`. The main difference is that `facet_grid()` will make sure all of your smaller boxes share a common axis. In this example, we will stack all the boxes on top of each other into rows so that their x axes all line up.
-
-
-~~~
-ggplot(sample_data) +
-  aes(x = temperature, y = cells_per_ml) +
-  geom_point() +
-  facet_grid(rows = vars(env_group))
-~~~
-{: .language-r}
-
-<img src="../fig/rmd-01-GapFacetGrid-1.png" width="540" style="display: block; margin: auto;" />
-
-Unlike the `facet_wrap` output where each box got its own x and y axis, with `facet_grid()`, there is only one x axis along the bottom. We also used the function `vars()` to make it clear we're referencing the column `env_group`.
-
 ## Saving plots
 _[Back to top](#contents)_
 
@@ -1592,7 +1582,7 @@ box_plot
 
 <img src="../fig/rmd-01-outputViolinPlot-1.png" width="540" style="display: block; margin: auto;" />
 
-We can also add changes to the plot. Let's say we want our violin plot to have the black-and-white theme:
+We can also add changes to the plot. Let's say we want our boxplot to have the black-and-white theme:
 
 
 ~~~
@@ -1602,7 +1592,7 @@ box_plot + theme_bw()
 
 <img src="../fig/rmd-01-violinPlotBWTheme-1.png" width="540" style="display: block; margin: auto;" />
 
-Watch out! Adding the theme does not change the `violin_plot` object! If we want to change the object, we need to store our changes:
+Watch out! Adding the theme does not change the `box_plot` object! If we want to change the object, we need to store our changes:
 
 
 ~~~
