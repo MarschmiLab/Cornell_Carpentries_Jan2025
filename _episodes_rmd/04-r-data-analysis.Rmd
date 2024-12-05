@@ -26,8 +26,8 @@ editor_options:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
-options(pillar.width = 50,
-        width = 50)
+options(pillar.width = 120,
+        width = 120)
 ```
 
 ### Contents
