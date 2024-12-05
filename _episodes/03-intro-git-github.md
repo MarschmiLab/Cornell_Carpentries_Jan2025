@@ -138,7 +138,7 @@ which means that any changes pushed to
 another Git host server
 in a later lesson will include this information.
 
-For these lessons, we will be interacting with [GitHub](https://github.com/) and so the email address used should be the same as the one used when setting up your GitHub account. If you are concerned about privacy, please review [GitHub's instructions for keeping your email address private][git-privacy].
+For these lessons, we will be interacting with [GitHub](https://github.com/) and so the email address used should be the same as the one used when setting up your GitHub account.
 
 > ## GitHub, GitLab, & BitBucket
 >
@@ -194,15 +194,14 @@ $ git config --global init.defaultBranch main
 ```
 {: .language-bash}
 
-When Git requires our input, it will automatically open up a text editor for us to enter messages and fix conflicts. We learned about one text editor - nano - in our Unix lesson. By default, Git uses a different text editor called vim. Vim can be challenging for new (and experienced!) users to navigate, so we should change our default editor to one with which we're already familiar.
+When Git requires our input, it will automatically open up a text editor for us to enter messages and fix conflicts. We learned about one text editor - nano - in our Unix lesson. By default, Git uses a different text editor called Vim. Vim can be challenging for new (and experienced!) users to navigate, so we should change our default editor to one with which we're already familiar.
 
 ```
 $ git config --global core.editor "nano -w"
 ```
 {: .language-bash}
 
-If you have a different preferred text editor, it is possible to reconfigure the text editor for Git to other editors whenever you want to change it.
-Vim is the default editor. If you did not change your editor and are stuck in Vim, the following instructions will help you exit.
+If you have a different preferred text editor, it is possible to reconfigure the text editor for Git to other editors whenever you want to change it. If you did not change your editor and are stuck in Vim, the following instructions will help you exit.
 
 > ## Exiting Vim
 >
@@ -276,15 +275,6 @@ $ pwd
 $ /home/USERNAME/Desktop/ontario-report
 ```
 {: .output}
-
-> To get back to your `ontario-report` directory you can use the following command:
->
-> Mac/git-bash:
-> ```
-> cd ~/Desktop/ontario-report
-> ```
-> {: .language-bash}
-{: .callout}
 
 What is currently in our directory?
 
@@ -496,7 +486,7 @@ We plotted temperature and cell abundance.
 {: .output}
 
 If we check the status of our project again,
-Git tells us that it's noticed the new file:
+Git tells us that it's noticed the new file, alongside directories containing our other files:
 
 ```
 $ git status
@@ -512,6 +502,9 @@ Untracked files:
    (use "git add <file>..." to include in what will be committed)
 
 	notes.txt
+	code/
+	data/
+	figures/
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
@@ -542,6 +535,13 @@ Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
 	new file:   notes.txt
+	
+Untracked files:
+   (use "git add <file>..." to include in what will be committed)
+
+	code/
+	data/
+	figures/
 
 ```
 {: .output}
@@ -588,7 +588,13 @@ $ git status
 
 ```
 On branch main
-nothing to commit, working directory clean
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	code/
+	data/
+	figures/
+
+nothing added to commit but untracked files present (use "git add" to track)
 ```
 {: .output}
 
@@ -656,9 +662,14 @@ $ git status
 On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
+  (use "git restore <file>..." to discard changes in working directory)
 	modified:   notes.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	code/
+	data/
+	figures/
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -719,9 +730,14 @@ $ git status
 On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
+  (use "git restore <file>..." to discard changes in working directory)
 	modified:   notes.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	code/
+	data/
+	figures/
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -880,7 +896,14 @@ $ git status
 
 ```
 On branch main
-nothing to commit, working directory clean
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	code/
+	data/
+	figures/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
 ```
 {: .output}
 
@@ -1053,7 +1076,7 @@ repository (`git commit`):
 > last commit made to `notes.txt`?
 >
 > 1. "Changes"
-> 2. "Added line 'Continents are grouped by color.' to notes.txt"
+> 2. "Added line 'Environmental groups are denoted by color.' to notes.txt"
 > 3. "Describe grouping"
 >
 > > ## Solution
@@ -1241,8 +1264,7 @@ Name your repository `ontario-report` and then click `Create Repository`.
 > explanation of why the repository needs to be empty.
 {: .checklist}
 
-In the screenshots below, the Owner is 'mkuzak' and the Repository name is 'planets'.
-You should instead see your own username for the Owner and you should name the
+You should see your own username for the Owner and you should name the
 repository `ontario-report`.
 
 ![Creating a Repository on GitHub (Step 2)]({{ page.root }}/fig/git/github-create-repo-02.png)
@@ -1354,7 +1376,7 @@ ssh-keygen -t rsa -b 4096 -C "your.email@address"
 
 ```
 Generating public/private ed25519 key pair.
-Enter file in which to save the key (/c/Users/Alfredo/.ssh/id_ed25519):
+Enter file in which to save the key (/c/Users/USERNAME/.ssh/id_ed25519):
 ```
 {: .output}
 
@@ -1625,7 +1647,7 @@ $ git clone git@github.com:USERNAME/ontario-report.git ~/Desktop/USERNAME-ontari
 ```
 {: .language-bash}
 
-Replace `USERNAME` with the Owner's username.
+Replace `USERNAME` with the Owner's username. Remember that if you have a more complicated path to your Desktop (like OneDrive), you'll need to change this file path.
 
 The Collaborator can now make a change in their clone of the Owner's repository,
 exactly the same way as we've been doing before:
