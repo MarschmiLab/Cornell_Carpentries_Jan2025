@@ -23,6 +23,10 @@ keypoints:
 
 
 
+~~~
+Warning: package 'lubridate' was built under R version 4.3.3
+~~~
+{: .warning}
 
 ### Contents
 1. [What is R Markdown and why use it?](#why-use-r-markdown)
@@ -437,7 +441,7 @@ _[Back to top](#contents)_
 > 
 > ~~~
 > Rows: 71 Columns: 15
-> ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr  (2): sample_id, env_group
 > dbl (13): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus...
