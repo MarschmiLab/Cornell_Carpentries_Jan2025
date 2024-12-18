@@ -441,7 +441,7 @@ _[Back to top](#contents)_
 > 
 > ~~~
 > Rows: 71 Columns: 15
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr  (2): sample_id, env_group
 > dbl (13): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus...
