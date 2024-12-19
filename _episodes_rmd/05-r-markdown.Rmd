@@ -23,7 +23,7 @@ source("../bin/chunk-options.R")
 knitr_fig_path("05-")
 ```
 
-```{r deps, echo=FALSE, message=FALSE}
+```{r deps, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 set.seed(0314)
 sample_and_taxon <- read_csv("data/sample_and_taxon.csv")
