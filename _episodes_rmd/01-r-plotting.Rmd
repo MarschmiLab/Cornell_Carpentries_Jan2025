@@ -230,6 +230,13 @@ sample_data <- read_csv("sample_data.csv")
 sample_data <- read_csv("../data/sample_data.csv")
 ```
 
+> ## `read_csv` vs. `read.csv`
+>
+> When you began typing the `read_csv` command, a very similarly named function, `read.csv`, may have popped up. These commands both do the same thing - they read in data from .csv files. The `read.csv` function is from "base" R (the packages and code that is automatically loaded), while `read_csv` is from the `readr` package in the tidyverse. They are very similar and are often interchangeable. The way they print data tables in the console is different, though, as is how they handle messier data tables. In later lessons, these functions **won't** be interchangeable for us. So to keep us consistent, please confirm that you are using `read_csv`.
+>
+{: .callout}
+
+
 Look at the "Environment" tab. Here you will see a list of all the objects you've created or imported during your R session. Do you see an object called `sample_data`? Click on the small table to the right of `sample_data` to View our dataset. This is a quick way to browse your data to make sure everything looks like it has been imported correctly.
 
 We see that our data has 9 columns (variables).

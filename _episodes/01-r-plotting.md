@@ -184,13 +184,13 @@ Warning: package 'lubridate' was built under R version 4.3.3
 
 
 ~~~
-── Attaching core tidyverse packages ───────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
-── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -250,7 +250,7 @@ sample_data <- read_csv("sample_data.csv")
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
 dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -259,6 +259,13 @@ dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, dis
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ~~~
 {: .output}
+
+> ## `read_csv` vs. `read.csv`
+>
+> When you began typing the `read_csv` command, a very similarly named function, `read.csv`, may have popped up. These commands both do the same thing - they read in data from .csv files. The `read.csv` function is from "base" R (the packages and code that is automatically loaded), while `read_csv` is from the `readr` package in the tidyverse. They are very similar and are often interchangeable. The way they print data tables in the console is different, though, as is how they handle messier data tables. In later lessons, these functions **won't** be interchangeable for us. So to keep us consistent, please confirm that you are using `read_csv`.
+>
+{: .callout}
+
 
 Look at the "Environment" tab. Here you will see a list of all the objects you've created or imported during your R session. Do you see an object called `sample_data`? Click on the small table to the right of `sample_data` to View our dataset. This is a quick way to browse your data to make sure everything looks like it has been imported correctly.
 
@@ -393,7 +400,7 @@ Sys.Date()
 
 
 ~~~
-[1] "2024-12-18"
+[1] "2025-01-07"
 ~~~
 {: .output}
 
@@ -453,7 +460,7 @@ read_csv(file = 'sample_data.csv')
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
 dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -518,7 +525,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > 
 > ~~~
-> [1] "2024-12-18"
+> [1] "2025-01-07"
 > ~~~
 > {: .output}
 > 
@@ -557,7 +564,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > ~~~
 > Rows: 71 Columns: 9
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (2): sample_id, env_group
 > dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
