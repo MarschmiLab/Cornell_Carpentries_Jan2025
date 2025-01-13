@@ -41,7 +41,7 @@ sample_and_taxon <- read_csv("data/sample_and_taxon.csv")
 1. [Formatting](#formatting)
 1. [Integrating it all together: Paired exercise](#integrating-it-all-together-paired-exercise)
 
-Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario
+Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario.
 
 > ## Discussion
 > How do you usually share data analyses with your collaborators? Add your usual workflow to the Etherpad.
@@ -156,7 +156,7 @@ _[Back to top](#contents)_
 Let's return to the new R Markdown file you created and delete everything below the setup code chunk. (That stuff is just examples and reminders of how to use R Markdown.)
 
 Next, let's save our R markdown file to the `reports` directory.
-You can do this by clicking the save icon in the top left or using <kbd>control</kbd> + <kbd>s</kbd> (<kbd>command</kbd> + <kbd>s</kbd>  on a Mac).
+You can do this by clicking the save icon in the top left or using <kbd>control</kbd> + <kbd>s</kbd> (<kbd>command</kbd> + <kbd>s</kbd>  on a Mac). Make sure to end the file with a ".Rmd" file extension.
 
 There's one other thing that we need to do before we get started with our report.
 To render our documents into html format, we can "knit" them in R Studio.
@@ -229,7 +229,7 @@ When we knit this again, our plot is back!
 
 Before we finalize our report, let's look at a few other cool features. Sometimes, you want to describe your data or results (like our plot) to the audience in text but the data and results may still change as you work things out. R Markdown offers an easy way to do this dynamically, so that the text updates as your data or results change. Here is how to do this.
 
-First, let's create a code chunk that summarizes features of our data that we can use to describe our plot to  our audience. Note that we set `include=FALSE` because we only want this step to happen in the background. For our purposes, we will calculate how many countries were included in the analysis, as well as the minimum and maximum GDP per capita values:
+First, let's create a code chunk that summarizes features of our data that we can use to describe our plot to  our audience. Note that we set `include=FALSE` because we only want this step to happen in the background. For our purposes, we will calculate how many samples were included in the analysis, as well as the minimum and maximum temperature values:
 
 ```{r,comment=NA,echo=F,collapse=T}
 cat('```{r data_summary, include=FALSE}\nnSamples <- sample_and_taxon %>%
@@ -274,14 +274,14 @@ When we knit the report again, the code above will render like this:
 Here's the text that we need to include to create a summary table of our data:
 
 ```{r, echo = FALSE}
-cat('```
+cat('
 |Summary of Data|
 |------|------|
 |Number of Samples|`r nSamples`|
 |Minimum Temperature|`r minTemp`|
 |Maximum Temperature|`r maxTemp`|
 
-```')
+')
 ```
 
 
@@ -299,7 +299,7 @@ library(knitr)
 sample_and_taxon %>%
   filter(env_group == "Deep") %>%
   select(sample_id, env_group, cells_per_ml, temperature) %>%
-  kable()
+  kable("html")
 ```
 
 ## Formatting
@@ -335,7 +335,7 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 
 > ## Using the "Visual" view for easy formatting
 > 
-> In newer versions of RStudio, we can switch to the "Visual" view when editing our documents. This makes the experience much more similar to writing in software like Microsoft Word or Google Docs. We can use formatting tools (like bolding and italicizing), insert pictures, and create tables without manually typing out the markdown syntax. The best part? If you then switch back to the "Source" view, you can see the markdown syntax RStudio has automatically created for you
+> In newer versions of RStudio, we can switch to the "Visual" view when editing our documents. This makes the experience much more similar to writing in software like Microsoft Word or Google Docs. We can use formatting tools (like bolding and italicizing), insert pictures, and create tables without manually typing out the markdown syntax. The best part? If you then switch back to the "Source" view, you can see the markdown syntax RStudio has automatically created for you.
 {: .callout}
 
 ## Integrating it all together: Make your own report!

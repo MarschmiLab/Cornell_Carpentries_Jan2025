@@ -36,7 +36,7 @@ keypoints:
 1. [Formatting](#formatting)
 1. [Integrating it all together: Paired exercise](#integrating-it-all-together-paired-exercise)
 
-Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario
+Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario.
 
 > ## Discussion
 > How do you usually share data analyses with your collaborators? Add your usual workflow to the Etherpad.
@@ -159,7 +159,7 @@ _[Back to top](#contents)_
 Let's return to the new R Markdown file you created and delete everything below the setup code chunk. (That stuff is just examples and reminders of how to use R Markdown.)
 
 Next, let's save our R markdown file to the `reports` directory.
-You can do this by clicking the save icon in the top left or using <kbd>control</kbd> + <kbd>s</kbd> (<kbd>command</kbd> + <kbd>s</kbd>  on a Mac).
+You can do this by clicking the save icon in the top left or using <kbd>control</kbd> + <kbd>s</kbd> (<kbd>command</kbd> + <kbd>s</kbd>  on a Mac). Make sure to end the file with a ".Rmd" file extension.
 
 There's one other thing that we need to do before we get started with our report.
 To render our documents into html format, we can "knit" them in R Studio.
@@ -252,7 +252,7 @@ When we knit this again, our plot is back!
 
 Before we finalize our report, let's look at a few other cool features. Sometimes, you want to describe your data or results (like our plot) to the audience in text but the data and results may still change as you work things out. R Markdown offers an easy way to do this dynamically, so that the text updates as your data or results change. Here is how to do this.
 
-First, let's create a code chunk that summarizes features of our data that we can use to describe our plot to  our audience. Note that we set `include=FALSE` because we only want this step to happen in the background. For our purposes, we will calculate how many countries were included in the analysis, as well as the minimum and maximum GDP per capita values:
+First, let's create a code chunk that summarizes features of our data that we can use to describe our plot to  our audience. Note that we set `include=FALSE` because we only want this step to happen in the background. For our purposes, we will calculate how many samples were included in the analysis, as well as the minimum and maximum temperature values:
 
 
 ~~~
@@ -302,14 +302,12 @@ Here's the text that we need to include to create a summary table of our data:
 
 
 ~~~
-```
+
 |Summary of Data|
 |------|------|
 |Number of Samples|`r nSamples`|
 |Minimum Temperature|`r minTemp`|
 |Maximum Temperature|`r maxTemp`|
-
-```
 ~~~
 {: .output}
 
@@ -329,38 +327,151 @@ library(knitr)
 sample_and_taxon %>%
   filter(env_group == "Deep") %>%
   select(sample_id, env_group, cells_per_ml, temperature) %>%
-  kable()
+  kable("html")
 ~~~
 {: .language-r}
 
 
 
 ~~~
-
-
-|sample_id       |env_group | cells_per_ml| temperature|
-|:---------------|:---------|------------:|-----------:|
-|May_12_B        |Deep      |      2058864|     4.07380|
-|May_29_B        |Deep      |      2153086|     4.66955|
-|May_33_B        |Deep      |      2293177|     3.87050|
-|May_41_B        |Deep      |      2422141|     3.76370|
-|May_55_B        |Deep      |      1847686|     3.66830|
-|May_64_B        |Deep      |      1631065|     3.67740|
-|May_74_B        |Deep      |      2270042|     4.86530|
-|September_12_B  |Deep      |      1703592|     4.19650|
-|September_12_M  |Deep      |      2304545|     4.75550|
-|September_33_B  |Deep      |      1246414|     3.97670|
-|September_33_M  |Deep      |      1793411|     4.16960|
-|September_38_B  |Deep      |      1783244|     5.26790|
-|September_38_E  |Deep      |      1989859|     6.83795|
-|September_41_B  |Deep      |      1394350|     3.83100|
-|September_41_M  |Deep      |      2067910|     3.93275|
-|September_55_B  |Deep      |      1594241|     3.77870|
-|September_55_M  |Deep      |      2008431|     3.92295|
-|September_64_B  |Deep      |      1459993|     3.76020|
-|September_64_M  |Deep      |      1852089|     3.98550|
-|September_717_B |Deep      |      1575429|     4.02260|
-|September_717_M |Deep      |      2024282|     4.85345|
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sample_id </th>
+   <th style="text-align:left;"> env_group </th>
+   <th style="text-align:right;"> cells_per_ml </th>
+   <th style="text-align:right;"> temperature </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> May_12_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2058864 </td>
+   <td style="text-align:right;"> 4.07380 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_29_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2153086 </td>
+   <td style="text-align:right;"> 4.66955 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_33_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2293177 </td>
+   <td style="text-align:right;"> 3.87050 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_41_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2422141 </td>
+   <td style="text-align:right;"> 3.76370 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_55_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1847686 </td>
+   <td style="text-align:right;"> 3.66830 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_64_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1631065 </td>
+   <td style="text-align:right;"> 3.67740 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_74_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2270042 </td>
+   <td style="text-align:right;"> 4.86530 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_12_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1703592 </td>
+   <td style="text-align:right;"> 4.19650 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_12_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2304545 </td>
+   <td style="text-align:right;"> 4.75550 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_33_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1246414 </td>
+   <td style="text-align:right;"> 3.97670 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_33_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1793411 </td>
+   <td style="text-align:right;"> 4.16960 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_38_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1783244 </td>
+   <td style="text-align:right;"> 5.26790 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_38_E </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1989859 </td>
+   <td style="text-align:right;"> 6.83795 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_41_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1394350 </td>
+   <td style="text-align:right;"> 3.83100 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_41_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2067910 </td>
+   <td style="text-align:right;"> 3.93275 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_55_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1594241 </td>
+   <td style="text-align:right;"> 3.77870 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_55_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2008431 </td>
+   <td style="text-align:right;"> 3.92295 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_64_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1459993 </td>
+   <td style="text-align:right;"> 3.76020 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_64_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1852089 </td>
+   <td style="text-align:right;"> 3.98550 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_717_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1575429 </td>
+   <td style="text-align:right;"> 4.02260 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_717_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2024282 </td>
+   <td style="text-align:right;"> 4.85345 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ~~~
@@ -399,7 +510,7 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 
 > ## Using the "Visual" view for easy formatting
 > 
-> In newer versions of RStudio, we can switch to the "Visual" view when editing our documents. This makes the experience much more similar to writing in software like Microsoft Word or Google Docs. We can use formatting tools (like bolding and italicizing), insert pictures, and create tables without manually typing out the markdown syntax. The best part? If you then switch back to the "Source" view, you can see the markdown syntax RStudio has automatically created for you
+> In newer versions of RStudio, we can switch to the "Visual" view when editing our documents. This makes the experience much more similar to writing in software like Microsoft Word or Google Docs. We can use formatting tools (like bolding and italicizing), insert pictures, and create tables without manually typing out the markdown syntax. The best part? If you then switch back to the "Source" view, you can see the markdown syntax RStudio has automatically created for you.
 {: .callout}
 
 ## Integrating it all together: Make your own report!
@@ -437,7 +548,7 @@ _[Back to top](#contents)_
 > 
 > ~~~
 > Rows: 71 Columns: 15
-> ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr  (2): sample_id, env_group
 > dbl (13): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus...
