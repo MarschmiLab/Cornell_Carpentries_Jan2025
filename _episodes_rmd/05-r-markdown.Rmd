@@ -1,21 +1,22 @@
 ---
-source: Rmd
 title: "Writing Reports with R Markdown"
+source: Rmd
 teaching: 105
 exercises: 30
 questions:
-- "How can I make reproducible reports using R Markdown?"
-- "How do I format text using Markdown?"
+- How can I make reproducible reports using R Markdown?
+- How do I format text using Markdown?
 objectives:
-- "To create a report in R Markdown that combines text, code, and figures."
-- "To use Markdown to format our report."
-- "To understand how to use R code chunks to include or hide code, figures, and messages."
-- "To be aware of the various report formats that can be rendered using R Markdown."
-- "To practice using the Unix Shell, and R through paired programming exercises. "
+- To create a report in R Markdown that combines text, code, and figures.
+- To use Markdown to format our report.
+- To understand how to use R code chunks to include or hide code, figures, and messages.
+- To be aware of the various report formats that can be rendered using R Markdown.
+- 'To practice using the Unix Shell, and R through paired programming exercises. '
 keypoints:
-  - "R Markdown is an easy way to create a report that integrates text, code, and figures."
-  - "Options such as `include` and `echo` determine what parts of an R code chunk are included in the R Markdown report. "
-  - "R Markdown can render HTML, PDF, and Microsoft Word outputs."
+- R Markdown is an easy way to create a report that integrates text, code, and figures.
+- 'Options such as `include` and `echo` determine what parts of an R code chunk are
+  included in the R Markdown report. '
+- R Markdown can render HTML, PDF, and Microsoft Word outputs.
 ---
 
 ```{r, include=FALSE}
@@ -291,7 +292,7 @@ This will render like this:
 
 This is useful if we are reporting a few values, but can get tedious for larger tables. Another way we can add tables to our reports is using an R function called `kable()`. Since this is an R function, we will use it within a code chunk. We can give the `kable()` function a data table and it will format it to a nice looking table in the report. For example, we could use the following code to generate a table of all the Deep samples. The rendered version should look almost exactly as it does on this webpage. 
 
-```{r,comment=NA, collapse=T}
+```{r, eval=FALSE, comment=NA, collapse=T}
 # load library
 library(knitr)
 
@@ -299,8 +300,148 @@ library(knitr)
 sample_and_taxon %>%
   filter(env_group == "Deep") %>%
   select(sample_id, env_group, cells_per_ml, temperature) %>%
-  kable("html")
+  kable()
 ```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sample_id </th>
+   <th style="text-align:left;"> env_group </th>
+   <th style="text-align:right;"> cells_per_ml </th>
+   <th style="text-align:right;"> temperature </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> May_12_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2058864 </td>
+   <td style="text-align:right;"> 4.07380 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_29_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2153086 </td>
+   <td style="text-align:right;"> 4.66955 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_33_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2293177 </td>
+   <td style="text-align:right;"> 3.87050 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_41_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2422141 </td>
+   <td style="text-align:right;"> 3.76370 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_55_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1847686 </td>
+   <td style="text-align:right;"> 3.66830 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_64_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1631065 </td>
+   <td style="text-align:right;"> 3.67740 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> May_74_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2270042 </td>
+   <td style="text-align:right;"> 4.86530 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_12_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1703592 </td>
+   <td style="text-align:right;"> 4.19650 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_12_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2304545 </td>
+   <td style="text-align:right;"> 4.75550 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_33_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1246414 </td>
+   <td style="text-align:right;"> 3.97670 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_33_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1793411 </td>
+   <td style="text-align:right;"> 4.16960 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_38_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1783244 </td>
+   <td style="text-align:right;"> 5.26790 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_38_E </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1989859 </td>
+   <td style="text-align:right;"> 6.83795 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_41_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1394350 </td>
+   <td style="text-align:right;"> 3.83100 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_41_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2067910 </td>
+   <td style="text-align:right;"> 3.93275 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_55_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1594241 </td>
+   <td style="text-align:right;"> 3.77870 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_55_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2008431 </td>
+   <td style="text-align:right;"> 3.92295 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_64_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1459993 </td>
+   <td style="text-align:right;"> 3.76020 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_64_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1852089 </td>
+   <td style="text-align:right;"> 3.98550 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_717_B </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 1575429 </td>
+   <td style="text-align:right;"> 4.02260 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> September_717_M </td>
+   <td style="text-align:left;"> Deep </td>
+   <td style="text-align:right;"> 2024282 </td>
+   <td style="text-align:right;"> 4.85345 </td>
+  </tr>
+</tbody>
+</table>
+
 
 ## Formatting
 _[Back to top](#contents)_
