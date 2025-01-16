@@ -1460,7 +1460,7 @@ Good! This output confirms that the SSH key works as intended (do not worry abou
 Now that we've set up the remote server information and have generated an ssh key, we are ready to send our data to GitHub. This command will push the changes from our local repository to the repository on GitHub:
 
 ```
-$ git push origin main
+$ git push -u origin main
 ```
 {: .language-bash}
 
