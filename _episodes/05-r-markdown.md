@@ -279,7 +279,7 @@ plot. To do this, we enclose each value in one set of backticks
 indicates that it's a chunk of R code. When we knit our report, R will
 automatically fill in the values we just created in the above code chunk. Note
 that R will automatically update these values every time our data might change
-(if we were to decide to drop or add countries to this  analysis, for example).
+(if we were to decide to drop or add samples to this  analysis, for example).
 
 ```
 The above plot shows the relationship between cell abundance and temperature for a total of `r nSamples ` samples. For this set of samples, temperature ranged from a minimum of `r minTemp`°C
@@ -543,7 +543,7 @@ _[Back to top](#contents)_
 > 
 > ~~~
 > Rows: 71 Columns: 15
-> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr  (2): sample_id, env_group
 > dbl (13): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus...

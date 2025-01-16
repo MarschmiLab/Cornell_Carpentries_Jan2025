@@ -85,13 +85,13 @@ Warning: package 'lubridate' was built under R version 4.3.3
 
 
 ~~~
-── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
-── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -114,7 +114,7 @@ sample_data <- read_csv("data/sample_data.csv")
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
 dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -720,7 +720,7 @@ Warning: One or more parsing issues, call `problems()` on your data frame for de
 
 ~~~
 Rows: 73 Columns: 10
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (10): Taxon Abundance from Lake Ontario, ...2, ...3, ...4, ...5, ...6, ...7, ...8, ...9, ...10
 
@@ -785,7 +785,7 @@ Warning: One or more parsing issues, call `problems()` on your data frame for de
 
 ~~~
 Rows: 71 Columns: 10
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, ...9
 dbl (7): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Lot_Number
@@ -854,7 +854,7 @@ Warning: One or more parsing issues, call `problems()` on your data frame for de
 
 ~~~
 Rows: 71 Columns: 10
-── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, ...9
 dbl (7): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Lot_Number
@@ -921,7 +921,7 @@ head(taxon_dirty, 6)
 > 
 > ~~~
 > Rows: 71 Columns: 10
-> ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (2): sample_id, ...9
 > dbl (7): Proteobacteria, Actinobacteriota, Bacteroidota, Chloroflexi, Verrucomicrobiota, Cyanobacteria, Lot_Number

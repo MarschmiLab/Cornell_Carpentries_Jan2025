@@ -184,13 +184,13 @@ Warning: package 'lubridate' was built under R version 4.3.3
 
 
 ~~~
-── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
-── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
@@ -250,7 +250,7 @@ sample_data <- read_csv("sample_data.csv")
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
 dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -400,7 +400,7 @@ Sys.Date()
 
 
 ~~~
-[1] "2025-01-07"
+[1] "2025-01-16"
 ~~~
 {: .output}
 
@@ -460,7 +460,7 @@ read_csv(file = 'sample_data.csv')
 
 ~~~
 Rows: 71 Columns: 9
-── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
 chr (2): sample_id, env_group
 dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -525,7 +525,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > 
 > ~~~
-> [1] "2025-01-07"
+> [1] "2025-01-16"
 > ~~~
 > {: .output}
 > 
@@ -564,7 +564,7 @@ Sometimes it is helpful - or even necessary - to include the argument name, but 
 > 
 > ~~~
 > Rows: 71 Columns: 9
-> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
 > Delimiter: ","
 > chr (2): sample_id, env_group
 > dbl (7): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus, diss_org_carbon, chlorophyll
@@ -1095,7 +1095,7 @@ ggplot(data = buoy_data) +
 
 Note that `facet_wrap` requires this `~` in order to pass in the column names. You can interpret the `~` as "facet **by** this. We can see in this output that we get a separate box with a label for each buoy so that only the lines for the buoy are in that box. Now it is much easier to see trends in our data! We see that while surface waters are often much warmer than bottom waters, there can be sudden drops in temperature. As limnologists (people who study lakes), we call these "upwellings". Through our analyses, we can see these upwellings are more common near Toronto than near Niagara!
 
-> ## Bonus Exercise: Free axes on facetted plots
+> ## Bonus Exercise: Free axes on faceted plots
 > Often, the range of values between facets is very different; for example, Toronto's max temperature is five degrees less than the South Shore station. Perhaps we want to emphasise the trends within each group, with less concern about comparing values between facets. We can modify the range of facet axes by adding the argument `scales = ` inside our `facet_wrap` command.
 >
 > > ## Example solution

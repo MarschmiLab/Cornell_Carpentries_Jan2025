@@ -827,7 +827,7 @@ ggplot(data = buoy_data) +
 
 Note that `facet_wrap` requires this `~` in order to pass in the column names. You can interpret the `~` as "facet **by** this. We can see in this output that we get a separate box with a label for each buoy so that only the lines for the buoy are in that box. Now it is much easier to see trends in our data! We see that while surface waters are often much warmer than bottom waters, there can be sudden drops in temperature. As limnologists (people who study lakes), we call these "upwellings". Through our analyses, we can see these upwellings are more common near Toronto than near Niagara!
 
-> ## Bonus Exercise: Free axes on facetted plots
+> ## Bonus Exercise: Free axes on faceted plots
 > Often, the range of values between facets is very different; for example, Toronto's max temperature is five degrees less than the South Shore station. Perhaps we want to emphasise the trends within each group, with less concern about comparing values between facets. We can modify the range of facet axes by adding the argument `scales = ` inside our `facet_wrap` command.
 >
 > > ## Example solution
