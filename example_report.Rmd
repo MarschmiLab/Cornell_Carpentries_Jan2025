@@ -2,8 +2,10 @@
 title: "A Report on Lake Ontario's Microbes"
 author: "Augustus Pendleton"
 date: "01/14/2025"
-output: html_document
-editor_options: 
+output:
+  pdf_document: default
+  html_document: default
+editor_options:
   chunk_output_type: console
 ---
 
@@ -45,9 +47,3 @@ maxTemp <- sample_and_taxon %>%
 
 The above plot shows the relationship between cell abundance and temperature for a total of `r nSamples` samples. For this set of samples, temperature ranged from a minimum of `r minTemp`°C
 to a maximum of `r maxTemp`°C.
-
-|Summary of Data|
-|------|------|
-|Number of Samples|`r nSamples`|
-|Minimum Temperature|`r minTemp`|
-|Maximum Temperature|`r maxTemp`|

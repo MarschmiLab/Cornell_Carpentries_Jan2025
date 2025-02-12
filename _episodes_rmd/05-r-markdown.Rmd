@@ -287,6 +287,12 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 >
 > > ## Solution
 > > [This link](https://rmarkdown.rstudio.com/authoring_basics.html) has some helpful basic R Markdown syntax.
+> > To create bullet points, use `-` or `*` on each line
+> > To make something bold, wrap the words in two asterisks: `**`
+> > To make something italic, wrap the words in one asterisk: `*`
+> > To make something bold and italic, wrap the words in three asterisks: `***`
+> > To make a numbered list, use `1.`, `2.`, etc. on each line
+> > To make a hyperlink, wrap the words in square brackets followed by the url in  parentheses `[sentence to link](url)`
 > {: .solution}
 {: .challenge}
 
@@ -297,4 +303,38 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 
 ## Knitting to PDF
 _[Back to top](#contents)_
+
+So far, we've been knitting our documents to produce an HTML document. HTML is the language used by web developers to make websites - browsers like Chrome or Safari read HTML and display it to you as a beautiful site. HTML documents have many benefits: they tend to be flexible which is nice for large figures, long lines of code, or large tables and you can easily change the theme. It's also easy to quickly use HTML documents to produce websites which you can send to people or link via QR codes. However, sometimes we want PDF documents, which are easy to print or share via email. 
+
+By installing the package `knitr`, we were able to knit our Rmarkdown documents to HTML. To knit to PDF, we need to install an additional software packages. We'll first install the R package `tinytex`. This R package will then help us install a different software, called TinyTeX (pronounced "Tiny-TECK"), which can translate our RMarkdown document to a PDF. 
+
+In the console, type:
+
+```{r, eval = FALSE}
+install.packages("tinytex")
+```
+
+This will install the R package `tinytex`. Next, we'll use a function within the `tinytex` package to install the TinyTeX software
+
+```{r eval = FALSE}
+tinytex::install_tinytex()
+```
+
+Finally, we're going to change our YAML header to reflect that we should knit to PDF. 
+
+```
+---
+title: 'Writing Reports with R Markdown'
+author: "Augustus Pendleton"
+date: "01/14/2025"
+output: pdf_document
+---
+```
+
+Now, let's click the "Knit" button. We should see our new PDF document rendered!
+
+![]({{ page.root }}/fig/r-markdown/pdf_document.png)
+
+
+
 

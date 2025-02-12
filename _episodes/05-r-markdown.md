@@ -3,7 +3,7 @@
 # Instead, please edit 05-r-markdown.md in _episodes_rmd/
 title: "Writing Reports with R Markdown"
 source: Rmd
-teaching: 105
+teaching: 90
 exercises: 30
 questions:
 - How can I make reproducible reports using R Markdown?
@@ -13,7 +13,6 @@ objectives:
 - To use Markdown to format our report.
 - To understand how to use R code chunks to include or hide code, figures, and messages.
 - To be aware of the various report formats that can be rendered using R Markdown.
-- 'To practice using the Unix Shell, and R through paired programming exercises. '
 keypoints:
 - R Markdown is an easy way to create a report that integrates text, code, and figures.
 - 'Options such as `include` and `echo` determine what parts of an R code chunk are
@@ -35,7 +34,7 @@ keypoints:
     + [Text](#text)
 1. [Starting the report](#starting-the-report)
 1. [Formatting](#formatting)
-1. [Integrating it all together: Paired exercise](#integrating-it-all-together-paired-exercise)
+1. [Knitting to PDF](#pdf)
 
 Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario.
 
@@ -287,191 +286,6 @@ to a maximum `r maxTemp`°C.
 ```
 {: .code}
 
-In addition to reporting specific values in the text, we may also want to show a table of values. With R Markdown there are multiple ways to product tables. One way to generate smaller tables is manually. Using a special format we can generate a table in our output. Note that this does not get generated in a code chunk because it is markdown formatting not R code.
-
-```
-|HEADER 1|HEADER 2|
-|-------------|-------------|
-|row 1, column1|row 1, column 2|
-|row 2, column1|row 2, column 2|
-```
-Columns are separated by the pipe key <kbd>|</kbd> located above <kbd>Enter</kbd> on the keyboard. The dashes distinguish the header row from the rest of the table. This header could be a name for each column or a header for the whole table. Now that we know the basic structure we can fill in our table. This is how we could present the same numbers from the previous paragraph as a table instead, again using in-line code.
-When we knit the report again, the code above will render like this:
-![]({{ page.root }}/fig/r-markdown/table_format.png)
-
-Here's the text that we need to include to create a summary table of our data:
-
-
-~~~
-
-|Summary of Data|
-|------|------|
-|Number of Samples|`r nSamples`|
-|Minimum Temperature|`r minTemp`|
-|Maximum Temperature|`r maxTemp`|
-~~~
-{: .output}
-
-
-This will render like this:
-
-![]({{ page.root }}/fig/r-markdown/table_fillin.png)
-
-This is useful if we are reporting a few values, but can get tedious for larger tables. Another way we can add tables to our reports is using an R function called `kable()`. Since this is an R function, we will use it within a code chunk. We can give the `kable()` function a data table and it will format it to a nice looking table in the report. For example, we could use the following code to generate a table of all the Deep samples. The rendered version should look almost exactly as it does on this webpage. 
-
-
-~~~
-# load library
-library(knitr)
-
-# print kable
-sample_and_taxon %>%
-  filter(env_group == "Deep") %>%
-  select(sample_id, env_group, cells_per_ml, temperature) %>%
-  kable()
-~~~
-{: .language-r}
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> sample_id </th>
-   <th style="text-align:left;"> env_group </th>
-   <th style="text-align:right;"> cells_per_ml </th>
-   <th style="text-align:right;"> temperature </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> May_12_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2058864 </td>
-   <td style="text-align:right;"> 4.07380 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> May_29_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2153086 </td>
-   <td style="text-align:right;"> 4.66955 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> May_33_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2293177 </td>
-   <td style="text-align:right;"> 3.87050 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> May_41_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2422141 </td>
-   <td style="text-align:right;"> 3.76370 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> May_55_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1847686 </td>
-   <td style="text-align:right;"> 3.66830 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> May_64_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1631065 </td>
-   <td style="text-align:right;"> 3.67740 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> May_74_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2270042 </td>
-   <td style="text-align:right;"> 4.86530 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_12_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1703592 </td>
-   <td style="text-align:right;"> 4.19650 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_12_M </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2304545 </td>
-   <td style="text-align:right;"> 4.75550 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_33_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1246414 </td>
-   <td style="text-align:right;"> 3.97670 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_33_M </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1793411 </td>
-   <td style="text-align:right;"> 4.16960 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_38_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1783244 </td>
-   <td style="text-align:right;"> 5.26790 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_38_E </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1989859 </td>
-   <td style="text-align:right;"> 6.83795 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_41_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1394350 </td>
-   <td style="text-align:right;"> 3.83100 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_41_M </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2067910 </td>
-   <td style="text-align:right;"> 3.93275 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_55_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1594241 </td>
-   <td style="text-align:right;"> 3.77870 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_55_M </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2008431 </td>
-   <td style="text-align:right;"> 3.92295 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_64_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1459993 </td>
-   <td style="text-align:right;"> 3.76020 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_64_M </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1852089 </td>
-   <td style="text-align:right;"> 3.98550 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_717_B </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 1575429 </td>
-   <td style="text-align:right;"> 4.02260 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> September_717_M </td>
-   <td style="text-align:left;"> Deep </td>
-   <td style="text-align:right;"> 2024282 </td>
-   <td style="text-align:right;"> 4.85345 </td>
-  </tr>
-</tbody>
-</table>
-
-
 ## Formatting
 _[Back to top](#contents)_
 
@@ -500,6 +314,12 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 >
 > > ## Solution
 > > [This link](https://rmarkdown.rstudio.com/authoring_basics.html) has some helpful basic R Markdown syntax.
+> > To create bullet points, use `-` or `*` on each line
+> > To make something bold, wrap the words in two asterisks: `**`
+> > To make something italic, wrap the words in one asterisk: `*`
+> > To make something bold and italic, wrap the words in three asterisks: `***`
+> > To make a numbered list, use `1.`, `2.`, etc. on each line
+> > To make a hyperlink, wrap the words in square brackets followed by the url in  parentheses `[sentence to link](url)`
 > {: .solution}
 {: .challenge}
 
@@ -508,246 +328,44 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 > In newer versions of RStudio, we can switch to the "Visual" view when editing our documents. This makes the experience much more similar to writing in software like Microsoft Word or Google Docs. We can use formatting tools (like bolding and italicizing), insert pictures, and create tables without manually typing out the markdown syntax. The best part? If you then switch back to the "Source" view, you can see the markdown syntax RStudio has automatically created for you.
 {: .callout}
 
-## Integrating it all together: Make your own report!
+## Knitting to PDF
 _[Back to top](#contents)_
 
-You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report which you can share with Collaborators via Github! Don't worry - if you have questions, the instructor and helpers are here to help you out!
+So far, we've been knitting our documents to produce an HTML document. HTML is the language used by web developers to make websites - browsers like Chrome or Safari read HTML and display it to you as a beautiful site. HTML documents have many benefits: they tend to be flexible which is nice for large figures, long lines of code, or large tables and you can easily change the theme. It's also easy to quickly use HTML documents to produce websites which you can send to people or link via QR codes. However, sometimes we want PDF documents, which are easy to print or share via email. 
 
-1. Make a new R Markdown file.
-1. Give it an informative title.
-1. Delete all the unnecessary Markdown and R code (everything below the setup R chunk).
-1. Save it to the `reports` directory as LASTNAME_Ontario_Report.Rmd
+By installing the package `knitr`, we were able to knit our Rmarkdown documents to HTML. To knit to PDF, we need to install an additional software packages. We'll first install the R package `tinytex`. This R package will then help us install a different software, called TinyTeX (pronounced "Tiny-TECK"), which can translate our RMarkdown document to a PDF. 
 
-Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working. 
+In the console, type:
 
-The exercises below give you some ideas of directions to pursue. These are nice exercises because we have the solutions saved. However, you're welcome to branch out as well! Maybe you have your own hypotheses you'd like to test. Maybe you want to explore a new type of ggplot. Perhaps you want to run some statistical tests.  
 
-Just remember to use a combination of prose (writing) and code to document the goals, process, and outputs of your analysis in your RMarkdown report. 
+~~~
+install.packages("tinytex")
+~~~
+{: .language-r}
 
-Once you're done, *add* your report to your Git repo, *commit* those changes, and *push* those changes to Github. If you feel comfortable, post a link to the repo on the Etherpad, and [change your repo's settings to **Public**](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility#changing-a-repositorys-visibility), so that others in the class can admire what you've accomplished!
+This will install the R package `tinytex`. Next, we'll use a function within the `tinytex` package to install the TinyTeX software
 
-### Bonus Exercises
-_[Back to top](#contents)_
 
-[1] The very first step is to read in the sample_and_taxon dataset, so do that first! Also load the `tidyverse` package.
+~~~
+tinytex::install_tinytex()
+~~~
+{: .language-r}
 
-> ## Solution
-> 
-> ~~~
-> library(tidyverse)
-> sample_and_taxon <- read_csv('data/sample_and_taxon.csv')
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> Rows: 71 Columns: 15
-> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────
-> Delimiter: ","
-> chr  (2): sample_id, env_group
-> dbl (13): depth, cells_per_ml, temperature, total_nitrogen, total_phosphorus...
-> 
-> ℹ Use `spec()` to retrieve the full column specification for this data.
-> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-> ~~~
-> {: .output}
-{: .solution}
+Finally, we're going to change our YAML header to reflect that we should knit to PDF. 
 
-#### Investigating nutrients and cell density
-_[Back to top](#contents)_
+```
+---
+title: 'Writing Reports with R Markdown'
+author: "Augustus Pendleton"
+date: "01/14/2025"
+output: pdf_document
+---
+```
 
-[2] Make a scatter plot of total_nitrogen vs. cells_per_ml, separated into a plot for each env_group. **Hint:** you can use `facet_wrap(~column_name)` to separate into different plots based on that column.
+Now, let's click the "Knit" button. We should see our new PDF document rendered!
 
-> ## Solution
-> 
-> ~~~
-> ggplot(sample_and_taxon, aes(x=total_nitrogen,y=cells_per_ml)) +
-> geom_point() +
-> facet_wrap(~env_group)
-> ~~~
-> {: .language-r}
-> 
-> <img src="../fig/rmd-05-unnamed-chunk-13-1.png" width="540" style="display: block; margin: auto;" />
-{: .solution}
+![]({{ page.root }}/fig/r-markdown/pdf_document.png)
 
-[3] It seems like there is an outlier in Shallow_May with very high nitrogen levels. What is this sample? Use a combination of `filter` and `arrange` to find out.
 
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>% 
->  filter(env_group == "Shallow_May") %>% 
->  arrange(desc(total_nitrogen))
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> # A tibble: 25 × 15
->    sample_id env_group   depth cells_per_ml temperature total_nitrogen
->    <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
->  1 May_8_E   Shallow_May     5     4578830.        8.43            640
->  2 May_29_M  Shallow_May    19     2566156.        5.69            539
->  3 May_29_E  Shallow_May     5     3124920.        5.97            521
->  4 May_33_M  Shallow_May    20     3114433.        4.53            515
->  5 May_43_E  Shallow_May     5     2787020.        5.88            499
->  6 May_17_E  Shallow_May     5     3738681.        5.99            492
->  7 May_66_E  Shallow_May     5     5262156.       12.3             489
->  8 May_35_B  Shallow_May    27     3066162.        6.57            479
->  9 May_48_B  Shallow_May    35     2300782.        4.79            477
-> 10 May_717_E Shallow_May     5     4197941.       10.2             477
-> # ℹ 15 more rows
-> # ℹ 9 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-> #   chlorophyll <dbl>, Proteobacteria <dbl>, Actinobacteriota <dbl>,
-> #   Bacteroidota <dbl>, Chloroflexi <dbl>, Verrucomicrobiota <dbl>,
-> #   Cyanobacteria <dbl>
-> ~~~
-> {: .output}
-{: .solution}
 
-[4] Where was this sample again? Let's look at a map:
 
-<img src="{{ page.root }}/fig/r-plotting/station_map.png" width="600"/>
-
-Wow! This sample is right outside of Toronto.
-
-We also see that Shallow September has four strange points, with high nitrogen and low cell counts. Let's use a new geom, `geom_text` to figure out what those samples are (this might take some googling!). Also, let's use `filter` to only plot samples from "Shallow_September".
-
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>%
->   filter(env_group == "Shallow_September") %>%
->   ggplot(aes(x = total_nitrogen, y = cells_per_ml)) + 
->   geom_text(aes(label = sample_id))
-> ~~~
-> {: .language-r}
-> 
-> <img src="../fig/rmd-05-unnamed-chunk-15-1.png" width="540" style="display: block; margin: auto;" />
-{: .solution}
-
-Interesting...these are mostly from Station 35. I wonder why these stations have such high nitrogen and such low cell abundances? 
-
-> ## Solution
-> ![]({{ page.root }}/fig/r-markdown/upwelling_surface.png)
-> Here, I show surface temperatures across the lake in September. Station 35 was on the edge an upwelling event, where cold, nutrient rich water is pulled to the surface of the lake! Stn. 38, which was smack dab in the upwelling itself, was so similar to deep samples that its env_group is "Deep" rather than "Shallow_September".
-{: .solution}
-
-If you want to investigate this phenomenon further, spend time analyzing the relative composition of Phyla in these upwelling stations compared to the rest of Shallow_September. If you want to go further, you can use the buoy_data from the Niagara and South Shore buoys to see if you can detect when this upwelling event began.
-
-#### Comparing Dominant Phylum Across Environmental Groups
-_[Back to top](#contents)_
-
-[6] We want to know which Phyla tend to live in which environments. Previously, we focused on Chloroflexi, and found it preferred Deep environments. What if we want to look at the relative abundances of all our Phyla between env_groups at once?
-
-First, let's remind ourselves how we looked at Chloroflexi across env_groups. Make a boxplot with env_group on the x-axis, and Chloroflexi relative abundance on the y axis.
-
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>%
->   ggplot(aes(x = env_group, y = Chloroflexi)) + 
->   geom_boxplot()
-> ~~~
-> {: .language-r}
-> 
-> <img src="../fig/rmd-05-unnamed-chunk-16-1.png" width="540" style="display: block; margin: auto;" />
-{: .solution}
-
-[7] Now, we want to analyze multiple Phyla at once. Because our taxa abundances are in wide format, we can't use multiple Phyla in a single ggplot. As such, we will need to convert our data to long format. Using `pivot_longer`, convert the columns containing our Phyla abundances from wide to long.
-
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance")
-> ~~~
-> {: .language-r}
-> 
-> 
-> 
-> ~~~
-> # A tibble: 426 × 11
->    sample_id env_group   depth cells_per_ml temperature total_nitrogen
->    <chr>     <chr>       <dbl>        <dbl>       <dbl>          <dbl>
->  1 May_12_B  Deep         103.     2058864.        4.07            465
->  2 May_12_B  Deep         103.     2058864.        4.07            465
->  3 May_12_B  Deep         103.     2058864.        4.07            465
->  4 May_12_B  Deep         103.     2058864.        4.07            465
->  5 May_12_B  Deep         103.     2058864.        4.07            465
->  6 May_12_B  Deep         103.     2058864.        4.07            465
->  7 May_12_E  Shallow_May    5      4696827.        7.01            465
->  8 May_12_E  Shallow_May    5      4696827.        7.01            465
->  9 May_12_E  Shallow_May    5      4696827.        7.01            465
-> 10 May_12_E  Shallow_May    5      4696827.        7.01            465
-> # ℹ 416 more rows
-> # ℹ 5 more variables: total_phosphorus <dbl>, diss_org_carbon <dbl>,
-> #   chlorophyll <dbl>, Phylum <chr>, Abundance <dbl>
-> ~~~
-> {: .output}
-{: .solution}
-
-You can see that we've now made size rows per sample, one for each Phylum. This does mean that our metadata has been duplicated, which is okay right now.
-
-Now, our data is in the correct format for plotting with ggplot. In the end, we want a plot that shows, for each env_group, the relative abundance of each Phylum. There are actually many plotting styles we could use to answer that question! We'll try out three. 
-
-[8] Pipe your long dataframe into a boxplot with env_group on the x-axis, and Abundance on the y-axis. Use fill to differentiate different Phyla
-
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
->   ggplot(aes(x = env_group, y = Abundance, fill = Phylum)) + 
->   geom_boxplot()
-> ~~~
-> {: .language-r}
-> 
-> <img src="../fig/rmd-05-unnamed-chunk-18-1.png" width="540" style="display: block; margin: auto;" />
-{: .solution}
-
-[9] Okay, what does this plot tell us? Make sure to write a quick summary in your report. Next, make a new plot, where Phylum is now on the x-axis, and the fill is determined by the env_group.
-
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
->   ggplot(aes(x = Phylum, y = Abundance, fill = env_group)) + 
->   geom_boxplot()
-> ~~~
-> {: .language-r}
-> 
-> <img src="../fig/rmd-05-unnamed-chunk-19-1.png" width="540" style="display: block; margin: auto;" />
-{: .solution}
-
-[10] Which do you prefer? Which do you feel is easier to understand? Finally, let's use faceting, rather than fill, to separate out Phyla
-
-> ## Solution
-> 
-> ~~~
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
->   ggplot(aes(x = env_group, y = Abundance)) + 
->   geom_boxplot() + 
->   facet_wrap(~Phylum)
-> ~~~
-> {: .language-r}
-> 
-> <img src="../fig/rmd-05-unnamed-chunk-20-1.png" width="540" style="display: block; margin: auto;" />
-{: .solution}
-
-If you want to investigate this dataset further, consider changing the x-axis to a continuous variable, like temperature, rather than the categorical env_group. Can you find associations between different environmental conditions and the abundance of specific taxa?
-
-### Bonus-Bonus: Let your creativity shine!
-
-If you've gotten this far, feel free to let your creativity shine. Consider:
-
-1. Make your plots beautiful and professional:
- - Alter axis labels
- - Use `theme` to change the font size of axis and legend text
- - Using or creating a beautiful palette from a new package
-2. Render your report in different formats, including pdf or docx
-3. Find a partner and use Github to collaborate on a shared RMarkdown document.
