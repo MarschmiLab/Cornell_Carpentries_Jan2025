@@ -1,7 +1,7 @@
 ---
 title: "Writing Reports with R Markdown"
 source: Rmd
-teaching: 105
+teaching: 90
 exercises: 30
 questions:
 - How can I make reproducible reports using R Markdown?
@@ -11,7 +11,6 @@ objectives:
 - To use Markdown to format our report.
 - To understand how to use R code chunks to include or hide code, figures, and messages.
 - To be aware of the various report formats that can be rendered using R Markdown.
-- 'To practice using the Unix Shell, and R through paired programming exercises. '
 keypoints:
 - R Markdown is an easy way to create a report that integrates text, code, and figures.
 - 'Options such as `include` and `echo` determine what parts of an R code chunk are
@@ -40,7 +39,7 @@ sample_and_taxon <- read_csv("data/sample_and_taxon.csv")
     + [Text](#text)
 1. [Starting the report](#starting-the-report)
 1. [Formatting](#formatting)
-1. [Integrating it all together: Paired exercise](#integrating-it-all-together-paired-exercise)
+1. [Knitting to PDF](#pdf)
 
 Recall that our  goal is to generate a report which analyses how environmental conditions change microbial communities in Lake Ontario.
 
@@ -296,156 +295,6 @@ OK, now that we know how to make headers, let's practice some more Markdown synt
 > In newer versions of RStudio, we can switch to the "Visual" view when editing our documents. This makes the experience much more similar to writing in software like Microsoft Word or Google Docs. We can use formatting tools (like bolding and italicizing), insert pictures, and create tables without manually typing out the markdown syntax. The best part? If you then switch back to the "Source" view, you can see the markdown syntax RStudio has automatically created for you.
 {: .callout}
 
-## Integrating it all together: Make your own report!
+## Knitting to PDF
 _[Back to top](#contents)_
 
-You've learned so much in the past two days - how to use the Unix Shell to move around your computer, how to make pretty plots and do data analysis in R, and how to incorporate it all into a report which you can share with Collaborators via Github! Don't worry - if you have questions, the instructor and helpers are here to help you out!
-
-1. Make a new R Markdown file.
-1. Give it an informative title.
-1. Delete all the unnecessary Markdown and R code (everything below the setup R chunk).
-1. Save it to the `reports` directory as LASTNAME_Ontario_Report.Rmd
-
-Work through the exercises below, adding code chunks to analyze and plot the data, and prose to explain what you're doing. Make sure to knit as you go, to make sure everything is working. 
-
-The exercises below give you some ideas of directions to pursue. These are nice exercises because we have the solutions saved. However, you're welcome to branch out as well! Maybe you have your own hypotheses you'd like to test. Maybe you want to explore a new type of ggplot. Perhaps you want to run some statistical tests.  
-
-Just remember to use a combination of prose (writing) and code to document the goals, process, and outputs of your analysis in your RMarkdown report. 
-
-Once you're done, *add* your report to your Git repo, *commit* those changes, and *push* those changes to Github. If you feel comfortable, post a link to the repo on the Etherpad, and [change your repo's settings to **Public**](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility#changing-a-repositorys-visibility), so that others in the class can admire what you've accomplished!
-
-### Bonus Exercises
-_[Back to top](#contents)_
-
-[1] The very first step is to read in the sample_and_taxon dataset, so do that first! Also load the `tidyverse` package.
-
-> ## Solution
-> ```{r}
-> library(tidyverse)
-> sample_and_taxon <- read_csv('data/sample_and_taxon.csv')
-> ```
-{: .solution}
-
-#### Investigating nutrients and cell density
-_[Back to top](#contents)_
-
-[2] Make a scatter plot of total_nitrogen vs. cells_per_ml, separated into a plot for each env_group. **Hint:** you can use `facet_wrap(~column_name)` to separate into different plots based on that column.
-
-> ## Solution
-> ```{r}
-> ggplot(sample_and_taxon, aes(x=total_nitrogen,y=cells_per_ml)) +
-> geom_point() +
-> facet_wrap(~env_group)
-> ```
-{: .solution}
-
-[3] It seems like there is an outlier in Shallow_May with very high nitrogen levels. What is this sample? Use a combination of `filter` and `arrange` to find out.
-
-> ## Solution
-> ```{r}
-> sample_and_taxon %>% 
->  filter(env_group == "Shallow_May") %>% 
->  arrange(desc(total_nitrogen))
-> ```
-{: .solution}
-
-[4] Where was this sample again? Let's look at a map:
-
-<img src="{{ page.root }}/fig/r-plotting/station_map.png" width="600"/>
-
-Wow! This sample is right outside of Toronto.
-
-We also see that Shallow September has four strange points, with high nitrogen and low cell counts. Let's use a new geom, `geom_text` to figure out what those samples are (this might take some googling!). Also, let's use `filter` to only plot samples from "Shallow_September".
-
-> ## Solution
-> ```{r}
-> sample_and_taxon %>%
->   filter(env_group == "Shallow_September") %>%
->   ggplot(aes(x = total_nitrogen, y = cells_per_ml)) + 
->   geom_text(aes(label = sample_id))
-> ```
-{: .solution}
-
-Interesting...these are mostly from Station 35. I wonder why these stations have such high nitrogen and such low cell abundances? 
-
-> ## Solution
-> ![]({{ page.root }}/fig/r-markdown/upwelling_surface.png)
-> Here, I show surface temperatures across the lake in September. Station 35 was on the edge an upwelling event, where cold, nutrient rich water is pulled to the surface of the lake! Stn. 38, which was smack dab in the upwelling itself, was so similar to deep samples that its env_group is "Deep" rather than "Shallow_September".
-{: .solution}
-
-If you want to investigate this phenomenon further, spend time analyzing the relative composition of Phyla in these upwelling stations compared to the rest of Shallow_September. If you want to go further, you can use the buoy_data from the Niagara and South Shore buoys to see if you can detect when this upwelling event began.
-
-#### Comparing Dominant Phylum Across Environmental Groups
-_[Back to top](#contents)_
-
-[6] We want to know which Phyla tend to live in which environments. Previously, we focused on Chloroflexi, and found it preferred Deep environments. What if we want to look at the relative abundances of all our Phyla between env_groups at once?
-
-First, let's remind ourselves how we looked at Chloroflexi across env_groups. Make a boxplot with env_group on the x-axis, and Chloroflexi relative abundance on the y axis.
-
-> ## Solution
-> ```{r}
-> sample_and_taxon %>%
->   ggplot(aes(x = env_group, y = Chloroflexi)) + 
->   geom_boxplot()
-> ```
-{: .solution}
-
-[7] Now, we want to analyze multiple Phyla at once. Because our taxa abundances are in wide format, we can't use multiple Phyla in a single ggplot. As such, we will need to convert our data to long format. Using `pivot_longer`, convert the columns containing our Phyla abundances from wide to long.
-
-> ## Solution
-> ```{r}
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance")
-> ```
-{: .solution}
-
-You can see that we've now made size rows per sample, one for each Phylum. This does mean that our metadata has been duplicated, which is okay right now.
-
-Now, our data is in the correct format for plotting with ggplot. In the end, we want a plot that shows, for each env_group, the relative abundance of each Phylum. There are actually many plotting styles we could use to answer that question! We'll try out three. 
-
-[8] Pipe your long dataframe into a boxplot with env_group on the x-axis, and Abundance on the y-axis. Use fill to differentiate different Phyla
-
-> ## Solution
-> ```{r}
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
->   ggplot(aes(x = env_group, y = Abundance, fill = Phylum)) + 
->   geom_boxplot()
-> ```
-{: .solution}
-
-[9] Okay, what does this plot tell us? Make sure to write a quick summary in your report. Next, make a new plot, where Phylum is now on the x-axis, and the fill is determined by the env_group.
-
-> ## Solution
-> ```{r}
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
->   ggplot(aes(x = Phylum, y = Abundance, fill = env_group)) + 
->   geom_boxplot()
-> ```
-{: .solution}
-
-[10] Which do you prefer? Which do you feel is easier to understand? Finally, let's use faceting, rather than fill, to separate out Phyla
-
-> ## Solution
-> ```{r}
-> sample_and_taxon %>%
->   pivot_longer(cols = Proteobacteria:Cyanobacteria, names_to = "Phylum", values_to = "Abundance") %>%
->   ggplot(aes(x = env_group, y = Abundance)) + 
->   geom_boxplot() + 
->   facet_wrap(~Phylum)
-> ```
-{: .solution}
-
-If you want to investigate this dataset further, consider changing the x-axis to a continuous variable, like temperature, rather than the categorical env_group. Can you find associations between different environmental conditions and the abundance of specific taxa?
-
-### Bonus-Bonus: Let your creativity shine!
-
-If you've gotten this far, feel free to let your creativity shine. Consider:
-
-1. Make your plots beautiful and professional:
- - Alter axis labels
- - Use `theme` to change the font size of axis and legend text
- - Using or creating a beautiful palette from a new package
-2. Render your report in different formats, including pdf or docx
-3. Find a partner and use Github to collaborate on a shared RMarkdown document.
