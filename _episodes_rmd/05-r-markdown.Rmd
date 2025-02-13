@@ -163,6 +163,9 @@ To render our documents into html format, we can "knit" them in R Studio.
 Usually, R Markdown renders documents from the directory where the document is saved (the location of the `.Rmd` file), but we want it to render from the main project directory where our `.Rproj` file is.
 This is because that's where all of our relative paths are from and it's good practice to have all of your relative paths from the main project directory.
 To change this default, click on the down arrow next to the "Knit" button at the top left of R Studio, go to "Knit Directory" and click "Project Directory".
+
+![]({{ page.root }}/fig/r-markdown/knit_dir_proj_dir.png)
+
 Now it will assume all of your relative paths for reading and writing files are from the `ontario-report` directory, rather than the `reports` directory.
 
 Now that we have that set up, let's start on the report!
